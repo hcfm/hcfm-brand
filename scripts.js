@@ -488,6 +488,15 @@
     `).join('');
   }
 
+  /* ---------- Auto-unlock on page load if sessionStorage has the keys ----------
+     This MUST run AFTER renderParentGallery / renderDlMinistryGrid / renderSourceMinistryList
+     are defined, because unlockDownloads() calls all three. Placed here to guarantee
+     hoisting/temporal-dead-zone safety for any const dependencies. */
+  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+    unlockDownloads();
+    if (sessionStorage.getItem(ADMIN_KEY) === '1') unlockAdmin();
+  }
+
   /* ---------- Image lightbox ---------- */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
