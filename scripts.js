@@ -300,6 +300,8 @@
   });
 
   /* ---------- Parent gallery (PNG/JPG only — no AI files publicly) ---------- */
+  const RELEASE_BASE = 'https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets';
+
   function renderParentGallery() {
     const el = document.getElementById('parentGallery');
     if (!el) return;
@@ -308,7 +310,7 @@
       {
         title: 'HCFM Symbol',
         sub: 'The mark alone',
-        zip: 'downloads/logos/parent/HCFM_Symbol.zip',
+        zip: `${RELEASE_BASE}/HCFM_Symbol.zip`,
         zipSize: '2.1 MB',
         folder: 'HCFM_Symbol',
         variants: [
@@ -322,7 +324,7 @@
       {
         title: 'Logotype 1 — Horizontal',
         sub: 'Mark left, wordmark right (single line)',
-        zip: 'downloads/logos/parent/HCFM_Logotype1.zip',
+        zip: `${RELEASE_BASE}/HCFM_Logotype1.zip`,
         zipSize: '2.6 MB',
         folder: 'HCFM_Logotype1',
         variants: [
@@ -336,7 +338,7 @@
       {
         title: 'Logotype 2 — Stacked',
         sub: 'Mark on top, wordmark on two lines below',
-        zip: 'downloads/logos/parent/HCFM_Logotype2.zip',
+        zip: `${RELEASE_BASE}/HCFM_Logotype2.zip`,
         zipSize: '2.6 MB',
         folder: 'HCFM_Logotype2',
         variants: [
@@ -350,7 +352,7 @@
       {
         title: 'Logotype 3 — Compact stacked',
         sub: 'Mark on top with a smaller wordmark',
-        zip: 'downloads/logos/parent/HCFM_Logotype3.zip',
+        zip: `${RELEASE_BASE}/HCFM_Logotype3.zip`,
         zipSize: '2.3 MB',
         folder: 'HCFM_Logotype3',
         variants: [
@@ -364,7 +366,7 @@
       {
         title: 'Logotype 4 — Single line',
         sub: 'Mark with full wordmark on a single line',
-        zip: 'downloads/logos/parent/HCFM_Logotype4.zip',
+        zip: `${RELEASE_BASE}/HCFM_Logotype4.zip`,
         zipSize: '2.5 MB',
         folder: 'HCFM_Logotype4',
         variants: [
@@ -384,7 +386,7 @@
             <h3>HCFM Parent Pack</h3>
             <p>Everything: Symbol + all 4 Logotypes, all colors, PNG and JPG. 12 MB.</p>
           </div>
-          <a href="downloads/logos/parent/HCFM_Parent_Pack.zip" download class="btn btn-primary">Download all <span class="btn-meta">12 MB</span></a>
+          <a href="${RELEASE_BASE}/HCFM_Parent_Pack.zip" class="btn btn-primary">Download all <span class="btn-meta">12 MB</span></a>
         </div>
       </article>
     ` + groups.map(g => `
@@ -431,7 +433,7 @@
     const el = document.getElementById('dlSourceMinistries');
     if (!el) return;
     el.innerHTML = ministries.map(m => `
-      <li><a href="downloads/source-files/ministries/${m.code}_SOURCE.zip" download><strong>${m.name}</strong><span>${m.region} · ZIP · AI / JPG / PNG</span></a></li>
+      <li><a href="${RELEASE_BASE}/${m.code}_SOURCE.zip"><strong>${m.name}</strong><span>${m.region} · ZIP · AI / JPG / PNG</span></a></li>
     `).join('');
   }
 
