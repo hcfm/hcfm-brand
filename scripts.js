@@ -56,11 +56,17 @@
   // Pick the canonical HCFM-Blue mark preview for a ministry, falling back
   // to the parent symbol if the manifest hasn't loaded yet or the ministry
   // doesn't have a Blue variant in its preview set.
+  // Logotype 2 (stacked) is preferred for grid thumbnails because mark-on-top
+  // + wordmark-below fits naturally in a square preview slot.
   function ministryMarkUrl(code) {
     const groups = ministryManifest[code];
     if (groups && groups.length) {
-      // Prefer Logotype1 (horizontal) blue variant, then Logotype2, then any blue
-      for (const g of groups) {
+      // Prefer Logotype2 (stacked, fits square previews), then Logotype1, then anything Blue
+      const ordered = [...groups].sort((a, b) => {
+        const score = g => g.folder.toLowerCase().includes('logotype2') ? 0 : g.folder.toLowerCase().includes('logotype1') ? 1 : 2;
+        return score(a) - score(b);
+      });
+      for (const g of ordered) {
         const blueFile = g.files.find(f => f.toLowerCase().includes('pos_2728c') && !f.toLowerCase().includes('871c'));
         if (blueFile) {
           return `assets/previews/ministries/${encodeURIComponent(code)}/${encodeURIComponent(g.folder)}/${blueFile}`;
