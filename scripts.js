@@ -79,12 +79,13 @@
   function renderMinistryDirectory() {
     const grid = document.getElementById('ministryGrid');
     if (!grid) return;
+    // The whole card is the link; we drop the redundant "View logos →" text and
+    // let the hover state (gold border + lift) carry the affordance.
     grid.innerHTML = ministries.map(m => `
-      <a class="ministry-card" href="#ministry/${m.code}">
+      <a class="ministry-card" href="#ministry/${m.code}" aria-label="View logos for ${m.name}">
         <img src="${ministryMarkUrl(m.code)}" alt="" class="ministry-mark" loading="lazy" onerror="this.src='assets/logos/hcfm-symbol-blue.png'">
         <p class="ministry-name">${m.name}</p>
         <p class="ministry-region">${m.region.toUpperCase()}</p>
-        <span class="ministry-cta">View logos →</span>
       </a>
     `).join('');
   }
@@ -637,7 +638,7 @@
 
     // ---------- Design Elements ----------
     { q: ['design element', 'border', 'fade', 'curve'], a: 'Four approved design elements: <strong>Thin Border</strong> (3-4 px max), <strong>Color Fade Effect</strong> (brand colors only), <strong>Curved Shapes</strong>, <strong>Dark Overlays</strong>. Use only one or two per design.' },
-    { q: ['thin border'], a: '<strong>Thin Border:</strong> a 3–4 pixel frame in a brand color. Most often Muted Gold for traditional, reverent contexts. Yellow Gold for digital and energetic applications. Where it works: certificate edges, donor cards, prayer-card edges, formal invitations.' },
+    { q: ['thin border'], a: '<strong>Thin Border:</strong> a 3–4 pixel frame in a brand color. Use Muted Gold for traditional, reverent contexts. Use Yellow Gold for digital and energetic applications. Where it works: certificate edges, donor cards, prayer-card edges, formal invitations.' },
     { q: ['color fade', 'gradient'], a: '<strong>Color Fade Effect:</strong> a gradient using only brand-palette colors. Yellow Gold to Black is the digital default. HCFM Blue to White works for formal moments. Never introduce outside colors into a brand fade.' },
     { q: ['dark overlay', 'photo overlay opacity'], a: '<strong>Dark Overlays:</strong> black transparent layer on photos to make text readable. Adjust opacity by eye — light images with sparse text need 40 to 50 percent, busy images with longer copy need 60 to 70 percent. The rule is readability, not a number.' },
     { q: ['60-30-10', 'sixty thirty ten', 'color ratio'], a: 'The 60-30-10 rule: 60% dominant color (background), 30% secondary (supporting), 10% accent (highlights). Sometimes 70-20-10 or 80-10-10 is better. The point is intentional hierarchy: one color leading, the others playing their part.' },
