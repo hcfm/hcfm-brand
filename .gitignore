@@ -1,0 +1,28 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+.claude/
+
+# Stray asset zips not loaded by the page (kept locally for archival)
+assets/Calluna.zip
+assets/Playlist Script.otf
+
+
+# Source-file folders not loaded by the live page
+assets/sub-ministries/
+assets/logos/HCFM_Symbol/
+assets/logos/Parent Logotypes/
+assets/logos/OneDrive_*
+assets/logos/*.zip
+assets/MyFonts Order*/
+assets/HCo_Whitney_Basic/
+assets/Whitney.zip
+assets/2025-2026 HCFM Visual Identity Guidelines/
+
+# Heavy download ZIPs — hosted on GitHub Releases instead of the repo
+downloads/logos/
+downloads/source-files/
+downloads/locked/

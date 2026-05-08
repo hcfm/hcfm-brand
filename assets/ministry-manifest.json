@@ -1,0 +1,540 @@
+{
+  "02_HCFM_Foundation": [
+    {
+      "folder": "HCFM_Foundation_Logotype1",
+      "files": [
+        "hcfmf_logo1_pos_2728c.png",
+        "hcfmf_logo1_pos_871c_2728c.png",
+        "hcfmf_logo1_pos_black.png",
+        "hcfmf_logo1_rev_1245c_white.png",
+        "hcfmf_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_Foundation_Logotype2",
+      "files": [
+        "hcfmf_logo2_pos_2728c.png",
+        "hcfmf_logo2_pos_871c_2728c.png",
+        "hcfmf_logo2_pos_black.png",
+        "hcfmf_logo2_rev_1245c_white.png",
+        "hcfmf_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "03A_CatholicMom": [
+    {
+      "folder": "CatholicMom_Logotype1",
+      "files": [
+        "CatholicMom_hcfm_logo1_pos_2728c.png",
+        "CatholicMom_hcfm_logo1_pos_871c_2728c.png",
+        "CatholicMom_hcfm_logo1_pos_black.png",
+        "CatholicMom_hcfm_logo1_rev_1245c_white.png",
+        "CatholicMom_hcfm_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "CatholicMom_Logotype2",
+      "files": [
+        "CatholicMom_hcfm_logo2_pos_2728c.png",
+        "CatholicMom_hcfm_logo2_pos_871c_2728c.png",
+        "CatholicMom_hcfm_logo2_pos_black.png",
+        "CatholicMom_hcfm_logo2_rev_1245c_white.png",
+        "CatholicMom_hcfm_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "03B_MusFamPrayer": [
+    {
+      "folder": "MusFamPrayer_Logotype1",
+      "files": [
+        "MuseumFamPrayer_hcfm_logo1_pos_2728c.png",
+        "MuseumFamPrayer_hcfm_logo1_pos_871c_2728c.png",
+        "MuseumFamPrayer_hcfm_logo1_pos_black.png",
+        "MuseumFamPrayer_hcfm_logo1_rev_1245c_white.png",
+        "MuseumFamPrayer_hcfm_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "MusFamPrayer_Logotype2",
+      "files": [
+        "MuseumFamPrayer_hcfm_logo2_pos_2728c.png",
+        "MuseumFamPrayer_hcfm_logo2_pos_871c_2728c.png",
+        "MuseumFamPrayer_hcfm_logo2_pos_black.png",
+        "MuseumFamPrayer_hcfm_logo2_rev_1245c_white.png",
+        "MuseumFamPrayer_hcfm_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "03_FamRosary": [
+    {
+      "folder": "FamRosary_Logotype1",
+      "files": [
+        "FamRosary_logo1_pos_2728c.png",
+        "FamRosary_logo1_pos_871c_2728c.png",
+        "FamRosary_logo1_pos_black.png",
+        "FamRosary_logo1_rev_1245c_white.png",
+        "FamRosary_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "FamRosary_Logotype2",
+      "files": [
+        "FamRosary_logo2_pos_2728c.png",
+        "FamRosary_logo2_pos_871c_2728c.png",
+        "FamRosary_logo2_pos_black.png",
+        "FamRosary_logo2_rev_1245c_white.png",
+        "FamRosary_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "04_FamThtrProdns": [
+    {
+      "folder": "4_FamThtrProdns_Logotype1",
+      "files": [
+        "FamTheaterProd_logo1_pos_2728c.png",
+        "FamTheaterProd_logo1_pos_871c_2728c.png",
+        "FamTheaterProd_logo1_pos_black.png",
+        "FamTheaterProd_logo1_rev_1245c_white.png",
+        "FamTheaterProd_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "4_FamThtrProdns_Logotype2",
+      "files": [
+        "FamTheaterProd_logo2_pos_2728c.png",
+        "FamTheaterProd_logo2_pos_871c_2728c.png",
+        "FamTheaterProd_logo2_pos_black.png",
+        "FamTheaterProd_logo2_rev_1245c_white.png",
+        "FamTheaterProd_logo2_rev_white.png"
+      ]
+    },
+    {
+      "folder": "FamThtrProdns_Logotype3",
+      "files": [
+        "FamTheaterProd_logo3_pos_2728c.png",
+        "FamTheaterProd_logo3_pos_871c_2728c.png",
+        "FamTheaterProd_logo3_pos_black.png",
+        "FamTheaterProd_logo3_rev_1245c_white.png",
+        "FamTheaterProd_logo3_rev_white.png"
+      ]
+    }
+  ],
+  "05_PeytonInstDCL": [
+    {
+      "folder": "PeytonInstDCL_Logotype1",
+      "files": [
+        "PeytonInstDCL_logo1_pos_2728c.png",
+        "PeytonInstDCL_logo1_pos_871c_2728c.png",
+        "PeytonInstDCL_logo1_pos_black.png",
+        "PeytonInstDCL_logo1_rev_1245c_white.png",
+        "PeytonInstDCL_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "PeytonInstDCL_Logotype2",
+      "files": [
+        "PeytonInstDCL_logo2_pos_2728c.png",
+        "PeytonInstDCL_logo2_pos_871c_2728c.png",
+        "PeytonInstDCL_logo2_pos_black.png",
+        "PeytonInstDCL_logo2_rev_1245c_white.png",
+        "PeytonInstDCL_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "06_FP_PrayerGuild": [
+    {
+      "folder": "FP_PrayerGuild_Logotype1",
+      "files": [
+        "FP_PrayerGuild_logo1_pos_2728c.png",
+        "FP_PrayerGuild_logo1_pos_871c_2728c.png",
+        "FP_PrayerGuild_logo1_pos_black.png",
+        "FP_PrayerGuild_logo1_rev_1245c_white.png",
+        "FP_PrayerGuild_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "FP_PrayerGuild_Logotype2",
+      "files": [
+        "FP_PrayerGuild_logo2_pos_2728c.png",
+        "FP_PrayerGuild_logo2_pos_871c_2728c.png",
+        "FP_PrayerGuild_logo2_pos_black.png",
+        "FP_PrayerGuild_logo2_rev_1245c_white.png",
+        "FP_PrayerGuild_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "07_FamRosaryCrusade_PH": [
+    {
+      "folder": "FamRosaryCrusade_PH_Logotype1",
+      "files": [
+        "FamRosaryCrusade_PH_logo1_pos_2728c.png",
+        "FamRosaryCrusade_PH_logo1_pos_871c_2728c.png",
+        "FamRosaryCrusade_PH_logo1_pos_black.png",
+        "FamRosaryCrusade_PH_logo1_rev_1245c_white.png",
+        "FamRosaryCrusade_PH_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "FamRosaryCrusade_PH_Logotype2",
+      "files": [
+        "FamRosaryCrusade_PH_logo2_pos_2728c.png",
+        "FamRosaryCrusade_PH_logo2_pos_871c_2728c.png",
+        "FamRosaryCrusade_PH_logo2_pos_black.png",
+        "FamRosaryCrusade_PH_logo2_rev_1245c_white.png",
+        "FamRosaryCrusade_PH_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "08_FP_Centre_IE": [
+    {
+      "folder": "FP_Centre_IE_Logotype1",
+      "files": [
+        "FP_Centre_IE_logo1_pos_2728c.png",
+        "FP_Centre_IE_logo1_pos_871c_2728c.png",
+        "FP_Centre_IE_logo1_pos_black.png",
+        "FP_Centre_IE_logo1_rev_1245c_white.png",
+        "FP_Centre_IE_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "FP_Centre_IE_Logotype2",
+      "files": [
+        "FP_Centre_IE_logo2_pos_2728c.png",
+        "FP_Centre_IE_logo2_pos_871c_2728c.png",
+        "FP_Centre_IE_logo2_pos_black.png",
+        "FP_Centre_IE_logo2_rev_1245c_white.png",
+        "FP_Centre_IE_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "09_FP_FamiIyInst": [
+    {
+      "folder": "09_FP_FamiIyInst_Logotype1",
+      "files": [
+        "FP_FamilyInst_logo1_pos_2728c.png",
+        "FP_FamilyInst_logo1_pos_871c_2728c.png",
+        "FP_FamilyInst_logo1_pos_black.png",
+        "FP_FamilyInst_logo1_rev_1245c_white.png",
+        "FP_FamilyInst_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "09_FP_FamiIyInst_Logotype2",
+      "files": [
+        "FP_FamilyInst_logo2_pos_2728c.png",
+        "FP_FamilyInst_logo2_pos_871c_2728c.png",
+        "FP_FamilyInst_logo2_pos_black.png",
+        "FP_FamilyInst_logo2_rev_1245c_white.png",
+        "FP_FamilyInst_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "10_HCFM_BD": [
+    {
+      "folder": "HCFM_BD_Logotype1",
+      "files": [
+        "hcfm_BD_logo1_pos_2728c.png",
+        "hcfm_BD_logo1_pos_871c_2728c.png",
+        "hcfm_BD_logo1_pos_black.png",
+        "hcfm_BD_logo1_rev_1245c_white.png",
+        "hcfm_BD_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_BD_Logotype2",
+      "files": [
+        "hcfm_BD_logo2_pos_2728c.png",
+        "hcfm_BD_logo2_pos_871c_2728c.png",
+        "hcfm_BD_logo2_pos_black.png",
+        "hcfm_BD_logo2_rev_1245c_white.png",
+        "hcfm_BD_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "11_HCFM_CA": [
+    {
+      "folder": "HCFM_CA_Logotype1",
+      "files": [
+        "hcfm_CA_logo1_pos_2728c.png",
+        "hcfm_CA_logo1_pos_871c_2728c.png",
+        "hcfm_CA_logo1_pos_black.png",
+        "hcfm_CA_logo1_rev_1245c_white.png",
+        "hcfm_CA_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_CA_Logotype2",
+      "files": [
+        "hcfm_CA_logo2_pos_2728c.png",
+        "hcfm_CA_logo2_pos_871c_2728c.png",
+        "hcfm_CA_logo2_pos_black.png",
+        "hcfm_CA_logo2_rev_1245c_white.png",
+        "hcfm_CA_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "12_HCFM_FR": [
+    {
+      "folder": "HCFM_FR_Logotype1",
+      "files": [
+        "hcfm_FR_logo1_pos_2728c.png",
+        "hcfm_FR_logo1_pos_871c_2728c.png",
+        "hcfm_FR_logo1_pos_black.png",
+        "hcfm_FR_logo1_rev_1245c_white.png",
+        "hcfm_FR_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_FR_Logotype2",
+      "files": [
+        "hcfm_FR_logo2_pos_2728c.png",
+        "hcfm_FR_logo2_pos_871c_2728c.png",
+        "hcfm_FR_logo2_pos_black.png",
+        "hcfm_FR_logo2_rev_1245c_white.png",
+        "hcfm_FR_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "13_HCFM_GH": [
+    {
+      "folder": "HCFM_GH_Logotype1",
+      "files": [
+        "hcfm_GH_logo1_pos_2728c.png",
+        "hcfm_GH_logo1_pos_871c_2728c.png",
+        "hcfm_GH_logo1_pos_black.png",
+        "hcfm_GH_logo1_rev_1245c_white.png",
+        "hcfm_GH_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_GH_Logotype2",
+      "files": [
+        "hcfm_GH_logo2_pos_2728c.png",
+        "hcfm_GH_logo2_pos_871c_2728c.png",
+        "hcfm_GH_logo2_pos_black.png",
+        "hcfm_GH_logo2_rev_1245c_white.png",
+        "hcfm_GH_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "14_HCFM_IN": [
+    {
+      "folder": "HCFM_IN_Logotype1",
+      "files": [
+        "hcfm_IN_logo1_pos_2728c.png",
+        "hcfm_IN_logo1_pos_871c_2728c.png",
+        "hcfm_IN_logo1_pos_black.png",
+        "hcfm_IN_logo1_rev_1245c_white.png",
+        "hcfm_IN_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_IN_Logotype2",
+      "files": [
+        "hcfm_IN_logo2_pos_2728c.png",
+        "hcfm_IN_logo2_pos_871c_2728c.png",
+        "hcfm_IN_logo2_pos_black.png",
+        "hcfm_IN_logo2_rev_1245c_white.png",
+        "hcfm_IN_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "15_HCFM_KE": [
+    {
+      "folder": "HCFM_KE_Logotype1",
+      "files": [
+        "hcfm_KE_logo1_pos_2728c.png",
+        "hcfm_KE_logo1_pos_871c_2728c.png",
+        "hcfm_KE_logo1_pos_black.png",
+        "hcfm_KE_logo1_rev_1245c_white.png",
+        "hcfm_KE_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_KE_Logotype2",
+      "files": [
+        "hcfm_KE_logo2_pos_2728c.png",
+        "hcfm_KE_logo2_pos_871c_2728c.png",
+        "hcfm_KE_logo2_pos_black.png",
+        "hcfm_KE_logo2_rev_1245c_white.png",
+        "hcfm_KE_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "16_HCFM_TZ": [
+    {
+      "folder": "HCFM_TZ_Logotype1",
+      "files": [
+        "hcfm_TZ_logo1_pos_2728c.png",
+        "hcfm_TZ_logo1_pos_871c_2728c.png",
+        "hcfm_TZ_logo1_pos_black.png",
+        "hcfm_TZ_logo1_rev_1245c_white.png",
+        "hcfm_TZ_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_TZ_Logotype2",
+      "files": [
+        "hcfm_TZ_logo2_pos_2728c.png",
+        "hcfm_TZ_logo2_pos_871c_2728c.png",
+        "hcfm_TZ_logo2_pos_black.png",
+        "hcfm_TZ_logo2_rev_1245c_white.png",
+        "hcfm_TZ_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "17_HCFM_UG": [
+    {
+      "folder": "HCFM_UG_Logotype1",
+      "files": [
+        "hcfm_UG_logo1_pos_2728c.png",
+        "hcfm_UG_logo1_pos_871c_2728c.png",
+        "hcfm_UG_logo1_pos_black.png",
+        "hcfm_UG_logo1_rev_1245c_white.png",
+        "hcfm_UG_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_UG_Logotype2",
+      "files": [
+        "hcfm_UG_logo2_pos_2728c.png",
+        "hcfm_UG_logo2_pos_871c_2728c.png",
+        "hcfm_UG_logo2_pos_black.png",
+        "hcfm_UG_logo2_rev_1245c_white.png",
+        "hcfm_UG_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "18_HCFM_UY": [
+    {
+      "folder": "HCFM_UY_Logotype1",
+      "files": [
+        "hcfm_UY_logo1_pos_2728c.png",
+        "hcfm_UY_logo1_pos_871c_2728c.png",
+        "hcfm_UY_logo1_pos_black.png",
+        "hcfm_UY_logo1_rev_1245c_white.png",
+        "hcfm_UY_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "HCFM_UY_Logotype2",
+      "files": [
+        "hcfm_UY_logo2_pos_2728c.png",
+        "hcfm_UY_logo2_pos_871c_2728c.png",
+        "hcfm_UY_logo2_pos_black.png",
+        "hcfm_UY_logo2_rev_1245c_white.png",
+        "hcfm_UY_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "19_INFAM_PE": [
+    {
+      "folder": "INFAM_PE_Logotype1",
+      "files": [
+        "INFAM_PE_logo1_pos_2728c.png",
+        "INFAM_PE_logo1_pos_871c_2728c.png",
+        "INFAM_PE_logo1_pos_black.png",
+        "INFAM_PE_logo1_rev_1245c_white.png",
+        "INFAM_PE_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "INFAM_PE_Logotype2",
+      "files": [
+        "INFAM_PE_logo2_pos_2728c.png",
+        "INFAM_PE_logo2_pos_871c_2728c.png",
+        "INFAM_PE_logo2_pos_black.png",
+        "INFAM_PE_logo2_rev_1245c_white.png",
+        "INFAM_PE_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "20_RosarioFam_BR": [
+    {
+      "folder": "RosarioFam_BR_Logotype1",
+      "files": [
+        "RosarioFam_BR_logo1_pos_2728c.png",
+        "RosarioFam_BR_logo1_pos_871c_2728c.png",
+        "RosarioFam_BR_logo1_pos_black.png",
+        "RosarioFam_BR_logo1_rev_1245c_white.png",
+        "RosarioFam_BR_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "RosarioFam_BR_Logotype2",
+      "files": [
+        "RosarioFam_BR_logo2_pos_2728c.png",
+        "RosarioFam_BR_logo2_pos_871c_2728c.png",
+        "RosarioFam_BR_logo2_pos_black.png",
+        "RosarioFam_BR_logo2_prev_white.png",
+        "RosarioFam_BR_logo2_rev_1245c_white.png"
+      ]
+    }
+  ],
+  "21_RosarioFam_CL": [
+    {
+      "folder": "RosarioFam_CL_Logotype1",
+      "files": [
+        "RosarioFam_CL_logo1_pos_2728c.png",
+        "RosarioFam_CL_logo1_pos_871c_2728c.png",
+        "RosarioFam_CL_logo1_pos_black.png",
+        "RosarioFam_CL_logo1_rev_1245c_white.png",
+        "RosarioFam_CL_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "RosarioFam_CL_Logotype2",
+      "files": [
+        "RosarioFam_CL_logo2_pos_2728c.png",
+        "RosarioFam_CL_logo2_pos_871c_2728c.png",
+        "RosarioFam_CL_logo2_pos_black.png",
+        "RosarioFam_CL_logo2_rev_1245c_white.png",
+        "RosarioFam_CL_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "22_RosarioFam_MX": [
+    {
+      "folder": "RosarioFam_MX_Logotype1",
+      "files": [
+        "RosarioFam_MX_logo1_pos_2728c.png",
+        "RosarioFam_MX_logo1_pos_871c_2728c.png",
+        "RosarioFam_MX_logo1_pos_black.png",
+        "RosarioFam_MX_logo1_rev_1245c_white.png",
+        "RosarioFam_MX_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "RosarioFam_MX_Logotype2",
+      "files": [
+        "RosarioFam_MX_logo2_pos_2728c.png",
+        "RosarioFam_MX_logo2_pos_871c_2728c.png",
+        "RosarioFam_MX_logo2_pos_black.png",
+        "RosarioFam_MX_logo2_rev_1245c_white.png",
+        "RosarioFam_MX_logo2_rev_white.png"
+      ]
+    }
+  ],
+  "23_RosarioFam_PE": [
+    {
+      "folder": "RosarioFam_PE_Logotype1",
+      "files": [
+        "RosarioFam_PE_logo1_pos_2728c.png",
+        "RosarioFam_PE_logo1_pos_871c_2728c.png",
+        "RosarioFam_PE_logo1_pos_black.png",
+        "RosarioFam_PE_logo1_rev_1245c_white.png",
+        "RosarioFam_PE_logo1_rev_white.png"
+      ]
+    },
+    {
+      "folder": "RosarioFam_PE_Logotype2",
+      "files": [
+        "RosarioFam_PE_logo2_pos_2728c.png",
+        "RosarioFam_PE_logo2_pos_871c_2728c.png",
+        "RosarioFam_PE_logo2_pos_black.png",
+        "RosarioFam_PE_logo2_rev_1245c_white.png",
+        "RosarioFam_PE_logo2_rev_white.png"
+      ]
+    }
+  ]
+}
