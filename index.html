@@ -63,6 +63,7 @@
       </nav>
     </div>
     <div class="sidebar-foot">
+      <span class="sidebar-admin-badge" aria-hidden="true">Brand-owner mode</span>
       <p>Maintained by</p>
       <p><strong>Easton Creatives</strong></p>
       <a href="mailto:vhassan@hcfm.org,eepau@hcfm.org" class="sidebar-mail">Get in touch →</a>
@@ -558,22 +559,31 @@
       <p class="ratio-note">A guideline, not a law. Sometimes 70-20-10 or 80-10-10 works better. The point is intentional hierarchy: one color clearly leading, the others playing their part. Whatever colors you pick, keep one dominant.</p>
 
       <h2>Combinations to avoid</h2>
-      <p>These combinations look fine on a screen until you actually use them. They fail readability, accessibility, or both. Avoid them.</p>
+      <p>Each card below shows the failed combination on top so you can see why it fails. The diagnosis below the line is the explanation.</p>
       <div class="avoid-grid">
-        <div class="avoid-card" style="background:#FFFFFF;color:#FFB500;border:1px solid #e6e6e6">
-          <p class="ax">✕</p>
-          <p class="aname">Yellow Gold text on White</p>
-          <p class="adef">1.9:1 contrast — fails WCAG AA. The text disappears at body sizes.</p>
+        <div class="avoid-card">
+          <div class="avoid-demo" style="background:#FFFFFF;color:#FFB500"><span>The text disappears.</span></div>
+          <div class="avoid-body">
+            <p class="avoid-tag">Avoid · Yellow Gold on White</p>
+            <p class="avoid-ratio">Contrast 1.9 : 1 · fails WCAG AA</p>
+            <p class="avoid-fix">Move Yellow Gold to dark backgrounds only — or use Black or HCFM Blue for body text on white.</p>
+          </div>
         </div>
-        <div class="avoid-card" style="background:#000000;color:#0047BB">
-          <p class="ax">✕</p>
-          <p class="aname">HCFM Blue on Black</p>
-          <p class="adef">Low visibility. Blue gets lost against black. Looks muddy. Use Yellow Gold or White on black instead.</p>
+        <div class="avoid-card">
+          <div class="avoid-demo" style="background:#000000;color:#0047BB"><span>The text gets lost.</span></div>
+          <div class="avoid-body">
+            <p class="avoid-tag">Avoid · HCFM Blue on Black</p>
+            <p class="avoid-ratio">Low visibility — looks muddy</p>
+            <p class="avoid-fix">Use Yellow Gold or White on Black instead. Reserve HCFM Blue for light backgrounds and accent moments.</p>
+          </div>
         </div>
-        <div class="avoid-card" style="background:#00A9E0;color:#FFB500">
-          <p class="ax">✕</p>
-          <p class="aname">Marian Blue + Yellow Gold as primary</p>
-          <p class="adef">Two accent colors competing for attention. Pick one to lead.</p>
+        <div class="avoid-card">
+          <div class="avoid-demo" style="background:#00A9E0;color:#FFB500"><span>Both colors fight.</span></div>
+          <div class="avoid-body">
+            <p class="avoid-tag">Avoid · Marian Blue + Yellow Gold as primary</p>
+            <p class="avoid-ratio">Two accent colors competing for attention</p>
+            <p class="avoid-fix">Pick one to lead. Marian Blue on Black with White text, or Yellow Gold on Black with HCFM Blue accents.</p>
+          </div>
         </div>
       </div>
 
@@ -1020,18 +1030,71 @@
       <h1>Platform Dimensions</h1>
       <p class="page-intro">Approved sizes for content across the major social and content platforms. Designs that fall short get cropped. Designs that overshoot get downsized awkwardly. Use these dimensions exactly.</p>
 
+      <h2>At a glance</h2>
+      <p>Each platform's accepted aspect ratios shown at scale. Hover for the pixel dimensions.</p>
+
+      <div class="dim-grid">
+        <article class="dim-card">
+          <div class="dim-shape dim-portrait" title="1080 × 1350"><span>1080×1350</span></div>
+          <p class="dim-platform">Instagram</p>
+          <p class="dim-type">Static image (portrait)</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-vertical" title="1080 × 1920"><span>1080×1920</span></div>
+          <p class="dim-platform">Instagram</p>
+          <p class="dim-type">Reel / Story</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-portrait" title="1080 × 1350"><span>1080×1350</span></div>
+          <p class="dim-platform">Facebook</p>
+          <p class="dim-type">Static image (portrait)</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-landscape" title="1280 × 720"><span>1280×720</span></div>
+          <p class="dim-platform">Facebook</p>
+          <p class="dim-type">Video (feed)</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-vertical" title="1080 × 1920"><span>1080×1920</span></div>
+          <p class="dim-platform">Facebook</p>
+          <p class="dim-type">Reels</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-wide" title="1200 × 627"><span>1200×627</span></div>
+          <p class="dim-platform">LinkedIn</p>
+          <p class="dim-type">Static image</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-portrait" title="1080 × 1350"><span>1080×1350</span></div>
+          <p class="dim-platform">LinkedIn</p>
+          <p class="dim-type">Portrait image</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-wide" title="1200 × 675"><span>1200×675</span></div>
+          <p class="dim-platform">X (Twitter)</p>
+          <p class="dim-type">Static image</p>
+        </article>
+        <article class="dim-card">
+          <div class="dim-shape dim-landscape" title="1280 × 720"><span>1280×720</span></div>
+          <p class="dim-platform">YouTube</p>
+          <p class="dim-type">Thumbnail</p>
+        </article>
+      </div>
+
+      <h2>Reference table</h2>
+      <p>Same data, sortable and copyable.</p>
       <table class="spec-table">
-        <thead><tr><th>Platform</th><th>Content type</th><th>Dimensions (px)</th></tr></thead>
+        <thead><tr><th>Platform</th><th>Content type</th><th>Dimensions (px)</th><th>Aspect ratio</th></tr></thead>
         <tbody>
-          <tr><td>Instagram</td><td>Static image (portrait)</td><td>1080 × 1350</td></tr>
-          <tr><td>Instagram</td><td>Reel / Story</td><td>1080 × 1920</td></tr>
-          <tr><td>Facebook</td><td>Static image (portrait)</td><td>1080 × 1350</td></tr>
-          <tr><td>Facebook</td><td>Video (feed)</td><td>1280 × 720</td></tr>
-          <tr><td>Facebook</td><td>Reels</td><td>1080 × 1920</td></tr>
-          <tr><td>LinkedIn</td><td>Static image</td><td>1200 × 627</td></tr>
-          <tr><td>LinkedIn</td><td>Portrait image</td><td>1080 × 1350</td></tr>
-          <tr><td>X (Twitter)</td><td>Static image</td><td>1200 × 675</td></tr>
-          <tr><td>YouTube</td><td>Thumbnail</td><td>1280 × 720</td></tr>
+          <tr><td>Instagram</td><td>Static image (portrait)</td><td>1080 × 1350</td><td>4:5</td></tr>
+          <tr><td>Instagram</td><td>Reel / Story</td><td>1080 × 1920</td><td>9:16</td></tr>
+          <tr><td>Facebook</td><td>Static image (portrait)</td><td>1080 × 1350</td><td>4:5</td></tr>
+          <tr><td>Facebook</td><td>Video (feed)</td><td>1280 × 720</td><td>16:9</td></tr>
+          <tr><td>Facebook</td><td>Reels</td><td>1080 × 1920</td><td>9:16</td></tr>
+          <tr><td>LinkedIn</td><td>Static image</td><td>1200 × 627</td><td>1.91:1</td></tr>
+          <tr><td>LinkedIn</td><td>Portrait image</td><td>1080 × 1350</td><td>4:5</td></tr>
+          <tr><td>X (Twitter)</td><td>Static image</td><td>1200 × 675</td><td>16:9</td></tr>
+          <tr><td>YouTube</td><td>Thumbnail</td><td>1280 × 720</td><td>16:9</td></tr>
         </tbody>
       </table>
     </section>

@@ -53,15 +53,51 @@
   // Manifest of actual file paths per ministry — loaded from JSON
   let ministryManifest = {};
 
+  // Pick the canonical HCFM-Blue mark preview for a ministry, falling back
+  // to the parent symbol if the manifest hasn't loaded yet or the ministry
+  // doesn't have a Blue variant in its preview set.
+  function ministryMarkUrl(code) {
+    const groups = ministryManifest[code];
+    if (groups && groups.length) {
+      // Prefer Logotype1 (horizontal) blue variant, then Logotype2, then any blue
+      for (const g of groups) {
+        const blueFile = g.files.find(f => f.toLowerCase().includes('pos_2728c') && !f.toLowerCase().includes('871c'));
+        if (blueFile) {
+          return `assets/previews/ministries/${encodeURIComponent(code)}/${encodeURIComponent(g.folder)}/${blueFile}`;
+        }
+      }
+    }
+    return 'assets/logos/hcfm-symbol-blue.png';
+  }
+
+  function renderMinistryDirectory() {
+    const grid = document.getElementById('ministryGrid');
+    if (!grid) return;
+    grid.innerHTML = ministries.map(m => `
+      <a class="ministry-card" href="#ministry/${m.code}">
+        <img src="${ministryMarkUrl(m.code)}" alt="" class="ministry-mark" loading="lazy" onerror="this.src='assets/logos/hcfm-symbol-blue.png'">
+        <p class="ministry-name">${m.name}</p>
+        <p class="ministry-region">${m.region.toUpperCase()}</p>
+        <span class="ministry-cta">View logos →</span>
+      </a>
+    `).join('');
+  }
+
   fetch('assets/ministry-manifest.json')
     .then(r => r.json())
     .then(data => {
       ministryManifest = data;
+      // Re-render the directory grid now that we have ministry-specific marks
+      renderMinistryDirectory();
       // If we are already on a ministry detail route, re-render now that manifest is loaded
       if (location.hash.startsWith('#ministry/')) {
         const code = location.hash.split('/')[1];
         const m = ministries.find(x => x.code === code);
         if (m) renderMinistryDetail(m);
+      }
+      // If the downloads page is unlocked and showing the ministry tab, refresh that too
+      if (sessionStorage.getItem('hcfm-dl-unlocked') === '1') {
+        renderDlMinistryGrid();
       }
     })
     .catch(() => console.warn('Ministry manifest failed to load'));
@@ -148,17 +184,7 @@
   }
 
   /* ---------- Ministry directory ---------- */
-  const grid = document.getElementById('ministryGrid');
-  if (grid) {
-    grid.innerHTML = ministries.map(m => `
-      <a class="ministry-card" href="#ministry/${m.code}">
-        <img src="assets/logos/hcfm-symbol-blue.png" alt="" class="ministry-mark">
-        <p class="ministry-name">${m.name}</p>
-        <p class="ministry-region">${m.region.toUpperCase()}</p>
-        <span class="ministry-cta">View logos →</span>
-      </a>
-    `).join('');
-  }
+  renderMinistryDirectory(); // initial render with parent fallback; manifest fetch will re-render with actual marks
 
   /* ---------- Ministry detail page (reads from manifest) ---------- */
   function variantLabelFromFile(filename) {
@@ -438,7 +464,7 @@
     if (!el) return;
     el.innerHTML = ministries.map(m => `
       <a class="dl-ministry-card" href="#ministry/${m.code}">
-        <img src="assets/logos/hcfm-symbol-blue.png" alt="">
+        <img src="${ministryMarkUrl(m.code)}" alt="" loading="lazy" onerror="this.src='assets/logos/hcfm-symbol-blue.png'">
         <div>
           <p class="dl-ministry-card-name">${m.name}</p>
           <p class="dl-ministry-card-region">${m.region}</p>
@@ -783,37 +809,200 @@
     { q: ['negative feedback rate', 'hide post signal'], a: 'Negative Feedback Rate (hides + "not interested" clicks) is a <strong>color-avoidance signal.</strong> If one variant triggers significantly more hides than another, that\'s a trust or warmth failure regardless of what it\'s scoring on engagement. We watch for this because attention without affinity hurts mission engagement, even when the click numbers look good.' }
   ];
 
+  // ---------- Synonym dictionary: maps user-language to KB-language ----------
+  // When a user types something to the left, the matcher also tries the right.
+  const SYNONYMS = {
+    'reel': 'instagram',
+    'reels': 'instagram',
+    'story': 'instagram',
+    'stories': 'instagram',
+    'cover': 'thumbnail',
+    'pic': 'image',
+    'picture': 'image',
+    'photograph': 'photography',
+    'photos': 'photography',
+    'pics': 'photography',
+    'colour': 'color',
+    'colours': 'colors',
+    'mistake': 'misuse',
+    'wrong': 'misuse',
+    'rules': 'rule',
+    'broken': 'misuse',
+    'rule': 'guideline',
+    'allowed': 'approved',
+    'forbidden': 'avoid',
+    'cannot': 'never',
+    "can't": 'never',
+    'permit': 'allow',
+    'modify': 'edit',
+    'change': 'edit',
+    'tweak': 'edit',
+    'adjust': 'edit',
+    'add stroke': 'stroke outline',
+    'outline': 'stroke',
+    'border': 'stroke',
+    'big': 'size',
+    'small': 'size',
+    'tiny': 'minimum size',
+    'huge': 'maximum size',
+    'partner': 'co-branding',
+    'co brand': 'co-branding',
+    'cobrand': 'co-branding',
+    'campaign': 'special campaign',
+    'social media': 'social',
+    'fb': 'facebook',
+    'ig': 'instagram',
+    'twitter': 'x twitter',
+    'x': 'x twitter',
+    'youtube': 'youtube thumbnail',
+    'tagalog': 'translation',
+    'filipino': 'translation',
+    'french': 'translation',
+    'spanish': 'translation',
+    'portuguese': 'translation',
+    'swahili': 'translation',
+    'kiswahili': 'translation',
+    'language': 'translation',
+    'africa': 'east africa',
+    'east africa': 'east africa kenya uganda tanzania',
+    'kenya': 'east africa kenya',
+    'uganda': 'east africa uganda',
+    'tanzania': 'east africa tanzania',
+    'philippines': 'philippines',
+    'pinas': 'philippines',
+    'manila': 'philippines',
+    'parish': 'ministry center',
+    'parishes': 'ministry centers',
+    'how do i': '',
+    "how can i": '',
+    'where do i': '',
+    'where can i': '',
+    'what is': '',
+    "what's": '',
+    'should i': '',
+    'do i': '',
+    'i want to': '',
+    'i need': ''
+  };
+
+  // Cheap stemmer — strip common suffixes so 'reels' matches 'reel' etc.
+  function stem(w) {
+    return w.replace(/(ies|ied|ying|ing|ed|es|s|ly)$/i, '');
+  }
+
+  // Expand a query: lowercase, apply synonym substitutions, then split into stem-tokens.
+  function tokenize(q) {
+    let s = ' ' + q.toLowerCase() + ' ';
+    // Apply 2-word and 1-word synonym substitutions
+    for (const [from, to] of Object.entries(SYNONYMS)) {
+      const re = new RegExp(`\\b${from}\\b`, 'g');
+      s = s.replace(re, ' ' + to + ' ');
+    }
+    return s.split(/[^a-z0-9]+/).filter(Boolean).map(stem);
+  }
+
   function answerQuestion(q) {
-    q = q.toLowerCase();
+    if (!q || !q.trim()) return null;
+    const userTokens = tokenize(q);
+    if (!userTokens.length) return null;
+    let best = null;
     let bestScore = 0;
-    let bestAnswer = null;
     for (const k of knowledge) {
       let score = 0;
       for (const term of k.q) {
-        if (q.includes(term.toLowerCase())) score += term.length;
+        const termTokens = tokenize(term);
+        // Substring match on the full term (existing behavior, scaled by length)
+        if ((' ' + userTokens.join(' ') + ' ').includes(' ' + termTokens.join(' ') + ' ')) {
+          score += term.length * 2;
+        }
+        // Token-level overlap — every shared stem adds points
+        for (const t of termTokens) {
+          if (t.length < 2) continue;
+          if (userTokens.includes(t)) score += t.length;
+        }
       }
-      if (score > bestScore) {
-        bestScore = score;
-        bestAnswer = k.a;
-      }
+      if (score > bestScore) { bestScore = score; best = k; }
     }
-    if (bestAnswer) return bestAnswer;
-    return `I don't have a confident answer for that yet. Try one of these topics: <em>colors, fonts, logos, voice, photography, ministries, downloads, transition, password</em>. Or email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>.`;
+    // Threshold: require a minimum confidence to avoid false matches.
+    if (best && bestScore >= 6) return { answer: best.a, key: best.q[0] };
+    return null;
   }
 
-  function addChatMessage(text, isUser) {
+  // Suggested follow-up questions per topic — surfaces RELATED entries
+  // by matching the matched-entry's keywords against neighbour entries.
+  function suggestFollowUps(matchedKey) {
+    if (!matchedKey) return [];
+    const matchedTokens = tokenize(matchedKey);
+    const scored = knowledge.map(k => {
+      const kTokens = tokenize(k.q[0]);
+      let s = 0;
+      for (const t of kTokens) if (matchedTokens.includes(t)) s++;
+      return { k, s };
+    }).filter(x => x.s > 0 && x.k.q[0] !== matchedKey)
+      .sort((a, b) => b.s - a.s)
+      .slice(0, 3);
+    return scored.map(x => x.k.q[0]);
+  }
+
+  function addChatMessage(text, isUser, opts = {}) {
     if (!chatBody) return;
     const div = document.createElement('div');
     div.className = `chat-msg chat-msg-${isUser ? 'user' : 'bot'}`;
-    div.innerHTML = `<p>${text}</p>`;
+    let html = `<p>${text}</p>`;
+    if (opts.followUps && opts.followUps.length) {
+      html += `<div class="chat-followups">`;
+      for (const f of opts.followUps) {
+        const label = f.charAt(0).toUpperCase() + f.slice(1);
+        html += `<button class="chat-pill" data-q="${f.replace(/"/g, '&quot;')}">${label}</button>`;
+      }
+      html += `</div>`;
+    }
+    if (opts.escalate) {
+      html += `<div class="chat-escalate">
+        <p class="chat-escalate-h">Want a human to take this?</p>
+        <p class="chat-escalate-p">Send Victoria and Emmanuel a quick message — they reply within two business days.</p>
+        <button class="chat-escalate-btn" id="chatEscalateBtn">Email Victoria & Emmanuel →</button>
+      </div>`;
+    }
+    div.innerHTML = html;
     chatBody.appendChild(div);
     chatBody.scrollTop = chatBody.scrollHeight;
+    persistChat();
   }
+
+  function persistChat() {
+    if (!chatBody) return;
+    try { sessionStorage.setItem('hcfm-chat-history', chatBody.innerHTML); } catch {}
+  }
+
+  function restoreChat() {
+    if (!chatBody) return;
+    try {
+      const saved = sessionStorage.getItem('hcfm-chat-history');
+      if (saved) {
+        chatBody.innerHTML = saved;
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    } catch {}
+  }
+  restoreChat();
 
   function handleChatQuery(query) {
     if (!query || !query.trim()) return;
     addChatMessage(query, true);
-    setTimeout(() => addChatMessage(answerQuestion(query), false), 320);
+    const result = answerQuestion(query);
+    setTimeout(() => {
+      if (result) {
+        const followUps = suggestFollowUps(result.key);
+        addChatMessage(result.answer, false, { followUps });
+      } else {
+        addChatMessage(
+          `I don't have a confident answer for that. The brand book covers <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>. Try one of those topics — or send Victoria and Emmanuel a direct question below.`,
+          false,
+          { escalate: true }
+        );
+      }
+    }, 280);
   }
 
   if (chatForm) {
@@ -828,8 +1017,39 @@
 
   document.addEventListener('click', (e) => {
     const pill = e.target.closest('.chat-pill');
-    if (pill) handleChatQuery(pill.dataset.q);
+    if (pill && pill.dataset.q) handleChatQuery(pill.dataset.q);
+    if (e.target.closest('#chatEscalateBtn')) showEscalateForm();
   });
+
+  // Embedded escalation form — keeps the user inside the chat
+  function showEscalateForm() {
+    if (!chatBody) return;
+    const div = document.createElement('div');
+    div.className = 'chat-msg chat-msg-bot chat-form-msg';
+    div.innerHTML = `
+      <p><strong>Send Victoria & Emmanuel a question</strong></p>
+      <form class="chat-mini-form" id="chatEscalateForm">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Your question or request" rows="3" required></textarea>
+        <button type="submit" class="btn btn-primary">Send →</button>
+      </form>`;
+    chatBody.appendChild(div);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    const f = div.querySelector('#chatEscalateForm');
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(f);
+      const subject = encodeURIComponent('HCFM Brand · question from chat');
+      const body = encodeURIComponent(
+        `From: ${fd.get('name')} <${fd.get('email')}>\n\n${fd.get('message')}\n\n— Sent from the brand portal chat`
+      );
+      window.location.href = `mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=${subject}&body=${body}`;
+      addChatMessage('Thanks. Your email client should be opening with the message pre-filled. Send it from there and we will reply within two business days.', false);
+      f.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+    });
+    persistChat();
+  }
 
   /* ---------- Language switcher placeholder ---------- */
   document.querySelectorAll('.lang-btn').forEach(btn => {
