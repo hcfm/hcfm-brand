@@ -85,19 +85,19 @@ p { margin: 0 0 1em; }
 .brand-mark { display: flex; align-items: center; gap: 16px; color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.015em; }
 .brand-mark img { width: 48px; height: 48px; }
 .brand-mark:hover { color: var(--hcfm-gold); text-decoration: none; }
-.header-search { width: 320px; padding: 8px 14px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 4px; color: #fff; font-size: 13px; }
+.header-search-wrap { position: relative; display: flex; align-items: center; }
+.header-search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.55); pointer-events: none; }
+.header-search { width: 320px; padding: 8px 14px 8px 36px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 4px; color: #fff; font-size: 13px; font-family: var(--font-display); }
 .header-search::placeholder { color: rgba(255,255,255,0.55); }
 .header-search:focus { outline: none; border-color: var(--hcfm-gold); background: rgba(255,255,255,0.15); }
+.header-search-wrap:focus-within .header-search-icon { color: var(--hcfm-gold); }
 
 /* ---------- Page wrap (full viewport, sidebar flush left) ---------- */
-.page-wrap { width: 100%; max-width: 100%; margin: 0; display: grid; grid-template-columns: var(--sidebar-width) 1fr; min-height: calc(100vh - 76px - 36px); background: var(--bg); }
+.page-wrap { width: 100%; max-width: 100%; margin: 0; display: grid; grid-template-columns: var(--sidebar-width) 1fr; min-height: calc(100vh - 76px); background: var(--bg); }
 
 /* ---------- Sidebar ---------- */
 .sidebar { border-right: 1px solid var(--rule); padding: 0; position: sticky; top: 76px; align-self: start; height: calc(100vh - 76px); overflow: hidden; background: var(--bg); display: flex; flex-direction: column; }
-.sidebar-head { flex: 0 0 auto; padding: 28px 24px 20px 40px; border-bottom: 1px solid var(--rule); background: var(--bg); }
-.sidebar-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hcfm-gold); margin: 0 0 4px; }
-.sidebar-version { font-family: var(--font-display); font-size: 12px; color: var(--text-muted); margin: 0; }
-.sidebar-scroll { flex: 1 1 auto; overflow-y: auto; padding: 16px 24px 16px 40px; }
+.sidebar-scroll { flex: 1 1 auto; overflow-y: auto; padding: 32px 24px 16px 40px; }
 .sidebar-foot { flex: 0 0 auto; padding: 20px 24px 24px 40px; border-top: 1px solid var(--rule); background: var(--bg); font-family: var(--font-display); font-size: 12px; color: var(--text-muted); }
 .sidebar-foot p { margin: 0 0 2px; }
 .sidebar-foot p strong { color: var(--text); font-weight: 600; }
@@ -289,8 +289,8 @@ p { margin: 0 0 1em; }
 .sym-layer-reverse { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
 .sym-layer-reverse .sym-layer-visual { order: 2; }
 .sym-layer-reverse .sym-layer-text { order: 1; }
-.sym-layer-visual { background: var(--bg-page); border: 1px solid var(--rule); border-radius: 8px; padding: 32px; display: flex; align-items: center; justify-content: center; min-height: 340px; }
-.sym-layer-visual-light { background: var(--hcfm-black); border-color: var(--hcfm-black); }
+.sym-layer-visual { background: transparent; border: none; border-radius: 0; padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 340px; }
+.sym-layer-visual-light { background: var(--hcfm-black); border-radius: 8px; }
 .sym-layer-text h2 { padding: 0; border: none; margin: 0 0 14px; font-size: 28px; color: var(--hcfm-blue); }
 .sym-layer-eyebrow { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hcfm-gold); margin: 0 0 8px; }
 .sym-layer-text p { font-size: 15px; line-height: 1.7; color: var(--text); margin: 0 0 12px; }
@@ -300,13 +300,20 @@ p { margin: 0 0 1em; }
 /* Native symbol visuals */
 .sym-vis { position: relative; display: inline-block; }
 
-/* Layer 1 + 2 — user-provided transparent PNGs */
+/* Hero Mark — render in Yellow Gold (digital primary) */
+.sym-vis-mark img {
+  width: 320px; height: 320px;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%);
+}
+
+/* Layer 1 + 2 — user-provided transparent PNGs, rendered in Yellow Gold */
 .sym-visual-art {
   width: 100%;
   max-width: 420px;
   height: auto;
   display: block;
   margin: 0 auto;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%);
 }
 
 /* Father Peyton quote — readable italic, not the unreadable script */
@@ -485,7 +492,7 @@ p { margin: 0 0 1em; }
 .vr-col li::marker { color: var(--hcfm-gold); }
 .vr-col-foil li::marker { color: var(--text-quiet); }
 .voice-table { font-size: 13px; }
-.voice-table td:first-child { color: var(--hcfm-blue); }
+.voice-table td:first-child { color: var(--text); font-weight: 600; }
 
 /* ---------- Imagery ---------- */
 .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
@@ -546,7 +553,7 @@ p { margin: 0 0 1em; }
 .spec-table { width: 100%; border-collapse: collapse; font-family: var(--font-display); font-size: 14px; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
 .spec-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding: 10px 16px; background: var(--bg-page); border-bottom: 1px solid var(--rule); }
 .spec-table td { padding: 12px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; }
-.spec-table td:first-child { font-weight: 600; color: var(--hcfm-blue); }
+.spec-table td:first-child { font-weight: 600; color: var(--text); }
 .spec-table tr:last-child td { border-bottom: none; }
 
 /* ---------- Ministry Centers (HCFM mark + name) ---------- */
@@ -603,10 +610,13 @@ p { margin: 0 0 1em; }
 /* Download gallery (parent logos preview) */
 .dl-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .dl-gallery-item { background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.dl-gallery-item-feature { grid-column: span 2; border-color: var(--hcfm-gold); }
+.dl-gallery-item-feature .dl-gallery-head { background: var(--bg-page); border-bottom-color: var(--hcfm-gold); }
 .dl-gallery-head { padding: 14px 18px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .dl-gallery-head h3 { font-size: 15px; margin: 0; }
 .dl-gallery-head p { margin: 0; font-size: 12px; color: var(--text-muted); }
 .dl-variants { padding: 12px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; background: var(--bg-page); }
+.dl-variants-feature { grid-template-columns: repeat(6, 1fr); }
 .dl-variant { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 12px 8px; text-align: center; cursor: pointer; transition: border-color 120ms; }
 .dl-variant.dark { background: #000; border-color: #000; }
 .dl-variant:hover { border-color: var(--hcfm-gold); }
@@ -710,8 +720,8 @@ p { margin: 0 0 1em; }
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-family: var(--font-display); font-weight: 600; font-size: 13px; border: 0; border-radius: 4px; cursor: pointer; transition: background-color 120ms; text-decoration: none; }
-.btn-primary { background: var(--hcfm-blue); color: #fff; }
-.btn-primary:hover { background: #003a99; color: #fff; text-decoration: none; }
+.btn-primary { background: var(--hcfm-marian-blue); color: #fff; }
+.btn-primary:hover { background: #0093c4; color: #fff; text-decoration: none; }
 .btn[disabled] { opacity: 0.5; cursor: not-allowed; }
 .btn-meta { font-weight: 400; font-size: 11px; opacity: 0.85; }
 
@@ -734,7 +744,7 @@ p { margin: 0 0 1em; }
 /* ============================================================
    CHAT ASSISTANT (floating)
    ============================================================ */
-.chat-fab { position: fixed; bottom: 24px; right: 24px; background: var(--hcfm-blue); color: #fff; padding: 12px 18px; border: 0; border-radius: 200px; font-family: var(--font-display); font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,71,187,0.3); transition: all 200ms; z-index: 150; }
+.chat-fab { position: fixed; bottom: 24px; right: 24px; background: var(--hcfm-marian-blue); color: #fff; padding: 12px 18px; border: 0; border-radius: 200px; font-family: var(--font-display); font-weight: 600; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,169,224,0.35); transition: all 200ms; z-index: 150; }
 .chat-fab:hover { background: var(--hcfm-black); transform: translateY(-2px); }
 .chat-fab-icon { font-size: 16px; }
 

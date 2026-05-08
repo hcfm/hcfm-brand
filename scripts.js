@@ -253,6 +253,10 @@
   const MINISTRY_PASSWORDS = ['hcfm2026', 'eastoncreatives', 'familyrosary'];
   const ADMIN_PASSWORDS = ['emmyvictoria', 'brandowners', 'eastonadmin'];
 
+  // Release base for heavy ZIPs hosted on GitHub Releases — declared early so
+  // the auto-unlock path below can use it (avoids temporal dead zone).
+  const RELEASE_BASE = 'https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets';
+
   function unlockDownloads() {
     if (dlGate) dlGate.hidden = true;
     if (dlContent) dlContent.hidden = false;
@@ -265,11 +269,7 @@
   function unlockAdmin() {
     if (sourceTab) sourceTab.hidden = false;
     sessionStorage.setItem(ADMIN_KEY, '1');
-  }
-
-  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-    unlockDownloads();
-    if (sessionStorage.getItem(ADMIN_KEY) === '1') unlockAdmin();
+    document.body.classList.add('admin-active');
   }
 
   if (dlForm) {
@@ -300,8 +300,6 @@
   });
 
   /* ---------- Parent gallery (PNG/JPG only — no AI files publicly) ---------- */
-  const RELEASE_BASE = 'https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets';
-
   function renderParentGallery() {
     const el = document.getElementById('parentGallery');
     if (!el) return;
@@ -379,6 +377,16 @@
       }
     ];
 
+    // Six representative thumbnails for the Parent Pack hero card
+    const featuredPreviews = [
+      { folder: 'HCFM_Symbol',    file: 'hcfm_symbol_pos_2728c.png',      label: 'Symbol · Blue',    dark: false },
+      { folder: 'HCFM_Logotype1', file: 'hcfm_logo1_pos_2728c.png',       label: 'Logotype 1 · Blue', dark: false },
+      { folder: 'HCFM_Logotype2', file: 'hcfm_logo2_pos_871c_2728c.png',  label: 'Logotype 2 · Two-tone', dark: false },
+      { folder: 'HCFM_Logotype3', file: 'hcfm_logo3_pos_black.png',       label: 'Logotype 3 · Black', dark: false },
+      { folder: 'HCFM_Logotype4', file: 'hcfm_logo4_rev_white.png',       label: 'Logotype 4 · White reverse', dark: true },
+      { folder: 'HCFM_Symbol',    file: 'hcfm_symbol_rev_1245c.png',      label: 'Symbol · Gold reverse', dark: true }
+    ];
+
     el.innerHTML = `
       <article class="dl-gallery-item dl-gallery-item-feature">
         <div class="dl-gallery-head">
@@ -387,6 +395,17 @@
             <p>Everything: Symbol + all 4 Logotypes, all colors, PNG and JPG. 12 MB.</p>
           </div>
           <a href="${RELEASE_BASE}/HCFM_Parent_Pack.zip" class="btn btn-primary">Download all <span class="btn-meta">12 MB</span></a>
+        </div>
+        <div class="dl-variants dl-variants-feature">
+          ${featuredPreviews.map(v => `
+            <div class="dl-variant ${v.dark ? 'dark' : ''}">
+              <img src="assets/previews/parent/${v.folder}/${v.file}" alt="${v.label}" loading="lazy" onerror="this.style.opacity='0.3'">
+              <span class="dl-variant-name">${v.label}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="dl-gallery-foot">
+          <span class="dl-link">A representative sample. Download to see every variant in every color across all 5 configurations.</span>
         </div>
       </article>
     ` + groups.map(g => `
@@ -520,7 +539,7 @@
     { q: ['muted gold', 'pantone 871', 'old gold', '89764b'], a: '<strong>Muted Gold.</strong> Hex #89764B · RGB 137/118/75 · Pantone 871C. The reverent gold. Print, formal, donor materials, certificates. Symbolizes sacredness in traditional, devotional contexts.' },
     { q: ['black', 'foundation color', '000000'], a: '<strong>Black (#000000).</strong> Process Black. Your workhorse. The primary background that lets every other brand color shine. Use it for social graphics, video thumbnails, and as a 40 to 70 percent overlay on photos.' },
     { q: ['white', 'ffffff', 'breathing space'], a: '<strong>White (#FFFFFF).</strong> Visual rest and balance. The space between things. Use white as text on dark, and as negative space to let content breathe.' },
-    { q: ['yellow gold vs muted gold', 'when use muted gold', 'two golds', 'gold difference'], a: '<strong>Simple rule:</strong> If it is on a screen, use Yellow Gold. If it is for donors, on a certificate, or in formal print, consider Muted Gold. Yellow Gold is digital and energetic. Muted Gold is traditional and reverent. The two golds are not interchangeable.' },
+    { q: ['yellow gold vs muted gold', 'when use muted gold', 'two golds', 'gold difference'], a: '<strong>Simple rule:</strong> If it is on a screen, use Yellow Gold. If it is for donors, on a certificate, or in formal print, use Muted Gold. Yellow Gold is digital and energetic. Muted Gold is traditional and reverent. The two golds are not interchangeable.' },
     { q: ['yellow gold body text', 'gold on white', 'accessibility', 'contrast'], a: 'Never use Yellow Gold for body text on white. Yellow Gold on white is 1.9:1 contrast — fails WCAG AA. Use Yellow Gold for headlines and accents only on dark backgrounds.' },
     { q: ['contrast', 'wcag', 'readable', 'accessibility ratio'], a: '<strong>WCAG AA</strong> requires 4.5:1 for body text, 3:1 for large text. <strong>HCFM Blue on White:</strong> 8.6:1 (AAA). <strong>White on HCFM Blue:</strong> 8.6:1 (AAA). <strong>Yellow Gold on Black:</strong> 11.7:1 (AAA). <strong>Yellow Gold on White:</strong> 1.9:1 (FAILS).' },
     { q: ['light blue', 'why marian'], a: '"Light Blue" in the 2026 brand book and "Marian Blue" in the Visual Identity deck refer to the same color (#00A9E0). Going forward, we standardize on "Marian Blue" because it carries the Marian meaning explicitly.' },
