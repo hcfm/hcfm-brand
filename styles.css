@@ -105,14 +105,14 @@ p { margin: 0 0 1em; }
 .sidebar-scroll::-webkit-scrollbar { width: 4px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 2px; }
 .sidebar-nav { display: flex; flex-direction: column; font-family: var(--font-display); }
-.sidebar-nav > a { display: block; padding: 9px 16px 9px 0; color: var(--text); font-size: 15px; font-weight: 500; border-bottom: 2px solid transparent; width: fit-content; margin-bottom: 4px; transition: color 120ms; }
+.sidebar-nav > a { display: block; padding: 9px 16px 9px 0; color: var(--text); font-size: 15px; font-weight: 600; letter-spacing: -0.005em; border-bottom: 2px solid transparent; width: fit-content; margin-bottom: 4px; transition: color 120ms; }
 .sidebar-nav > a:hover { color: var(--hcfm-blue); text-decoration: none; }
-.sidebar-nav > a.active { color: var(--text); font-weight: 600; border-bottom-color: var(--hcfm-gold); }
+.sidebar-nav > a.active { color: var(--text); font-weight: 700; border-bottom-color: var(--hcfm-gold); }
 .nav-group { margin: 16px 0; display: flex; flex-direction: column; }
-.nav-group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-quiet); padding: 8px 0 6px; }
-.nav-group a { display: block; padding: 7px 16px 7px 0; color: var(--text); font-size: 14px; font-weight: 400; border-bottom: 2px solid transparent; width: fit-content; transition: color 120ms; }
+.nav-group-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-quiet); padding: 8px 0 6px; }
+.nav-group a { display: block; padding: 7px 16px 7px 0; color: var(--text); font-size: 15px; font-weight: 500; letter-spacing: -0.005em; border-bottom: 2px solid transparent; width: fit-content; transition: color 120ms; }
 .nav-group a:hover { color: var(--hcfm-blue); text-decoration: none; }
-.nav-group a.active { font-weight: 600; border-bottom-color: var(--hcfm-gold); }
+.nav-group a.active { font-weight: 700; border-bottom-color: var(--hcfm-gold); }
 
 /* ---------- Content (fills the column, capped at a reasonable reading width on ultra-wide screens) ---------- */
 .content { padding: 56px 80px 96px; min-width: 0; width: 100%; max-width: none; margin: 0; }
