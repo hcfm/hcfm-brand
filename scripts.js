@@ -53,12 +53,46 @@
   // Manifest of actual file paths per ministry — loaded from JSON
   let ministryManifest = {};
 
+  // HCFM Foundation uses the parent HCFM logo as-is (no "FOUNDATION" added
+  // to the wordmark). The entity sits AT the parent ministry; its visual
+  // identity is the parent identity. We override its preview paths to point
+  // at the parent HCFM previews instead of the ministry-folder previews.
+  const FOUNDATION_CODE = '02_HCFM_Foundation';
+  const FOUNDATION_AS_PARENT = [
+    {
+      folder: 'HCFM_Logotype1',
+      basePath: 'assets/previews/parent',
+      files: [
+        'hcfm_logo1_pos_2728c.png',
+        'hcfm_logo1_pos_871c_2728c.png',
+        'hcfm_logo1_pos_black.png',
+        'hcfm_logo1_rev_1245c_white.png',
+        'hcfm_logo1_rev_white.png'
+      ]
+    },
+    {
+      folder: 'HCFM_Logotype2',
+      basePath: 'assets/previews/parent',
+      files: [
+        'hcfm_logo2_pos_2728c.png',
+        'hcfm_logo2_pos_871c_2728c.png',
+        'hcfm_logo2_pos_black.png',
+        'hcfm_logo2_rev_1245c_white.png',
+        'hcfm_logo2_rev_white.png'
+      ]
+    }
+  ];
+
   // Pick the canonical HCFM-Blue mark preview for a ministry, falling back
   // to the parent symbol if the manifest hasn't loaded yet or the ministry
   // doesn't have a Blue variant in its preview set.
   // Logotype 2 (stacked) is preferred for grid thumbnails because mark-on-top
   // + wordmark-below fits naturally in a square preview slot.
   function ministryMarkUrl(code) {
+    // HCFM Foundation override — use parent HCFM Logotype 2 Blue
+    if (code === FOUNDATION_CODE) {
+      return 'assets/previews/parent/HCFM_Logotype2/hcfm_logo2_pos_2728c.png';
+    }
     const groups = ministryManifest[code];
     if (groups && groups.length) {
       // Prefer Logotype2 (stacked, fits square previews), then Logotype1, then anything Blue
@@ -217,8 +251,14 @@
     h1.textContent = m.name;
     intro.innerHTML = `<strong>${m.region}.</strong> Logo gallery for this ministry. Below: each variant with a color preview. To download production files (PNG and JPG only), go to <a href="#downloads">Resources / Downloads</a> with your access password.`;
 
-    const groups = ministryManifest[m.code] || [];
-    const previewBase = `assets/previews/ministries/${encodeURIComponent(m.code)}`;
+    // HCFM Foundation uses the parent HCFM logos directly (the wordmark is
+    // 'Holy Cross Family Ministries' with no 'Foundation' suffix added).
+    const isFoundation = m.code === FOUNDATION_CODE;
+    if (isFoundation) {
+      intro.innerHTML += `<p style="margin-top:12px;font-size:13px;color:var(--text-muted);"><em>The HCFM Foundation uses the parent Holy Cross Family Ministries logo as its identity. The wordmark does not include "Foundation".</em></p>`;
+    }
+    const groups = isFoundation ? FOUNDATION_AS_PARENT : (ministryManifest[m.code] || []);
+    const previewBase = isFoundation ? '' : `assets/previews/ministries/${encodeURIComponent(m.code)}`;
 
     if (!groups.length) {
       gallery.innerHTML = `
@@ -245,11 +285,13 @@
         </div>
       </div>
       ${groups.map(g => {
-        // Folder name is e.g. "HCFM_KE_Logotype1", "FamRosary_Logotype1"
-        const ltLabel = g.folder.replace(/.*_(Logotype\d)/, '$1').replace('Logotype', 'Logotype ');
+        // Folder name is e.g. "HCFM_KE_Logotype1", "FamRosary_Logotype1", or
+        // for Foundation override "HCFM_Logotype1" pointing at the parent.
+        const ltLabel = g.folder.replace(/.*(Logotype\d)/, '$1').replace('Logotype', 'Logotype ');
+        const groupBase = g.basePath ? `${g.basePath}/${encodeURIComponent(g.folder)}` : `${previewBase}/${encodeURIComponent(g.folder)}`;
         const variantsHtml = g.files.map(file => {
           const v = variantLabelFromFile(file);
-          const path = `${previewBase}/${encodeURIComponent(g.folder)}/${file}`;
+          const path = `${groupBase}/${file}`;
           return `
             <div class="md-variant">
               <div class="md-variant-bg ${v.dark ? 'dark' : ''}">
