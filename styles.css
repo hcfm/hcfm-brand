@@ -308,20 +308,20 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 /* Native symbol visuals */
 .sym-vis { position: relative; display: inline-block; }
 
-/* Hero Mark — render in Yellow Gold (digital primary) */
+/* Hero Mark — Muted Gold (premium / reverent register, appropriate for the
+   Symbol page where we explain the meaning of the mark). The source PNG is
+   already Muted Gold, so no filter needed. */
 .sym-vis-mark img {
   width: 320px; height: 320px;
-  filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%);
 }
 
-/* Layer 1 + 2 — user-provided transparent PNGs, rendered in Yellow Gold */
+/* Layer 1 + 2 — user-provided transparent PNGs, rendered in Muted Gold */
 .sym-visual-art {
   width: 100%;
   max-width: 420px;
   height: auto;
   display: block;
   margin: 0 auto;
-  filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%);
 }
 
 /* Father Peyton quote — readable italic, not the unreadable script */
@@ -346,17 +346,17 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   margin-top: 6px;
 }
 
-/* Layer 3 — Floral Character: petals that suggest the Rose / Lily / Iris */
+/* Layer 3 — Floral Character: petals that suggest the Rose / Lily / Iris.
+   Mark rendered in Muted Gold; petals tone-matched in muted gold for cohesion. */
 .sym-vis-floral { padding: 40px; }
 .sym-vis-floral img {
   width: 280px; height: 280px;
-  filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%);
   position: relative; z-index: 2;
 }
 .floral-petal {
   position: absolute;
   border-radius: 50% 0 50% 0;
-  background: rgba(255,181,0,0.10);
+  background: rgba(137,118,75,0.10);
   pointer-events: none;
 }
 .floral-petal-1 { width: 200px; height: 200px; top: -10px; left: 50%; transform: translateX(-50%) rotate(0deg); }
@@ -376,9 +376,11 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   filter: blur(4px);
   pointer-events: none;
 }
+/* Mark on the dark Moon and Light card stays Muted Gold (premium/reverent),
+   matching the rest of the Symbol page. The white centre-glow does the
+   "moon clothed in light" visual work without needing a brighter mark. */
 .sym-vis-moon img {
   width: 280px; height: 280px;
-  filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%);
   position: relative; z-index: 2;
 }
 
@@ -386,13 +388,12 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .sym-vis-welcome { padding: 40px; }
 .sym-vis-welcome img {
   width: 280px; height: 280px;
-  filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%);
   position: relative; z-index: 2;
 }
 .welcome-ring {
   position: absolute; top: 50%; left: 50%;
   border-radius: 50%;
-  border: 2px dashed rgba(255,181,0,0.5);
+  border: 2px dashed rgba(137,118,75,0.55);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
