@@ -74,9 +74,12 @@ The Downloads page (`#downloads`) used to have a password input (passwords baked
 - Ministry Tier: `119154177`
 - Admin Tier: `119152416` (admin access also includes ministry access)
 
-**Members so far:**
-- You (Emmanuel) — eepau@nd.edu — added to **both** groups, **invite pending**
-- (Victoria + ministry contacts not added yet — would send invitation emails, wanted your OK first)
+**Members so far (all 3 added to BOTH groups, invitation emails sent — all invite-pending):**
+- Emmanuel Epau — eepau@nd.edu (Notre Dame email)
+- Victoria Hassan — victoriah719@gmail.com (her primary CRM email; vhassan@hcfm.org is on her record as a secondary)
+- Colum Devine — cdevine@hcfm.org
+
+**Heads up on Victoria's email:** her existing CRM record has `victoriah719@gmail.com` as the primary email (with 28 segments + 16 campaigns of history attached). I added the existing record rather than creating a duplicate — invitation email went to her gmail. If you want her to sign in with `vhassan@hcfm.org` instead, the cleanest path is for her to update the primary email on her own contact record after she registers, or you can update it for her in Contacts.
 
 When not logged in: anonymous visitors see "Sign in to access production files" with a Sign in button → `/_hcms/mem/login?redirect_url=/brand%23downloads`. Public-facing brand documents below the gate remain visible.
 
@@ -138,10 +141,9 @@ Then republish the page in HubSpot UI.
 
 ## Open decisions for you
 
-1. **Add Victoria as a member?** Will send invitation email to `vhassan@hcfm.org`. OK to proceed?
-2. **Add 2-3 initial ministry-center contacts?** Need names + emails. (Or wait for Phase 5D verification first.)
-3. **Switch your sign-in email from `eepau@nd.edu` to `eepau@hcfm.org`?** I noticed your member record uses your Notre Dame email. Either works, but `@hcfm.org` is more on-brand.
-4. **Enable MS Forms inline embedding?** In your MS Forms settings → "Anyone with link can respond" → "Allow embedding". Right now it shows the "Fill out the form" card (functional but not as elegant).
+1. **Add 2-3 initial ministry-center contacts?** Need names + emails. (Or wait for Phase 5D verification first.)
+2. **Switch your sign-in email from `eepau@nd.edu` to `eepau@hcfm.org`?** I noticed your member record uses your Notre Dame email. Either works, but `@hcfm.org` is more on-brand. Same question for Victoria — her primary is the gmail.
+3. **Enable MS Forms inline embedding?** In your MS Forms settings → "Anyone with link can respond" → "Allow embedding". Right now it shows the "Fill out the form" card (functional but not as elegant).
 
 ---
 
