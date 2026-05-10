@@ -812,6 +812,11 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .chat-pill-inline { display: inline-block; vertical-align: middle; margin-left: 4px; background: var(--hcfm-blue); color: #fff; border-color: var(--hcfm-blue); }
 .chat-pill-inline:hover { background: #003a99; border-color: #003a99; }
 
+/* Skip-introduction row on the name and role onboarding messages */
+.chat-skip-row { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.chat-pill-skip { background: var(--bg-page); border-color: var(--rule); color: var(--text-muted); font-weight: 600; }
+.chat-pill-skip:hover { border-color: var(--hcfm-blue); color: var(--hcfm-blue); }
+
 /* Bot comprehension check — "did that help?" footer */
 .chat-confirm { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .chat-confirm-h { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin: 0 6px 0 0; flex-basis: 100%; }

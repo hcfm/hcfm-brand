@@ -626,7 +626,9 @@
       setTimeout(() => {
         if (chatBody && chatBody.children.length === 0 && chatSession.onboardStep === 0) {
           addChatMessage(
-            `<p>Hi — I'm the HCFM brand-portal assistant. I can explain the 2026 system, the science behind the color changes, voice and tone, where to download assets, and how to handle specific ministry-center scenarios.</p><p>Before we start, <strong>what should I call you?</strong></p>`,
+            `<p>Hi — I'm the HCFM brand-portal assistant. I can explain the 2026 system, the science behind the color changes, voice and tone, where to download assets, and how to handle specific ministry-center scenarios.</p>
+             <p>Before we start, <strong>what should I call you?</strong> Type your name below.</p>
+             <p class="chat-skip-row">Prefer to jump straight to questions? <button class="chat-pill chat-pill-skip" data-q="skip">Skip introduction →</button></p>`,
             false
           );
         }
@@ -1069,7 +1071,8 @@
       chatSession.onboardStep = 1;
       persistSession();
       addChatMessage(
-        `<p>Good to meet you, <strong>${chatSession.name}</strong>. One more thing — what's your role with HCFM? (e.g. <em>marketing lead in the Philippines</em>, <em>designer at Easton</em>, <em>vendor</em>, <em>ministry-center director</em>). Or type <em>skip</em> if you'd rather just ask your question.</p>`,
+        `<p>Good to meet you, <strong>${chatSession.name}</strong>. One more thing — what's your role with HCFM? (e.g. <em>marketing lead in the Philippines</em>, <em>designer at Easton</em>, <em>vendor</em>, <em>ministry-center director</em>).</p>
+         <p class="chat-skip-row">Don't want to share? <button class="chat-pill chat-pill-skip" data-q="skip">Skip and start asking →</button></p>`,
         false
       );
       return;
