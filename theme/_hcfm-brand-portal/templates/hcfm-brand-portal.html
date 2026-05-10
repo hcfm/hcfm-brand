@@ -1129,18 +1129,30 @@
       <h1>Downloads</h1>
       <p class="page-intro">Brand documents, logo files, font files, and ministry-center logo packs. Public-facing visual references are throughout the site. Production files are gated below — request the access password from <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>.</p>
 
+      {# HCFM Memberships gate — ministry-tier sees production downloads, admin-tier also sees source files #}
+      {% set is_logged_in = request.contact.is_logged_in %}
+      {% set group_ids = [] %}
+      {% if is_logged_in %}
+        {% set group_ids = request.contact.list_memberships|default([])|map(attribute='id')|list %}
+      {% endif %}
+      {% set has_ministry_access = is_logged_in and (119154177 in group_ids or 119152416 in group_ids) %}
+      {% set has_admin_access = is_logged_in and 119152416 in group_ids %}
+
+      {% if not is_logged_in %}
       <div id="dlGate" class="dl-gate">
         <div class="dl-gate-inner">
-          <h2 class="dl-gate-h">Access required</h2>
-          <p class="dl-gate-note">Brand assets are gated to keep them inside the HCFM creative network. Enter your access password to unlock all downloads.</p>
-          <form class="dl-gate-form" id="dlGateForm">
-            <input type="password" placeholder="Access password" id="dlPassword" autocomplete="current-password">
-            <button type="submit" class="btn btn-primary">Unlock</button>
-          </form>
-          <p class="dl-gate-help">Need a password? Email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>.</p>
+          <h2 class="dl-gate-h">Sign in to access production files</h2>
+          <p class="dl-gate-note">Logo packs, source files, and editable templates are reserved for ministry-center designers and Easton internal collaborators. Public-facing brand documents below are open to everyone.</p>
+          <a href="/_hcms/mem/login?redirect_url=/brand%23downloads" class="btn btn-primary">Sign in</a>
+          <p class="dl-gate-help">No account yet? Email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a> for an invitation.</p>
           <p class="dl-gate-public">In the meantime: the <a href="#downloads/documents">brand documents</a> below are public.</p>
         </div>
       </div>
+      {% else %}
+      <div class="dl-signed-in-banner">
+        <p>Signed in as <strong>{{ request.contact.firstname|default(request.contact.email) }}</strong>{% if has_admin_access %} — admin tier (full source files){% elif has_ministry_access %} — ministry tier{% endif %}. <a href="/_hcms/mem/logout?redirect_url=/brand">Sign out</a></p>
+      </div>
+      {% endif %}
 
       <div id="dlContent" class="dl-content" hidden>
         <nav class="dl-tabs">
@@ -1370,7 +1382,7 @@
       </div>
 
       <h2>Send a request or feedback</h2>
-      <p class="section-note">Both forms go to <strong>vhassan@hcfm.org</strong> and <strong>eepau@hcfm.org</strong>. Submitting opens your email client with a pre-filled message; review and send it from there.</p>
+      <p class="section-note">Asset requests go to <strong>vhassan@hcfm.org</strong> and <strong>eepau@hcfm.org</strong>. General feedback uses the Microsoft Forms feedback channel the Easton team monitors.</p>
 
       <div class="form-grid">
         <form class="contact-form" id="requestForm" action="mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=Brand%20Asset%20Request" method="post" enctype="text/plain">
@@ -1383,15 +1395,22 @@
           <button type="submit" class="btn btn-primary">Send request</button>
           <p class="form-foot">→ Goes to Victoria and Emmanuel.</p>
         </form>
-        <form class="contact-form" id="feedbackForm" action="mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=Brand%20Page%20Feedback" method="post" enctype="text/plain">
+        <div class="contact-form ms-forms-embed">
           <h3>Send feedback</h3>
-          <p class="form-sub">The brand system evolves. Tell us what is missing, what is confusing, or what you would like to see added.</p>
-          <input type="text" name="Name" placeholder="Your name (optional)">
-          <input type="email" name="Email" placeholder="Your email (optional)">
-          <textarea name="Feedback" placeholder="What you'd like to share" rows="3" required></textarea>
-          <button type="submit" class="btn btn-primary">Send feedback</button>
-          <p class="form-foot">→ Goes to Victoria and Emmanuel.</p>
-        </form>
+          <p class="form-sub">The brand system evolves. Tell us what is missing, what is confusing, or what you would like to see added — same form the Easton team uses internally.</p>
+          <iframe
+            src="https://forms.office.com/Pages/ResponsePage.aspx?id=KKJPDKgLzU2Hn2-25tYDCkf7HD1tm-tJtB-UhoW4DPdUQldHM01CRVRMQ05UUUM1N1VEM1JFRUNPVy4u&embed=true"
+            width="100%" height="540"
+            frameborder="0" marginwidth="0" marginheight="0"
+            style="border:0;background:transparent;border-radius:8px;"
+            allowfullscreen
+            webkitallowfullscreen
+            mozallowfullscreen
+            msallowfullscreen
+            title="HCFM brand portal feedback form"
+          ></iframe>
+          <p class="form-foot">→ Goes to the Easton team via the Microsoft Forms inbox.</p>
+        </div>
       </div>
 
       <div class="info-block">
@@ -1401,7 +1420,7 @@
 
       <div class="info-block">
         <h3>How this works behind the scenes</h3>
-        <p>The forms above use a standard <code>mailto:</code> handoff: clicking submit opens whatever email client is set as your system default, with the body pre-filled and addressed to both Victoria and Emmanuel. You then send the message yourself. This is the simplest way to keep messages flowing while we are still standing this site up. When the WordPress / HubSpot site goes live, these forms will move to a server-handled submission with a real database log.</p>
+        <p>Asset requests submit directly to HubSpot — no email client needed — and create a record Victoria and Emmanuel can track. Feedback uses Microsoft Forms (the same channel the Easton team uses internally) so all feedback lands in one shared place. We respond within two business days either way.</p>
       </div>
     </section>
 
