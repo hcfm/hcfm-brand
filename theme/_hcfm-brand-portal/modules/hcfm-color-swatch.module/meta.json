@@ -1,0 +1,25 @@
+{
+  "label": "HCFM Color Swatch",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "A single color swatch showing role, name, technical values, and hex. Click-to-copy on the live page.",
+  "host_template_types": [
+    "PAGE",
+    "BLOG_POST",
+    "BLOG_LISTING"
+  ],
+  "icon": null,
+  "inline_help_text": "Use one swatch per brand color. Hex value drives the visual.",
+  "is_available_for_new_content": true,
+  "module_id": null,
+  "smart_type": "NOT_SMART",
+  "tags": [
+    "hcfm",
+    "brand"
+  ],
+  "categories": [
+    "DESIGN"
+  ],
+  "type": "module"
+}

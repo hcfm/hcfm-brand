@@ -1,0 +1,155 @@
+[
+  {
+    "values": {
+      "question": "Are all ministry centers expected to fully transition to the 2026 system?",
+      "answer": "<p>Yes. All ministry centers are expected to transition. We are not enforcing a hard deadline. New materials produced from now forward should use the 2026 system. Existing materials in active circulation can phase out over the next six to twelve months as they are reprinted or refreshed.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 1
+    }
+  },
+  {
+    "values": {
+      "question": "How do ministry centers with the older guidelines handle the move to the new brand?",
+      "answer": "<p>The Philippines and East Africa regional guides still apply for the parts that haven't been updated — margins, photography composition, layout fundamentals. The new brand replaces the older content for typography, colors, and design elements. Where the two conflict, the new brand wins.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 2
+    }
+  },
+  {
+    "values": {
+      "question": "What is the ideal lead time for the transition?",
+      "answer": "<p>For new campaigns, immediate. For existing collateral, switch when you reprint. For digital-first applications such as social media and web, within 30 days of any meaningful update.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 3
+    }
+  },
+  {
+    "values": {
+      "question": "What about older printed materials following the old guidelines?",
+      "answer": "<p>Use them through their natural life. Do not reprint at scale. When you reorder, switch to the 2026 system. Avoid mixing old and new system materials in the same campaign.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 4
+    }
+  },
+  {
+    "values": {
+      "question": "Who reviews ministry-center work for alignment?",
+      "answer": "<p>Victoria Hassan and Emmanuel Epau in Easton. There is no charge or formal request process. Email before you ship anything you are unsure about. Turnaround is typically two business days.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 5
+    }
+  },
+  {
+    "values": {
+      "question": "What support is available from the HCFM team?",
+      "answer": "<p>Victoria and Emmanuel will: review your design before you publish, help you apply the rules in your specific situation, create custom materials when you have a partner organization, commission logo files when the existing pack doesn't cover what you need, and run training calls for ministry-center design teams.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 6
+    }
+  },
+  {
+    "values": {
+      "question": "Can I use Yellow Gold for body text?",
+      "answer": "<p>No. Yellow Gold on white has only 1.9:1 contrast. Accessibility requires 4.5:1 minimum. Use Yellow Gold for headlines, accents, CTAs, and decoration only. On dark backgrounds, Yellow Gold is excellent.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 7
+    }
+  },
+  {
+    "values": {
+      "question": "Why does the brand book say \"Light Blue\" and the page say \"Marian Blue\"?",
+      "answer": "<p>Same color, two names. The 2026 brand book uses \"Light Blue.\" The 2025 Visual Identity deck and most updated documents use \"Marian Blue.\" Going forward, we are standardizing on Marian Blue because it carries more brand meaning.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 8
+    }
+  },
+  {
+    "values": {
+      "question": "When should I use Muted Gold instead of Yellow Gold?",
+      "answer": "<p>Simple rule: if it is on a screen, use Yellow Gold. If it is for donors, on a certificate, or in formal print, use Muted Gold. Muted Gold is the default for traditional, reverent contexts. Yellow Gold is the default for digital, social, and energetic contexts.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 9
+    }
+  },
+  {
+    "values": {
+      "question": "What if I need a logo file in a format that's not in the pack?",
+      "answer": "<p>Email Victoria or Emmanuel. We can commission additional formats — SVG, EPS, PDF, vector outlines for specific cuts — through the Easton creative team.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 10
+    }
+  },
+  {
+    "values": {
+      "question": "Can I create a new sub-brand or accent color for my ministry's local culture?",
+      "answer": "<p><strong>No.</strong> The HCFM system is the same across every ministry — that's what gives us recognition across 18 countries. A family in Manila and a family in Nairobi should see the same brand and instantly know it's HCFM. Cultural adaptation happens through imagery, language, and the specific stories you tell — not through changing the colors or fonts.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 11
+    }
+  },
+  {
+    "values": {
+      "question": "What's the rule on overlays for photos?",
+      "answer": "<p>Black transparent overlays at 40 to 70 percent opacity. The exact opacity depends on the image and how much text you have. 40% for light images and minimal text, 50–60% for most situations, 70%+ for busy images or large text blocks.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 12
+    }
+  },
+  {
+    "values": {
+      "question": "How do I handle a logo with a partner organization?",
+      "answer": "<p>Email Victoria or Emmanuel <strong>before</strong> you produce anything that places another organization's logo next to ours. We have specific rules about how the two logos sit together, how much space goes between them, and what needs approval. Don't design first and ask later — we'll have to redo it.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 13
+    }
+  },
+  {
+    "values": {
+      "question": "Can I create a custom font treatment for a special campaign?",
+      "answer": "<p><strong>No.</strong> The HCFM type system is Whitney, Calluna, and Playlist Script. Period. A custom treatment for one campaign breaks the system for every campaign that follows. If you have a real visual need (a feast-day moment, a launch identity), email Victoria or Emmanuel to discuss how to solve it within the existing typography — never outside it.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 14
+    }
+  },
+  {
+    "values": {
+      "question": "How do I report someone using the HCFM brand wrongly?",
+      "answer": "<p>Email Victoria or Emmanuel with a screenshot or link. We follow up directly with whoever is using the brand. If it is someone outside HCFM (a vendor, a third-party site, an unauthorized printer), we handle the legal follow-up so you don't have to.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 15
+    }
+  },
+  {
+    "values": {
+      "question": "Are there translated versions of the brand guidelines?",
+      "answer": "<p>French, Spanish, Portuguese, and Swahili translations are in progress. Until they are published, ministry centers should use the English version and ask Easton for clarification on any term that does not translate cleanly.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 16
+    }
+  },
+  {
+    "values": {
+      "question": "Where do I get a password for the Downloads tab?",
+      "answer": "<p>Email <a href=\"mailto:vhassan@hcfm.org\">vhassan@hcfm.org</a> or <a href=\"mailto:eepau@hcfm.org\">eepau@hcfm.org</a> with your name and ministry center. We respond within two business days.</p>",
+      "category": "",
+      "is_pinned": false,
+      "display_order": 17
+    }
+  }
+]

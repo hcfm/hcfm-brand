@@ -1,0 +1,14 @@
+{
+  "name": "_hcfm-brand-portal",
+  "label": "HCFM Brand Portal",
+  "preview_path": "./templates/hcfm-brand-portal.html",
+  "screenshot_path": "./images/screenshot.png",
+  "version": "1.0.0",
+  "author": {
+    "name": "Easton Creatives",
+    "email": "eepau@hcfm.org"
+  },
+  "documentation_url": "https://www.hcfm.org/brand-preview",
+  "license": "Internal use — Holy Cross Family Ministries",
+  "enable_domain_stylesheets": false
+}

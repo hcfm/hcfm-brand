@@ -1,0 +1,35 @@
+{
+  "name": "hcfm_faq",
+  "label": "HCFM FAQ",
+  "useForPages": false,
+  "allowPublicApiAccess": true,
+  "allowChildTables": false,
+  "enableChildTablePages": false,
+  "columns": [
+    {
+      "name": "question",
+      "label": "Question",
+      "type": "TEXT"
+    },
+    {
+      "name": "answer",
+      "label": "Answer",
+      "type": "RICHTEXT"
+    },
+    {
+      "name": "category",
+      "label": "Category",
+      "type": "TEXT"
+    },
+    {
+      "name": "is_pinned",
+      "label": "Pin to top",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "display_order",
+      "label": "Display order",
+      "type": "NUMBER"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "hcfm_ministries",
+  "label": "HCFM Ministry Centers",
+  "useForPages": false,
+  "allowPublicApiAccess": true,
+  "allowChildTables": false,
+  "enableChildTablePages": false,
+  "columns": [
+    { "name": "code", "label": "Code (folder name in Files)", "type": "TEXT" },
+    { "name": "name", "label": "Display name", "type": "TEXT" },
+    { "name": "region", "label": "Region / location", "type": "TEXT" },
+    { "name": "display_order", "label": "Display order", "type": "NUMBER" },
+    { "name": "is_foundation", "label": "Use parent HCFM logo", "type": "BOOLEAN" }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "_comment": "Replace each '__GUID__' with the real form GUID returned by the HubSpot Forms API after creation. Then run apply-forms.py to inject into the codebase.",
+  "portalId": "275132",
+  "forms": {
+    "asset_request": {
+      "guid": "__GUID_ASSET_REQUEST__",
+      "name": "hcfm-brand-asset-request",
+      "label": "Brand asset request",
+      "fields": ["firstname", "email", "hcfm_ministry_center", "hcfm_brand_request"],
+      "wired_to": "#requestForm in template (Help section)"
+    },
+    "feedback": {
+      "guid": "__GUID_FEEDBACK__",
+      "name": "hcfm-brand-feedback",
+      "label": "Brand page feedback",
+      "fields": ["firstname", "email", "hcfm_brand_feedback"],
+      "wired_to": "#feedbackForm in template (Help section)"
+    },
+    "vendor_access": {
+      "guid": "__GUID_VENDOR_ACCESS__",
+      "name": "hcfm-vendor-access",
+      "label": "Vendor / locked-tier access request",
+      "fields": ["firstname", "email", "company", "hcfm_access_reason"],
+      "wired_to": "Replaces 'Email vhassan@hcfm.org' link in Downloads gate"
+    },
+    "bot_escalation": {
+      "guid": "__GUID_BOT_ESCALATION__",
+      "name": "hcfm-bot-escalation",
+      "label": "Bot escalation (no-match fallback)",
+      "fields": ["email", "hcfm_bot_question", "hcfm_ministry_center"],
+      "wired_to": "Fires from chat when bot has no answer (Phase 4 add)"
+    }
+  }
+}

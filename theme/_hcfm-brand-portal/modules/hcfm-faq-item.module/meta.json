@@ -1,0 +1,25 @@
+{
+  "label": "HCFM FAQ Item",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "A single Q&A pair. Question + answer with rich text.",
+  "host_template_types": [
+    "PAGE",
+    "BLOG_POST",
+    "BLOG_LISTING"
+  ],
+  "icon": null,
+  "inline_help_text": "Use one per common question. Group multiple to build a FAQ.",
+  "is_available_for_new_content": true,
+  "smart_type": "NOT_SMART",
+  "tags": [
+    "hcfm",
+    "brand",
+    "faq"
+  ],
+  "categories": [
+    "BODY_CONTENT"
+  ],
+  "type": "module"
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "role",
+    "label": "Role label (small caps)",
+    "type": "text",
+    "default": "Foundation",
+    "help_text": "Tier or function — e.g. Foundation, Identifier, Energy"
+  },
+  {
+    "name": "color_name",
+    "label": "Color name",
+    "type": "text",
+    "default": "Black",
+    "help_text": "Display name. Whitney bold."
+  },
+  {
+    "name": "swatch_color",
+    "label": "Swatch color",
+    "type": "color",
+    "default": { "color": "#000000", "opacity": 100 },
+    "help_text": "The actual color shown."
+  },
+  {
+    "name": "hex_value",
+    "label": "Hex value (display + click-to-copy)",
+    "type": "text",
+    "default": "#000000",
+    "help_text": "Including the # prefix. This is what gets copied when clicked."
+  },
+  {
+    "name": "pantone_value",
+    "label": "Pantone reference (optional)",
+    "type": "text",
+    "default": "",
+    "help_text": "e.g. Pantone 2728 C. Leave blank for none."
+  },
+  {
+    "name": "rgb_value",
+    "label": "RGB value (optional)",
+    "type": "text",
+    "default": "",
+    "help_text": "e.g. RGB 0 / 71 / 187."
+  },
+  {
+    "name": "description_below",
+    "label": "Description (shown below swatch)",
+    "type": "text",
+    "default": "",
+    "help_text": "One-line role description. Optional."
+  },
+  {
+    "name": "use_dark_text",
+    "label": "Use dark text on swatch",
+    "type": "boolean",
+    "default": false,
+    "help_text": "Enable for light backgrounds (yellow, white)."
+  }
+]

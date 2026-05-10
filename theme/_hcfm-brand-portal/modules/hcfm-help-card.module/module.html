@@ -1,0 +1,11 @@
+{# HCFM Help Card — single named contact #}
+<article class="help-card">
+  <span class="help-role">{{ module.role|escape }}</span>
+  <h3 class="help-name">{{ module.person_name|escape }}</h3>
+  <p class="help-title">{{ module.title|escape }}</p>
+  {% if module.blurb %}<div class="help-blurb">{{ module.blurb }}</div>{% endif %}
+  <p class="help-email"><a href="mailto:{{ module.email|escape }}">{{ module.email|escape }}</a></p>
+  {% if module.show_send_mail_button %}
+    <a href="mailto:{{ module.email|escape }}" class="btn btn-primary help-cta">Send mail →</a>
+  {% endif %}
+</article>

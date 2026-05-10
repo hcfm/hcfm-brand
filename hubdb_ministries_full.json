@@ -1,0 +1,253 @@
+{
+  "name": "hcfm_ministries",
+  "label": "HCFM Ministry Centers",
+  "useForPages": false,
+  "allowPublicApiAccess": true,
+  "allowChildTables": false,
+  "enableChildTablePages": false,
+  "columns": [
+    {
+      "name": "code",
+      "label": "Code (folder name in Files)",
+      "type": "TEXT"
+    },
+    {
+      "name": "name",
+      "label": "Display name",
+      "type": "TEXT"
+    },
+    {
+      "name": "region",
+      "label": "Region / location",
+      "type": "TEXT"
+    },
+    {
+      "name": "display_order",
+      "label": "Display order",
+      "type": "NUMBER"
+    },
+    {
+      "name": "is_foundation",
+      "label": "Use parent HCFM logo",
+      "type": "BOOLEAN"
+    }
+  ],
+  "rows": [
+    {
+      "values": {
+        "code": "02_HCFM_Foundation",
+        "name": "HCFM Foundation",
+        "region": "Easton, MA",
+        "display_order": 1,
+        "is_foundation": true
+      }
+    },
+    {
+      "values": {
+        "code": "03_FamRosary",
+        "name": "Family Rosary",
+        "region": "Easton, MA",
+        "display_order": 2,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "03A_CatholicMom",
+        "name": "Catholic Mom",
+        "region": "Easton, MA",
+        "display_order": 3,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "03B_MusFamPrayer",
+        "name": "Museum of Family Prayer",
+        "region": "Easton, MA",
+        "display_order": 4,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "04_FamThtrProdns",
+        "name": "Family Theater Productions",
+        "region": "Hollywood, CA",
+        "display_order": 5,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "05_PeytonInstDCL",
+        "name": "Peyton Institute · Domestic Church",
+        "region": "Easton, MA",
+        "display_order": 6,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "06_FP_PrayerGuild",
+        "name": "Father Peyton Prayer Guild",
+        "region": "Easton, MA",
+        "display_order": 7,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "07_FamRosaryCrusade_PH",
+        "name": "Family Rosary Crusade",
+        "region": "Philippines",
+        "display_order": 8,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "08_FP_Centre_IE",
+        "name": "Father Peyton Centre",
+        "region": "Ireland",
+        "display_order": 9,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "09_FP_FamiIyInst",
+        "name": "Father Peyton Family Institute",
+        "region": "Easton, MA",
+        "display_order": 10,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "10_HCFM_BD",
+        "name": "HCFM Bangladesh",
+        "region": "Bangladesh",
+        "display_order": 11,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "11_HCFM_CA",
+        "name": "HCFM Canada",
+        "region": "Canada",
+        "display_order": 12,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "12_HCFM_FR",
+        "name": "HCFM France",
+        "region": "France",
+        "display_order": 13,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "13_HCFM_GH",
+        "name": "HCFM Ghana",
+        "region": "Ghana",
+        "display_order": 14,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "14_HCFM_IN",
+        "name": "HCFM India",
+        "region": "India",
+        "display_order": 15,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "15_HCFM_KE",
+        "name": "HCFM Kenya",
+        "region": "Kenya",
+        "display_order": 16,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "16_HCFM_TZ",
+        "name": "HCFM Tanzania",
+        "region": "Tanzania",
+        "display_order": 17,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "17_HCFM_UG",
+        "name": "HCFM Uganda",
+        "region": "Uganda",
+        "display_order": 18,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "18_HCFM_UY",
+        "name": "HCFM Uruguay",
+        "region": "Uruguay",
+        "display_order": 19,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "19_INFAM_PE",
+        "name": "INFAM Perú",
+        "region": "Peru",
+        "display_order": 20,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "20_RosarioFam_BR",
+        "name": "Rosário em Família",
+        "region": "Brasil",
+        "display_order": 21,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "21_RosarioFam_CL",
+        "name": "Rosario en Familia",
+        "region": "Chile",
+        "display_order": 22,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "22_RosarioFam_MX",
+        "name": "Rosario en Familia",
+        "region": "México",
+        "display_order": 23,
+        "is_foundation": false
+      }
+    },
+    {
+      "values": {
+        "code": "23_RosarioFam_PE",
+        "name": "Rosario en Familia",
+        "region": "Perú",
+        "display_order": 24,
+        "is_foundation": false
+      }
+    }
+  ]
+}

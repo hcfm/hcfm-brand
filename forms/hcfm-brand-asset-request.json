@@ -1,0 +1,22 @@
+{
+  "name": "hcfm-brand-asset-request",
+  "displayOptions": {
+    "renderRawHtml": false,
+    "theme": "default_style"
+  },
+  "fieldGroups": [
+    { "fields": [{ "name": "firstname", "label": "Your name", "fieldType": "single_line_text", "objectTypeId": "0-1", "required": true }] },
+    { "fields": [{ "name": "email", "label": "Your email (optional)", "fieldType": "email", "objectTypeId": "0-1", "required": false }] },
+    { "fields": [{ "name": "hcfm_ministry_center", "label": "Ministry center", "fieldType": "single_line_text", "objectTypeId": "0-1", "required": true }] },
+    { "fields": [{ "name": "hcfm_brand_request", "label": "What you need (and when, if there is a deadline)", "fieldType": "multi_line_text", "objectTypeId": "0-1", "required": true }] }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "postSubmitAction": { "type": "thank_you_message", "value": "<p>Thanks. Victoria and Emmanuel will be in touch within 2 business days.</p>" },
+    "notifyContactOwner": false,
+    "captchaEnabled": true
+  },
+  "formType": "hubspot",
+  "legalConsentOptions": { "type": "none" }
+}

@@ -1,0 +1,9 @@
+{# HCFM FAQ Item — single Q&A pair #}
+<details class="faq-item{% if module.is_pinned %} faq-item-pinned{% endif %}">
+  <summary class="faq-q">
+    {% if module.is_pinned %}<span class="faq-pin">Pinned</span>{% endif %}
+    {% if module.category %}<span class="faq-cat">{{ module.category|escape }}</span>{% endif %}
+    <span class="faq-q-text">{{ module.question|escape }}</span>
+  </summary>
+  <div class="faq-a">{{ module.answer }}</div>
+</details>

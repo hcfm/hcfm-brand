@@ -1,0 +1,17 @@
+{
+  "name": "hcfm-brand-feedback",
+  "displayOptions": { "renderRawHtml": false, "theme": "default_style" },
+  "fieldGroups": [
+    { "fields": [{ "name": "firstname", "label": "Your name (optional)", "fieldType": "single_line_text", "objectTypeId": "0-1", "required": false }] },
+    { "fields": [{ "name": "email", "label": "Your email (optional)", "fieldType": "email", "objectTypeId": "0-1", "required": false }] },
+    { "fields": [{ "name": "hcfm_brand_feedback", "label": "What you'd like to share — what is missing, what is confusing, or what you would like to see added", "fieldType": "multi_line_text", "objectTypeId": "0-1", "required": true }] }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "postSubmitAction": { "type": "thank_you_message", "value": "<p>Thanks for the feedback. Victoria reads every submission.</p>" },
+    "captchaEnabled": true
+  },
+  "formType": "hubspot",
+  "legalConsentOptions": { "type": "none" }
+}

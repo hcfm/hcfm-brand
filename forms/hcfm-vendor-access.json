@@ -1,0 +1,18 @@
+{
+  "name": "hcfm-vendor-access",
+  "displayOptions": { "renderRawHtml": false, "theme": "default_style" },
+  "fieldGroups": [
+    { "fields": [{ "name": "firstname", "label": "Your name", "fieldType": "single_line_text", "objectTypeId": "0-1", "required": true }] },
+    { "fields": [{ "name": "email", "label": "Your email", "fieldType": "email", "objectTypeId": "0-1", "required": true }] },
+    { "fields": [{ "name": "company", "label": "Company / vendor / ministry center", "fieldType": "single_line_text", "objectTypeId": "0-1", "required": true }] },
+    { "fields": [{ "name": "hcfm_access_reason", "label": "What you need access for (project, deadline, scope)", "fieldType": "multi_line_text", "objectTypeId": "0-1", "required": true }] }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "postSubmitAction": { "type": "thank_you_message", "value": "<p>Request received. Victoria or Emmanuel will email you the access password within 2 business days.</p>" },
+    "captchaEnabled": true
+  },
+  "formType": "hubspot",
+  "legalConsentOptions": { "type": "none" }
+}

@@ -1,0 +1,25 @@
+{
+  "label": "HCFM Help Card",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "A named contact card with role, name, email, and a 'Send mail' link.",
+  "host_template_types": [
+    "PAGE",
+    "BLOG_POST",
+    "BLOG_LISTING"
+  ],
+  "icon": null,
+  "inline_help_text": "Use one card per contact. Email becomes a clickable mailto link.",
+  "is_available_for_new_content": true,
+  "smart_type": "NOT_SMART",
+  "tags": [
+    "hcfm",
+    "brand",
+    "contact"
+  ],
+  "categories": [
+    "BODY_CONTENT"
+  ],
+  "type": "module"
+}

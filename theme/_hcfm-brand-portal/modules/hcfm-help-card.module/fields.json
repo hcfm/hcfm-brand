@@ -1,0 +1,44 @@
+[
+  {
+    "name": "role",
+    "label": "Role / area of responsibility",
+    "type": "text",
+    "default": "Brand owner",
+    "help_text": "Small caps label above the name."
+  },
+  {
+    "name": "person_name",
+    "label": "Person's name",
+    "type": "text",
+    "default": "Victoria Hassan",
+    "help_text": "Display name."
+  },
+  {
+    "name": "title",
+    "label": "Title",
+    "type": "text",
+    "default": "Director of Marketing & Communications",
+    "help_text": "One-line title shown below the name."
+  },
+  {
+    "name": "email",
+    "label": "Email",
+    "type": "text",
+    "default": "vhassan@hcfm.org",
+    "help_text": "Used for the mailto: link and shown on the card."
+  },
+  {
+    "name": "blurb",
+    "label": "What this person handles (optional)",
+    "type": "richtext",
+    "default": "Approves brand-page edits, voice and tone, public communications.",
+    "help_text": "One sentence describing their domain."
+  },
+  {
+    "name": "show_send_mail_button",
+    "label": "Show 'Send mail' button",
+    "type": "boolean",
+    "default": true,
+    "help_text": "Adds a button below the email."
+  }
+]

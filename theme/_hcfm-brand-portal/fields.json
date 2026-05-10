@@ -1,0 +1,40 @@
+[
+  {
+    "name": "colors",
+    "label": "Brand colors",
+    "type": "group",
+    "expanded": false,
+    "children": [
+      {
+        "name": "hcfm_blue",
+        "label": "HCFM Blue (primary identifier)",
+        "type": "color",
+        "default": { "color": "#0047BB", "opacity": 100 }
+      },
+      {
+        "name": "yellow_gold",
+        "label": "Yellow Gold (primary energy)",
+        "type": "color",
+        "default": { "color": "#FFB500", "opacity": 100 }
+      },
+      {
+        "name": "marian_blue",
+        "label": "Marian Blue (secondary)",
+        "type": "color",
+        "default": { "color": "#00A9E0", "opacity": 100 }
+      },
+      {
+        "name": "muted_gold",
+        "label": "Muted Gold (sacred/reverent)",
+        "type": "color",
+        "default": { "color": "#89764B", "opacity": 100 }
+      },
+      {
+        "name": "topbar_blue",
+        "label": "Topbar Blue (parent site)",
+        "type": "color",
+        "default": { "color": "#3399CC", "opacity": 100 }
+      }
+    ]
+  }
+]

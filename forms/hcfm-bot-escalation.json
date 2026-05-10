@@ -1,0 +1,17 @@
+{
+  "name": "hcfm-bot-escalation",
+  "displayOptions": { "renderRawHtml": false, "theme": "default_style" },
+  "fieldGroups": [
+    { "fields": [{ "name": "email", "label": "Your email (so we can answer back)", "fieldType": "email", "objectTypeId": "0-1", "required": true }] },
+    { "fields": [{ "name": "hcfm_bot_question", "label": "Your question (the bot did not have an answer)", "fieldType": "multi_line_text", "objectTypeId": "0-1", "required": true }] },
+    { "fields": [{ "name": "hcfm_ministry_center", "label": "Ministry center (optional)", "fieldType": "single_line_text", "objectTypeId": "0-1", "required": false }] }
+  ],
+  "configuration": {
+    "language": "en",
+    "createNewContactForNewEmail": true,
+    "postSubmitAction": { "type": "thank_you_message", "value": "<p>Got it. We will answer within 2 business days, and the bot will know this answer next time.</p>" },
+    "captchaEnabled": true
+  },
+  "formType": "hubspot",
+  "legalConsentOptions": { "type": "none" }
+}

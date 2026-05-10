@@ -1,0 +1,14 @@
+{
+  "name": "hcfm_chatbot_kb",
+  "label": "HCFM Chatbot Knowledge Base",
+  "useForPages": false,
+  "allowPublicApiAccess": true,
+  "allowChildTables": false,
+  "enableChildTablePages": false,
+  "columns": [
+    { "name": "keywords", "label": "Keywords (comma-separated)", "type": "TEXT" },
+    { "name": "answer", "label": "Answer (HTML)", "type": "RICHTEXT" },
+    { "name": "category", "label": "Category", "type": "TEXT" },
+    { "name": "priority", "label": "Priority / order", "type": "NUMBER" }
+  ]
+}

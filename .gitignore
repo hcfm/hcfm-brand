@@ -26,3 +26,9 @@ assets/2025-2026 HCFM Visual Identity Guidelines/
 downloads/logos/
 downloads/source-files/
 downloads/locked/
+.env >>
+.env
+hubspot.config.yml
+# Intermediate HubDB fetch results (have tokens / transient data)
+hubdb_*_check*.json
+hubdb_*_fetched.json

@@ -559,7 +559,7 @@
     if (!lightbox) return;
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
-    setTimeout(() => { if (lightboxImg) lightboxImg.src = ''; }, 200);
+    setTimeout(() => { if (lightboxImg) lightboxImg.src = 'data:,'; }, 200);
   }
 
   if (lightbox) lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
