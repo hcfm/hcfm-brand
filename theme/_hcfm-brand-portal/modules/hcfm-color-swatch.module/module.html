@@ -1,13 +1,17 @@
-{# HCFM Color Swatch — single brand color card with click-to-copy hex #}
-<div class="color-cube" data-hex="{{ module.hex_value|escape }}" style="background:{{ module.swatch_color.color }};{% if module.use_dark_text %}color:#000;{% else %}color:#fff;{% endif %}">
-  {% if module.role %}<span class="cc-role">{{ module.role|escape }}</span>{% endif %}
-  <span class="cc-name">{{ module.color_name|escape }}</span>
-  <span class="cc-tech">
+{# HCFM Color Swatch — single brand color card, matches page CSS conventions #}
+{# Uses the same DOM as inline color cards: .color-cube article with .cube-codes inner block #}
+<article class="color-cube{% if module.is_bordered %} color-cube-bordered{% endif %}"
+         data-hex="{{ module.hex_value|escape }}"
+         data-tone="{% if module.use_dark_text %}dark{% else %}light{% endif %}"
+         style="background:{{ module.swatch_color.color }};">
+  <div class="cube-codes">
+    <strong>{{ module.color_name|escape }}</strong>
+    {% if module.role %}<span>{{ module.role|escape }}</span>{% endif %}
     {% if module.pantone_value %}<span>{{ module.pantone_value|escape }}</span>{% endif %}
     {% if module.rgb_value %}<span>{{ module.rgb_value|escape }}</span>{% endif %}
-  </span>
-  <span class="cc-hex">{{ module.hex_value|escape }}</span>
-</div>
+    <span class="cube-hex">{{ module.hex_value|escape }}</span>
+  </div>
+</article>
 {% if module.description_below %}
-<p class="cc-blurb">{{ module.description_below|escape }}</p>
+<p class="color-role">{{ module.description_below }}</p>
 {% endif %}

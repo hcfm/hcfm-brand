@@ -1,11 +1,11 @@
-{# HCFM Help Card — single named contact #}
-<article class="help-card">
-  <span class="help-role">{{ module.role|escape }}</span>
-  <h3 class="help-name">{{ module.person_name|escape }}</h3>
-  <p class="help-title">{{ module.title|escape }}</p>
-  {% if module.blurb %}<div class="help-blurb">{{ module.blurb }}</div>{% endif %}
-  <p class="help-email"><a href="mailto:{{ module.email|escape }}">{{ module.email|escape }}</a></p>
+{# HCFM Help Card — single named contact, matches site .contact-card CSS #}
+<div class="contact-card">
+  {% if module.role %}<p class="help-role" style="font-family:var(--font-display);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 6px;">{{ module.role|escape }}</p>{% endif %}
+  <h3>{{ module.person_name|escape }}</h3>
+  {% if module.title %}<p style="margin:0 0 12px;color:var(--text-muted);font-size:14px;">{{ module.title|escape }}</p>{% endif %}
+  {% if module.blurb %}<div class="help-blurb" style="margin:0 0 12px;font-size:14px;line-height:1.55;">{{ module.blurb }}</div>{% endif %}
+  <p style="margin:0;"><a href="mailto:{{ module.email|escape }}">{{ module.email|escape }}</a></p>
   {% if module.show_send_mail_button %}
-    <a href="mailto:{{ module.email|escape }}" class="btn btn-primary help-cta">Send mail →</a>
+    <p style="margin:14px 0 0;"><a href="mailto:{{ module.email|escape }}" class="btn btn-primary" style="font-size:14px;">Send mail →</a></p>
   {% endif %}
-</article>
+</div>

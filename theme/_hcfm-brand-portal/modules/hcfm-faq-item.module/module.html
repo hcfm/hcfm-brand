@@ -1,9 +1,10 @@
-{# HCFM FAQ Item — single Q&A pair #}
-<details class="faq-item{% if module.is_pinned %} faq-item-pinned{% endif %}">
-  <summary class="faq-q">
-    {% if module.is_pinned %}<span class="faq-pin">Pinned</span>{% endif %}
-    {% if module.category %}<span class="faq-cat">{{ module.category|escape }}</span>{% endif %}
-    <span class="faq-q-text">{{ module.question|escape }}</span>
+{# HCFM FAQ Item — single Q&A pair, matches inline FAQ <details> structure #}
+{# Use this module on pages other than the brand portal (which is HubDB-driven). #}
+<details{% if module.is_pinned %} class="faq-item-pinned"{% endif %}>
+  <summary>
+    {% if module.is_pinned %}<span class="faq-pin" style="display:inline-block;font-family:var(--font-display);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;background:var(--hcfm-gold);color:#000;padding:2px 6px;border-radius:3px;margin-right:8px;">Pinned</span>{% endif %}
+    {% if module.category %}<span class="faq-cat" style="font-family:var(--font-display);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-muted);margin-right:8px;">{{ module.category|escape }}</span>{% endif %}
+    {{ module.question|escape }}
   </summary>
   <div class="faq-a">{{ module.answer }}</div>
 </details>

@@ -54,5 +54,12 @@
     "type": "boolean",
     "default": false,
     "help_text": "Enable for light backgrounds (yellow, white)."
+  },
+  {
+    "name": "is_bordered",
+    "label": "Add a thin border (for white/very-light swatches)",
+    "type": "boolean",
+    "default": false,
+    "help_text": "Adds a subtle outline so white-on-white still reads as a card."
   }
 ]

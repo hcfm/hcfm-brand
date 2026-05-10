@@ -1135,32 +1135,49 @@
       {% if is_logged_in %}
         {% set group_ids = request.contact.list_memberships|default([])|map(attribute='id')|list %}
       {% endif %}
-      {% set has_ministry_access = is_logged_in and (119154177 in group_ids or 119152416 in group_ids) %}
       {% set has_admin_access = is_logged_in and 119152416 in group_ids %}
+      {% set has_ministry_access = is_logged_in and (119154177 in group_ids or 119152416 in group_ids) %}
+      {% set display_name = request.contact.firstname|default(request.contact.email)|default('') %}
 
-      {% if not is_logged_in %}
+      {# Expose membership state to JS so the password-gate code path stays in sync #}
+      <script>
+        window.HCFM_MEMBERSHIP = {
+          isLoggedIn: {% if is_logged_in %}true{% else %}false{% endif %},
+          hasMinistry: {% if has_ministry_access %}true{% else %}false{% endif %},
+          hasAdmin: {% if has_admin_access %}true{% else %}false{% endif %}
+        };
+        {% if has_admin_access %}document.addEventListener('DOMContentLoaded', function() { document.body.classList.add('admin-active'); });{% endif %}
+      </script>
+
+      {% if not has_ministry_access %}
       <div id="dlGate" class="dl-gate">
         <div class="dl-gate-inner">
-          <h2 class="dl-gate-h">Sign in to access production files</h2>
-          <p class="dl-gate-note">Logo packs, source files, and editable templates are reserved for ministry-center designers and Easton internal collaborators. Public-facing brand documents below are open to everyone.</p>
-          <a href="/_hcms/mem/login?redirect_url=/brand%23downloads" class="btn btn-primary">Sign in</a>
-          <p class="dl-gate-help">No account yet? Email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a> for an invitation.</p>
+          {% if is_logged_in %}
+            <h2 class="dl-gate-h">Your account doesn't have download access yet</h2>
+            <p class="dl-gate-note">{% if display_name %}You're signed in as <strong>{{ display_name }}</strong>, but your{% else %}Your{% endif %} account isn't in the ministry-center access group. Email Victoria or Emmanuel to be added — usually same day.</p>
+            <p class="dl-gate-help">Request access from <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>. Or <a href="/_hcms/mem/logout?redirect_url=/brand%23downloads">sign out</a>.</p>
+          {% else %}
+            <h2 class="dl-gate-h">Sign in to access production files</h2>
+            <p class="dl-gate-note">Logo packs, source files, and editable templates are reserved for ministry-center designers and Easton internal collaborators. Public-facing brand documents below are open to everyone.</p>
+            <a href="/_hcms/mem/login?redirect_url=/brand%23downloads" class="btn btn-primary">Sign in</a>
+            <p class="dl-gate-help">No account yet? Email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a> for an invitation.</p>
+          {% endif %}
           <p class="dl-gate-public">In the meantime: the <a href="#downloads/documents">brand documents</a> below are public.</p>
         </div>
       </div>
       {% else %}
       <div class="dl-signed-in-banner">
-        <p>Signed in as <strong>{{ request.contact.firstname|default(request.contact.email) }}</strong>{% if has_admin_access %} — admin tier (full source files){% elif has_ministry_access %} — ministry tier{% endif %}. <a href="/_hcms/mem/logout?redirect_url=/brand">Sign out</a></p>
+        <p>Signed in{% if display_name %} as <strong>{{ display_name }}</strong>{% endif %}{% if has_admin_access %} — admin tier (full source files){% else %} — ministry tier{% endif %}. <a href="/_hcms/mem/logout?redirect_url=/brand">Sign out</a></p>
       </div>
       {% endif %}
 
-      <div id="dlContent" class="dl-content" hidden>
+      <div id="dlContent" class="dl-content"{% if not has_ministry_access %} hidden{% endif %}>
         <nav class="dl-tabs">
           <button class="dl-tab active" data-dl-tab="documents">Brand documents</button>
           <button class="dl-tab" data-dl-tab="parent">Parent logos</button>
           <button class="dl-tab" data-dl-tab="ministries">Ministry centers</button>
           <button class="dl-tab" data-dl-tab="fonts">Fonts</button>
-          <button class="dl-tab dl-tab-admin" data-dl-tab="source" id="sourceTab" hidden>Source files <span class="dl-tab-lock">●</span></button>
+          <button class="dl-tab dl-tab-admin" data-dl-tab="source" id="sourceTab"{% if not has_admin_access %} hidden{% endif %}>Source files <span class="dl-tab-lock">●</span></button>
         </nav>
 
         <div class="dl-pane active" data-dl-pane="documents">
@@ -1191,12 +1208,12 @@
 
           <h3 class="dl-source-h">Parent logos · source</h3>
           <ul class="download-list">
-            <li><a href="https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets/HCFM_Parent_SOURCE_Pack.zip"><strong>HCFM Parent Pack — Source</strong><span>ZIP · All 4 logotypes + Symbol · AI / JPG / PNG · 37 MB</span></a></li>
-            <li><a href="https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets/HCFM_Symbol_SOURCE.zip"><strong>HCFM Symbol — Source</strong><span>ZIP · AI / JPG / PNG · 6.6 MB</span></a></li>
-            <li><a href="https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets/HCFM_Logotype1_SOURCE.zip"><strong>Logotype 1 — Source</strong><span>ZIP · AI / JPG / PNG · 8.4 MB</span></a></li>
-            <li><a href="https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets/HCFM_Logotype2_SOURCE.zip"><strong>Logotype 2 — Source</strong><span>ZIP · AI / JPG / PNG · 7.5 MB</span></a></li>
-            <li><a href="https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets/HCFM_Logotype3_SOURCE.zip"><strong>Logotype 3 — Source</strong><span>ZIP · AI / JPG / PNG · 7.3 MB</span></a></li>
-            <li><a href="https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets/HCFM_Logotype4_SOURCE.zip"><strong>Logotype 4 — Source</strong><span>ZIP · AI / JPG / PNG · 7.4 MB</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files/parent/HCFM_Parent_SOURCE_Pack.zip"><strong>HCFM Parent Pack — Source</strong><span>ZIP · All 4 logotypes + Symbol · AI / JPG / PNG · 37 MB</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files/parent/HCFM_Symbol_SOURCE.zip"><strong>HCFM Symbol — Source</strong><span>ZIP · AI / JPG / PNG · 6.6 MB</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files/parent/HCFM_Logotype1_SOURCE.zip"><strong>Logotype 1 — Source</strong><span>ZIP · AI / JPG / PNG · 8.4 MB</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files/parent/HCFM_Logotype2_SOURCE.zip"><strong>Logotype 2 — Source</strong><span>ZIP · AI / JPG / PNG · 7.5 MB</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files/parent/HCFM_Logotype3_SOURCE.zip"><strong>Logotype 3 — Source</strong><span>ZIP · AI / JPG / PNG · 7.3 MB</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files/parent/HCFM_Logotype4_SOURCE.zip"><strong>Logotype 4 — Source</strong><span>ZIP · AI / JPG / PNG · 7.4 MB</span></a></li>
           </ul>
 
           <h3 class="dl-source-h">Ministry centers · source</h3>

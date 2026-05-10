@@ -132,7 +132,7 @@
         if (m) renderMinistryDetail(m);
       }
       // If the downloads page is unlocked and showing the ministry tab, refresh that too
-      if (sessionStorage.getItem('hcfm-dl-unlocked') === '1') {
+      if (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry) {
         renderDlMinistryGrid();
       }
     })
@@ -309,28 +309,22 @@
     `;
   }
 
-  /* ---------- Downloads: dual-gate (ministry + admin) ---------- */
+  /* ---------- Downloads: HubSpot Memberships gate (server-rendered via HubL) ----------
+     Visibility of dlGate / dlContent / sourceTab is controlled in the template by HubL
+     conditionals on `has_ministry_access` and `has_admin_access`. This JS just renders
+     the dynamic content inside dlContent when the user has access. The window.HCFM_MEMBERSHIP
+     global is set inline in the template before this script runs. */
   const dlGate = document.getElementById('dlGate');
   const dlContent = document.getElementById('dlContent');
-  const dlForm = document.getElementById('dlGateForm');
-  const dlPassword = document.getElementById('dlPassword');
   const sourceTab = document.getElementById('sourceTab');
 
-  const STORAGE_KEY = 'hcfm-dl-unlocked';
-  const ADMIN_KEY = 'hcfm-dl-admin';
-
-  // Two passwords: ministry-tier vs admin-tier
-  const MINISTRY_PASSWORDS = ['hcfm2026', 'eastoncreatives', 'familyrosary'];
-  const ADMIN_PASSWORDS = ['emmyvictoria', 'brandowners', 'eastonadmin'];
-
-  // Release base for heavy ZIPs hosted on GitHub Releases — declared early so
-  // the auto-unlock path below can use it (avoids temporal dead zone).
+  // Release base for heavy ZIPs hosted on HubSpot Files CDN
   const RELEASE_BASE = 'https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files';
 
+  // No-op shims so any leftover references in older code paths don't throw.
   function unlockDownloads() {
     if (dlGate) dlGate.hidden = true;
     if (dlContent) dlContent.hidden = false;
-    sessionStorage.setItem(STORAGE_KEY, '1');
     renderParentGallery();
     renderDlMinistryGrid();
     renderSourceMinistryList();
@@ -338,26 +332,7 @@
 
   function unlockAdmin() {
     if (sourceTab) sourceTab.hidden = false;
-    sessionStorage.setItem(ADMIN_KEY, '1');
     document.body.classList.add('admin-active');
-  }
-
-  if (dlForm) {
-    dlForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const value = (dlPassword.value || '').trim().toLowerCase();
-      if (ADMIN_PASSWORDS.includes(value)) {
-        unlockDownloads();
-        unlockAdmin();
-        showToast('Brand-owner access granted. Source Files tab unlocked.');
-      } else if (MINISTRY_PASSWORDS.includes(value)) {
-        unlockDownloads();
-        showToast('Access granted');
-      } else {
-        showToast('Wrong password. Email victoria@ or eepau@ to request access.');
-        dlPassword.value = '';
-      }
-    });
   }
 
   // Tabs inside Downloads
@@ -526,13 +501,17 @@
     `).join('');
   }
 
-  /* ---------- Auto-unlock on page load if sessionStorage has the keys ----------
-     This MUST run AFTER renderParentGallery / renderDlMinistryGrid / renderSourceMinistryList
-     are defined, because unlockDownloads() calls all three. Placed here to guarantee
-     hoisting/temporal-dead-zone safety for any const dependencies. */
-  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-    unlockDownloads();
-    if (sessionStorage.getItem(ADMIN_KEY) === '1') unlockAdmin();
+  /* ---------- Memberships-driven dynamic content render on page load ----------
+     The template has already server-rendered the static parts of the gate (visible/hidden
+     based on HubL has_ministry_access / has_admin_access). Here we just render the
+     dynamic galleries inside dlContent when the user has ministry access. */
+  if (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry) {
+    renderParentGallery();
+    renderDlMinistryGrid();
+    renderSourceMinistryList();
+    if (window.HCFM_MEMBERSHIP.hasAdmin) {
+      document.body.classList.add('admin-active');
+    }
   }
 
   /* ---------- Image lightbox ---------- */

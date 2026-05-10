@@ -9,15 +9,19 @@ Generated: 2026-05-10 ~02:30 EDT
 The brand portal is **live at `https://www.hcfm.org/brand`** with:
 
 - ✅ Phase 1B (HubSpot CDN ZIPs) — done
+- ✅ Phase 2C (3 modules updated to match site CSS, drop-in compatible) — done
 - ✅ Phase 4A (MS Forms feedback iframe + mailto: asset request form) — done
-- ✅ Phase 5C (Memberships gate replacing JS password gate) — done
+- ✅ Phase 5C (Memberships gate, server-rendered via HubL, robust against HubSpot-admin-not-member edge case) — done
+- ✅ Phase 5 (Victoria + Colum + Emmanuel added to both access groups; invites pending) — done
 - ✅ Phase 8 (URL rename `/brand-preview` → `/brand` + 301 redirect) — done
+
+**Phase 5C had a real bug discovered + fixed during overnight QA**: anyone "logged into HubSpot but not in a membership group" saw a broken "Signed in as ." banner with empty contact info. Now correctly shows a "Your account doesn't have download access yet" message with instructions to email Victoria/Emmanuel for access. Also fixed: `dlContent` and `sourceTab` were stuck `hidden` even for authorized members because the JS unhide-via-sessionStorage path was vestigial. Both now server-rendered visibility-correct via HubL on `has_ministry_access` and `has_admin_access`. Also fixed: 6 hardcoded GitHub source-pack URLs that were left from before Phase 1B — now all on HubSpot CDN.
 
 The remaining work that needs you in the morning:
 
-1. **Generate new PAK with `forms` + `automation` scopes** (5 min) — unblocks Phase 4 HubSpot Forms creation via API. Without this, the brand-asset request form is using a `mailto:` handoff and feedback uses Microsoft Forms iframe (both functional, just less DB-tracked).
-2. **Complete your invite-pending registration** at `eepau@nd.edu` so you can test the login flow.
-3. **Decide whether to add Victoria + ministry-center contacts to access groups** — they'll receive invitation emails, so wanted your OK before sending.
+1. **Phase 4 HubSpot Forms requires Joe Pereira's help** (~10 min for him). Discovery: Personal Access Keys CANNOT grant `forms` scope in HubSpot — that scope is only available via Private Apps, which require Super Admin role. Emmanuel's account doesn't have Super Admin permission. Either: (a) Joe creates a Private App with `forms` + `automation` scopes and shares the token, OR (b) we keep the current `mailto:` asset-request form (already working — opens user's email client) and don't bother with HubSpot Forms.
+2. **Complete your invite-pending registration** at `eepau@nd.edu` so you can test the login flow end-to-end.
+3. **Optional**: Add 2-3 initial ministry-center contacts to the Ministry Tier access group.
 
 **The page is fully functional right now.** Visit `https://www.hcfm.org/brand` to see it.
 
