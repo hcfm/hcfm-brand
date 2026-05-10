@@ -131,8 +131,10 @@
         const m = ministries.find(x => x.code === code);
         if (m) renderMinistryDetail(m);
       }
-      // If the downloads page is unlocked and showing the ministry tab, refresh that too
-      if (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry) {
+      // If Tier 1 is unlocked (member or password), refresh the ministry grid now that
+      // the manifest is available. Safe to call multiple times — function is idempotent.
+      if ((window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry)
+          || sessionStorage.getItem('hcfm-tier1-unlocked') === '1') {
         renderDlMinistryGrid();
       }
     })
@@ -309,40 +311,86 @@
     `;
   }
 
-  /* ---------- Downloads: HubSpot Memberships gate (server-rendered via HubL) ----------
-     Visibility of dlGate / dlContent / sourceTab is controlled in the template by HubL
-     conditionals on `has_ministry_access` and `has_admin_access`. This JS just renders
-     the dynamic content inside dlContent when the user has access. The window.HCFM_MEMBERSHIP
-     global is set inline in the template before this script runs. */
-  const dlGate = document.getElementById('dlGate');
-  const dlContent = document.getElementById('dlContent');
+  /* ---------- Downloads: 3-tier hybrid gate ----------
+     Tier 0 (public): Brand documents — always visible, no gate.
+     Tier 1 (password OR ministry-tier membership): Parent / Ministries / Fonts.
+       Ministry-tier members auto-unlock via HubSpot Memberships (server-rendered).
+       Anonymous users enter a single shared password (cached in sessionStorage).
+     Tier 2 (admin-tier membership only): Source files. Server-rendered visibility
+       via HubL on `has_admin_access`; the source pane and tab don't render at all
+       in HTML for non-admin visitors. */
+  const tier1Gate = document.getElementById('tier1Gate');
+  const tier1Form = document.getElementById('tier1Form');
+  const tier1Password = document.getElementById('tier1Password');
   const sourceTab = document.getElementById('sourceTab');
 
-  // Release base for heavy ZIPs hosted on HubSpot Files CDN
+  const TIER1_STORAGE_KEY = 'hcfm-tier1-unlocked';
+  // Single shared password (case-insensitive, multiple acceptable variants for fault tolerance)
+  const TIER1_PASSWORDS = ['hcfm2026', 'eastoncreatives', 'familyrosary'];
+
   const RELEASE_BASE = 'https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files';
 
-  // No-op shims so any leftover references in older code paths don't throw.
-  function unlockDownloads() {
-    if (dlGate) dlGate.hidden = true;
-    if (dlContent) dlContent.hidden = false;
+  function isTier1Unlocked() {
+    return (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry)
+        || sessionStorage.getItem(TIER1_STORAGE_KEY) === '1';
+  }
+
+  function renderTier1ContentIfNeeded() {
+    // Only render once per page load — the underlying functions are also idempotent.
+    if (renderTier1ContentIfNeeded._done) return;
+    renderTier1ContentIfNeeded._done = true;
     renderParentGallery();
     renderDlMinistryGrid();
-    renderSourceMinistryList();
+    if (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasAdmin) {
+      renderSourceMinistryList();
+    }
   }
 
-  function unlockAdmin() {
-    if (sourceTab) sourceTab.hidden = false;
-    document.body.classList.add('admin-active');
+  function showPane(target) {
+    // Mark the matching tab active
+    document.querySelectorAll('.dl-tab').forEach(t => t.classList.toggle('active', t.dataset.dlTab === target));
+    // Hide every pane
+    document.querySelectorAll('.dl-pane').forEach(p => { p.classList.remove('active'); p.hidden = true; });
+    // For Tier 1 tabs without unlock, show the gate pane in the content area
+    const isTier1Tab = ['parent', 'ministries', 'fonts'].includes(target);
+    if (isTier1Tab && !isTier1Unlocked()) {
+      if (tier1Gate) { tier1Gate.hidden = false; tier1Gate.classList.add('active'); }
+      // Focus the password field for convenience
+      if (tier1Password) tier1Password.focus();
+      return;
+    }
+    // Otherwise show the requested pane
+    const pane = document.querySelector('.dl-pane[data-dl-pane="' + target + '"]');
+    if (pane) { pane.hidden = false; pane.classList.add('active'); }
   }
 
-  // Tabs inside Downloads
+  // Wire up the tab buttons
   document.querySelectorAll('.dl-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.dlTab;
-      document.querySelectorAll('.dl-tab').forEach(t => t.classList.toggle('active', t === tab));
-      document.querySelectorAll('.dl-pane').forEach(p => p.classList.toggle('active', p.dataset.dlPane === target));
-    });
+    tab.addEventListener('click', () => showPane(tab.dataset.dlTab));
   });
+
+  // Tier 1 password form
+  if (tier1Form) {
+    tier1Form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = (tier1Password.value || '').trim().toLowerCase();
+      if (TIER1_PASSWORDS.includes(value)) {
+        sessionStorage.setItem(TIER1_STORAGE_KEY, '1');
+        renderTier1ContentIfNeeded();
+        showToast('Access granted');
+        // Switch user to the Parent tab so they immediately see unlocked content
+        showPane('parent');
+      } else {
+        showToast('Wrong password. Email Victoria or Emmanuel for access.');
+        tier1Password.value = '';
+      }
+    });
+  }
+
+  // No-op shims kept so any older code path or external integration referencing
+  // unlockDownloads()/unlockAdmin() doesn't throw a ReferenceError.
+  function unlockDownloads() { sessionStorage.setItem(TIER1_STORAGE_KEY, '1'); renderTier1ContentIfNeeded(); }
+  function unlockAdmin() { document.body.classList.add('admin-active'); }
 
   /* ---------- Parent gallery (PNG/JPG only — no AI files publicly) ---------- */
   function renderParentGallery() {
@@ -501,15 +549,13 @@
     `).join('');
   }
 
-  /* ---------- Memberships-driven dynamic content render on page load ----------
-     The template has already server-rendered the static parts of the gate (visible/hidden
-     based on HubL has_ministry_access / has_admin_access). Here we just render the
-     dynamic galleries inside dlContent when the user has ministry access. */
-  if (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry) {
-    renderParentGallery();
-    renderDlMinistryGrid();
-    renderSourceMinistryList();
-    if (window.HCFM_MEMBERSHIP.hasAdmin) {
+  /* ---------- Auto-unlock Tier 1 on page load when access exists ----------
+     Two paths to Tier 1: signed-in ministry-tier member, or sessionStorage flag from
+     a previous password unlock in this browser session. Either way, render the
+     dynamic galleries so the panes are populated when the user clicks the tabs. */
+  if (isTier1Unlocked()) {
+    renderTier1ContentIfNeeded();
+    if (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasAdmin) {
       document.body.classList.add('admin-active');
     }
   }

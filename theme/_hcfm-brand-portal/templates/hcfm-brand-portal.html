@@ -1127,9 +1127,9 @@
     <section class="page" id="downloads" data-title="Downloads">
       <p class="breadcrumb">Resources / Downloads</p>
       <h1>Downloads</h1>
-      <p class="page-intro">Brand documents, logo files, font files, and ministry-center logo packs. Public-facing visual references are throughout the site. Production files are gated below — request the access password from <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>.</p>
+      <p class="page-intro">Three tiers: <strong>Brand documents</strong> are public — anyone can grab them. <strong>Logo packs, ministry centers, and fonts</strong> share a single access password (request it from Victoria or Emmanuel). <strong>Source AI files</strong> are restricted to the Easton internal team via individual sign-in.</p>
 
-      {# HCFM Memberships gate — ministry-tier sees production downloads, admin-tier also sees source files #}
+      {# HCFM Memberships gate — used ONLY for the source-files (admin) tier. Ministry tier members also auto-unlock the password-gated section without entering the password. #}
       {% set is_logged_in = request.contact.is_logged_in %}
       {% set group_ids = [] %}
       {% if is_logged_in %}
@@ -1139,7 +1139,7 @@
       {% set has_ministry_access = is_logged_in and (119154177 in group_ids or 119152416 in group_ids) %}
       {% set display_name = request.contact.firstname|default(request.contact.email)|default('') %}
 
-      {# Expose membership state to JS so the password-gate code path stays in sync #}
+      {# Expose membership state to JS so it can decide whether to show the Tier 1 password gate or auto-unlock #}
       <script>
         window.HCFM_MEMBERSHIP = {
           isLoggedIn: {% if is_logged_in %}true{% else %}false{% endif %},
@@ -1149,39 +1149,23 @@
         {% if has_admin_access %}document.addEventListener('DOMContentLoaded', function() { document.body.classList.add('admin-active'); });{% endif %}
       </script>
 
-      {% if not has_ministry_access %}
-      <div id="dlGate" class="dl-gate">
-        <div class="dl-gate-inner">
-          {% if is_logged_in %}
-            <h2 class="dl-gate-h">Your account doesn't have download access yet</h2>
-            <p class="dl-gate-note">{% if display_name %}You're signed in as <strong>{{ display_name }}</strong>, but your{% else %}Your{% endif %} account isn't in the ministry-center access group. Email Victoria or Emmanuel to be added — usually same day.</p>
-            <p class="dl-gate-help">Request access from <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>. Or <a href="/_hcms/mem/logout?redirect_url=/brand%23downloads">sign out</a>.</p>
-          {% else %}
-            <h2 class="dl-gate-h">Sign in to access production files</h2>
-            <p class="dl-gate-note">Logo packs, source files, and editable templates are reserved for ministry-center designers and Easton internal collaborators. Public-facing brand documents below are open to everyone.</p>
-            <a href="/_hcms/mem/login?redirect_url=/brand%23downloads" class="btn btn-primary">Sign in</a>
-            <p class="dl-gate-help">No account yet? Email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a> for an invitation.</p>
-          {% endif %}
-          <p class="dl-gate-public">In the meantime: the <a href="#downloads/documents">brand documents</a> below are public.</p>
-        </div>
-      </div>
-      {% else %}
+      {% if has_ministry_access %}
       <div class="dl-signed-in-banner">
-        <p>Signed in{% if display_name %} as <strong>{{ display_name }}</strong>{% endif %}{% if has_admin_access %} — admin tier (full source files){% else %} — ministry tier{% endif %}. <a href="/_hcms/mem/logout?redirect_url=/brand">Sign out</a></p>
+        <p>Signed in{% if display_name %} as <strong>{{ display_name }}</strong>{% endif %}{% if has_admin_access %} — admin tier (full source files){% else %} — ministry tier (logo packs unlocked){% endif %}. <a href="/_hcms/mem/logout?redirect_url=/brand%23downloads">Sign out</a></p>
       </div>
       {% endif %}
 
-      <div id="dlContent" class="dl-content"{% if not has_ministry_access %} hidden{% endif %}>
+      <div id="dlContent" class="dl-content">
         <nav class="dl-tabs">
           <button class="dl-tab active" data-dl-tab="documents">Brand documents</button>
-          <button class="dl-tab" data-dl-tab="parent">Parent logos</button>
-          <button class="dl-tab" data-dl-tab="ministries">Ministry centers</button>
-          <button class="dl-tab" data-dl-tab="fonts">Fonts</button>
-          <button class="dl-tab dl-tab-admin" data-dl-tab="source" id="sourceTab"{% if not has_admin_access %} hidden{% endif %}>Source files <span class="dl-tab-lock">●</span></button>
+          <button class="dl-tab" data-dl-tab="parent" data-tier="1">Parent logos</button>
+          <button class="dl-tab" data-dl-tab="ministries" data-tier="1">Ministry centers</button>
+          <button class="dl-tab" data-dl-tab="fonts" data-tier="1">Fonts</button>
+          {% if has_admin_access %}<button class="dl-tab dl-tab-admin" data-dl-tab="source" id="sourceTab">Source files <span class="dl-tab-lock">●</span></button>{% endif %}
         </nav>
 
         <div class="dl-pane active" data-dl-pane="documents">
-          <p class="dl-pane-intro">The brand documents that matter. PDFs are public — no password required.</p>
+          <p class="dl-pane-intro">Public — anyone can download these PDFs. No password.</p>
           <ul class="download-list">
             <li><a href="downloads/public/HCFM_Brand_Guidelines_2026.pdf" download><strong>HCFM Brand Guidelines 2026</strong><span>PDF · 7 pages · The practical guide</span></a></li>
             <li><a href="downloads/public/HCFM_Content_Style_Guide.pdf" download><strong>Content Style Guide</strong><span>PDF · How we write</span></a></li>
@@ -1189,17 +1173,33 @@
           </ul>
         </div>
 
-        <div class="dl-pane" data-dl-pane="parent">
+        {# Tier 1 single password gate — covers Parent / Ministries / Fonts. Hidden when ministry-access member is signed in. #}
+        <div class="dl-pane dl-pane-gate" data-dl-pane="tier1-gate" id="tier1Gate"{% if has_ministry_access %} hidden{% endif %}>
+          <div class="dl-gate-inner">
+            <h2 class="dl-gate-h">Logo packs, ministry centers, and fonts</h2>
+            <p class="dl-gate-note">These three tabs share a <strong>single access password</strong>. Once you enter it, you can switch freely between them. Ministry centers: ask your director for the password — the same one works for everyone in your ministry.</p>
+            <form class="dl-gate-form" id="tier1Form">
+              <input type="password" placeholder="Access password" id="tier1Password" autocomplete="current-password">
+              <button type="submit" class="btn btn-primary">Unlock</button>
+            </form>
+            <p class="dl-gate-help">Need the password? Email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>.</p>
+            {% if not is_logged_in %}<p class="dl-gate-help"><em>Easton internal team: <a href="/_hcms/mem/login?redirect_url=/brand%23downloads">sign in</a> instead — your account auto-unlocks this section plus source files.</em></p>{% endif %}
+          </div>
+        </div>
+
+        <div class="dl-pane" data-dl-pane="parent" data-tier="1" hidden>
           <p class="dl-pane-intro">Parent HCFM logos in five color variants per configuration. <strong>PNG and JPG only.</strong> Editable AI source files are restricted to the brand owners — Emmanuel and Victoria — to protect logo integrity. If you need a custom edit, request it through the Help tab.</p>
           <div class="dl-gallery" id="parentGallery"></div>
         </div>
 
-        <div class="dl-pane" data-dl-pane="ministries">
+        <div class="dl-pane" data-dl-pane="ministries" data-tier="1" hidden>
           <p class="dl-pane-intro">Twenty-four ministry-center logo packs. <strong>PNG and JPG only</strong> in these public packs. Click any ministry to view its logos before downloading.</p>
           <div class="dl-ministry-grid" id="dlMinistryGrid"></div>
         </div>
 
-        <div class="dl-pane" data-dl-pane="source">
+        {# Source files pane — visible only to admin-tier members via HubSpot Memberships. #}
+        {% if has_admin_access %}
+        <div class="dl-pane" data-dl-pane="source" hidden>
           <div class="info-block info-block-strong">
             <p class="ib-label">Brand Owner Access · Restricted</p>
             <p class="ib-headline">Editable source files (AI / EPS).</p>
@@ -1220,8 +1220,9 @@
           <p class="section-note">Each ministry's full source pack including AI files.</p>
           <ul class="download-list" id="dlSourceMinistries"></ul>
         </div>
+        {% endif %}
 
-        <div class="dl-pane" data-dl-pane="fonts">
+        <div class="dl-pane" data-dl-pane="fonts" data-tier="1" hidden>
           <p class="dl-pane-intro">Brand fonts. Each font shows a specimen so you can confirm what you are downloading.</p>
           <div class="dl-fonts" id="dlFonts">
             <article class="dl-font-card">
