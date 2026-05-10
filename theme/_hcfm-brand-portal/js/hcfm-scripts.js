@@ -620,6 +620,17 @@
       chatPanel.classList.add('open');
       chatPanel.setAttribute('aria-hidden', 'false');
       setTimeout(() => chatInput && chatInput.focus(), 300);
+      // First open this session: trigger the name-greeting flow if we haven't
+      // already collected the user's name. Only fires when chat body is empty
+      // (so we don't repeat the intro every time the panel is reopened).
+      setTimeout(() => {
+        if (chatBody && chatBody.children.length === 0 && chatSession.onboardStep === 0) {
+          addChatMessage(
+            `<p>Hi — I'm the HCFM brand-portal assistant. I can explain the 2026 system, the science behind the color changes, voice and tone, where to download assets, and how to handle specific ministry-center scenarios.</p><p>Before we start, <strong>what should I call you?</strong></p>`,
+            false
+          );
+        }
+      }, 350);
     }
   }
   function closeChat() {
@@ -741,56 +752,148 @@
     return s.split(/[^a-z0-9]+/).filter(Boolean).map(stem);
   }
 
-  function answerQuestion(q) {
-    if (!q || !q.trim()) return null;
+  // Return all matches ranked by score so the caller can decide single-vs-multi.
+  function rankMatches(q) {
+    if (!q || !q.trim()) return [];
     const userTokens = tokenize(q);
-    if (!userTokens.length) return null;
-    let best = null;
-    let bestScore = 0;
+    if (!userTokens.length) return [];
+    const scored = [];
     for (const k of knowledge) {
       let score = 0;
       for (const term of k.q) {
         const termTokens = tokenize(term);
-        // Substring match on the full term (existing behavior, scaled by length)
         if ((' ' + userTokens.join(' ') + ' ').includes(' ' + termTokens.join(' ') + ' ')) {
           score += term.length * 2;
         }
-        // Token-level overlap — every shared stem adds points
         for (const t of termTokens) {
           if (t.length < 2) continue;
           if (userTokens.includes(t)) score += t.length;
         }
       }
-      if (score > bestScore) { bestScore = score; best = k; }
+      if (score >= 6) scored.push({ k, score });
     }
-    // Threshold: require a minimum confidence to avoid false matches.
-    if (best && bestScore >= 6) return { answer: best.a, key: best.q[0] };
-    return null;
+    scored.sort((a, b) => b.score - a.score);
+    return scored;
   }
 
-  // Suggested follow-up questions per topic — surfaces RELATED entries
-  // by matching the matched-entry's keywords against neighbour entries.
-  function suggestFollowUps(matchedKey) {
-    if (!matchedKey) return [];
-    const matchedTokens = tokenize(matchedKey);
-    const scored = knowledge.map(k => {
-      const kTokens = tokenize(k.q[0]);
-      let s = 0;
-      for (const t of kTokens) if (matchedTokens.includes(t)) s++;
-      return { k, s };
-    }).filter(x => x.s > 0 && x.k.q[0] !== matchedKey)
-      .sort((a, b) => b.s - a.s)
-      .slice(0, 3);
-    return scored.map(x => x.k.q[0]);
+  // Single-best wrapper kept for backwards compatibility callers.
+  function answerQuestion(q) {
+    const matches = rankMatches(q);
+    if (!matches.length) return null;
+    return { answer: matches[0].k.a, key: matches[0].k.q[0] };
+  }
+
+  // Parse an answer HTML to extract authored followups (embedded by v3 push
+  // as <div class="chat-followups-data" data-followups="a|b|c">). Returns
+  // { cleanHTML, followups[] }. Falls back to keyword-similarity neighbours
+  // when no authored list is present.
+  function parseAnswer(answerHTML) {
+    if (!answerHTML) return { cleanHTML: '', followups: [] };
+    const m = answerHTML.match(/<div class="chat-followups-data"[^>]*data-followups="([^"]*)"[^>]*><\/div>\s*$/i);
+    if (!m) return { cleanHTML: answerHTML, followups: [] };
+    const followups = m[1].split('|').map(s => s.trim()).filter(Boolean);
+    const cleanHTML = answerHTML.replace(m[0], '').trim();
+    return { cleanHTML, followups };
+  }
+
+  // Suggest follow-up questions: prefer the authored list embedded in the
+  // answer; fall back to keyword-overlap neighbours. Filter out anything
+  // the user has already asked this session.
+  function suggestFollowUps(matchedKey, authoredList) {
+    let candidates = [];
+    if (authoredList && authoredList.length) {
+      candidates = authoredList.slice();
+    } else if (matchedKey) {
+      const matchedTokens = tokenize(matchedKey);
+      const scored = knowledge.map(k => {
+        const kTokens = tokenize(k.q[0]);
+        let s = 0;
+        for (const t of kTokens) if (matchedTokens.includes(t)) s++;
+        return { k, s };
+      }).filter(x => x.s > 0 && x.k.q[0] !== matchedKey)
+        .sort((a, b) => b.s - a.s)
+        .slice(0, 4);
+      candidates = scored.map(x => x.k.q[0]);
+    }
+    // Drop anything the user already asked.
+    return candidates.filter(c => !chatSession.askedKeys.has(c.toLowerCase())).slice(0, 4);
+  }
+
+  // -------- SESSION STATE --------
+  // Tracks what the user has already asked, their name/role if collected,
+  // and the topic thread. Persisted to sessionStorage so it survives reload.
+  const chatSession = (function () {
+    let saved = {};
+    try { saved = JSON.parse(sessionStorage.getItem('hcfm-chat-session') || '{}'); } catch {}
+    return {
+      name: saved.name || null,
+      role: saved.role || null,
+      onboardStep: saved.onboardStep || 0,  // 0=ask name, 1=ask role, 2=done
+      askedKeys: new Set(saved.askedKeys || []),
+      askedKeysOrder: saved.askedKeysOrder || [],
+      topics: saved.topics || [],  // ordered list of matched-entry primary keywords
+    };
+  })();
+
+  function persistSession() {
+    try {
+      sessionStorage.setItem('hcfm-chat-session', JSON.stringify({
+        name: chatSession.name,
+        role: chatSession.role,
+        onboardStep: chatSession.onboardStep,
+        askedKeys: Array.from(chatSession.askedKeys),
+        askedKeysOrder: chatSession.askedKeysOrder,
+        topics: chatSession.topics,
+      }));
+    } catch {}
+  }
+
+  function rememberTopic(matchedKey) {
+    if (!matchedKey) return;
+    const k = matchedKey.toLowerCase();
+    chatSession.askedKeys.add(k);
+    chatSession.askedKeysOrder.push(k);
+    chatSession.topics.push(matchedKey);
+    if (chatSession.topics.length > 12) chatSession.topics.shift();
+    persistSession();
+  }
+
+  // Build a "this connects to earlier" preface when the new topic relates
+  // to an earlier one. Returns "" when no good connection.
+  function buildPreface(matchedKey) {
+    if (!matchedKey || chatSession.topics.length < 2) return '';
+    const newTokens = tokenize(matchedKey);
+    // Look for any earlier topic (other than current) that shares 2+ stems.
+    for (let i = chatSession.topics.length - 2; i >= 0; i--) {
+      const t = chatSession.topics[i];
+      if (t.toLowerCase() === matchedKey.toLowerCase()) continue;
+      const tTokens = tokenize(t);
+      const overlap = newTokens.filter(x => tTokens.includes(x)).length;
+      if (overlap >= 2) {
+        const name = chatSession.name ? chatSession.name + ', ' : '';
+        return `${name}this connects to what you asked earlier about <em>${t}</em>.`;
+      }
+    }
+    return '';
   }
 
   function addChatMessage(text, isUser, opts = {}) {
     if (!chatBody) return;
     const div = document.createElement('div');
     div.className = `chat-msg chat-msg-${isUser ? 'user' : 'bot'}`;
-    let html = `<p>${text}</p>`;
+    // Don't wrap block-level HTML (the v3 rich answers are already <p>…</p><p>…</p>).
+    // Wrap only plain-text or inline-only content.
+    const looksBlock = /^\s*<(p|div|ul|ol|h\d|table|blockquote)\b/i.test(text);
+    let html = looksBlock ? text : `<p>${text}</p>`;
+    if (opts.preface) {
+      // Small leading callout that connects to earlier conversation
+      html = `<p class="chat-preface">${opts.preface}</p>` + html;
+    }
     if (opts.followUps && opts.followUps.length) {
       html += `<div class="chat-followups">`;
+      if (opts.followUpsLabel) {
+        html += `<p class="chat-followups-h">${opts.followUpsLabel}</p>`;
+      }
       for (const f of opts.followUps) {
         const label = f.charAt(0).toUpperCase() + f.slice(1);
         html += `<button class="chat-pill" data-q="${f.replace(/"/g, '&quot;')}">${label}</button>`;
@@ -837,31 +940,114 @@
   }
   restoreChat();
 
+  // -------- NAME / ROLE GREETING FLOW --------
+  // First time the chat is opened, run a 2-step intro: name → role → ready.
+  // This makes the first 30 seconds feel personal instead of transactional.
+  function handleOnboardStep(rawInput) {
+    const trimmed = (rawInput || '').trim();
+    if (chatSession.onboardStep === 0) {
+      // Expect a name
+      // Strip lead phrases like "my name is" / "i'm" / "i am"
+      let name = trimmed.replace(/^(my name is|i am|i'm|im|this is|call me)\s+/i, '');
+      // Take first capitalized word (or first word) — keep it simple
+      name = name.split(/[,;.\n]/)[0].trim();
+      // Capitalize first letter for display
+      if (name.length > 0) name = name.charAt(0).toUpperCase() + name.slice(1);
+      // Sanity cap
+      if (name.length > 40) name = name.slice(0, 40);
+      chatSession.name = name || 'friend';
+      chatSession.onboardStep = 1;
+      persistSession();
+      addChatMessage(
+        `<p>Good to meet you, <strong>${chatSession.name}</strong>. One more thing — what's your role with HCFM? (e.g. <em>marketing lead in the Philippines</em>, <em>designer at Easton</em>, <em>vendor</em>, <em>ministry-center director</em>). I'll tailor my answers to your context.</p>`,
+        false
+      );
+      return;
+    }
+    if (chatSession.onboardStep === 1) {
+      chatSession.role = trimmed.slice(0, 120);
+      chatSession.onboardStep = 2;
+      persistSession();
+      const roleHint = chatSession.role && chatSession.role.length > 2 ? ` Got it — I'll keep "<em>${chatSession.role}</em>" in mind when I answer.` : '';
+      addChatMessage(
+        `<p>Thanks, ${chatSession.name}.${roleHint} Ask me anything about the HCFM brand — colors, fonts, logos, voice, the science behind why we made the 2026 changes, where to download assets, how to handle a specific ministry-center situation. I'm happy to go deep on any of it.</p>`,
+        false,
+        { followUps: [
+            'why did we move from muted gold to yellow gold',
+            'why is HCFM blue 0047BB',
+            'how do I use Playlist Script',
+            'where do I download logos',
+          ],
+          followUpsLabel: 'A good place to start:',
+        }
+      );
+      return;
+    }
+  }
+
   function handleChatQuery(query) {
     if (!query || !query.trim()) return;
     addChatMessage(query, true);
-    const result = answerQuestion(query);
+
+    // First-touch flow: name + role
+    if (chatSession.onboardStep < 2) {
+      setTimeout(() => handleOnboardStep(query), 220);
+      return;
+    }
+
+    const matches = rankMatches(query);
+
     setTimeout(() => {
-      if (result) {
-        const followUps = suggestFollowUps(result.key);
-        // Skip the "did that help?" check for conversational responses (yes/no/thanks/hi)
-        // — adding it there creates an infinite confirmation loop. We detect those by
-        // a short answer length AND priority in the conversational range (200-211).
-        const isConversational = result.answer && result.answer.length < 200
-          && /^(glad|got it|hi —|anytime|i'm a brand|if you want a person|sure\.|fair\.|definitely|welcome\.|bookmark)/i.test(
-              result.answer.replace(/<[^>]+>/g, '').trim()
-            );
-        addChatMessage(result.answer, false, {
-          followUps,
-          confirm: !isConversational,
-        });
-      } else {
+      if (!matches.length) {
+        const namePrefix = chatSession.name ? `${chatSession.name}, ` : '';
         addChatMessage(
-          `I don't have a confident answer for that. The brand book covers <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>. Try one of those topics — or send Victoria and Emmanuel a direct question below.`,
+          `${namePrefix}I don't have a confident answer for that yet. I cover <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>, plus the <em>why</em> behind the 2026 changes. Try one of those topics — or send Victoria and Emmanuel a direct question below.`,
           false,
           { escalate: true }
         );
+        return;
       }
+
+      const top = matches[0];
+      const parsed = parseAnswer(top.k.a);
+      let renderedAnswer = parsed.cleanHTML || top.k.a;
+      let authoredFollowups = parsed.followups;
+
+      // ---- Multi-match synthesizer ----
+      // If a second match scored within 60% of the top score AND it covers a
+      // distinct primary keyword, surface it as a "this also connects to…" teaser.
+      let synthesizedTeaser = '';
+      if (matches.length > 1) {
+        const second = matches[1];
+        const secondKey = second.k.q[0];
+        if (second.score >= top.score * 0.6 && !chatSession.askedKeys.has(secondKey.toLowerCase())) {
+          synthesizedTeaser = `<p class="chat-synth"><strong>Related angle:</strong> this question also overlaps with <em>${secondKey}</em>. <button class="chat-pill chat-pill-inline" data-q="${secondKey.replace(/"/g, '&quot;')}">Read that next →</button></p>`;
+        }
+      }
+
+      // ---- Topic-aware preface ----
+      const preface = buildPreface(top.k.q[0]);
+
+      // ---- Conversational detector — short, casual greeting responses ----
+      const isConversational = renderedAnswer && renderedAnswer.length < 200
+        && /^(glad|got it|hi —|anytime|i'm a brand|if you want a person|sure\.|fair\.|definitely|welcome\.|bookmark)/i.test(
+            renderedAnswer.replace(/<[^>]+>/g, '').trim()
+          );
+
+      // ---- Compose the rendered HTML ----
+      let finalHTML = renderedAnswer;
+      if (synthesizedTeaser) finalHTML = finalHTML + synthesizedTeaser;
+
+      const followUps = suggestFollowUps(top.k.q[0], authoredFollowups);
+
+      addChatMessage(finalHTML, false, {
+        preface: preface || undefined,
+        followUps,
+        followUpsLabel: followUps.length ? 'You might also want to know:' : undefined,
+        confirm: !isConversational,
+      });
+
+      rememberTopic(top.k.q[0]);
     }, 280);
   }
 

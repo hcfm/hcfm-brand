@@ -797,8 +797,20 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 
 /* Bot follow-up suggestions */
 .chat-followups { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; gap: 6px; }
-.chat-followups::before { content: 'Related:'; display: block; width: 100%; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+/* Default label only when no .chat-followups-h is rendered (legacy fallback) */
+.chat-followups:not(:has(.chat-followups-h))::before { content: 'Related:'; display: block; width: 100%; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+.chat-followups-h { display: block; width: 100%; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 4px; }
 .chat-followups .chat-pill { font-size: 11px; }
+
+/* Topic-aware preface — "this connects to what you asked earlier" */
+.chat-preface { font-size: 11px; color: var(--text-muted); font-style: italic; margin: 0 0 8px; padding: 6px 10px; background: rgba(255, 181, 0, 0.06); border-left: 2px solid var(--hcfm-gold); border-radius: 0 4px 4px 0; }
+.chat-preface em { font-style: normal; color: var(--hcfm-blue); font-weight: 600; }
+
+/* Multi-match synthesizer teaser — "Related angle: this also overlaps with X" */
+.chat-synth { font-size: 12px; color: var(--text); margin: 12px 0 0; padding: 8px 10px; background: rgba(0, 71, 187, 0.04); border-left: 2px solid var(--hcfm-blue); border-radius: 0 4px 4px 0; }
+.chat-synth strong { color: var(--hcfm-blue); }
+.chat-pill-inline { display: inline-block; vertical-align: middle; margin-left: 4px; background: var(--hcfm-blue); color: #fff; border-color: var(--hcfm-blue); }
+.chat-pill-inline:hover { background: #003a99; border-color: #003a99; }
 
 /* Bot comprehension check — "did that help?" footer */
 .chat-confirm { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
