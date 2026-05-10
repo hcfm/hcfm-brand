@@ -1,0 +1,170 @@
+row_id,keywords,current_category,new_category
+,"primary color, primary palette, primary",,colors
+,"secondary color, accent, accent palette",,colors
+,"liturgical, lent, advent, pentecost, ordinary time, extended",,general
+,"hcfm blue, pantone 2728, brand blue, identifier blue",,voice
+,"yellow gold, pantone 7549, gold hex, ffb500",,voice
+,"marian blue, pantone 2995, sky blue, light blue",,voice
+,"muted gold, pantone 871, old gold, 89764b",,voice
+,"black, foundation color, 000000",,colors
+,"white, ffffff, breathing space",,colors
+,"yellow gold vs muted gold, when use muted gold, two golds, gold difference",,colors
+,"yellow gold body text, gold on white, accessibility, contrast",,typography
+,"contrast, wcag, readable, accessibility ratio",,accessibility
+,"light blue, why marian",,colors
+,"extended palette, do not use, old colors",,colors
+,"mark vs logo, mark or logo, difference mark logo, symbol vs logo",,logo
+,"logotype 1, horizontal, wide layout",,logo
+,"logotype 2, stacked",,logo
+,"logotype 3, compact stacked",,logo
+,"logotype 4, single line, narrow",,logo
+,"logo download, where logo, download logo, get logo",,logo
+,"ai file, editable, illustrator, source file, eps",,logo
+,"minimum size, logo size, how small",,logo
+,"clear space, free space, margin around logo",,logo
+,"logo do not, misuse, never do, logo rule",,logo
+,"file format, svg, png, jpg",,logo
+,"favicon, profile picture, small",,logo
+,"symbol meaning, what does symbol, meaning of mark, mark layers",,symbol
+,"10 beads, ten beads, rosary beads, why ten",,symbol
+,"family of prayer, person, figure",,symbol
+,"floral, rose, lily, iris, mary connection",,symbol
+,"moon, light center, white space mark",,symbol
+,"welcome, invitation, mission, outward",,symbol
+,"font, typography, fonts list",,typography
+,"body text, body font, paragraph font",,typography
+,"headline, header, display font",,typography
+,"playlist script, script font, decorative font",,typography
+,"whitney, sans serif",,typography
+,"calluna, serif font",,typography
+,"times roman, times new roman",,typography
+,"font download, where font, get fonts",,typography
+,"font pairing, combination, mix fonts",,typography
+,"voice, tone, how to write",,voice
+,"we say, preferred phrase, always say",,voice
+,"we avoid, never say, do not say",,voice
+,"donor letter, how donor letter",,voice
+,"social caption, caption tone",,voice
+,"imagery, photography, photo categories",,imagery
+,rule of thirds,,imagery
+,leading lines,,imagery
+,frame within frame,,imagery
+,filling the frame,,imagery
+,"shot list, event photography",,imagery
+,"stock photography, staged photo",,imagery
+,"design element, border, fade, curve",,design-elements
+,thin border,,design-elements
+,"color fade, gradient",,design-elements
+,"dark overlay, photo overlay opacity",,design-elements
+,"60-30-10, sixty thirty ten, color ratio",,colors
+,"stationery, letterhead, business card, envelope",,stationery
+,"letterhead template, word template",,stationery
+,"easton address, mailing address",,stationery
+,"instagram size, instagram post, instagram dimensions",,platforms
+,"facebook size, facebook dimensions",,platforms
+,"linkedin size, linkedin dimensions",,platforms
+,"twitter, x size, x dimensions",,platforms
+,"youtube thumbnail, youtube size",,platforms
+,"ministry center, sub ministry, ministries list",,ministries
+,family rosary,,ministries
+,"father peyton, venerable patrick peyton, founder",,father-peyton
+,catholic mom,,ministries
+,museum of family prayer,,ministries
+,family theater productions,,ministries
+,"preflight, pre-flight, checklist, before publish",,workflow
+,"review my work, who reviews, check my design",,workflow
+,"co-branding, partner logo, two logos",,workflow
+,"report misuse, wrong use",,logo
+,"contact, email, help",,contact
+,"password, access, unlock",,downloads
+,"transition, deadline, 2026 system",,history
+,"translation, french, spanish, portuguese, swahili",,translation
+,"who maintains, who owns brand, easton creatives, who manages brand",,contact
+,"why changed, why update, why new system",,history
+,"complementary colors, opposite colors, why blue and yellow work, color wheel",,colors
+,"why blue yellow, ikea best buy walmart, industry blue yellow",,colors
+,"gestalt, figure ground, how brain processes color",,colors
+,"why yellow on black, gold on black, high contrast",,colors
+,"why dark, why black background, dark mode",,colors
+,"attention vs affinity, stop scroll vs trust, engagement quality",,general
+,"why 60-30-10, color hierarchy why, why one color leads",,colors
+,"where does 60-30-10 come from, origin of rule",,colors
+,"why yellow gold primary, why elevated yellow gold, gold change 2026",,colors
+,"muted gold problem, why not muted gold digital",,colors
+,"why blue mary, mary blue tradition, why marian blue",,colors
+,"why blue support not lead, blue 10 percent digital, blue accent",,colors
+,"why hcfm blue 0047bb, pantone 2728 reason",,voice
+,"black culture mourning, east africa black, death color",,regional
+,"philippines black, asia color culture",,regional
+,"uganda yellow, east africa yellow gold, political color",,regional
+,"ireland color, europe culture",,regional
+,"why same brand globally, brand consistency vs culture, fragmentation",,regional
+,"wcag aa, contrast ratio explanation",,accessibility
+,"why never gold body text, gold readability",,typography
+,"blue on blue, marian blue on hcfm blue",,colors
+,"why playlist script rules, why strict colors script",,typography
+,"why script single words, short phrases playlist",,typography
+,"why whitney, whitney choice reason",,typography
+,"why calluna, calluna body text choice",,typography
+,"why three fonts, why not one font",,typography
+,"humanist sans, sans serif character",,typography
+,"why one or two elements, restraint design",,design-elements
+,"why dark overlay opacity range, overlay 40 to 70",,design-elements
+,"why thin border 3 4 pixels, border thickness rule",,design-elements
+,"why dark mode matters, dark mode percentage",,general
+,"why social fast, two seconds scroll, attention span",,general
+,"why ikea blue but not blue background, industry brand vs social",,colors
+,"why print different, digital vs print colors",,colors
+,"why pantone 871 muted, muted gold reason",,voice
+,"why whitney calluna pair, sans serif body pairing",,typography
+,"why not just one font, monotype",,typography
+,"why simplified palette, 20 colors to 6",,history
+,"why playlist script added, why script font 2026",,typography
+,"research backing, evidence for choices, why trust this system",,research
+,"why ten beads, why not five or seven, rosary decade reason",,symbol
+,"why circular mark, why round logo",,symbol
+,"why each shape person, why ten people",,symbol
+,"why central not local, why one canonical",,general
+,"why ai files restricted, why not give source files",,logo
+,"why password gate, why gated downloads",,downloads
+,"why two voice registers, voice why two",,voice
+,"why family the family that prays, why peyton phrase",,father-peyton
+,"why named not abstract, why specific countries",,general
+,"why real not stock, authentic photography",,imagery
+,"why photography rules, visual standards photo",,imagery
+,"why this brand page, purpose of brand portal",,philosophy
+,"why public, why visible to everyone",,philosophy
+,"ewtn colors, word on fire, catholic media, competitor brand",,regional
+,"vatican colors, vatican gold, catholic standard",,regional
+,"why not light blue dominant, why not teal",,colors
+,"industry alignment, why dark like everyone else",,general
+,"why digital first, mobile audience, digital channels",,regional
+,"why younger generations, reach young families",,regional
+,"mobile screens optimization, screen vs print",,regional
+,"why global community, family rosary audience, who follows hcfm",,regional
+,"follower decline, why we updated brand",,history
+,"why ab test, why test colors, why not just decide",,research
+,"why paid boosting, organic vs paid testing",,research
+,"allan qualitative research, two kinds of research",,research
+,"sub brand, podcast logo, ministry sub-brand",,logo
+,"why simplicity logo, logo design rules",,logo
+,"why no extra icons, avoid microphone trope",,philosophy
+,"why narrative voice, why stories not bullets",,voice
+,"why warm voice, why not formal",,voice
+,"why family unit, household focus",,voice
+,"why gradual change, why phased rollout",,history
+,"why ministry support, easton creatives support, team support",,workflow
+,"why centralized asset distribution, sharepoint replacement",,workflow
+,"why one accent per design, one not three",,design-elements
+,"why dark overlay specific opacity, 40 to 60 percent overlay",,design-elements
+,"why platform dimensions exact, why sizes matter",,platforms
+,"why brand consistency matters, consistency mission",,philosophy
+,"why aesthetic vs strategic, not aesthetic preference",,philosophy
+,"why this brand book, value of brand guidelines",,philosophy
+,"what stayed the same, what didn\",,history
+,"why not full rebrand, why refinement only",,history
+,"google color test, why test color, data driven design",,research
+,"labrecque research, color and brand personality",,research
+,"cyr trust research, culturally appropriate colors",,research
+,"cta over vanity, click rate matters, why ctr",,research
+,"negative feedback rate, hide post signal",,research

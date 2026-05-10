@@ -1,0 +1,2068 @@
+[
+  {
+    "id": null,
+    "keywords": "primary color, primary palette, primary",
+    "answer": "<strong>Three primary colors:</strong> Black (#000000) is the foundation, HCFM Blue (#0047BB / Pantone 2728C) is the identifier, Yellow Gold (#FFB500 / Pantone 7549C) is the energy.",
+    "category": "colors",
+    "priority": 1,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "secondary color, accent, accent palette",
+    "answer": "<strong>Three secondary colors:</strong> Marian Blue (#00A9E0 / 2995C) pairs with Playlist Script. Muted Gold (#89764B / 871C) is for print and donor materials. White is for text on dark backgrounds.",
+    "category": "colors",
+    "priority": 2,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "liturgical, lent, advent, pentecost, ordinary time, extended",
+    "answer": "<strong>Extended palette:</strong> Purple (#5F259F) for Lent, Advent, and penitential themes. Red (#CF3339) for Pentecost, martyrs, Sacred Heart. Green (#3A913F) for Ordinary Time, growth, creation care.",
+    "category": "general",
+    "priority": 3,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "hcfm blue, pantone 2728, brand blue, identifier blue",
+    "answer": "<strong>HCFM Blue.</strong> Hex #0047BB \u00b7 RGB 0/71/187 \u00b7 Pantone 2728C. The brand identifier \u2014 the logo, the mark, formal letterhead, official documents, website headers. Use sparingly outside those moments so it stays meaningful.",
+    "category": "voice",
+    "priority": 4,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "yellow gold, pantone 7549, gold hex, ffb500",
+    "answer": "<strong>Yellow Gold.</strong> Hex #FFB500 \u00b7 RGB 255/181/0 \u00b7 Pantone 7549C. The energy color. Headlines on dark backgrounds, call-to-action buttons, accent borders, Playlist Script, icons that need to pop. Never for body text on white.",
+    "category": "voice",
+    "priority": 5,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "marian blue, pantone 2995, sky blue, light blue",
+    "answer": "<strong>Marian Blue.</strong> Hex #00A9E0 \u00b7 RGB 0/169/224 \u00b7 Pantone 2995C. Pairs with Playlist Script. Closely associated with Mary \u2014 gentleness, presence, guidance. The brand book sometimes calls this \"Light Blue\" \u2014 same color.",
+    "category": "voice",
+    "priority": 6,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "muted gold, pantone 871, old gold, 89764b",
+    "answer": "<strong>Muted Gold.</strong> Hex #89764B \u00b7 RGB 137/118/75 \u00b7 Pantone 871C. The reverent gold. Print, formal, donor materials, certificates. Symbolizes sacredness in traditional, devotional contexts.",
+    "category": "voice",
+    "priority": 7,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "black, foundation color, 000000",
+    "answer": "<strong>Black (#000000).</strong> Process Black. Your workhorse. The primary background that lets every other brand color shine. Use it for social graphics, video thumbnails, and as a 40 to 70 percent overlay on photos.",
+    "category": "colors",
+    "priority": 8,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "white, ffffff, breathing space",
+    "answer": "<strong>White (#FFFFFF).</strong> Visual rest and balance. The space between things. Use white as text on dark, and as negative space to let content breathe.",
+    "category": "colors",
+    "priority": 9,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "yellow gold vs muted gold, when use muted gold, two golds, gold difference",
+    "answer": "<strong>Simple rule:</strong> If it is on a screen, use Yellow Gold. If it is for donors, on a certificate, or in formal print, use Muted Gold. Yellow Gold is digital and energetic. Muted Gold is traditional and reverent. The two golds are not interchangeable.",
+    "category": "colors",
+    "priority": 10,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "yellow gold body text, gold on white, accessibility, contrast",
+    "answer": "Never use Yellow Gold for body text on white. Yellow Gold on white is 1.9:1 contrast \u2014 fails WCAG AA. Use Yellow Gold for headlines and accents only on dark backgrounds.",
+    "category": "typography",
+    "priority": 11,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "contrast, wcag, readable, accessibility ratio",
+    "answer": "<strong>WCAG AA</strong> requires 4.5:1 for body text, 3:1 for large text. <strong>HCFM Blue on White:</strong> 8.6:1 (AAA). <strong>White on HCFM Blue:</strong> 8.6:1 (AAA). <strong>Yellow Gold on Black:</strong> 11.7:1 (AAA). <strong>Yellow Gold on White:</strong> 1.9:1 (FAILS).",
+    "category": "accessibility",
+    "priority": 12,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "light blue, why marian",
+    "answer": "\"Light Blue\" in the 2026 brand book and \"Marian Blue\" in the Visual Identity deck refer to the same color (#00A9E0). Going forward, we standardize on \"Marian Blue\" because it carries the Marian meaning explicitly.",
+    "category": "colors",
+    "priority": 13,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "extended palette, do not use, old colors",
+    "answer": "The old SharePoint extended palette (red, orange, dark green, magenta, light pink, sage, etc. \u2014 14 colors total) is deprecated. The 2026 system is six colors only: 4 primary, 2 accent, plus three liturgical (Purple, Red, Green) for seasonal use.",
+    "category": "colors",
+    "priority": 14,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "mark vs logo, mark or logo, difference mark logo, symbol vs logo",
+    "answer": "<strong>The Mark</strong> is the symbol alone. Use when space is small or the audience already knows HCFM (favicons, profile pictures, watermarks). <strong>The Logo</strong> is the symbol with \"Holy Cross Family Ministries.\" Use when introducing HCFM, or for official documents.",
+    "category": "logo",
+    "priority": 15,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "logotype 1, horizontal, wide layout",
+    "answer": "<strong>Logotype 1 \u2014 Horizontal.</strong> Mark left, wordmark right on a single horizontal line. Best for wide layouts: web headers, document headers, email signatures.",
+    "category": "logo",
+    "priority": 16,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "logotype 2, stacked",
+    "answer": "<strong>Logotype 2 \u2014 Stacked.</strong> Mark on top, wordmark on two lines below. The default formal version. Use on letterhead, certificates, official documents.",
+    "category": "logo",
+    "priority": 17,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "logotype 3, compact stacked",
+    "answer": "<strong>Logotype 3 \u2014 Compact stacked.</strong> Mark on top with a smaller wordmark. For tight spaces where the stacked version is too tall but you still need full identification.",
+    "category": "logo",
+    "priority": 18,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "logotype 4, single line, narrow",
+    "answer": "<strong>Logotype 4 \u2014 Single line.</strong> Mark with the full wordmark on a single line. Use in narrow horizontal contexts: footers, banners, sign-off blocks.",
+    "category": "logo",
+    "priority": 19,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "logo download, where logo, download logo, get logo",
+    "answer": "Logo files are gated on the <a href=\"#downloads\">Downloads tab</a>. Public packs include PNG and JPG only. Editable AI source files are restricted to brand owners (Victoria and Emmanuel). Email vhassan@hcfm.org or eepau@hcfm.org for access.",
+    "category": "logo",
+    "priority": 20,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "ai file, editable, illustrator, source file, eps",
+    "answer": "AI / EPS / editable source files are restricted to the brand owners (Victoria and Emmanuel). This is intentional: a single canonical source keeps every ministry-center logo identical. If you need a custom edit, request it through the Help tab.",
+    "category": "logo",
+    "priority": 21,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "minimum size, logo size, how small",
+    "answer": "Mark alone: 5/16 inch (7.94 mm) print, 150 px web. Wordmark \"FAMILY MINISTRIES\" cap height: 1/16 inch (1.59 mm). Below these sizes, legibility breaks.",
+    "category": "logo",
+    "priority": 22,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "clear space, free space, margin around logo",
+    "answer": "Clear space around the mark equals the height of one prayer-person bead in the mark itself. Keep that minimum margin on all four sides \u2014 never let other elements crowd inside it.",
+    "category": "logo",
+    "priority": 23,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "logo do not, misuse, never do, logo rule",
+    "answer": "<strong>Never:</strong> stretch or distort the logo \u00b7 use colors outside the approved palette \u00b7 substitute fonts on the wordmark \u00b7 add drop shadows, glows, or 3D \u00b7 add strokes or outlines \u00b7 crop in a way that obscures the form \u00b7 rotate the mark \u00b7 place on busy backgrounds without an overlay.",
+    "category": "logo",
+    "priority": 24,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "file format, svg, png, jpg",
+    "answer": "Public logo packs include <strong>PNG and JPG</strong> only. SVG, EPS, and AI are brand-owner restricted. If you need a specific format we have not packaged (vector outlines, white-only PDF, etc.), request through the Help page.",
+    "category": "logo",
+    "priority": 25,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "favicon, profile picture, small",
+    "answer": "For favicons and social profile pictures, use the <strong>Mark alone</strong> (just the symbol, no wordmark). Render at 800px+ and export down to platform sizes. Approved colors: HCFM Blue or Yellow Gold on white, or White on HCFM Blue.",
+    "category": "logo",
+    "priority": 26,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "symbol meaning, what does symbol, meaning of mark, mark layers",
+    "answer": "The HCFM symbol carries five layers of meaning: <br>1. <strong>10 Beads of the Rosary</strong> \u2014 totality and unity.<br>2. <strong>A Family of Prayer</strong> \u2014 each shape is a person in prayer.<br>3. <strong>Floral Character</strong> \u2014 Rose, Lily, Iris (symbolic of Mary).<br>4. <strong>Moon and Light</strong> \u2014 center white space emits light.<br>5. <strong>Welcome and Invitation</strong> \u2014 radiates outward.",
+    "category": "symbol",
+    "priority": 27,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "10 beads, ten beads, rosary beads, why ten",
+    "answer": "The mark is composed of 10 interconnected shapes \u2014 a reference to the 10 beads of a Rosary decade. The design represents <em>totality</em> and <em>unity</em>: family members of every kind brought together in prayer, and the continuous rhythm of prayer lived daily, not occasionally.",
+    "category": "symbol",
+    "priority": 28,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "family of prayer, person, figure",
+    "answer": "Each shape in the mark represents a person in prayer \u2014 hands raised or folded. The ten shapes together form a united family. No single shape stands alone; each depends on the others. Family prayer strengthens relationships and faith.",
+    "category": "symbol",
+    "priority": 29,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "floral, rose, lily, iris, mary connection",
+    "answer": "The mark expresses a floral character \u2014 Rose, Lily, Iris, all flowers symbolic of the Virgin Mary. The petal-like shape of each unit is intentional. When you let your eye soften, the mark reads less like ten beads and more like a flower in full bloom.",
+    "category": "symbol",
+    "priority": 30,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "moon, light center, white space mark",
+    "answer": "The white space at the heart of the mark creates an optical effect that seems to emit light \u2014 a reference to the moon. In Catholic iconography, Mary is often shown standing on the moon, clothed in light. The mark carries that imagery without ever drawing it literally.",
+    "category": "symbol",
+    "priority": 31,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "welcome, invitation, mission, outward",
+    "answer": "The symbol radiates outward by design. HCFM is not inward-facing \u2014 we are mission-driven, actively reaching out to families across cultures and communities. The careful delineation of form also suggests the sense of mystery associated with the work of the Holy Spirit.",
+    "category": "symbol",
+    "priority": 32,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "font, typography, fonts list",
+    "answer": "HCFM uses three fonts. <strong>Whitney</strong> for headlines (sans-serif, 6 weights). <strong>Calluna</strong> for body text (serif, 4 weights). <strong>Playlist Script</strong> for decorative single words (Yellow Gold, White, or Marian Blue only).",
+    "category": "typography",
+    "priority": 33,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "body text, body font, paragraph font",
+    "answer": "Use <strong>Calluna</strong> for body text. A serif font that reflects tradition, depth, and reflection. Calluna is for paragraphs, prayer text, reflections, and formal documents. Available weights: Regular, Italic, Semibold, Bold.",
+    "category": "typography",
+    "priority": 34,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "headline, header, display font",
+    "answer": "Use <strong>Whitney</strong> for headlines, subheadings, and short text. Six weights are available: Light, Book, Medium, Semibold, Bold, Black. Whitney is clean, modern, and highly readable.",
+    "category": "typography",
+    "priority": 35,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "playlist script, script font, decorative font",
+    "answer": "<strong>Playlist Script rules:</strong> Single words or short phrases only (3\u20134 words max). One element per design. Yellow Gold, White, or Marian Blue only. Never at small sizes (under 18px screen / 14pt print). Never for body text.",
+    "category": "typography",
+    "priority": 36,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "whitney, sans serif",
+    "answer": "<strong>Whitney</strong> is HCFM's display sans-serif. Designed by Hoefler & Frere-Jones. Six weights: Light, Book, Medium, Semibold, Bold, Black. Use for headlines, navigation, buttons, callouts, captions, labels \u2014 anywhere clarity at a glance matters.",
+    "category": "typography",
+    "priority": 37,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "calluna, serif font",
+    "answer": "<strong>Calluna</strong> is HCFM's body serif. Designed by Jos Buivenga. Four weights: Regular, Italic, Semibold, Bold. Use for paragraphs, prayer text, reflections, letterhead body, donor letters, and anywhere a serif's warmth is appropriate.",
+    "category": "typography",
+    "priority": 38,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "times roman, times new roman",
+    "answer": "Avoid Times Roman / Times New Roman. The older SharePoint guidance suggesting Times Roman for letter body is superseded \u2014 use Calluna instead. Calluna carries the warmth Times Roman lacks.",
+    "category": "typography",
+    "priority": 39,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "font download, where font, get fonts",
+    "answer": "Font files are on the <a href=\"#downloads\">Downloads tab</a> under the Fonts pane. Whitney pack (368 KB), Calluna pack (252 KB), Playlist Script (52 KB), or all three in one HCFM Font Pack (660 KB).",
+    "category": "typography",
+    "priority": 40,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "font pairing, combination, mix fonts",
+    "answer": "Default pairing: <strong>Whitney + Calluna</strong> (headline + body). For hero moments, campaign covers, donor letters, and feast-day communications, add Playlist Script for one decorative word: <strong>Whitney + Playlist Script + Calluna</strong>.",
+    "category": "typography",
+    "priority": 41,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "voice, tone, how to write",
+    "answer": "HCFM has two registers. <strong>For the faithful:</strong> reverent, warm, family-first, narrative, named-not-abstract. <strong>For vendors:</strong> specific, direct, practical, documented. The family is the hero, prayer is the language, we are the support.",
+    "category": "voice",
+    "priority": 42,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "we say, preferred phrase, always say",
+    "answer": "<strong>We say:</strong> \"The family that prays together stays together.\" (Father Peyton's actual phrase.) \"Holy Cross Family Ministries\" spelled out on first reference, \"HCFM\" after. \"Venerable Patrick Peyton, C.S.C.\" with title and order on first reference. \"Father Peyton\" on second reference. Country names by name.",
+    "category": "voice",
+    "priority": 43,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "we avoid, never say, do not say",
+    "answer": "<strong>We avoid:</strong> theological jargon where plain English works. \"Intercessory familial communion\" when we mean family prayer. \"Stakeholders\" or \"audience segments\" for the people we serve. Hyperbole \u2014 we do not \"transform lives.\" Generic mission language. Acronyms before they are spelled out.",
+    "category": "voice",
+    "priority": 44,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "donor letter, how donor letter",
+    "answer": "Donor letters: warm, grateful, named. Open with \"Dear friends in Christ,\" or \"Dear [Name],\" and reference something specific the donor has supported. Calluna for body. Sign with full name and title.",
+    "category": "voice",
+    "priority": 45,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "social caption, caption tone",
+    "answer": "Social captions: plain, devotional, short. \"Today, we honor the Holy Name of Jesus\u2026\" works better than \"Join us as we celebrate\u2026\" Aim for 1\u20132 sentences plus a closing prayer or question.",
+    "category": "voice",
+    "priority": 46,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "imagery, photography, photo categories",
+    "answer": "Five sample categories of photography: Father Patrick Peyton, ministry-center culture, Marian imagery, family prayer, Rosary imagery. Use high-quality images only. Apply dark overlays when text goes over a photo. Choose real over staged.",
+    "category": "imagery",
+    "priority": 47,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "rule of thirds",
+    "answer": "<strong>Rule of thirds:</strong> divide the image into nine equal parts with two vertical and two horizontal lines. Place the main subject at the intersections or along the lines to create a balanced scene.",
+    "category": "imagery",
+    "priority": 48,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "leading lines",
+    "answer": "<strong>Leading lines:</strong> use natural elements (rivers, roads, pathways) or man-made elements (fences, walls, staircases) to create a visual path that guides the viewer's eye to the subject.",
+    "category": "imagery",
+    "priority": 49,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "frame within frame",
+    "answer": "<strong>Frame within a frame:</strong> use natural elements like trees or rocks, or man-made objects like windows and doorways, to draw attention to the subject. Adds depth and visual interest.",
+    "category": "imagery",
+    "priority": 50,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "filling the frame",
+    "answer": "<strong>Filling the frame:</strong> move closer to the subject. The focus falls on facial expression and details that would otherwise be missed. Bonus: distracting backgrounds disappear.",
+    "category": "imagery",
+    "priority": 51,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "shot list, event photography",
+    "answer": "For HCFM events: shoot details (signs, programs, branded items), venue (before and during), attendees (candid emotional shots \u2014 both close-up and wide), speakers and special guests. A shot list separates a recap from a memory.",
+    "category": "imagery",
+    "priority": 52,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "stock photography, staged photo",
+    "answer": "Avoid stock photography. Choose real over staged: real families, real prayer, real local context. The image must reflect HCFM's actual mission, not a generic \"international\" aesthetic.",
+    "category": "imagery",
+    "priority": 53,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "design element, border, fade, curve",
+    "answer": "Four approved design elements: <strong>Thin Border</strong> (3-4 px max), <strong>Color Fade Effect</strong> (brand colors only), <strong>Curved Shapes</strong>, <strong>Dark Overlays</strong>. Use only one or two per design.",
+    "category": "design-elements",
+    "priority": 54,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "thin border",
+    "answer": "<strong>Thin Border:</strong> a 3\u20134 pixel frame in a brand color. Use Muted Gold for traditional, reverent contexts. Use Yellow Gold for digital and energetic applications. Where it works: certificate edges, donor cards, prayer-card edges, formal invitations.",
+    "category": "design-elements",
+    "priority": 55,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "color fade, gradient",
+    "answer": "<strong>Color Fade Effect:</strong> a gradient using only brand-palette colors. Yellow Gold to Black is the digital default. HCFM Blue to White works for formal moments. Never introduce outside colors into a brand fade.",
+    "category": "design-elements",
+    "priority": 56,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "dark overlay, photo overlay opacity",
+    "answer": "<strong>Dark Overlays:</strong> black transparent layer on photos to make text readable. Adjust opacity by eye \u2014 light images with sparse text need 40 to 50 percent, busy images with longer copy need 60 to 70 percent. The rule is readability, not a number.",
+    "category": "design-elements",
+    "priority": 57,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "60-30-10, sixty thirty ten, color ratio",
+    "answer": "The 60-30-10 rule: 60% dominant color (background), 30% secondary (supporting), 10% accent (highlights). Sometimes 70-20-10 or 80-10-10 is better. The point is intentional hierarchy: one color leading, the others playing their part.",
+    "category": "colors",
+    "priority": 58,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "stationery, letterhead, business card, envelope",
+    "answer": "Print specs: Letterhead 8.5\u00d711 in on Strathmore 24# Bright White Wove with Pantone 871U + 2728U inks. Business card 3.5\u00d72 in on Strathmore 130# DTC Cover. #10 envelope 9.5\u00d74.125 in on the same letterhead stock. Mailing label 5.625\u00d74 in on Crack-n-Peel.",
+    "category": "stationery",
+    "priority": 59,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "letterhead template, word template",
+    "answer": "Editable Word letterhead templates exist for the parent ministry and six sub-ministries (Catholic Mom, Family Rosary, Family Theater Productions, Father Peyton Prayer Guild, Museum of Family Prayer, plus the parent HCFM letterhead). Available on the <a href=\"#downloads\">Downloads tab</a>.",
+    "category": "stationery",
+    "priority": 60,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "easton address, mailing address",
+    "answer": "HCFM Easton headquarters: <strong>508 Washington Street, North Easton, MA 02356, USA.</strong>",
+    "category": "stationery",
+    "priority": 61,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "instagram size, instagram post, instagram dimensions",
+    "answer": "<strong>Instagram:</strong> static portrait 1080\u00d71350 px \u00b7 Reel/Story 1080\u00d71920 px. Use exactly these dimensions \u2014 designs that fall short get cropped, designs that overshoot get downsized awkwardly.",
+    "category": "platforms",
+    "priority": 62,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "facebook size, facebook dimensions",
+    "answer": "<strong>Facebook:</strong> static portrait 1080\u00d71350 px \u00b7 video (feed) 1280\u00d7720 px \u00b7 Reels 1080\u00d71920 px.",
+    "category": "platforms",
+    "priority": 63,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "linkedin size, linkedin dimensions",
+    "answer": "<strong>LinkedIn:</strong> static image 1200\u00d7627 px \u00b7 portrait image 1080\u00d71350 px.",
+    "category": "platforms",
+    "priority": 64,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "twitter, x size, x dimensions",
+    "answer": "<strong>X (Twitter):</strong> static image 1200\u00d7675 px.",
+    "category": "platforms",
+    "priority": 65,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "youtube thumbnail, youtube size",
+    "answer": "<strong>YouTube:</strong> thumbnail 1280\u00d7720 px (16:9 ratio).",
+    "category": "platforms",
+    "priority": 66,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "ministry center, sub ministry, ministries list",
+    "answer": "HCFM has 24 ministry centers across 18 countries on 6 continents. The <a href=\"#ministries\">Ministry Centers tab</a> lists every one with its logo gallery. Each click opens that ministry's logo pack.",
+    "category": "ministries",
+    "priority": 67,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "family rosary",
+    "answer": "Family Rosary is the founding ministry of HCFM, based in Easton, MA. Father Peyton's original Rosary Crusade has grown into a global ministry through Family Rosary Crusade chapters in the Philippines, Latin America, Ireland, and beyond.",
+    "category": "ministries",
+    "priority": 68,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "father peyton, venerable patrick peyton, founder",
+    "answer": "Venerable Patrick Peyton, C.S.C. (1909\u20131992) founded Holy Cross Family Ministries. His phrase \"The family that prays together stays together\" anchors HCFM's mission. \"Father Peyton\" on second reference, never just \"Patrick.\"",
+    "category": "father-peyton",
+    "priority": 69,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "catholic mom",
+    "answer": "Catholic Mom is one of HCFM's digital ministries based in Easton, MA. Logo pack is available in the <a href=\"#ministries\">Ministry Centers</a> directory.",
+    "category": "ministries",
+    "priority": 70,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "museum of family prayer",
+    "answer": "The Museum of Family Prayer in Easton, MA preserves and celebrates the heritage of Father Peyton's mission and the broader history of Catholic family prayer.",
+    "category": "ministries",
+    "priority": 71,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "family theater productions",
+    "answer": "Family Theater Productions, based in Hollywood, CA, is HCFM's media arm. Founded by Father Peyton and led today by Father David Guffey, C.S.C.",
+    "category": "ministries",
+    "priority": 72,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "preflight, pre-flight, checklist, before publish",
+    "answer": "Run through the <a href=\"#checklist\">Pre-flight Checklist</a> before you publish. Four sections: Colors, Fonts, Design Elements, Platform. Most common ship-blockers: Yellow Gold body text on white (fails contrast), too many design elements (clutter), wrong platform dimensions (cropping).",
+    "category": "workflow",
+    "priority": 73,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "review my work, who reviews, check my design",
+    "answer": "Email <a href=\"mailto:vhassan@hcfm.org\">vhassan@hcfm.org</a> or <a href=\"mailto:eepau@hcfm.org\">eepau@hcfm.org</a> before you ship anything you are unsure about. No charge, no formal request process. Turnaround is typically two business days.",
+    "category": "workflow",
+    "priority": 74,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "co-branding, partner logo, two logos",
+    "answer": "Email Victoria or Emmanuel <strong>before</strong> you design anything with a partner organization's logo. We have specific rules about how the two logos sit together, the spacing between them, and what needs approval first.",
+    "category": "workflow",
+    "priority": 75,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "report misuse, wrong use",
+    "answer": "Email Victoria or Emmanuel with a screenshot or link. We follow up directly with whoever is using the brand wrongly. If it is someone outside HCFM (a vendor, a third-party site), we handle the legal follow-up.",
+    "category": "logo",
+    "priority": 76,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "contact, email, help",
+    "answer": "Email <a href=\"mailto:vhassan@hcfm.org\">vhassan@hcfm.org</a> (Victoria Hassan) or <a href=\"mailto:eepau@hcfm.org\">eepau@hcfm.org</a> (Emmanuel Epau). Either inbox is fine \u2014 both forms on the Help page go to both of us.",
+    "category": "contact",
+    "priority": 77,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "password, access, unlock",
+    "answer": "Brand asset downloads are gated. Email Victoria or Emmanuel to request the access password. Source files (AI) are restricted to brand owners.",
+    "category": "downloads",
+    "priority": 78,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "transition, deadline, 2026 system",
+    "answer": "All ministry centers are expected to transition to the 2026 system. No hard deadline. New materials use the new system. Existing materials phase out over 6\u201312 months.",
+    "category": "history",
+    "priority": 79,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "translation, french, spanish, portuguese, swahili",
+    "answer": "French, Spanish, Portuguese, and Swahili translations are in progress. Until they are published, ministry centers should use the English version and ask Easton for clarification.",
+    "category": "translation",
+    "priority": 80,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "who maintains, who owns brand, easton creatives, who manages brand",
+    "answer": "The HCFM brand is maintained by Victoria Hassan and Emmanuel Epau, working out of the HCFM headquarters in North Easton, MA. Any update to the brand book or this brand portal flows through them. They are sometimes called the \"Easton Creatives\" team in internal emails \u2014 same people.",
+    "category": "contact",
+    "priority": 81,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why changed, why update, why new system",
+    "answer": "The 2026 system simplified the palette from 20 colors to 6, elevated Yellow Gold to primary (over Muted Gold) for digital, and added Playlist Script as a decorative third typeface. The changes responded to ministry-center feedback and produced measurably stronger engagement on social platforms.",
+    "category": "history",
+    "priority": 82,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "complementary colors, opposite colors, why blue and yellow work, color wheel",
+    "answer": "Blue and Yellow Gold are <strong>complementary colors</strong> \u2014 they sit on opposite sides of the color wheel. The brain processes complementary pairs faster than any other combination because each color makes the other appear more vibrant. That neurological speed is exactly what you want when you have two seconds to stop a scroll.",
+    "category": "colors",
+    "priority": 83,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why blue yellow, ikea best buy walmart, industry blue yellow",
+    "answer": "Blue + Yellow appears in IKEA, Best Buy, and Walmart for a reason: <strong>Blue signals trust, reliability, stability. Yellow signals energy, warmth, optimism.</strong> Together they communicate \"dependable and exciting at the same time.\" That exact signal is also what a faith-based ministry needs \u2014 trustworthy enough to support, alive enough to engage.",
+    "category": "colors",
+    "priority": 84,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "gestalt, figure ground, how brain processes color",
+    "answer": "<strong>Figure-ground perception</strong> (a Gestalt principle) is how the brain separates foreground from background. The higher the contrast, the faster the separation. On social media \u2014 fractions of a second to decide \u2014 high contrast lets the brain do its job in the smallest possible time. A dark background with high-contrast Yellow Gold is the easiest job a scrolling brain can be given.",
+    "category": "colors",
+    "priority": 85,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why yellow on black, gold on black, high contrast",
+    "answer": "Yellow Gold on Black gives a <strong>contrast ratio of 11.7:1</strong> \u2014 passes WCAG AAA standards. The same Yellow Gold on HCFM Blue is only 4.5:1 \u2014 passes AA but is roughly 2.5x less visible. Black gives Yellow Gold maximum punch. That punch matters in a feed.",
+    "category": "colors",
+    "priority": 86,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why dark, why black background, dark mode",
+    "answer": "<strong>More than 80% of users browse with dark mode on.</strong> Black backgrounds are not just an aesthetic choice \u2014 they are how most families actually experience content on their phones. Designing for dark backgrounds means designing for how people are already consuming content. There is also an accessibility win: every HCFM brand color (Yellow Gold, White, Marian Blue) passes AAA contrast on Black.",
+    "category": "colors",
+    "priority": 87,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "attention vs affinity, stop scroll vs trust, engagement quality",
+    "answer": "There are two kinds of color performance. <strong>Attention metrics</strong> (does it stop the scroll?) and <strong>affinity metrics</strong> (does it earn trust and a share?). High-contrast colors stop the scroll. But a color that grabs attention without inspiring trust hurts mission engagement. The HCFM system threads the needle: dark backgrounds for scroll-stop, Marian Blue and warm Calluna prose for the trust that follows.",
+    "category": "general",
+    "priority": 88,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why 60-30-10, color hierarchy why, why one color leads",
+    "answer": "60-30-10 works because <strong>when every color fights for equal attention, the eye doesn't know where to land.</strong> The whole composition feels busy and you can't put your finger on why. Letting one color dominate (60%), one support (30%), and one accent (10%) gives the eye a clear path. Sometimes 70-20-10 or 80-10-10 is better \u2014 the principle is intentional hierarchy, not exact percentages.",
+    "category": "colors",
+    "priority": 89,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "where does 60-30-10 come from, origin of rule",
+    "answer": "The 60-30-10 rule is a classic principle that shows up across design fields \u2014 interior decorating, fashion, graphic design. It is not an HCFM invention. We adopted it because it makes color decisions reproducible: any HCFM creative can audit a design by asking \"is one color clearly leading?\" If the answer is yes and the leader is a brand color, the design is on track.",
+    "category": "colors",
+    "priority": 90,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why yellow gold primary, why elevated yellow gold, gold change 2026",
+    "answer": "In 2026 we elevated Yellow Gold (#FFB500 / Pantone 7549C) to primary for digital. <strong>Why:</strong> Muted Gold (#89764B) is reverent and traditional but lacks scroll-stopping power on small screens. Yellow Gold has the brightness and saturation digital feeds reward. Muted Gold remains the right choice for print, donor materials, and certificates \u2014 the two golds serve different registers.",
+    "category": "colors",
+    "priority": 91,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "muted gold problem, why not muted gold digital",
+    "answer": "Muted Gold (#89764B) is beautiful in print, but on social feeds it reads as olive or brown \u2014 too muted to register at a glance. Plus its contrast on white is only 3.4:1 (fails WCAG AA for body text). Yellow Gold solves both problems while keeping the gold metaphor that anchors HCFM's brand to liturgical glory.",
+    "category": "colors",
+    "priority": 92,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why blue mary, mary blue tradition, why marian blue",
+    "answer": "The association of Blue with the Virgin Mary dates to the <strong>12th century</strong>, when blue pigment (lapis lazuli) was the most expensive available \u2014 reserved for the most sacred subjects. The convention spread across Europe and remains universal in Catholic iconography. Marian Blue (#00A9E0) carries that history without needing to draw it.",
+    "category": "colors",
+    "priority": 93,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why blue support not lead, blue 10 percent digital, blue accent",
+    "answer": "In digital, Blue is calm \u2014 it signals trust and reliability. <strong>But calm doesn't stop a scroll.</strong> Yellow Gold on Black grabs first. Once attention is captured, Blue keeps the viewer engaged. That's why Blue plays a 10% accent role digitally \u2014 links, secondary buttons, dividers \u2014 and a much larger role in print where attention is already given. The roles flip by medium.",
+    "category": "colors",
+    "priority": 94,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why hcfm blue 0047bb, pantone 2728 reason",
+    "answer": "HCFM Blue (#0047BB / Pantone 2728C) was selected because it is <strong>a saturated, confident blue</strong> \u2014 strong enough to anchor formal materials but not so dark it loses warmth. It tests well across cultures, has no negative national associations, and pairs naturally with both Yellow Gold (energetic) and White (formal).",
+    "category": "voice",
+    "priority": 95,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "black culture mourning, east africa black, death color",
+    "answer": "In <strong>East Africa</strong>, black clothing outside formal settings can trigger bereavement associations. Black-bordered or desaturated images are a recognized social-media death-announcement convention. We design knowing this: dark backgrounds with bright HCFM colors on top read as energetic, not somber. The presence of Yellow Gold and White prevents the misread.",
+    "category": "regional",
+    "priority": 96,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "philippines black, asia color culture",
+    "answer": "In the <strong>Philippines</strong>, Black carries traditional mourning weight but is moderated by Western media influence. Urban audiences read black as fashion or elegance. Older and rural audiences keep stronger funeral associations. The dark-with-Yellow-Gold combination reads as modern and confident, not mournful \u2014 but ministry centers should match imagery to local reading.",
+    "category": "regional",
+    "priority": 97,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "uganda yellow, east africa yellow gold, political color",
+    "answer": "In <strong>Uganda</strong>, Yellow is the color of the NRM party that has held power 35+ years. For Ugandans, yellow can read as political before brand. East Africa ministry centers should be aware. We don't change the brand for it \u2014 we use Yellow Gold sparingly in those contexts and lean on Black + White + HCFM Blue when the political read is a risk.",
+    "category": "regional",
+    "priority": 98,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "ireland color, europe culture",
+    "answer": "In <strong>Ireland</strong>, black is normalized everyday dress \u2014 the mourning association is present but doesn't dominate. Marian Blue carries strong devotional weight given Ireland's Catholic heritage. The full HCFM palette translates cleanly there.",
+    "category": "regional",
+    "priority": 99,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why same brand globally, brand consistency vs culture, fragmentation",
+    "answer": "Research from Bottomley and Doyle (2006) found that <strong>brand consistency with appropriate connotations matters more than locale-specific palette switching.</strong> If we let every market pick its own colors, we fragment back to the state we started from. The right answer is one global system applied with cultural awareness \u2014 adjusting how we use the palette, not what is in the palette.",
+    "category": "regional",
+    "priority": 100,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "wcag aa, contrast ratio explanation",
+    "answer": "WCAG AA is the global accessibility standard. <strong>Body text needs 4.5:1 contrast.</strong> Large text (18px+ or 14px+ bold) needs 3:1. AAA is the higher tier \u2014 7:1 for body. HCFM Blue on White is 8.6:1 (AAA). Yellow Gold on White is 1.9:1 (fails AA). White on HCFM Blue is 8.6:1 (AAA). Yellow Gold on Black is 11.7:1 (AAA).",
+    "category": "accessibility",
+    "priority": 101,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why never gold body text, gold readability",
+    "answer": "Yellow Gold body text on white is <strong>1.9:1 contrast \u2014 far below the 4.5:1 WCAG AA minimum for body text.</strong> The text technically appears, but a quarter of readers cannot read it confidently \u2014 including older eyes, mild colorblindness, low-light viewing, and any photo-overlay context. Yellow Gold is for headlines and accents only. On dark backgrounds, it sings.",
+    "category": "typography",
+    "priority": 102,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "blue on blue, marian blue on hcfm blue",
+    "answer": "Marian Blue on HCFM Blue scores <strong>2.96:1</strong> \u2014 fails WCAG AA entirely. The two blues live in the same family and lose distinction when stacked. Use White or Yellow Gold on HCFM Blue instead. Reserve Marian Blue for accents on Black or White.",
+    "category": "colors",
+    "priority": 103,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why playlist script rules, why strict colors script",
+    "answer": "Playlist Script's elegance comes from <strong>specific letterform thicknesses and curves</strong> that only render legibly in a narrow band of colors. Yellow Gold, White, and Marian Blue all have enough lightness contrast against dark backgrounds to preserve those curves. Other colors flatten the strokes and make the script look messy. We tested others \u2014 they don't hold up.",
+    "category": "typography",
+    "priority": 104,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why script single words, short phrases playlist",
+    "answer": "Script fonts <strong>lose readability quickly the longer they get.</strong> A single word in Playlist Script reads as elegant. A full sentence reads as decorative noise. Think of Playlist Script as seasoning \u2014 just the right amount elevates a dish, too much overwhelms it. Three to four words maximum, one element per design.",
+    "category": "typography",
+    "priority": 105,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why whitney, whitney choice reason",
+    "answer": "<strong>Whitney</strong> (Hoefler & Frere-Jones) was chosen because it is humanist sans-serif \u2014 clean and modern but warm, not cold like Helvetica or geometric like Futura. It scales from a 12px label to an 84px display headline without losing character. Six weights give us range from a quiet caption to a confident hero. Whitney does brand work that pure-geometric sans cannot do.",
+    "category": "typography",
+    "priority": 106,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why calluna, calluna body text choice",
+    "answer": "<strong>Calluna</strong> (Jos Buivenga) is a serif designed for long-form reading. Its serifs reflect tradition, depth, and reflection \u2014 exactly the feel a faith ministry needs for prayer text, donor letters, and reflections. Calluna is also remarkably readable at small sizes, which matters because most HCFM body text appears on phones.",
+    "category": "typography",
+    "priority": 107,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why three fonts, why not one font",
+    "answer": "Three fonts give three registers. <strong>Whitney</strong> is the workhorse for clarity \u2014 labels, headlines, navigation. <strong>Calluna</strong> is the body voice \u2014 reflections, letters, longer prose. <strong>Playlist Script</strong> is the warm accent for one decorative word. One font would feel monotone. Four would feel scattered. Three matches how HCFM actually communicates.",
+    "category": "typography",
+    "priority": 108,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "humanist sans, sans serif character",
+    "answer": "Whitney is a <strong>humanist sans-serif</strong> \u2014 built on calligraphic skeletons rather than geometric ones. The lowercase 'g' has an open lower bowl, the 'y' has a curved descender, the 'V' is wider than Helvetica's. These small differences add up to a font that reads more human than Helvetica or Arial \u2014 important for a ministry where warmth matters.",
+    "category": "typography",
+    "priority": 109,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why one or two elements, restraint design",
+    "answer": "Combining too many design elements <strong>creates visual clutter</strong> that fights the message. A clean, focused design always outperforms a busy one. Restraint isn't about being boring \u2014 it's about every element doing one job, none competing. The four approved elements (Thin Border, Color Fade, Curved Shapes, Dark Overlays) are tools, not requirements.",
+    "category": "design-elements",
+    "priority": 110,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why dark overlay opacity range, overlay 40 to 70",
+    "answer": "Overlay opacity isn't one fixed number because <strong>images vary.</strong> A light, sparse image with one short headline only needs 40% to make text readable. A busy, photo-rich image with longer copy needs 70% or more. The rule is readability \u2014 adjust until the text passes. There is no \"correct\" opacity divorced from the image underneath.",
+    "category": "design-elements",
+    "priority": 111,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why thin border 3 4 pixels, border thickness rule",
+    "answer": "Borders 3-4px maximum because <strong>any thicker reads as a frame around the content rather than an accent on it.</strong> A heavy border draws the eye to the edge instead of the content. A thin border catches just enough to suggest formality without competing. Keep it 3-4px and lean Muted Gold for traditional contexts, Yellow Gold for digital.",
+    "category": "design-elements",
+    "priority": 112,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why dark mode matters, dark mode percentage",
+    "answer": "Over 80% of users browse with <strong>dark mode enabled</strong> on their phones. When you design with a black background, your design fits naturally into how the audience already views their feed. Light backgrounds in a dark feed become visual noise \u2014 dark backgrounds become continuous space.",
+    "category": "general",
+    "priority": 113,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why social fast, two seconds scroll, attention span",
+    "answer": "On social, you have <strong>maybe two seconds, maybe less</strong> before someone scrolls past. That window does not allow for anything subtle. Dark background plus high-contrast Yellow Gold gives the brain its easiest possible read \u2014 figure-ground separation in milliseconds. Slow elegance happens after the scroll has stopped.",
+    "category": "general",
+    "priority": 114,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why ikea blue but not blue background, industry brand vs social",
+    "answer": "IKEA and Walmart use Blue + Yellow as their <strong>brand identity</strong> \u2014 but on social media they use product photos, lifestyle images, and dark overlays. Their everyday social posts don't use blue backgrounds either. Brand identity (logo, store, packaging) is one thing. Social media application is another. The HCFM system honors both.",
+    "category": "colors",
+    "priority": 115,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why print different, digital vs print colors",
+    "answer": "In <strong>print</strong>, white is the canvas and brand colors step into supporting roles. Letterheads, certificates, and donor materials lean on White with HCFM Blue and Muted Gold. In <strong>digital</strong>, Black is the canvas and Yellow Gold and Marian Blue do the supporting work. The medium dictates the role. Same brand, two registers.",
+    "category": "colors",
+    "priority": 116,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why pantone 871 muted, muted gold reason",
+    "answer": "Muted Gold (Pantone 871C / #89764B) reads as <strong>traditional, reverent, devotional</strong> \u2014 the gold of liturgical glory and Catholic heritage. It belongs on certificates, donor acknowledgements, formal print where its quiet warmth is right. On a backlit screen it loses life; in print under reflected light it glows.",
+    "category": "voice",
+    "priority": 117,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why whitney calluna pair, sans serif body pairing",
+    "answer": "<strong>Whitney + Calluna</strong> works because the contrast is functional, not decorative. Whitney's sans-serif clarity for headlines tells you \"this matters.\" Calluna's serif warmth for body text tells you \"now sit and read.\" The pairing mirrors the cadence of how HCFM communicates \u2014 declarative headers, reflective prose.",
+    "category": "typography",
+    "priority": 118,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why not just one font, monotype",
+    "answer": "Using a single font for everything flattens hierarchy. Without contrast between headline and body, the reader can't tell what matters most at a glance. Three fonts give three jobs. Whitney announces. Calluna reflects. Playlist Script accents. Each font earns its place by doing what the others can't.",
+    "category": "typography",
+    "priority": 119,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why simplified palette, 20 colors to 6",
+    "answer": "The old palette had 20 colors (3 primary + 8 extended + 9 light). <strong>Too many.</strong> Every ministry-center designer made different choices, and the brand fragmented across regions. The 2026 system simplifies to 4 primary + 2 accent + 3 liturgical = 9 colors total, with clear rules on when each is used. Fewer choices, sharper brand.",
+    "category": "history",
+    "priority": 120,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why playlist script added, why script font 2026",
+    "answer": "Playlist Script was added in 2026 to <strong>introduce warmth and humanity</strong> the system was missing. Whitney is clean and modern. Calluna is reverent and serious. Neither can do \"the family that prays together stays together\" with the right emotional weight. Playlist Script \u2014 used sparingly \u2014 adds the warmth a global family ministry brand needs.",
+    "category": "typography",
+    "priority": 121,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "research backing, evidence for choices, why trust this system",
+    "answer": "Brand decisions are anchored in research: <strong>WCAG accessibility standards</strong> for contrast ratios, <strong>Labrecque & Milne (2012)</strong> on color and brand personality (Blue \u2192 competence), <strong>Madden et al. (2000)</strong> on cross-cultural color meaning, <strong>Bottomley & Doyle (2006)</strong> on brand consistency vs locale-switching, and <strong>Gestalt figure-ground</strong> principles for scroll-stop performance. The choices have a paper trail.",
+    "category": "research",
+    "priority": 122,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why ten beads, why not five or seven, rosary decade reason",
+    "answer": "Ten beads because <strong>a Rosary decade has ten beads.</strong> Each Hail Mary is a bead, and ten Hail Marys form a decade \u2014 the basic unit of Marian prayer. The mark didn't pick ten arbitrarily; it picked the smallest unit of the prayer that founds HCFM. Anything fewer would be incomplete; anything more would lose the reference.",
+    "category": "symbol",
+    "priority": 123,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why circular mark, why round logo",
+    "answer": "The circular shape is intentional. <strong>Circles communicate unity, continuity, and gathering</strong> \u2014 families coming together in prayer, the continuous rhythm of daily devotion, the unbroken cycle of the Rosary. A square or angular shape would carry different meanings. The circle is doing theological work, not just aesthetic work.",
+    "category": "symbol",
+    "priority": 124,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why each shape person, why ten people",
+    "answer": "Each of the ten shapes represents <strong>a person in prayer</strong> \u2014 hands raised or folded. No single shape stands alone. Each depends on the others. The mark visualizes Father Peyton's vision: families linked together through prayer, forming something greater than themselves. The form is the message.",
+    "category": "symbol",
+    "priority": 125,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why central not local, why one canonical",
+    "answer": "A single canonical brand keeps every ministry center recognizable as one family. <strong>If every center designs its own variant</strong>, the brand fragments \u2014 donors and partners can't tell which ministry is which. Centralizing the editable source means there is exactly one right version, and any change goes through one team. Predictability over flexibility.",
+    "category": "general",
+    "priority": 126,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why ai files restricted, why not give source files",
+    "answer": "AI files are restricted because <strong>once a ministry has the editable source, edits start happening.</strong> Slightly different spacing, slightly different gold, slightly different wordmark \u2014 and over a year you have 24 different versions of the logo across 24 ministries. Restricting AI to brand owners (Victoria and Emmanuel) means there is one canonical logo, always.",
+    "category": "logo",
+    "priority": 127,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why password gate, why gated downloads",
+    "answer": "Brand assets are gated to keep them <strong>inside the HCFM creative network</strong> \u2014 ministry centers, vendors with active work, partners. Open downloads invite misuse: a vendor takes the file for an unrelated project, a third party builds something off-brand, the mark shows up where it shouldn't. The password is friction by design.",
+    "category": "downloads",
+    "priority": 128,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why two voice registers, voice why two",
+    "answer": "HCFM speaks to <strong>two very different audiences</strong>. The faithful \u2014 families and parishes \u2014 need warmth, narrative, reverence. Vendors and partners \u2014 designers and printers \u2014 need specifics, dimensions, file formats. One voice can't serve both. Two registers acknowledge the truth that different audiences need different language, while staying recognizably HCFM in both.",
+    "category": "voice",
+    "priority": 129,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why family the family that prays, why peyton phrase",
+    "answer": "Father Peyton's phrase is <strong>real, original, and his.</strong> \"The family that prays together stays together\" came from his ministry directly. Using his actual words \u2014 instead of paraphrasing or modernizing \u2014 keeps HCFM connected to its founder. The phrase is also why the brand voice is family-first: he meant household prayer, not abstract piety.",
+    "category": "father-peyton",
+    "priority": 130,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why named not abstract, why specific countries",
+    "answer": "We say \"France, Philippines, Chile, Bangladesh, the United States\" instead of \"globally distributed\" because <strong>names carry weight that abstractions lose.</strong> A reader who hears \"globally\" thinks \"everywhere and nowhere.\" A reader who hears specific country names sees the mission as real and located. Specificity is mission language.",
+    "category": "general",
+    "priority": 131,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why real not stock, authentic photography",
+    "answer": "Stock photography <strong>looks like stock photography</strong> \u2014 and audiences know. A staged \"diverse family praying\" photo from a stock library carries less weight than an actual photo of an actual ministry-center event. Real images, even when imperfect, carry credibility stock cannot match. Especially for a ministry where authenticity is half the message.",
+    "category": "imagery",
+    "priority": 132,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why photography rules, visual standards photo",
+    "answer": "Photography rules exist because <strong>the wrong image can undo a hundred right design decisions.</strong> A grainy or off-brand photo on a perfect layout still reads as off-brand. A great photo on a mediocre layout reads as authentic. The image carries more weight than the design around it, so the bar for image quality is high.",
+    "category": "imagery",
+    "priority": 133,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why this brand page, purpose of brand portal",
+    "answer": "This brand page exists because <strong>SharePoint blocks external consultants, vendors, and ministry centers</strong> from accessing brand materials. The team was repeatedly fielding the same brand questions over email. Ministry centers in 18 countries couldn't find a clean reference. A single canonical destination \u2014 public-facing for documents, gated for production files \u2014 solves all three problems.",
+    "category": "philosophy",
+    "priority": 134,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why public, why visible to everyone",
+    "answer": "Most of the brand page is intentionally public because <strong>the brand wants to be seen and used correctly.</strong> Ministry-center designers, vendors, and curious partners shouldn't have to email anyone to learn what HCFM Blue's hex is. Production files are gated. Reference is open. That's the right division.",
+    "category": "philosophy",
+    "priority": 135,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "ewtn colors, word on fire, catholic media, competitor brand",
+    "answer": "Major Catholic media organizations all converge on the same color logic. <strong>EWTN</strong> uses Navy + Gold + White (60-25-15). <strong>Word on Fire (Bishop Barron)</strong> uses Black + Orange-Gold + White. <strong>Knights of Columbus</strong> uses Navy + Gold + White. <strong>Vatican News</strong> uses White + Gold + Deep Red. The pattern: <strong>dark or formal foundation, gold as sacred accent, restrained palette.</strong> HCFM's Black + Yellow Gold is industry-aligned with the most recognized Catholic brands.",
+    "category": "regional",
+    "priority": 136,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "vatican colors, vatican gold, catholic standard",
+    "answer": "The <strong>Vatican standard</strong> is Gold + White + Deep Red. Gold appears in nearly every major Catholic organization's palette because it signals tradition, divinity, and continuity with Church history. HCFM's Yellow Gold is a digital-modern reading of the same gold-as-sacred convention. We're not inventing \u2014 we're translating Catholic visual heritage for a mobile-first audience.",
+    "category": "regional",
+    "priority": 137,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why not light blue dominant, why not teal",
+    "answer": "Healthcare-style light blue is <strong>almost never used by serious Catholic organizations</strong> as a dominant color. It reads secular, modern, clinical. Marian Blue (#00A9E0) belongs at HCFM as an accent \u2014 a 10-20% color tied to Mary specifically. Using it heavily would distance HCFM from the Catholic media tradition (EWTN, Vatican, Word on Fire) it sits inside.",
+    "category": "colors",
+    "priority": 138,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "industry alignment, why dark like everyone else",
+    "answer": "When EWTN, Word on Fire, and Knights of Columbus all anchor their digital identity in dark backgrounds, that is <strong>not coincidence \u2014 it's convergent design.</strong> Dark backgrounds are the practical answer to small screens, dark mode, and Catholic gold-on-dark heritage. HCFM moving toward black on social aligns with industry leaders rather than departing from them.",
+    "category": "general",
+    "priority": 139,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why digital first, mobile audience, digital channels",
+    "answer": "Three realities drove the 2026 update. <strong>(1) Digital-first audiences:</strong> Over 80% of HCFM engagement happens on mobile devices. Colors and typography must be optimized for screens, not just print. <strong>(2) Reaching younger generations:</strong> To fulfill Father Peyton's vision, the visual language must feel inviting to young parents and children, not dated. <strong>(3) Global consistency:</strong> 18 countries, one recognizable identity.",
+    "category": "regional",
+    "priority": 140,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why younger generations, reach young families",
+    "answer": "Father Peyton's mission is the family that prays together. <strong>Future families are formed today by young parents and children</strong> \u2014 and those audiences live in feeds, not in mailers. The visual system has to feel vibrant and alive to land with them. Yellow Gold says invitation. Muted Gold says formality. The mission needs invitation.",
+    "category": "regional",
+    "priority": 141,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "mobile screens optimization, screen vs print",
+    "answer": "Muted Gold (#89764B) was designed for print materials and formal documents. <strong>On mobile screens and social feeds, it appears dark and lacks contrast.</strong> Yellow Gold (#FFB500) is optimized for digital visibility \u2014 it cuts through a crowded feed. The two golds aren't in competition; they serve different mediums.",
+    "category": "regional",
+    "priority": 142,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why global community, family rosary audience, who follows hcfm",
+    "answer": "The HCFM audience is a <strong>global community, not a US ministry with a few international branches.</strong> The Family Rosary Facebook page is <strong>59.4% Filipino</strong> \u2014 only 9.4% American. India, Bangladesh, Indonesia round out the top five. The brand is built for the Manila family checking their phone before the Rosary, not just the Easton donor. This shapes every visual decision.",
+    "category": "regional",
+    "priority": 143,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "follower decline, why we updated brand",
+    "answer": "Before the June 2025 visual update, the Family Rosary page had <strong>nine consecutive months of net follower loss.</strong> The audience was leaving. After the dark-themed update, the trend reversed. Followers came back. That isn't aesthetic preference \u2014 that's the audience telling us what works for the way they actually consume content.",
+    "category": "history",
+    "priority": 144,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why ab test, why test colors, why not just decide",
+    "answer": "Color decisions used to come from preference and intuition. The 2026 system <strong>let data decide.</strong> Same content, same imagery, same fonts \u2014 only background color changes. Test across markets, measure engagement, follow the result. That's how we know the dark theme works: it doesn't guess, it shows.",
+    "category": "research",
+    "priority": 145,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why paid boosting, organic vs paid testing",
+    "answer": "Organic posts are shown by Meta's algorithm to users <strong>most likely to engage</strong> \u2014 that's a curated audience, not a random sample. Paid boosting distributes the post to a broader, more representative slice, producing cleaner data and reducing the algorithm's selection bias. Even a small budget makes the comparison meaningful.",
+    "category": "research",
+    "priority": 146,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "allan qualitative research, two kinds of research",
+    "answer": "There are <strong>two complementary research traditions</strong> at HCFM. Allan Mirasol's qualitative work over 2+ years (focus groups, 30-300 sample sizes per country) measured <strong>emotional perception</strong> \u2014 how does this make you feel? Emmanuel's analytical work measured <strong>behavioral performance</strong> \u2014 what do people actually click, share, save? Both are valid. The brand integrates both: behavior tells us what works, emotion tells us when to be careful.",
+    "category": "research",
+    "priority": 147,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "sub brand, podcast logo, ministry sub-brand",
+    "answer": "Sub-brands (a podcast, an event, a sub-ministry) follow a clear rule: <strong>parent brand always wins.</strong> Use HCFM Blue and Gold palette. Use Whitney or compatible typeface. Anchor on the HCFM Circular Mark. The worst outcome is a sub-brand that creates a second competing visual identity \u2014 two different logos with two different fonts in the same room will always fight each other.",
+    "category": "logo",
+    "priority": 148,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why simplicity logo, logo design rules",
+    "answer": "Every serious analysis of top-performing brand logos finds the same trait: <strong>one strong visual idea, generous white space, type readable at 50\u00d750 pixels.</strong> Your logo will most often appear as a tiny thumbnail on a phone. That's the design environment. Everything else is secondary. HCFM's mark passes that test: ten interconnected shapes that read clearly even at favicon size.",
+    "category": "logo",
+    "priority": 149,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why no extra icons, avoid microphone trope",
+    "answer": "For a podcast or sub-brand, <strong>don't add a microphone, headset, or sound-wave icon.</strong> Like putting a camera on a movie poster \u2014 it tells people how it's made, not what it's about. The HCFM mark is already a circle of family in prayer. That's the metaphor. Add a microphone and you're telling the listener \"this is a podcast.\" They already know.",
+    "category": "philosophy",
+    "priority": 150,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why narrative voice, why stories not bullets",
+    "answer": "<strong>Stories carry more weight than bullet lists for the family audience.</strong> Bullet points are for vendors and processes. Pastoral letters, prayer reflections, devotional content \u2014 these need narrative motion. Walking the reader through an idea (\"Notice how... Building on what we just said...\") earns trust that bullets can't.",
+    "category": "voice",
+    "priority": 151,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why warm voice, why not formal",
+    "answer": "HCFM voice is warm, not formal \u2014 because <strong>we meet families at the kitchen table, on the bus, beside the grandmother.</strong> Formal language puts distance between the ministry and the household. Warm language closes that distance. We can be reverent and warm at the same time. Father Peyton was both.",
+    "category": "voice",
+    "priority": 152,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why family unit, household focus",
+    "answer": "The unit of HCFM communication is the <strong>household</strong>, not the individual. Catholic ministries often default to addressing isolated believers (\"you, the seeker\"). HCFM addresses the family unit because <strong>that's where Father Peyton said prayer happens.</strong> The grammar of every HCFM line treats the family as the subject of the sentence \u2014 not the brand, not the institution, the family.",
+    "category": "voice",
+    "priority": 153,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why gradual change, why phased rollout",
+    "answer": "Brand migrations <strong>happen gradually for a reason.</strong> When a system changes too abruptly, ministry centers don't adopt \u2014 they resist. Allan Mirasol's key insight: \"If you're going to change something, do it in phases.\" The 2026 system honors that: ministry centers transition as they reprint, not as a forced cutover. Existing materials phase out over 6-12 months. New work uses the new system.",
+    "category": "history",
+    "priority": 154,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why ministry support, easton creatives support, team support",
+    "answer": "Victoria and Emmanuel will <strong>review your design before you publish, help you apply the rules in your specific situation, create custom materials when you have a partner organization, commission logo files when the existing pack doesn't cover what you need, and run training calls for ministry-center design teams.</strong> The brand book is the floor; we are the safety net for everything above it.",
+    "category": "workflow",
+    "priority": 155,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why centralized asset distribution, sharepoint replacement",
+    "answer": "The old SharePoint system <strong>blocked external consultants, vendors, and ministry centers</strong> from accessing brand materials. Two of the main download links on SharePoint were broken. Ministry centers in 18 countries couldn't find a clean reference. This brand portal exists to be the one place anyone \u2014 internal, external, ministry, vendor \u2014 can go for the canonical source.",
+    "category": "workflow",
+    "priority": 156,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why one accent per design, one not three",
+    "answer": "One accent color per design because <strong>three competing accents is visual chaos.</strong> If Yellow Gold is your accent, commit. Don't add Marian Blue and Muted Gold on top. Pick one and let it lead. The 60-30-10 rule already gives you structure \u2014 adding a fourth competing color breaks the hierarchy that makes the design read clearly.",
+    "category": "design-elements",
+    "priority": 157,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why dark overlay specific opacity, 40 to 60 percent overlay",
+    "answer": "Dark overlays at 40-60% opacity hit the sweet spot. <strong>Below 40%</strong>, text on photos becomes hard to read on busy backgrounds. <strong>Above 60%</strong>, the overlay overwhelms the photo and the image stops doing its job. The exact percentage depends on the image \u2014 adjust until the text passes a quick readability test at arm's length.",
+    "category": "design-elements",
+    "priority": 158,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why platform dimensions exact, why sizes matter",
+    "answer": "Platform dimensions matter because the algorithms enforce them. <strong>Designs that fall short get cropped. Designs that overshoot get downsized awkwardly.</strong> A 1080\u00d71080 Instagram square works. A 1000\u00d71000 design becomes pixelated. A 1200\u00d71200 design gets compressed. Hit the dimensions exactly \u2014 there is no benefit to \"close enough.\"",
+    "category": "platforms",
+    "priority": 159,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why brand consistency matters, consistency mission",
+    "answer": "<strong>Consistency is mission.</strong> When ministry centers in 18 countries use the same colors, fonts, and visual elements, families recognize HCFM instantly \u2014 the Manila family scrolling at 7 am sees the same brand the Dublin family sees at 7 pm. Recognition builds trust. Trust strengthens mission. Inconsistency does the opposite \u2014 it makes us look like 24 different organizations doing 24 different things, when we're one family doing one thing.",
+    "category": "philosophy",
+    "priority": 160,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why aesthetic vs strategic, not aesthetic preference",
+    "answer": "These are <strong>strategic improvements, not aesthetic preferences.</strong> Yellow Gold over Muted Gold for digital isn't about taste \u2014 it's about contrast on screens. Black backgrounds aren't a fashion choice \u2014 they're how 80%+ of users browse. The 60-30-10 rule isn't a designer's opinion \u2014 it's how the brain processes color hierarchy. Every choice has a reason. None of them are personal preference.",
+    "category": "philosophy",
+    "priority": 161,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why this brand book, value of brand guidelines",
+    "answer": "Without documented rules, design decisions <strong>vary widely across centers.</strong> Some use thick borders, others thin. Some use random color gradients. Some use a competing font. Documenting elements (Thin Border 3-4px, Color Fade brand-only, Dark Overlay 40-60%) replaces guesswork with guardrails. Creators stop spending energy on \"is this OK?\" and start spending it on the actual message.",
+    "category": "philosophy",
+    "priority": 162,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "what stayed the same, what didn\\",
+    "answer": "The 2026 update was <strong>refinements, not a rebrand.</strong> What stayed: HCFM Blue (#0047BB) is still the signature color. Black and White are still core. The circular mark is unchanged. Logo usage rules (no stretching, distorting, cropping) remain. Minimum sizes (1.5\" print / 150px web) remain. Photography principles (faith, family, prayer, community, hope) remain. Most of what ministry centers were already doing is still right.",
+    "category": "history",
+    "priority": 163,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "why not full rebrand, why refinement only",
+    "answer": "A full rebrand would have meant abandoning the work ministry centers had already done \u2014 and the equity that work built. <strong>Refinement preserves what was working</strong> (the mark, HCFM Blue, the circular geometry, photography direction) while updating only what wasn't (palette overload, undefined typography, no documented design rules). You don't throw out a house to fix a kitchen.",
+    "category": "history",
+    "priority": 164,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "google color test, why test color, data driven design",
+    "answer": "Even <strong>sub-pixel color differences</strong> produce measurable behavioral changes at scale. Google famously tested 41 shades of blue for ad links \u2014 the winning shade generated $200M/year more revenue than the runner-up. The lesson for HCFM: small color choices compound. Yellow Gold over Muted Gold, Black over Blue background \u2014 these aren't cosmetic tweaks. They're measurable performance levers.",
+    "category": "research",
+    "priority": 165,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "labrecque research, color and brand personality",
+    "answer": "Labrecque & Milne's 2012 research established that color maps to brand personality dimensions. <strong>Blue significantly predicts Competence.</strong> Red significantly predicts Excitement. High saturation positively influences Excitement. For a ministry built on trust, Blue's competence association is structural \u2014 that's why HCFM Blue anchors formal materials, certificates, and donor communication.",
+    "category": "research",
+    "priority": 166,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "cyr trust research, culturally appropriate colors",
+    "answer": "Cyr, Head & Larios (2010) found that <strong>culturally incongruent color choices reduce trust even when they attract attention.</strong> What stops the scroll isn't always what builds the relationship. The HCFM dark + Yellow Gold system threads this carefully \u2014 high contrast for attention, then Marian Blue and warm Calluna prose for the trust that has to follow. Both registers in one system.",
+    "category": "research",
+    "priority": 167,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "cta over vanity, click rate matters, why ctr",
+    "answer": "Colum's framing: <strong>\"What's going to lead you to take action?\"</strong> Likes are habitual. Reactions are low-effort. Followers lag. The metrics that matter for a mission-driven org are <strong>shares</strong> (someone attached their identity to the content), <strong>saves</strong> (Instagram, indicates value worth returning to), and <strong>CTR to website</strong> (the design moved someone toward action). Vanity metrics tell flattering stories. Action metrics tell true ones.",
+    "category": "research",
+    "priority": 168,
+    "source": "v1"
+  },
+  {
+    "id": null,
+    "keywords": "negative feedback rate, hide post signal",
+    "answer": "Negative Feedback Rate (hides + \"not interested\" clicks) is a <strong>color-avoidance signal.</strong> If one variant triggers significantly more hides than another, that's a trust or warmth failure regardless of what it's scoring on engagement. We watch for this because attention without affinity hurts mission engagement, even when the click numbers look good.",
+    "category": "research",
+    "priority": 169,
+    "source": "v1"
+  },
+  {
+    "keywords": "hi, hello, hey, greetings",
+    "answer": "Hi \u2014 I'm the HCFM brand assistant. I know the colors, logos, fonts, voice rules, and the why behind every choice in the 2026 system. Ask me anything. <br><br>Some examples: <em>'What's HCFM Blue's hex?'</em>, <em>'Why did we change in 2026?'</em>, <em>'Can I use Yellow Gold for body text?'</em>, <em>'How do I refer to Father Peyton?'</em>",
+    "category": "conversation",
+    "priority": 200,
+    "source": "v2"
+  },
+  {
+    "keywords": "thanks, thank you, thanks a lot, appreciate it",
+    "answer": "Anytime. If something on the brand page is missing or confusing, the asset request form on the <a href='#help'>Help page</a> goes to Victoria and Emmanuel \u2014 they answer within two business days.",
+    "category": "conversation",
+    "priority": 201,
+    "source": "v2"
+  },
+  {
+    "keywords": "who are you, what are you, are you a bot, are you ai",
+    "answer": "I'm a brand assistant \u2014 not an AI, just a trained knowledge base that pattern-matches your question to a written answer. Every answer was written by Emmanuel and reflects the 2026 HCFM brand system. If I don't have your answer, I'll escalate to him + Victoria.",
+    "category": "conversation",
+    "priority": 202,
+    "source": "v2"
+  },
+  {
+    "keywords": "human, real person, talk to someone, escalate",
+    "answer": "If you want a person rather than me: email <a href='mailto:vhassan@hcfm.org'>vhassan@hcfm.org</a> or <a href='mailto:eepau@hcfm.org'>eepau@hcfm.org</a>. You can also use the asset-request form on the <a href='#help'>Help page</a> \u2014 same inbox, slightly more structure.",
+    "category": "conversation",
+    "priority": 203,
+    "source": "v2"
+  },
+  {
+    "keywords": "yes, yep, yeah, correct, that helps",
+    "answer": "Glad that landed. Want another question, or were you done?",
+    "category": "conversation",
+    "priority": 204,
+    "source": "v2"
+  },
+  {
+    "keywords": "no, nope, not really, doesn't help, didn't help, not what i meant",
+    "answer": "Got it \u2014 let me try a different angle. Can you tell me what specifically is unclear, or what you were actually trying to do? Sometimes a one-word clue (\"social post,\" \"print,\" \"a vendor asked me\") helps me find the right answer.",
+    "category": "conversation",
+    "priority": 205,
+    "source": "v2"
+  },
+  {
+    "keywords": "more, tell me more, go deeper, explain more, elaborate",
+    "answer": "Sure. Tell me which part you want me to go deeper on \u2014 the why, the how, an example, or the trade-offs we considered?",
+    "category": "conversation",
+    "priority": 206,
+    "source": "v2"
+  },
+  {
+    "keywords": "i don't understand, confusing, can you simplify, plain english, eli5",
+    "answer": "Fair. Tell me your role \u2014 designer, ministry-center staff, vendor, parent volunteer \u2014 and I'll rephrase. Brand vocab is rough if you didn't grow up in it.",
+    "category": "conversation",
+    "priority": 207,
+    "source": "v2"
+  },
+  {
+    "keywords": "what can you do, what do you know, help me, capabilities",
+    "answer": "I can answer pretty much anything about the 2026 HCFM brand: colors (hex/Pantone/why), logos (when to use which), the symbol's five layers of meaning, fonts (Whitney/Calluna/Playlist Script), voice (how we sound, what to say, what to avoid), imagery rules, platform dimensions, the 60-30-10 hierarchy, accessibility, and the reasoning behind every choice. Try a question.",
+    "category": "conversation",
+    "priority": 208,
+    "source": "v2"
+  },
+  {
+    "keywords": "can you help me, i need help, i'm stuck",
+    "answer": "Definitely \u2014 what are you working on? A social post, a print piece, a logo placement question, a vendor brief? Knowing the format usually narrows the answer fast.",
+    "category": "conversation",
+    "priority": 209,
+    "source": "v2"
+  },
+  {
+    "keywords": "i'm new, first time, just joined, onboarding",
+    "answer": "Welcome. Best 10-minute path: (1) skim the <a href='#symbol'>Symbol page</a> for what the mark means, (2) read <a href='#colors'>Colors</a> for the palette, (3) check <a href='#voice'>Voice</a> for how we sound. After that, you'll get the rest by osmosis. The <a href='#downloads'>Downloads page</a> has logo files when you need them.",
+    "category": "conversation",
+    "priority": 210,
+    "source": "v2"
+  },
+  {
+    "keywords": "bookmark, save this page, where do i go, url",
+    "answer": "Bookmark <strong>hcfm.org/brand</strong>. That's the canonical home for everything brand-related. SharePoint is being phased out for brand reference.",
+    "category": "conversation",
+    "priority": 211,
+    "source": "v2"
+  },
+  {
+    "keywords": "how do i start, where to begin, new design, starting a design",
+    "answer": "Start with the medium. <em>Where</em> is this going to live \u2014 Instagram, print bulletin, banner, email signature? That dictates dimensions (see <a href='#platforms'>Platform Dimensions</a>) and which colors to lead with (dark backgrounds for social, lighter for print). Then pick a palette ratio (the 60-30-10 rule on the <a href='#colors'>Colors</a> page), the right typeface combo (<a href='#typography'>Typography</a>), and the right imagery category. From there, build.",
+    "category": "workflow",
+    "priority": 250,
+    "source": "v2"
+  },
+  {
+    "keywords": "get my logo, my ministry logo, country specific logo, find my ministry logo",
+    "answer": "Every sub-ministry has its own logo pack. Go to the <a href='#ministries'>Ministry Centers</a> page, click your ministry (e.g., HCFM Kenya, Family Rosary Crusade Philippines), and you'll see the variants. To download the production files, head to <a href='#downloads'>Downloads</a> \u2192 Ministry centers tab. Logo packs include PNG and JPG variants; AI source files are admin-tier only.",
+    "category": "workflow",
+    "priority": 251,
+    "source": "v2"
+  },
+  {
+    "keywords": "request asset, custom asset, custom design, request something custom",
+    "answer": "Use the asset request form on the <a href='#help'>Help page</a>. It goes to Victoria and Emmanuel. Include: what ministry, what asset (announcement, poster, social pack), what dimensions, what deadline, and any reference materials. The clearer the brief, the faster the turnaround.",
+    "category": "workflow",
+    "priority": 252,
+    "source": "v2"
+  },
+  {
+    "keywords": "review my design, check my work, brand check, design review, audit",
+    "answer": "Two paths. (1) Run yourself through the <a href='#checklist'>Pre-flight checklist</a> \u2014 that catches 80% of issues. (2) If you want a second set of eyes before publishing, email Victoria or Emmanuel with the file attached. We'll respond within two business days. For high-stakes pieces (donor mailers, public campaigns), always loop us in before printing.",
+    "category": "workflow",
+    "priority": 253,
+    "source": "v2"
+  },
+  {
+    "keywords": "approval, who approves, sign off, approver",
+    "answer": "Brand-aligned design (follows the rules on this page) doesn't need approval \u2014 just ship it. <em>External-facing campaigns</em> with new copy, new imagery, or co-branding need Victoria or Emmanuel's sign-off. <em>Anything with Father Peyton's likeness</em> needs Father Fred Jenga's awareness too. When in doubt, ask Victoria.",
+    "category": "workflow",
+    "priority": 254,
+    "source": "v2"
+  },
+  {
+    "keywords": "feedback, comments, suggest change, suggest edit",
+    "answer": "Two ways: (1) the feedback form on the <a href='#help'>Help page</a> opens our Microsoft Forms inbox (Easton team monitors), or (2) email Victoria + Emmanuel directly. Both get to the same place. We update the brand page based on real ministry-center feedback.",
+    "category": "workflow",
+    "priority": 255,
+    "source": "v2"
+  },
+  {
+    "keywords": "easter post, easter graphic, easter social",
+    "answer": "Easter is a high-energy moment. <strong>Recommended palette:</strong> Yellow Gold dominant on Black (60-30-10), with Marian Blue accent. Use Playlist Script for a single word like <em>'Risen'</em> or <em>'Alleluia'</em>. Imagery: family at Easter Vigil, the empty tomb, a Marian image of the Resurrection. Avoid stock Easter eggs \u2014 we're a Catholic ministry, not a candy brand. Run it through the <a href='#checklist'>Pre-flight checklist</a> before publishing.",
+    "category": "scenarios",
+    "priority": 256,
+    "source": "v2"
+  },
+  {
+    "keywords": "christmas post, christmas graphic, advent post, nativity",
+    "answer": "Advent and Christmas both lean liturgical. <strong>Advent:</strong> Purple from the extended palette, with Yellow Gold accent for candlelight feel. <strong>Christmas:</strong> Yellow Gold or White on Black, Marian Blue accent. Imagery: nativity, Holy Family, manger, candlelight. Playlist Script for <em>'Emmanuel'</em>, <em>'Joy'</em>, <em>'Peace'</em>. Avoid Santa imagery and commercial Christmas tropes.",
+    "category": "scenarios",
+    "priority": 257,
+    "source": "v2"
+  },
+  {
+    "keywords": "lenten, ash wednesday, lent graphic, lent social",
+    "answer": "Lent reads serious and reflective. <strong>Palette:</strong> Black foundation with Purple (extended palette) accents \u2014 Purple is the liturgical color of Lent. Muted Gold for traditional/reverent moments. Avoid Yellow Gold (too energetic for the season). Imagery: ashes, fasting, prayer, the Cross. Calluna serif for body \u2014 its bookish character fits the reflective tone.",
+    "category": "scenarios",
+    "priority": 258,
+    "source": "v2"
+  },
+  {
+    "keywords": "pentecost, holy spirit graphic, red liturgical",
+    "answer": "Pentecost is fire and Spirit. <strong>Palette:</strong> The Red from the extended palette plus Yellow Gold \u2014 both are appropriate liturgical signals. On Black for social, or with White breathing space for print. Avoid mixing too many colors \u2014 Pentecost is bold but not chaotic. Imagery: tongues of fire, dove, Mary with the apostles.",
+    "category": "scenarios",
+    "priority": 259,
+    "source": "v2"
+  },
+  {
+    "keywords": "mary feast, marian feast, immaculate conception, assumption, our lady",
+    "answer": "Marian feasts are where Marian Blue (#00A9E0) earns its name. <strong>Palette:</strong> Marian Blue + White breathing space, with Playlist Script for <em>'Mary'</em>, <em>'Ave'</em>, or the specific feast title. Yellow Gold accents for star/halo imagery. Imagery: Marian art, the Rosary, family in prayer to Our Lady. The full Marian palette and rationale is on the <a href='#colors'>Colors</a> page.",
+    "category": "scenarios",
+    "priority": 260,
+    "source": "v2"
+  },
+  {
+    "keywords": "father peyton anniversary, peyton birth, peyton death, commemoration",
+    "answer": "Father Peyton's anniversaries are major. <strong>Important naming rule:</strong> Don't call it his \"birthday\" \u2014 he's no longer living. Use <em>'Anniversary of Birth'</em>, <em>'Anniversary of Birthday'</em>, or <em>'Celebration of Birth.'</em> Palette: Black or Muted Gold (reverent, traditional), with archival imagery of Father Peyton himself. His message \u2014 <em>'The Family That Prays Together Stays Together'</em> \u2014 gets the trademark symbol (\u2122).",
+    "category": "scenarios",
+    "priority": 261,
+    "source": "v2"
+  },
+  {
+    "keywords": "fundraising appeal, donor letter, asking for donations",
+    "answer": "Donor letters use the warm, named, grateful voice (<a href='#voice'>Voice</a> page \u2192 Tone by context). Start with the family or families the donor's gift will reach, not the institution. Use specific country names (\"the Manila ministry center,\" not \"globally\"). HCFM Blue for headlines, Calluna body, no Yellow Gold body text. The brand book PDF in <a href='#downloads'>Downloads</a> covers print specs for letterhead and envelopes.",
+    "category": "scenarios",
+    "priority": 262,
+    "source": "v2"
+  },
+  {
+    "keywords": "event banner, conference banner, rally banner",
+    "answer": "Banners are seen from 10+ feet \u2014 type has to be huge and color contrast extreme. <strong>Recommended:</strong> Black background, Yellow Gold for the headline, Marian Blue for sub-text, White for fine print. Symbol top-left or top-center. The mark scales beautifully \u2014 use it large. Print spec: 1080\u00d71920 portrait for digital displays; for physical banners ask your vendor for their bleed/safe-area template and design to that.",
+    "category": "scenarios",
+    "priority": 263,
+    "source": "v2"
+  },
+  {
+    "keywords": "newsletter, email newsletter, monthly newsletter",
+    "answer": "Newsletters live in the inbox \u2014 assume dark mode (most clients render dark by default now). Use HCFM Blue or Black header band, White or near-white body, Yellow Gold for one CTA button. Whitney for headlines, Calluna or system-font for body. Keep image-to-text ratio modest (some clients block images by default).",
+    "category": "scenarios",
+    "priority": 264,
+    "source": "v2"
+  },
+  {
+    "keywords": "youtube thumbnail, thumbnail design, video thumbnail",
+    "answer": "Thumbnails are the most attention-competitive surface we have. <strong>Spec:</strong> 1280\u00d7720, large face if there is one, a single high-contrast color block (Yellow Gold on Black works almost always), 2-4 words of overlay text max. Whitney Bold. Don't use Playlist Script in thumbnails \u2014 it doesn't read at thumbnail scale.",
+    "category": "scenarios",
+    "priority": 265,
+    "source": "v2"
+  },
+  {
+    "keywords": "bulletin insert, parish bulletin, church bulletin",
+    "answer": "Parish bulletins print on a budget \u2014 design for low-resolution print and limited color. <strong>Safe approach:</strong> Black + one accent color (HCFM Blue for institutional pieces; Yellow Gold for energy pieces). Calluna serif body (it reproduces better on cheap paper than sans-serif). Include the HCFM mark small in a corner, not the full logo.",
+    "category": "scenarios",
+    "priority": 266,
+    "source": "v2"
+  },
+  {
+    "keywords": "t-shirt, swag, merch, apparel, polo, cap",
+    "answer": "Merch is brand-by-touch. <strong>Logo placement:</strong> small mark on left chest (polos), centered on caps, large mark on event tees. <strong>Color:</strong> White, Black, or HCFM Blue garment with single-color print. Avoid full-color prints on apparel \u2014 too many ways for color to go wrong. Always send the vendor the AI source files (admin-tier in <a href='#downloads'>Downloads</a> \u2192 Source files) for crisp output.",
+    "category": "scenarios",
+    "priority": 267,
+    "source": "v2"
+  },
+  {
+    "keywords": "email signature, signature, my email signature",
+    "answer": "Email signatures want to be tiny and not distracting. <strong>Recommended format:</strong><br>Name, Title \u2014 Plain text, no styling<br>Holy Cross Family Ministries \u2014 Whitney bold<br>Phone | Email | hcfm.org<br>Small HCFM mark (60-80px wide), HCFM Blue version<br><br>Avoid stacked color blocks, taglines, multiple social icons. Tagline ('The Family That Prays Together Stays Together') is optional and looks best on one line, italic, smaller font.",
+    "category": "scenarios",
+    "priority": 268,
+    "source": "v2"
+  },
+  {
+    "keywords": "zoom background, virtual background, video call background",
+    "answer": "Black background with the HCFM symbol large in one corner reads cleanly on camera. Avoid the full logotype \u2014 it gets distorted at video-call resolution. The symbol-on-black PNG is in <a href='#downloads'>Downloads</a> \u2192 Ministry centers \u2192 your ministry pack.",
+    "category": "scenarios",
+    "priority": 269,
+    "source": "v2"
+  },
+  {
+    "keywords": "powerpoint, slide deck, presentation, slides",
+    "answer": "We're rebuilding the official PowerPoint template \u2014 Emmanuel is starting that work after the brand page launch. In the meantime, basic recipe: Black or HCFM Blue master background, White or Yellow Gold for titles in Whitney Bold, Calluna for body, HCFM mark top-right of every slide. The <a href='#typography'>Typography</a> page has the full type ladder.",
+    "category": "scenarios",
+    "priority": 270,
+    "source": "v2"
+  },
+  {
+    "keywords": "co-branding, partnership logo, joint logo, two logos",
+    "answer": "Co-branding is delicate. <strong>Layout rule:</strong> HCFM logo on the left, partner logo on the right, separated by a thin vertical rule. Equal visual weight (match heights, not widths \u2014 visual weight beats pixel measurement). Both at 100% color, no tinting. <strong>Approval:</strong> always run co-branded layouts past Victoria or Emmanuel before publishing \u2014 partner brand rules sometimes override ours.",
+    "category": "scenarios",
+    "priority": 271,
+    "source": "v2"
+  },
+  {
+    "keywords": "new ministry, launching ministry, new ministry center",
+    "answer": "When a new ministry center launches, the brand team in Easton commissions the logo pack (Logotype 1-4 in five color variants, all approved file formats). Reach out to Victoria with: ministry name, country, governance structure (HCFM-owned or affiliate), and the launch timeline. We need 4-6 weeks lead time for logo design + approval.",
+    "category": "scenarios",
+    "priority": 272,
+    "source": "v2"
+  },
+  {
+    "keywords": "hcfm singular, hcfm plural, hcfm grammar, hcfm verb",
+    "answer": "<strong>HCFM is a singular noun.</strong> Write 'HCFM serves families\u2026' \u2014 never 'HCFM serve.' Same rule for 'Holy Cross Family Ministries' written out \u2014 singular verb. (One family of ministries, not many.) Same logic applies to 'well-being' in the mission, which is hyphenated.",
+    "category": "voice",
+    "priority": 350,
+    "source": "v2"
+  },
+  {
+    "keywords": "father or fr, fr abbreviation, father vs fr",
+    "answer": "Use <strong>Father</strong> (full word), not <strong>Fr.</strong> (abbreviation), whenever possible. So 'Father Peyton' not 'Fr. Peyton.' First or last name use depends on the priest's personal preference and the formality of the copy.",
+    "category": "voice",
+    "priority": 351,
+    "source": "v2"
+  },
+  {
+    "keywords": "csc, c.s.c., congregation initials, csc punctuation",
+    "answer": "<strong>C.S.C.</strong> \u2014 with periods. Set off with commas in body copy: 'Father Willy Raymond, C.S.C., is the president.' The order is the Congregation of Holy Cross, and the initials follow Catholic Church convention.",
+    "category": "voice",
+    "priority": 352,
+    "source": "v2"
+  },
+  {
+    "keywords": "venerable patrick peyton, father patrick peyton, peyton name, how to refer to peyton",
+    "answer": "Two acceptable formats: <strong>Venerable Patrick Peyton</strong> OR <strong>Father Patrick Peyton, C.S.C.</strong> \u2014 but never combine 'Venerable' and 'Father' in the same reference. Per Catholic Church guidelines, sainthood titles (Saint, Venerable, Blessed) drop the 'Father' / 'Brother' and the C.S.C. After first mention, 'Father Peyton' is fine.",
+    "category": "father-peyton",
+    "priority": 353,
+    "source": "v2"
+  },
+  {
+    "keywords": "peyton birthday, peyton birth, father peyton birthday",
+    "answer": "Father Peyton is no longer living, so avoid the word 'birthday.' Events on or around his birth date should be titled <strong>'Anniversary of Birth'</strong>, <strong>'Anniversary of Birthday'</strong>, or <strong>'Celebration of Birth.'</strong> Saying 'birthday' implies he's still living \u2014 confusing for audiences who don't know him.",
+    "category": "father-peyton",
+    "priority": 354,
+    "source": "v2"
+  },
+  {
+    "keywords": "father moreau, basil moreau, congregation founder",
+    "answer": "Father Moreau is the founder of the Congregation of Holy Cross. Use the English form of his name: <strong>Basil Anthony Mary Moreau, C.S.C.</strong> \u2014 or <strong>Blessed Basil Anthony Moreau</strong> if using the sainthood title.",
+    "category": "voice",
+    "priority": 355,
+    "source": "v2"
+  },
+  {
+    "keywords": "rosary capital, rosary uppercase, capital r rosary",
+    "answer": "<strong>Always capital R</strong> in the word 'Rosary,' in every context. This is an HCFM convention that overrides standard AP grammar (which lowercases it). 'Rosary makers' is also two words. If a vendor's house style lowercases it, ask them to make an exception for our materials.",
+    "category": "voice",
+    "priority": 356,
+    "source": "v2"
+  },
+  {
+    "keywords": "ministry centers, mission center, hcfm office",
+    "answer": "All HCFM locations around the world are <strong>Ministry Centers</strong> \u2014 capital M, capital C. <em>Never</em> use 'office' (we're not a corporate office). <em>Never</em> use 'Mission Center' (that means too many other things). 'A family of ministries' is the mission language; 'Ministry Centers' is the operational language.",
+    "category": "ministries",
+    "priority": 357,
+    "source": "v2"
+  },
+  {
+    "keywords": "north easton, easton building, father peyton center",
+    "answer": "The HCFM campus in North Easton, Massachusetts is called <strong>The Father Peyton Center.</strong> The chapel there is <strong>'Our Lady of the Holy Rosary Chapel.'</strong> The chapel at the Holy Cross Center is <strong>'St. Joseph Chapel'</strong> \u2014 not 'St. Joseph's.' The museum's full name is <strong>'Museum of Family Prayer: A Contemporary Experience of Father Peyton's Ministry.'</strong>",
+    "category": "ministries",
+    "priority": 358,
+    "source": "v2"
+  },
+  {
+    "keywords": "catholic mom, catholicmom, .com",
+    "answer": "Refer to as <strong>Catholic Mom</strong> or <strong>Catholic Mom.com</strong> \u2014 include the '.com' whenever possible. Their tagline is 'A community of women celebrating all things faith, family, and fun.' Don't shorten to 'CMom' or 'CathMom.'",
+    "category": "ministries",
+    "priority": 359,
+    "source": "v2"
+  },
+  {
+    "keywords": "family theater productions, ftp, family theater",
+    "answer": "Use the full name \u2014 <strong>Family Theater Productions</strong> \u2014 in all external communications. The abbreviation <strong>FTP</strong> may be used internally when space is tight but is not preferred. <em>Never</em> shorten to 'Family Theater' externally \u2014 that loses the 'Productions' which signals the org makes media. Mission: 'Inspire, Educate, and Entertain.' Tagline: 'Produces family, faith-based media.'",
+    "category": "ministries",
+    "priority": 360,
+    "source": "v2"
+  },
+  {
+    "keywords": "catholic central, ccentral, enterforming",
+    "answer": "Two separate words: <strong>Catholic Central.</strong> Include the '.com' whenever possible. Their tagline is 'Insights on all things Catholic.' Hashtag: <strong>#Enterforming</strong> \u2014 capital E, one word, no spaces or underscores.",
+    "category": "ministries",
+    "priority": 361,
+    "source": "v2"
+  },
+  {
+    "keywords": "ireland memorial centre, ireland visitor center, peyton memorial",
+    "answer": "The HCFM visitors center in Ireland is called <strong>The Father Patrick Peyton, C.S.C., Memorial Centre.</strong> Note the British spelling 'Centre' (with -re), not 'Center' \u2014 the location is in Ireland and the locally-correct spelling matters.",
+    "category": "ministries",
+    "priority": 362,
+    "source": "v2"
+  },
+  {
+    "keywords": "family that prays trademark, message trademark, prays together trademark",
+    "answer": "<strong>The Family That Prays Together Stays Together</strong> is a trademarked phrase (\u2122) of The Family Rosary, Inc. Use the \u2122 symbol on first reference in any external publication. <strong>Punctuation rules:</strong> no period at the end if it stands alone in a graphic; period if it's in body copy or quoted as Father Peyton's words; a comma is <em>never</em> used within the phrase.",
+    "category": "father-peyton",
+    "priority": 363,
+    "source": "v2"
+  },
+  {
+    "keywords": "world at prayer trademark, world peace trademark, registered trademark",
+    "answer": "<strong>A World at Prayer is a World at Peace</strong> is a <em>registered</em> trademark (\u00ae) of The Family Rosary, Inc. Use the \u00ae symbol on first reference in any external publication. Same punctuation rules as the other message: no period if standalone graphic, period if body copy, no comma within.",
+    "category": "father-peyton",
+    "priority": 364,
+    "source": "v2"
+  },
+  {
+    "keywords": "slogan, motto, tagline, peyton slogan",
+    "answer": "Don't call Father Peyton's two phrases 'slogan' or 'motto' \u2014 refer to them as <strong>messages</strong> or <strong>Father Peyton's vision.</strong> They're not marketing slogans; they're his life's work distilled into two sentences. The vocabulary signals the difference.",
+    "category": "father-peyton",
+    "priority": 365,
+    "source": "v2"
+  },
+  {
+    "keywords": "copyright, copyright notation, all rights reserved",
+    "answer": "Standard copyright format: <strong>\u00a9 (year) The Family Rosary, Inc., All Rights Reserved.</strong> Use on packaging, product, and formal publications. Space-permitting use the full notation; otherwise the year + \u00a9 symbol is acceptable.",
+    "category": "voice",
+    "priority": 366,
+    "source": "v2"
+  },
+  {
+    "keywords": "reverential capitalization, capitalize god, his her his pronouns",
+    "answer": "Names, adjectives, and pronouns referring to God are capitalized in our copy: <em>Creator God</em>, <em>Your love for us</em>, <em>His blessings on us</em>, <em>the Holy Spirit</em>, <em>the Father.</em> This is called reverential capitalization. (Some non-Catholic style guides reject it; ours follows it.)",
+    "category": "voice",
+    "priority": 367,
+    "source": "v2"
+  },
+  {
+    "keywords": "congregation of holy cross, the holy cross, csc order",
+    "answer": "Correct full name: <strong>The Congregation of Holy Cross.</strong> Never write 'the Holy Cross' alone (the article + saint's name reads wrong). HCFM is sponsored <em>by</em> the Congregation, not <em>by</em> the Holy Cross.",
+    "category": "voice",
+    "priority": 368,
+    "source": "v2"
+  },
+  {
+    "keywords": "canva, canva template, canva brand",
+    "answer": "Canva templates for HCFM are coming \u2014 Emmanuel is preparing them for ministry-center designers who don't use Adobe. In the meantime: set your Canva brand kit with HCFM Blue #0047BB, Yellow Gold #FFB500, Marian Blue #00A9E0, Black, White. Upload Whitney and Calluna fonts if you have a Canva Pro account; otherwise use Canva's Whitney and Calluna substitutes (Montserrat and Lora are decent fallbacks).",
+    "category": "tools",
+    "priority": 400,
+    "source": "v2"
+  },
+  {
+    "keywords": "adobe, illustrator, photoshop, indesign",
+    "answer": "AI source files (the editable masters) are admin-tier in <a href='#downloads'>Downloads</a> \u2192 Source files \u2014 Easton internal team only. PNG and JPG variants for ministry centers are public-password tier (request the password from Victoria or Emmanuel). All Adobe Creative Cloud fonts can sync Whitney, Calluna, and Playlist Script if your subscription includes Adobe Fonts.",
+    "category": "tools",
+    "priority": 401,
+    "source": "v2"
+  },
+  {
+    "keywords": "google slides, google docs, gsuite",
+    "answer": "Google Workspace doesn't have Whitney, Calluna, or Playlist Script by default. <strong>Fallbacks:</strong> use Open Sans or Lato for sans-serif headlines, Lora or Source Serif Pro for body. Set the color palette in your Google account theme. A Google Slides HCFM template is on Emmanuel's task list \u2014 coming soon.",
+    "category": "tools",
+    "priority": 402,
+    "source": "v2"
+  },
+  {
+    "keywords": "powerpoint template, ppt template, slide template",
+    "answer": "An official 2026 PowerPoint template is in development \u2014 Emmanuel is rebuilding it from scratch. Until then: black master slide, Whitney Bold (Calibri or Aptos as fallback), HCFM mark top-right, body in Calluna (Cambria as fallback). For donor decks, Marian Blue is a strong secondary.",
+    "category": "tools",
+    "priority": 403,
+    "source": "v2"
+  },
+  {
+    "keywords": "figma, sketch, design tool",
+    "answer": "Figma supports the Adobe Fonts sync, so Whitney, Calluna, and Playlist Script will appear if your Adobe Creative Cloud subscription includes them. Otherwise upload the OTF files (Downloads \u2192 Fonts) into your Figma team library. The HCFM color tokens (HCFM Blue, Yellow Gold, etc.) are documented on the <a href='#colors'>Colors</a> page with hex values \u2014 add them as styles.",
+    "category": "tools",
+    "priority": 404,
+    "source": "v2"
+  },
+  {
+    "keywords": "word, microsoft word, letterhead, word template",
+    "answer": "Word letterhead templates for HCFM, Family Rosary, Catholic Mom, Family Theater Productions, Father Peyton Prayer Guild, and Museum of Family Prayer are in <a href='#downloads'>Downloads</a> \u2192 Letterhead Word templates. Use the body in Times New Roman per the print spec (the Brand Guidelines 2026 PDF documents the recipe).",
+    "category": "tools",
+    "priority": 405,
+    "source": "v2"
+  },
+  {
+    "keywords": "iphone, mobile design, designing on phone",
+    "answer": "Mobile design tools (Canva on iPad, Adobe Express on iPhone) are fine for quick social posts but can't reproduce the full type system \u2014 Playlist Script especially needs a desktop. For anything print-bound or campaign-bound, design on desktop. The brand portal itself works on mobile if you need to look up a hex code on the go.",
+    "category": "tools",
+    "priority": 406,
+    "source": "v2"
+  },
+  {
+    "keywords": "screen vs print, rgb vs cmyk, color conversion",
+    "answer": "Digital uses hex (#0047BB for HCFM Blue) or RGB. Print uses Pantone or CMYK. <strong>Recipe:</strong> match the Pantone spec (e.g., HCFM Blue = Pantone 2728 Coated) and let the printer convert. If they ask for CMYK directly, expect a slight shift \u2014 Pantone-to-CMYK loses some vibrancy on Yellow Gold and Marian Blue especially. The <a href='#colors'>Colors</a> page documents Pantone for every brand color.",
+    "category": "tools",
+    "priority": 407,
+    "source": "v2"
+  },
+  {
+    "keywords": "vendor brief, designer brief, brief for vendor",
+    "answer": "When briefing an external designer or vendor, point them to hcfm.org/brand. Then specify: (1) which logo configuration to use (mark only, Logotype 1, 2, 3, or 4), (2) which colors (Pantone numbers for print, hex for digital), (3) which fonts (and whether they need to license them or you'll provide), (4) the deliverable spec (dimensions, file format), (5) brand contact (Victoria or Emmanuel) for approval. Vendors love clear specs.",
+    "category": "vendors",
+    "priority": 450,
+    "source": "v2"
+  },
+  {
+    "keywords": "printer, print vendor, sending to printer",
+    "answer": "Printers want Pantone numbers, not hex codes. Send them the HCFM colors as <strong>Pantone Coated</strong> \u2014 that's what's on the <a href='#colors'>Colors</a> page. For coated paper stock, the spec is on the <a href='#stationery'>Stationery</a> page. For uncoated stock, ask the printer for the equivalent Pantone Uncoated value. Always proof in real ink before approving a print run.",
+    "category": "vendors",
+    "priority": 451,
+    "source": "v2"
+  },
+  {
+    "keywords": "color matching print, pantone matching, print accuracy",
+    "answer": "Color matching: Pantone 2728C (HCFM Blue) and 871C (Muted Gold) are the most-used spot colors and most printers stock them. Pantone 7549C (Yellow Gold) is less common \u2014 confirm your printer can match it before designing. For 4-color process printing (CMYK), expect a slight shift. Always print a proof and approve in person if possible.",
+    "category": "vendors",
+    "priority": 452,
+    "source": "v2"
+  },
+  {
+    "keywords": "vendor logo file, send logo to vendor, vendor needs logo",
+    "answer": "Send vendors the EPS or AI file for print, PNG for digital. Both are in <a href='#downloads'>Downloads</a> \u2192 Ministry centers (PNG/JPG public-password tier) or \u2192 Source files (AI/EPS admin tier). Do <em>not</em> send vendors PNG files for print work \u2014 they won't scale. Always include a usage license note: 'Files licensed for use on the [project name]. Not for reuse or redistribution.'",
+    "category": "vendors",
+    "priority": 453,
+    "source": "v2"
+  },
+  {
+    "keywords": "freelance designer, hire designer, freelancer brand",
+    "answer": "Freelance designers should be briefed off the brand page and pointed to <a href='#downloads'>Downloads</a> for assets. Request a co-branded NDA if they're working on Father Peyton imagery or unannounced campaign work. The brand portal includes a 'For Vendors' section on the <a href='#help'>Help page</a> \u2014 that's the link to share.",
+    "category": "vendors",
+    "priority": 454,
+    "source": "v2"
+  },
+  {
+    "keywords": "agency, marketing agency, external agency",
+    "answer": "If you're working with an external agency: send them to hcfm.org/brand. They should treat it as the brand book. For source files, they request a password from Victoria or Emmanuel \u2014 admin-tier access is granted per-engagement, not blanket. Agencies sometimes try to 'improve' the brand \u2014 flag any deviations from the brand book to Emmanuel before approving.",
+    "category": "vendors",
+    "priority": 455,
+    "source": "v2"
+  },
+  {
+    "keywords": "photographer, hire photographer, event photographer",
+    "answer": "Photographers should be briefed against the <a href='#imagery'>Imagery</a> page \u2014 five approved categories, real-not-stock, dark overlays on text moments. For event photographers, also send the shot-list framework (Details, Venue, Attendees, Speakers/Special Guests) on the same page. Talk through composition (rule of thirds, leading lines, etc.) only if their portfolio shows they need the prompt.",
+    "category": "vendors",
+    "priority": 456,
+    "source": "v2"
+  },
+  {
+    "keywords": "videographer, video producer, hire videographer",
+    "answer": "Brand video standards: open with a stable establishing shot (no shaky-cam intros), use HCFM-palette lower-thirds, Father Peyton imagery in archival quality (no AI upscaling). Aspect ratios: 16:9 for YouTube and Facebook feeds, 9:16 for Reels/Stories/TikTok. Sound: 192kbps minimum. Captions: hardcoded for social, separate SRT for YouTube.",
+    "category": "vendors",
+    "priority": 457,
+    "source": "v2"
+  },
+  {
+    "keywords": "t-shirt vendor, apparel vendor, screen printer",
+    "answer": "Apparel printers: send the AI source for the logo, specify <em>one color of ink</em> (single-color printing is cheapest and reproduces most reliably). Specify ink color by Pantone \u2014 usually White on a colored garment, or HCFM Blue on White. Place the logo on the left chest (3-4 inches wide) for polos; centered on caps; full chest for event tees.",
+    "category": "vendors",
+    "priority": 458,
+    "source": "v2"
+  },
+  {
+    "keywords": "banner vendor, signage vendor, sign company",
+    "answer": "Banner vendors: ask them for their bleed/safe-area template before designing \u2014 different finishers have different specs. Design to their template, send them the AI source (not PNG). Color: Pantone Coated for vinyl banner stock; CMYK for fabric or backlit material. Confirm in writing the file format they want \u2014 sometimes it's PDF/X, sometimes it's AI.",
+    "category": "vendors",
+    "priority": 459,
+    "source": "v2"
+  },
+  {
+    "keywords": "translate, translation, translating materials",
+    "answer": "HCFM materials get translated into the local language of each Ministry Center. The 2026 brand system applies across all languages \u2014 only the words change. Color, type, logo, and design rules stay identical. For Spanish content used in the US, request <strong>Latin American Spanish</strong> specifically (not Castilian / Spain Spanish) \u2014 the audience is Latin American Catholic families.",
+    "category": "localization",
+    "priority": 500,
+    "source": "v2"
+  },
+  {
+    "keywords": "spanish, latin american spanish, mexican spanish",
+    "answer": "<strong>Use Latin American Spanish</strong> for HCFM materials targeted at US Hispanic audiences and Mexico/Peru/Chile/Uruguay ministry centers. For Spain or European audiences (rare for us), use Castilian. When briefing translators, name the variant explicitly \u2014 'Spanish' alone is ambiguous and translators default to whichever they grew up with.",
+    "category": "localization",
+    "priority": 501,
+    "source": "v2"
+  },
+  {
+    "keywords": "tagalog, filipino, philippines language",
+    "answer": "<strong>Tagalog</strong> is the formal language; <strong>Filipino</strong> is the same language with more English loanwords (urban, younger). Family Rosary Crusade Philippines uses both depending on audience \u2014 formal events lean Tagalog, social media leans Filipino. English is widely understood in Philippines too.",
+    "category": "localization",
+    "priority": 502,
+    "source": "v2"
+  },
+  {
+    "keywords": "swahili, kenya tanzania uganda, east africa language",
+    "answer": "<strong>Swahili</strong> (Kiswahili) is the regional lingua franca for HCFM Kenya, Tanzania, and Uganda. English is also widely spoken \u2014 most ministry materials in East Africa run bilingual (Swahili + English). Color and brand rules stay identical across the regional languages.",
+    "category": "localization",
+    "priority": 503,
+    "source": "v2"
+  },
+  {
+    "keywords": "french, france haiti, french language",
+    "answer": "French is the primary language for HCFM France and one of three languages used in Haiti (alongside Haitian Creole and English). When commissioning French translation, specify <em>European French</em> (for France) or <em>Quebecois / Canadian French</em> (rare for HCFM but worth flagging). For Haiti, also commission Haitian Creole versions of key materials.",
+    "category": "localization",
+    "priority": 504,
+    "source": "v2"
+  },
+  {
+    "keywords": "portuguese, brazil portuguese, lusophone",
+    "answer": "Portuguese for HCFM materials targets Brazil (Ros\u00e1rio em Familia Brasil). Specify <em>Brazilian Portuguese</em> when briefing translators \u2014 European Portuguese has different grammar, vocabulary, and tone. Brazilian Portuguese is warmer and more conversational; European is more formal.",
+    "category": "localization",
+    "priority": 505,
+    "source": "v2"
+  },
+  {
+    "keywords": "bengali, bangladesh language",
+    "answer": "<strong>Bengali</strong> for HCFM Bangladesh. It's written in a non-Latin script \u2014 make sure your designer uses a real Bengali font (Shonar Bangla, Hind Siliguri) and not a Latin font with substituted glyphs. Whitney and Calluna don't have Bengali variants \u2014 for Bengali body text we use Hind Siliguri as the brand-aligned fallback.",
+    "category": "localization",
+    "priority": 506,
+    "source": "v2"
+  },
+  {
+    "keywords": "right to left, rtl, arabic, hebrew",
+    "answer": "HCFM doesn't yet have ministry centers in Arabic or Hebrew speaking regions, but if/when we do, all layouts will need to mirror (right-to-left). The 2026 brand system was designed left-to-right; an RTL adaptation would need new artwork. Talk to Emmanuel before committing to RTL deliverables.",
+    "category": "localization",
+    "priority": 507,
+    "source": "v2"
+  },
+  {
+    "keywords": "date format, date convention",
+    "answer": "US English uses month/day/year (e.g., 1/15/2026). Most other ministry-center countries use day/month/year (15/1/2026 or 15 January 2026). For international communications, spell out the month \u2014 '15 January 2026' is unambiguous in every locale. For social media captions, lean on the locale convention of the audience.",
+    "category": "localization",
+    "priority": 508,
+    "source": "v2"
+  },
+  {
+    "keywords": "used wrong color, made a mistake, mistake on social",
+    "answer": "Don't panic. If you've already published with an off-brand color (e.g., used Magenta from the old palette instead of Yellow Gold): (1) take the post down or edit it if the platform allows, (2) repost with the correct version, (3) email Victoria or Emmanuel so we can note the pattern and avoid it next time. We don't punish mistakes \u2014 we patch them quickly.",
+    "category": "troubleshooting",
+    "priority": 550,
+    "source": "v2"
+  },
+  {
+    "keywords": "competitor, ewtn, word on fire, busted halo, comparison",
+    "answer": "EWTN's brand is heavily blue-and-yellow but in a different register \u2014 more traditional, more textual, more 'broadcast.' Word on Fire uses a darker, more sophisticated palette (warm grays, deep blues, less yellow). Busted Halo leans casual. HCFM's brand sits between traditional and modern \u2014 dark backgrounds for digital, classic typography, Marian/Rosary imagery as our visual core. We don't copy any of them \u2014 we look like ourselves.",
+    "category": "regional",
+    "priority": 551,
+    "source": "v2"
+  },
+  {
+    "keywords": "use blue 50 percent opacity, tint blue, semi transparent",
+    "answer": "Tints (partial opacity) of HCFM colors are allowed but only on photographic overlays \u2014 not for type or solid color blocks. So: a 60% Black overlay on a photo to improve text legibility is fine; a 50% HCFM Blue patch as a 'soft' brand color is not (it falls outside the brand and becomes ambiguous).",
+    "category": "edge-cases",
+    "priority": 552,
+    "source": "v2"
+  },
+  {
+    "keywords": "tint photo blue, blue photo overlay, color overlay photo",
+    "answer": "Color overlays on photos that shift the photo's natural look are <em>not</em> approved \u2014 we use real photography in real colors. The exception is the dark overlay (Black at 40-60% opacity) which is for text legibility, not stylization. If you want a moody/branded photo look, work with the photographer at capture time, not as a post-production filter.",
+    "category": "edge-cases",
+    "priority": 553,
+    "source": "v2"
+  },
+  {
+    "keywords": "glow, drop shadow, 3d effect, outline on mark",
+    "answer": "<strong>No.</strong> The HCFM mark has clean line work that gets destroyed by glows, drop shadows, 3D extrusions, or strokes/outlines. The 'Logo do not' gallery on the <a href='#logos'>Logos</a> page shows the worst offenders. If you feel the mark needs a glow to stand out, the background contrast is wrong \u2014 fix the background, not the mark.",
+    "category": "edge-cases",
+    "priority": 554,
+    "source": "v2"
+  },
+  {
+    "keywords": "symbol larger than wordmark, scale mark bigger",
+    "answer": "The 4 logotype configurations on the <a href='#logos'>Logos</a> page document the exact symbol-to-wordmark proportions. <em>Never</em> resize the symbol independently of the wordmark \u2014 the relationship is part of the design. If you need the symbol bigger, use the mark alone (just the symbol, no wordmark) \u2014 that's a separate approved variant.",
+    "category": "edge-cases",
+    "priority": 555,
+    "source": "v2"
+  },
+  {
+    "keywords": "one color available, single color, monochrome",
+    "answer": "If you only have one color available (single-color print, screen-print on apparel, embroidery), use Black for light backgrounds, White for dark backgrounds. Both are part of the brand. Avoid using a non-brand color even if it's 'close' \u2014 better to be in pure Black than off-brand blue.",
+    "category": "edge-cases",
+    "priority": 556,
+    "source": "v2"
+  },
+  {
+    "keywords": "non-catholic vendor, secular vendor, working with non catholic",
+    "answer": "Most external vendors aren't Catholic \u2014 that's fine. The brand book is comprehensive enough that they don't need to know the theology to follow the rules. Brief them on what's required (logos, colors, fonts, do/don'ts) and skip the spiritual context unless they ask. Many of our best vendors are not Catholic; the brand is the contract.",
+    "category": "edge-cases",
+    "priority": 557,
+    "source": "v2"
+  },
+  {
+    "keywords": "competitor platform, post on competitor",
+    "answer": "If HCFM content is going to live on a non-HCFM platform (a partner's social, a co-branded campaign), check whether their brand rules conflict with ours. When in conflict, ours apply to <em>our</em> piece of the content; theirs apply to <em>theirs</em>. Always get co-branded layouts approved by Victoria or Emmanuel before publishing.",
+    "category": "edge-cases",
+    "priority": 558,
+    "source": "v2"
+  },
+  {
+    "keywords": "low resolution, blurry logo, pixelated logo",
+    "answer": "A pixelated logo means you're using a raster (PNG/JPG) when you should be using a vector (SVG/AI/EPS). For print, always use vector \u2014 it scales infinitely without quality loss. For digital, the PNG at the correct dimensions is fine. If you only have a small PNG and need it bigger, request a fresh file from Victoria or Emmanuel \u2014 don't upscale.",
+    "category": "edge-cases",
+    "priority": 559,
+    "source": "v2"
+  },
+  {
+    "keywords": "why this brand portal, why a website, why not pdf",
+    "answer": "Three reasons. (1) A PDF goes stale the moment we update the brand; a website updates instantly. (2) PDFs are awkward to search; a website has search, chatbot, FAQ. (3) Ministry centers in 18 countries needed something that didn't depend on SharePoint, which blocks external collaborators. The brand page solves all three at once.",
+    "category": "philosophy",
+    "priority": 600,
+    "source": "v2"
+  },
+  {
+    "keywords": "why not let local centers pick colors, regional palette, local brand",
+    "answer": "Tempting but fragmenting. Research (Bottomley & Doyle 2006) shows brand consistency matters more than locale-specific palette switching. A Filipino family seeing our Manila content and an Irish family seeing our Dublin content should both recognize HCFM instantly. Cultural awareness happens in <em>how we use</em> the colors (palette weighting, imagery choice), not <em>what's in</em> the palette.",
+    "category": "philosophy",
+    "priority": 601,
+    "source": "v2"
+  },
+  {
+    "keywords": "why one symbol globally, why not localize logo",
+    "answer": "The symbol is HCFM's deepest brand asset \u2014 10 beads of the Rosary, family of prayer, Marian floral character. Localizing it would dilute the meaning. What <em>does</em> localize is the wordmark: 'HCFM Kenya,' 'Family Rosary Crusade Philippines,' 'INFAM Peru.' The mark stays universal; the name underneath adapts.",
+    "category": "philosophy",
+    "priority": 602,
+    "source": "v2"
+  },
+  {
+    "keywords": "why brand book important, value of guidelines",
+    "answer": "Three things a brand book buys you. (1) <strong>Speed</strong> \u2014 designers and vendors stop asking 'what color?' a hundred times. (2) <strong>Consistency</strong> \u2014 your audience sees the same brand from every ministry, builds trust faster. (3) <strong>Accountability</strong> \u2014 when something goes wrong, the rule is in writing and you can point to it. Without a brand book, every project becomes a debate.",
+    "category": "philosophy",
+    "priority": 603,
+    "source": "v2"
+  },
+  {
+    "keywords": "marian blue vs hcfm blue, two blues, which blue",
+    "answer": "<strong>HCFM Blue (#0047BB)</strong> is the identifier \u2014 formal, institutional, used for logos, letterheads, official documents. <strong>Marian Blue (#00A9E0)</strong> is the accent \u2014 lighter, Marian, used for devotional content and pairings with Playlist Script. Same family, different role. Think 'institutional vs devotional.'",
+    "category": "colors",
+    "priority": 604,
+    "source": "v2"
+  },
+  {
+    "keywords": "yellow gold vs muted gold, two golds, which gold",
+    "answer": "<strong>Yellow Gold (#FFB500)</strong> is the digital primary \u2014 energetic, attention-grabbing, used for headlines, CTAs, social impact. <strong>Muted Gold (#89764B)</strong> is the print/formal accent \u2014 sophisticated, traditional, used for letterhead Pantone ink, donor stewardship materials, plaques. Yellow Gold for screens; Muted Gold for paper.",
+    "category": "colors",
+    "priority": 605,
+    "source": "v2"
+  },
+  {
+    "keywords": "why both blues, why both golds, two of each",
+    "answer": "Different jobs. The 'primary blue and gold' (HCFM Blue + Yellow Gold) carry the digital identity and the energetic moments. The 'secondary blue and gold' (Marian Blue + Muted Gold) carry the devotional and the traditional moments. Together they cover the full range of HCFM communications without becoming repetitive.",
+    "category": "colors",
+    "priority": 606,
+    "source": "v2"
+  },
+  {
+    "keywords": "whitney vs calluna, when whitney, when calluna",
+    "answer": "<strong>Whitney</strong> (sans-serif) is for headlines, subheads, short impactful copy, UI buttons. <strong>Calluna</strong> (serif) is for body paragraphs, long-form reading, formal documents. The pairing \u2014 sans for headline, serif for body \u2014 is the most-tested editorial type combination in publishing. Use them together; don't substitute one for the other.",
+    "category": "typography",
+    "priority": 607,
+    "source": "v2"
+  },
+  {
+    "keywords": "when use playlist script, where script font, playlist usage",
+    "answer": "<strong>Playlist Script</strong> is for accent moments \u2014 a single word, an emphasis phrase, a name highlighted in a headline. Never use it for body text, never use it at small sizes (it becomes unreadable), and only in three approved colors: Yellow Gold, White, or Marian Blue. Think 'seasoning' \u2014 a sprinkle elevates the meal; a handful ruins it.",
+    "category": "typography",
+    "priority": 608,
+    "source": "v2"
+  },
+  {
+    "keywords": "logo on dark vs light, white logo, color version",
+    "answer": "Five approved color variations: Black (light backgrounds), HCFM Blue (brand emphasis on neutral background), Muted Gold (premium/formal contexts), White (dark backgrounds \u2014 the 'reverse' version), Two-tone Gold-and-Blue (logo only, premium materials). Match the version to the background, not the other way around.",
+    "category": "logo",
+    "priority": 609,
+    "source": "v2"
+  },
+  {
+    "keywords": "small logo size, smallest logo, logo minimum",
+    "answer": "The mark alone (symbol only): never smaller than 5/16 inch (0.3125\" / 7.94mm) in print, 24 pixels on screen. The full logotypes with 'FAMILY ROSARY CRUSADE' / 'HCFM' wordmark: the wordmark height must be at least 1/16 inch (0.0625\" / 1.59mm) in print, 12 pixels on screen. Below these sizes the symbol loses detail and the wordmark becomes illegible.",
+    "category": "logo",
+    "priority": 610,
+    "source": "v2"
+  }
+]

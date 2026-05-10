@@ -800,6 +800,12 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .chat-followups::before { content: 'Related:'; display: block; width: 100%; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
 .chat-followups .chat-pill { font-size: 11px; }
 
+/* Bot comprehension check — "did that help?" footer */
+.chat-confirm { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chat-confirm-h { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin: 0 6px 0 0; flex-basis: 100%; }
+.chat-pill-confirm { background: var(--bg-page); border-color: var(--rule); }
+.chat-pill-confirm:hover { border-color: var(--hcfm-blue); }
+
 /* Bot escalation panel */
 .chat-escalate { margin-top: 10px; padding: 12px 14px; background: var(--bg-page); border-left: 3px solid var(--hcfm-gold); border-radius: 0 4px 4px 0; }
 .chat-escalate-h { font-family: var(--font-display); font-weight: 600; font-size: 12px; color: var(--text); margin: 0 0 4px; }

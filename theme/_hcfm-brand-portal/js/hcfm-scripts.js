@@ -797,6 +797,16 @@
       }
       html += `</div>`;
     }
+    if (opts.confirm) {
+      // Comprehension check — gives the user a way to say "that didn't land" without
+      // typing. The Yes/No queries are handled by the conversational KB entries
+      // (priority 204/205 in the v2 expansion).
+      html += `<div class="chat-confirm">
+        <p class="chat-confirm-h">Did that answer your question?</p>
+        <button class="chat-pill chat-pill-confirm" data-q="yes that helped">Yes, thanks</button>
+        <button class="chat-pill chat-pill-confirm" data-q="not quite, can you try again">Not quite</button>
+      </div>`;
+    }
     if (opts.escalate) {
       html += `<div class="chat-escalate">
         <p class="chat-escalate-h">Want a human to take this?</p>
@@ -834,7 +844,17 @@
     setTimeout(() => {
       if (result) {
         const followUps = suggestFollowUps(result.key);
-        addChatMessage(result.answer, false, { followUps });
+        // Skip the "did that help?" check for conversational responses (yes/no/thanks/hi)
+        // — adding it there creates an infinite confirmation loop. We detect those by
+        // a short answer length AND priority in the conversational range (200-211).
+        const isConversational = result.answer && result.answer.length < 200
+          && /^(glad|got it|hi —|anytime|i'm a brand|if you want a person|sure\.|fair\.|definitely|welcome\.|bookmark)/i.test(
+              result.answer.replace(/<[^>]+>/g, '').trim()
+            );
+        addChatMessage(result.answer, false, {
+          followUps,
+          confirm: !isConversational,
+        });
       } else {
         addChatMessage(
           `I don't have a confident answer for that. The brand book covers <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>. Try one of those topics — or send Victoria and Emmanuel a direct question below.`,
