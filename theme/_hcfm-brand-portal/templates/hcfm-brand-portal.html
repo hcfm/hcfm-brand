@@ -1538,10 +1538,9 @@
     <button class="chat-close" id="chatClose" aria-label="Close">✕</button>
   </header>
   <div class="chat-body" id="chatBody">
-    <div class="chat-msg chat-msg-bot">
-      <p>Hi. Ask me anything about the HCFM brand — colors, fonts, logos, voice, or where to find a specific file.</p>
-      <p class="chat-suggest">Try: <button class="chat-pill" data-q="What are the primary colors?">primary colors</button> <button class="chat-pill" data-q="When do I use Yellow Gold vs Muted Gold?">Yellow Gold vs Muted Gold</button> <button class="chat-pill" data-q="What font is used for body text?">body font</button></p>
-    </div>
+    {# The seed greeting is rendered by JS (hcfm-scripts.js openChat handler) #}
+    {# so first-time users get the name + role onboarding, and returning #}
+    {# users get their session restored from sessionStorage by restoreChat(). #}
   </div>
   <form class="chat-form" id="chatForm">
     <input type="text" id="chatInput" placeholder="Ask the brand…" autocomplete="off">

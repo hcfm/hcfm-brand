@@ -815,8 +815,18 @@
         .slice(0, 4);
       candidates = scored.map(x => x.k.q[0]);
     }
-    // Drop anything the user already asked.
-    return candidates.filter(c => !chatSession.askedKeys.has(c.toLowerCase())).slice(0, 4);
+    // Drop anything the user already asked, then dedupe case-insensitively.
+    const seen = new Set();
+    const out = [];
+    for (const c of candidates) {
+      const lc = c.toLowerCase();
+      if (chatSession.askedKeys.has(lc)) continue;
+      if (seen.has(lc)) continue;
+      seen.add(lc);
+      out.push(c);
+      if (out.length >= 4) break;
+    }
+    return out;
   }
 
   // -------- SESSION STATE --------
@@ -830,7 +840,6 @@
       role: saved.role || null,
       onboardStep: saved.onboardStep || 0,  // 0=ask name, 1=ask role, 2=done
       askedKeys: new Set(saved.askedKeys || []),
-      askedKeysOrder: saved.askedKeysOrder || [],
       topics: saved.topics || [],  // ordered list of matched-entry primary keywords
     };
   })();
@@ -842,7 +851,6 @@
         role: chatSession.role,
         onboardStep: chatSession.onboardStep,
         askedKeys: Array.from(chatSession.askedKeys),
-        askedKeysOrder: chatSession.askedKeysOrder,
         topics: chatSession.topics,
       }));
     } catch {}
@@ -852,26 +860,63 @@
     if (!matchedKey) return;
     const k = matchedKey.toLowerCase();
     chatSession.askedKeys.add(k);
-    chatSession.askedKeysOrder.push(k);
     chatSession.topics.push(matchedKey);
     if (chatSession.topics.length > 12) chatSession.topics.shift();
     persistSession();
   }
 
+  // Stopword set for preface — these are too generic to count as "real" overlap.
+  const PREFACE_STOP = new Set([
+    'why', 'rule', 'rules', 'use', 'used', 'using', 'design', 'system', 'brand',
+    'one', 'two', 'three', 'where', 'what', 'how', 'when', 'who',
+    'color', 'colors', 'font', 'fonts', 'logo', 'logos', 'image', 'images',
+  ]);
+
+  // Manual topic-relatedness clusters — semantic links the stem-overlap
+  // matcher can't catch (e.g. "playlist script" ↔ "typography" are related
+  // but share no stems).
+  const TOPIC_CLUSTERS = [
+    ['yellow gold', 'muted gold', 'blue yellow', 'simplified palette', 'hcfm blue', 'marian blue', '60-30-10', 'dark', 'ab test'],
+    ['playlist script', 'three fonts', 'whitney', 'calluna', 'typography', 'two fonts'],
+    ['10 beads', 'symbol', 'mark', 'rosary', 'family of prayer', 'floral', 'marian', 'mary'],
+    ['narrative voice', 'two voice', 'voice', 'tone', 'donor', 'social caption'],
+    ['real not stock', 'photography', 'imagery', 'dark overlay', 'thin border'],
+    ['digital first', 'platform dimensions', 'social media', 'mobile', 'younger generations'],
+    ['same brand globally', 'simplified palette', 'ministry centers', 'translation', 'regional'],
+    ['this brand page', 'sharepoint', 'support', 'who maintains', 'why portal'],
+  ];
+
   // Build a "this connects to earlier" preface when the new topic relates
-  // to an earlier one. Returns "" when no good connection.
+  // to an earlier one — either by non-stopword stem overlap (≥1) or by
+  // appearing in the same TOPIC_CLUSTERS group. Returns "" when nothing fits.
+  // Note: this runs BEFORE rememberTopic() so chatSession.topics contains only
+  // prior topics, not the current one. We need ≥1 prior topic to compare against.
   function buildPreface(matchedKey) {
-    if (!matchedKey || chatSession.topics.length < 2) return '';
-    const newTokens = tokenize(matchedKey);
-    // Look for any earlier topic (other than current) that shares 2+ stems.
-    for (let i = chatSession.topics.length - 2; i >= 0; i--) {
+    if (!matchedKey || chatSession.topics.length < 1) return '';
+    const newTokens = tokenize(matchedKey).filter(t => !PREFACE_STOP.has(t) && t.length > 2);
+    if (!newTokens.length) return '';
+    // Walk earlier topics newest-first so the preface references the MOST recent
+    // related topic (more conversational than digging up the first one).
+    for (let i = chatSession.topics.length - 1; i >= 0; i--) {
       const t = chatSession.topics[i];
       if (t.toLowerCase() === matchedKey.toLowerCase()) continue;
-      const tTokens = tokenize(t);
+      const tTokens = tokenize(t).filter(x => !PREFACE_STOP.has(x) && x.length > 2);
+      // Path 1: shared real (non-stopword) stem
       const overlap = newTokens.filter(x => tTokens.includes(x)).length;
-      if (overlap >= 2) {
+      if (overlap >= 1) {
         const name = chatSession.name ? chatSession.name + ', ' : '';
         return `${name}this connects to what you asked earlier about <em>${t}</em>.`;
+      }
+      // Path 2: same topic cluster
+      const newLower = matchedKey.toLowerCase();
+      const oldLower = t.toLowerCase();
+      for (const cluster of TOPIC_CLUSTERS) {
+        const newIn = cluster.some(c => newLower.includes(c));
+        const oldIn = cluster.some(c => oldLower.includes(c));
+        if (newIn && oldIn) {
+          const name = chatSession.name ? chatSession.name + ', ' : '';
+          return `${name}this builds on what you asked earlier about <em>${t}</em>.`;
+        }
       }
     }
     return '';
@@ -941,36 +986,114 @@
   restoreChat();
 
   // -------- NAME / ROLE GREETING FLOW --------
-  // First time the chat is opened, run a 2-step intro: name → role → ready.
-  // This makes the first 30 seconds feel personal instead of transactional.
+  // First time the chat is opened, offer a 2-step intro: name → role → ready.
+  // The user can opt out by typing "skip", "no", or anything that doesn't look
+  // like a name — they'll go straight to asking questions. Friction matters
+  // less than capturing a context cue.
+  const SKIP_PATTERNS = /^\s*(skip|no|nope|nah|later|pass|don'?t|just|first|hi|hello|hey|n\/a|no thanks|not now|i don'?t want|just answer|skip this)\s*[.!?]?\s*$/i;
+  // Recognize question-like inputs so we don't capture them as names
+  const QUESTION_PATTERNS = /\?|^\s*(what|where|why|how|when|who|which|do |does |is |are |can |could |should )/i;
+
+  function detectIntent(text) {
+    const t = (text || '').trim();
+    if (!t) return 'skip';
+    if (SKIP_PATTERNS.test(t)) return 'skip';
+    if (QUESTION_PATTERNS.test(t)) return 'question';
+    return 'name_or_role';
+  }
+
   function handleOnboardStep(rawInput) {
     const trimmed = (rawInput || '').trim();
+    const intent = detectIntent(trimmed);
+
     if (chatSession.onboardStep === 0) {
-      // Expect a name
-      // Strip lead phrases like "my name is" / "i'm" / "i am"
+      // Bail-out path: user typed "skip"/"no"/empty, OR jumped straight to a question.
+      if (intent === 'skip') {
+        chatSession.name = null;
+        chatSession.role = null;
+        chatSession.onboardStep = 2;
+        persistSession();
+        addChatMessage(
+          `<p>No problem. Ask me anything about the HCFM brand — colors, fonts, logos, voice, the science behind the 2026 changes, where to download assets, or how to handle a specific ministry-center situation.</p>`,
+          false,
+          { followUps: [
+              'why did we move from muted gold to yellow gold',
+              'why is HCFM blue 0047BB',
+              'how do I use Playlist Script',
+              'where do I download logos',
+            ],
+            followUpsLabel: 'A good place to start:',
+          }
+        );
+        return;
+      }
+      if (intent === 'question') {
+        // Treat as an immediate question — skip onboarding and answer it.
+        chatSession.onboardStep = 2;
+        persistSession();
+        handleChatQuery(trimmed);
+        return;
+      }
+      // name_or_role path — capture as name
       let name = trimmed.replace(/^(my name is|i am|i'm|im|this is|call me)\s+/i, '');
-      // Take first capitalized word (or first word) — keep it simple
       name = name.split(/[,;.\n]/)[0].trim();
-      // Capitalize first letter for display
-      if (name.length > 0) name = name.charAt(0).toUpperCase() + name.slice(1);
-      // Sanity cap
-      if (name.length > 40) name = name.slice(0, 40);
-      chatSession.name = name || 'friend';
+      // Reject obvious non-names: very long strings, anything with @, or punctuation-heavy
+      if (name.length > 40 || /[@<>]/.test(name)) {
+        name = '';
+      }
+      // Reject single-word common stop-words that slipped through
+      if (/^(yes|sure|ok|okay|fine|maybe|hmm)$/i.test(name)) {
+        name = '';
+      }
+      // Capitalize each word (handles multi-word names like "Father Fred")
+      if (name.length > 0) {
+        name = name.replace(/\b\w/g, c => c.toUpperCase());
+      } else {
+        // Fallback: skip the name capture entirely
+        chatSession.onboardStep = 2;
+        persistSession();
+        addChatMessage(
+          `<p>No problem. Ask me anything about the HCFM brand.</p>`,
+          false,
+          { followUps: [
+              'why did we move from muted gold to yellow gold',
+              'why is HCFM blue 0047BB',
+              'where do I download logos',
+            ],
+            followUpsLabel: 'A good place to start:',
+          }
+        );
+        return;
+      }
+      chatSession.name = name;
       chatSession.onboardStep = 1;
       persistSession();
       addChatMessage(
-        `<p>Good to meet you, <strong>${chatSession.name}</strong>. One more thing — what's your role with HCFM? (e.g. <em>marketing lead in the Philippines</em>, <em>designer at Easton</em>, <em>vendor</em>, <em>ministry-center director</em>). I'll tailor my answers to your context.</p>`,
+        `<p>Good to meet you, <strong>${chatSession.name}</strong>. One more thing — what's your role with HCFM? (e.g. <em>marketing lead in the Philippines</em>, <em>designer at Easton</em>, <em>vendor</em>, <em>ministry-center director</em>). Or type <em>skip</em> if you'd rather just ask your question.</p>`,
         false
       );
       return;
     }
+
     if (chatSession.onboardStep === 1) {
-      chatSession.role = trimmed.slice(0, 120);
+      if (intent === 'skip') {
+        chatSession.role = null;
+      } else if (intent === 'question') {
+        // Skip role step, answer the question
+        chatSession.onboardStep = 2;
+        persistSession();
+        handleChatQuery(trimmed);
+        return;
+      } else {
+        chatSession.role = trimmed.slice(0, 120);
+      }
       chatSession.onboardStep = 2;
       persistSession();
-      const roleHint = chatSession.role && chatSession.role.length > 2 ? ` Got it — I'll keep "<em>${chatSession.role}</em>" in mind when I answer.` : '';
+      const roleHint = chatSession.role && chatSession.role.length > 2
+        ? ` I'll keep "<em>${chatSession.role}</em>" in mind when I answer.`
+        : '';
       addChatMessage(
-        `<p>Thanks, ${chatSession.name}.${roleHint} Ask me anything about the HCFM brand — colors, fonts, logos, voice, the science behind why we made the 2026 changes, where to download assets, how to handle a specific ministry-center situation. I'm happy to go deep on any of it.</p>`,
+        `<p>Thanks, ${chatSession.name}.${roleHint} Ask me anything about the HCFM brand — colors, fonts, logos, voice, the science behind why we made the 2026 changes, where to download assets, or how to handle a specific ministry-center situation. I'm happy to go deep on any of it.</p>`,
         false,
         { followUps: [
             'why did we move from muted gold to yellow gold',
