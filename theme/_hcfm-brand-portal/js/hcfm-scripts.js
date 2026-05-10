@@ -620,16 +620,23 @@
       chatPanel.classList.add('open');
       chatPanel.setAttribute('aria-hidden', 'false');
       setTimeout(() => chatInput && chatInput.focus(), 300);
-      // First open this session: trigger the name-greeting flow if we haven't
-      // already collected the user's name. Only fires when chat body is empty
-      // (so we don't repeat the intro every time the panel is reopened).
+      // Industry-standard help-bot pattern: open with value (starter pills)
+      // not a survey. No identity capture, no friction — user can start
+      // asking immediately. Only render on a fresh session (empty body).
       setTimeout(() => {
-        if (chatBody && chatBody.children.length === 0 && chatSession.onboardStep === 0) {
+        if (chatBody && chatBody.children.length === 0) {
           addChatMessage(
-            `<p>Hi — I'm the HCFM brand-portal assistant. I can explain the 2026 system, the science behind the color changes, voice and tone, where to download assets, and how to handle specific ministry-center scenarios.</p>
-             <p>Before we start, <strong>what should I call you?</strong> Type your name below.</p>
-             <p class="chat-skip-row">Prefer to jump straight to questions? <button class="chat-pill chat-pill-skip" data-q="skip">Skip introduction →</button></p>`,
-            false
+            `<p class="chat-starter-intro">Ask anything about the HCFM brand — colors, fonts, logos, voice, the 2026 changes, downloads, or specific ministry-center situations.</p>`,
+            false,
+            {
+              followUps: [
+                'why did we move from muted gold to yellow gold',
+                'where do I download logos',
+                'how do I use Playlist Script',
+                'what fonts do we use',
+              ],
+              followUpsLabel: 'Try one of these:',
+            }
           );
         }
       }, 350);
@@ -832,15 +839,13 @@
   }
 
   // -------- SESSION STATE --------
-  // Tracks what the user has already asked, their name/role if collected,
-  // and the topic thread. Persisted to sessionStorage so it survives reload.
+  // Tracks what the user has already asked + topic thread. No identity
+  // capture — this is the industry-standard help-bot pattern. Persisted to
+  // sessionStorage so dedup and topic-aware preface survive reloads.
   const chatSession = (function () {
     let saved = {};
     try { saved = JSON.parse(sessionStorage.getItem('hcfm-chat-session') || '{}'); } catch {}
     return {
-      name: saved.name || null,
-      role: saved.role || null,
-      onboardStep: saved.onboardStep || 0,  // 0=ask name, 1=ask role, 2=done
       askedKeys: new Set(saved.askedKeys || []),
       topics: saved.topics || [],  // ordered list of matched-entry primary keywords
     };
@@ -849,9 +854,6 @@
   function persistSession() {
     try {
       sessionStorage.setItem('hcfm-chat-session', JSON.stringify({
-        name: chatSession.name,
-        role: chatSession.role,
-        onboardStep: chatSession.onboardStep,
         askedKeys: Array.from(chatSession.askedKeys),
         topics: chatSession.topics,
       }));
@@ -906,8 +908,7 @@
       // Path 1: shared real (non-stopword) stem
       const overlap = newTokens.filter(x => tTokens.includes(x)).length;
       if (overlap >= 1) {
-        const name = chatSession.name ? chatSession.name + ', ' : '';
-        return `${name}this connects to what you asked earlier about <em>${t}</em>.`;
+        return `This connects to what you asked earlier about <em>${t}</em>.`;
       }
       // Path 2: same topic cluster
       const newLower = matchedKey.toLowerCase();
@@ -916,8 +917,7 @@
         const newIn = cluster.some(c => newLower.includes(c));
         const oldIn = cluster.some(c => oldLower.includes(c));
         if (newIn && oldIn) {
-          const name = chatSession.name ? chatSession.name + ', ' : '';
-          return `${name}this builds on what you asked earlier about <em>${t}</em>.`;
+          return `This builds on what you asked earlier about <em>${t}</em>.`;
         }
       }
     }
@@ -987,147 +987,15 @@
   }
   restoreChat();
 
-  // -------- NAME / ROLE GREETING FLOW --------
-  // First time the chat is opened, offer a 2-step intro: name → role → ready.
-  // The user can opt out by typing "skip", "no", or anything that doesn't look
-  // like a name — they'll go straight to asking questions. Friction matters
-  // less than capturing a context cue.
-  const SKIP_PATTERNS = /^\s*(skip|no|nope|nah|later|pass|don'?t|just|first|hi|hello|hey|n\/a|no thanks|not now|i don'?t want|just answer|skip this)\s*[.!?]?\s*$/i;
-  // Recognize question-like inputs so we don't capture them as names
-  const QUESTION_PATTERNS = /\?|^\s*(what|where|why|how|when|who|which|do |does |is |are |can |could |should )/i;
-
-  function detectIntent(text) {
-    const t = (text || '').trim();
-    if (!t) return 'skip';
-    if (SKIP_PATTERNS.test(t)) return 'skip';
-    if (QUESTION_PATTERNS.test(t)) return 'question';
-    return 'name_or_role';
-  }
-
-  function handleOnboardStep(rawInput) {
-    const trimmed = (rawInput || '').trim();
-    const intent = detectIntent(trimmed);
-
-    if (chatSession.onboardStep === 0) {
-      // Bail-out path: user typed "skip"/"no"/empty, OR jumped straight to a question.
-      if (intent === 'skip') {
-        chatSession.name = null;
-        chatSession.role = null;
-        chatSession.onboardStep = 2;
-        persistSession();
-        addChatMessage(
-          `<p>No problem. Ask me anything about the HCFM brand — colors, fonts, logos, voice, the science behind the 2026 changes, where to download assets, or how to handle a specific ministry-center situation.</p>`,
-          false,
-          { followUps: [
-              'why did we move from muted gold to yellow gold',
-              'why is HCFM blue 0047BB',
-              'how do I use Playlist Script',
-              'where do I download logos',
-            ],
-            followUpsLabel: 'A good place to start:',
-          }
-        );
-        return;
-      }
-      if (intent === 'question') {
-        // Treat as an immediate question — skip onboarding and answer it.
-        chatSession.onboardStep = 2;
-        persistSession();
-        handleChatQuery(trimmed);
-        return;
-      }
-      // name_or_role path — capture as name
-      let name = trimmed.replace(/^(my name is|i am|i'm|im|this is|call me)\s+/i, '');
-      name = name.split(/[,;.\n]/)[0].trim();
-      // Reject obvious non-names: very long strings, anything with @, or punctuation-heavy
-      if (name.length > 40 || /[@<>]/.test(name)) {
-        name = '';
-      }
-      // Reject single-word common stop-words that slipped through
-      if (/^(yes|sure|ok|okay|fine|maybe|hmm)$/i.test(name)) {
-        name = '';
-      }
-      // Capitalize each word (handles multi-word names like "Father Fred")
-      if (name.length > 0) {
-        name = name.replace(/\b\w/g, c => c.toUpperCase());
-      } else {
-        // Fallback: skip the name capture entirely
-        chatSession.onboardStep = 2;
-        persistSession();
-        addChatMessage(
-          `<p>No problem. Ask me anything about the HCFM brand.</p>`,
-          false,
-          { followUps: [
-              'why did we move from muted gold to yellow gold',
-              'why is HCFM blue 0047BB',
-              'where do I download logos',
-            ],
-            followUpsLabel: 'A good place to start:',
-          }
-        );
-        return;
-      }
-      chatSession.name = name;
-      chatSession.onboardStep = 1;
-      persistSession();
-      addChatMessage(
-        `<p>Good to meet you, <strong>${chatSession.name}</strong>. One more thing — what's your role with HCFM? (e.g. <em>marketing lead in the Philippines</em>, <em>designer at Easton</em>, <em>vendor</em>, <em>ministry-center director</em>).</p>
-         <p class="chat-skip-row">Don't want to share? <button class="chat-pill chat-pill-skip" data-q="skip">Skip and start asking →</button></p>`,
-        false
-      );
-      return;
-    }
-
-    if (chatSession.onboardStep === 1) {
-      if (intent === 'skip') {
-        chatSession.role = null;
-      } else if (intent === 'question') {
-        // Skip role step, answer the question
-        chatSession.onboardStep = 2;
-        persistSession();
-        handleChatQuery(trimmed);
-        return;
-      } else {
-        chatSession.role = trimmed.slice(0, 120);
-      }
-      chatSession.onboardStep = 2;
-      persistSession();
-      const roleHint = chatSession.role && chatSession.role.length > 2
-        ? ` I'll keep "<em>${chatSession.role}</em>" in mind when I answer.`
-        : '';
-      addChatMessage(
-        `<p>Thanks, ${chatSession.name}.${roleHint} Ask me anything about the HCFM brand — colors, fonts, logos, voice, the science behind why we made the 2026 changes, where to download assets, or how to handle a specific ministry-center situation. I'm happy to go deep on any of it.</p>`,
-        false,
-        { followUps: [
-            'why did we move from muted gold to yellow gold',
-            'why is HCFM blue 0047BB',
-            'how do I use Playlist Script',
-            'where do I download logos',
-          ],
-          followUpsLabel: 'A good place to start:',
-        }
-      );
-      return;
-    }
-  }
-
   function handleChatQuery(query) {
     if (!query || !query.trim()) return;
     addChatMessage(query, true);
-
-    // First-touch flow: name + role
-    if (chatSession.onboardStep < 2) {
-      setTimeout(() => handleOnboardStep(query), 220);
-      return;
-    }
-
     const matches = rankMatches(query);
 
     setTimeout(() => {
       if (!matches.length) {
-        const namePrefix = chatSession.name ? `${chatSession.name}, ` : '';
         addChatMessage(
-          `${namePrefix}I don't have a confident answer for that yet. I cover <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>, plus the <em>why</em> behind the 2026 changes. Try one of those topics — or send Victoria and Emmanuel a direct question below.`,
+          `I don't have a confident answer for that yet. I cover <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>, plus the <em>why</em> behind the 2026 changes. Try one of those topics — or send Victoria and Emmanuel a direct question below.`,
           false,
           { escalate: true }
         );
