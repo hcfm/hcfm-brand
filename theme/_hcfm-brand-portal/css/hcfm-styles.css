@@ -897,3 +897,28 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .dl-signed-in-banner p { margin: 0; }
 .dl-signed-in-banner a { color: #fff; text-decoration: underline; opacity: 0.9; }
 .dl-signed-in-banner a:hover { opacity: 1; }
+
+
+/* ==================== Print stylesheet ====================
+   The page is the brand guide. When someone needs an offline / printable copy,
+   File > Print > Save as PDF should produce a readable single-document version.
+   Hide chrome, show every section sequentially, force readable typography. */
+@media print {
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+  .topbar, .header, .sidebar, .footer, .footer-fr, #lightbox,
+  .help-bubble, .ask-brand-bubble, .toast, #toast,
+  .video-frame, .video-card, .dl-tabs, .dl-pane-gate,
+  .dl-signed-in-banner, .search-input-wrap, .faq-search,
+  [class*="chatbot"], [id*="chatbot"], .hcfm-bot-host,
+  .ministry-mark-host, .hs-script-loader, [data-test-id="floating-help"]
+  { display: none !important; }
+  /* Show every page section sequentially in print, not just the active one */
+  .page { display: block !important; page-break-inside: avoid; padding: 0 0 18pt 0 !important; margin: 0 0 14pt 0 !important; border-bottom: 1pt solid #ccc; }
+  .page h1 { font-size: 22pt; margin-top: 16pt; page-break-after: avoid; }
+  .page h2 { font-size: 15pt; margin-top: 12pt; page-break-after: avoid; }
+  .page h3 { font-size: 12pt; page-break-after: avoid; }
+  .page p, .page li { font-size: 11pt; line-height: 1.45; }
+  /* Print URL after each link, except internal anchors and mailtos */
+  a[href]:after { content: " (" attr(href) ")"; font-size: 9pt; color: #666; }
+  a[href^="#"]:after, a[href^="mailto:"]:after { content: ""; }
+}
