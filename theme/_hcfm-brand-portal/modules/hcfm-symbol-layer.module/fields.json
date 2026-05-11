@@ -1,0 +1,49 @@
+[
+  {
+    "name": "eyebrow",
+    "label": "Eyebrow label",
+    "type": "text",
+    "default": "Detail 1",
+    "help_text": "Small caps label above the heading. Use 'Foundation' for the first layer, 'Detail 1'/'Detail 2'/etc. for subsequent ones."
+  },
+  {
+    "name": "heading",
+    "label": "Heading",
+    "type": "text",
+    "default": "The 10 Beads of the Rosary",
+    "help_text": "The layer's title — appears as H2."
+  },
+  {
+    "name": "body_text",
+    "label": "Body text",
+    "type": "richtext",
+    "default": "<p>The Mark is composed of 10 interconnected shapes. This is intentional. These 10 shapes reference the 10 beads of a Rosary decade.</p>",
+    "help_text": "Multi-paragraph description of this layer's meaning. Use <em> for inline emphasis."
+  },
+  {
+    "name": "image_url",
+    "label": "Visualization image",
+    "type": "image",
+    "default": {
+      "src": "",
+      "alt": "Symbol layer visualization"
+    },
+    "help_text": "The visual that illustrates this layer. Will be auto-sized."
+  },
+  {
+    "name": "image_position",
+    "label": "Image position",
+    "type": "choice",
+    "default": "right",
+    "choices": [["left", "Left of text"], ["right", "Right of text"]],
+    "help_text": "Layers typically alternate left/right for visual rhythm."
+  },
+  {
+    "name": "image_background",
+    "label": "Image background",
+    "type": "choice",
+    "default": "light",
+    "choices": [["light", "Light (default)"], ["dark", "Dark (for white-on-black symbols)"]],
+    "help_text": "Choose dark only if the symbol image is white-on-transparent."
+  }
+]

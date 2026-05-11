@@ -1,0 +1,25 @@
+{
+  "label": "HCFM Symbol Layer",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "One layer of meaning in the HCFM symbol. Used for the 5 layers on the Symbol page (10 Beads, Family of Prayer, Floral Character, Moon and Light, Welcome and Invitation).",
+  "host_template_types": [
+    "PAGE",
+    "BLOG_POST",
+    "BLOG_LISTING"
+  ],
+  "icon": null,
+  "inline_help_text": "Eyebrow + heading + body text + an image. Each layer alternates the image left/right.",
+  "is_available_for_new_content": true,
+  "smart_type": "NOT_SMART",
+  "tags": [
+    "hcfm",
+    "brand",
+    "symbol"
+  ],
+  "categories": [],
+  "label_localized": null,
+  "wrap_field_tag": "div",
+  "type": "module"
+}

@@ -1,0 +1,65 @@
+# GitHub Actions — Auto-Deploy to HubSpot
+# Runs every push to main when theme files change.
+# See docs/GITHUB_AUTO_SYNC.md for full setup instructions.
+#
+# Required GitHub secret:
+#   HUBSPOT_PERSONAL_ACCESS_KEY — a HubSpot Personal Access Key with CMS write
+#   permissions, stored at Settings > Secrets and variables > Actions.
+
+name: Deploy to HubSpot
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'theme/**'
+
+  # Allow manual triggering from the Actions tab as well
+  workflow_dispatch: {}
+
+# Only run one deploy at a time. If a new push comes in while a deploy is
+# running, cancel the older deploy.
+concurrency:
+  group: hubspot-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Upload theme to HubSpot
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install HubSpot CLI
+        run: npm install -g @hubspot/cli
+
+      - name: Initialize HubSpot config from secret
+        run: |
+          cat > hubspot.config.yml << 'EOF'
+          defaultAccount: brand-portal
+          accounts:
+            - name: brand-portal
+              accountId: 275132
+              authType: personalaccesskey
+              personalAccessKey: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
+          EOF
+
+      - name: Upload theme files
+        run: hs cms upload theme/_hcfm-brand-portal _hcfm-brand-portal --account=brand-portal
+
+      - name: Cleanup (always)
+        if: always()
+        run: rm -f hubspot.config.yml
+
+      - name: Notify on failure (optional)
+        if: failure()
+        run: echo "::warning::Deploy failed. Check the logs above and the HUBSPOT_PERSONAL_ACCESS_KEY secret."

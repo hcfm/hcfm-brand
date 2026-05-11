@@ -1,0 +1,3 @@
+{# HCFM Voice Rule — one rule entry. Renders as a <li> inside the .voice-list <ul>. #}
+{% if module.rule_title %}<strong>{{ module.rule_title|escape }}</strong>{% endif %}
+{% if module.rule_body %}{{ module.rule_body }}{% endif %}

@@ -1,0 +1,25 @@
+{
+  "label": "HCFM Design Element",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "One of the four approved design elements (Thin Border, Color Fade, Curved Shapes, Dark Overlays). One module per element.",
+  "host_template_types": [
+    "PAGE",
+    "BLOG_POST",
+    "BLOG_LISTING"
+  ],
+  "icon": null,
+  "inline_help_text": "Each element has a title, a body explaining it, and an optional 'where to use' callout.",
+  "is_available_for_new_content": true,
+  "smart_type": "NOT_SMART",
+  "tags": [
+    "hcfm",
+    "brand",
+    "design-elements"
+  ],
+  "categories": [],
+  "label_localized": null,
+  "wrap_field_tag": "div",
+  "type": "module"
+}

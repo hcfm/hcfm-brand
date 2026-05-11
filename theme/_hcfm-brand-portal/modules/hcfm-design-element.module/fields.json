@@ -1,0 +1,23 @@
+[
+  {
+    "name": "element_title",
+    "label": "Element title",
+    "type": "text",
+    "default": "Thin Border",
+    "help_text": "Examples: Thin Border, Color Fade Effect, Curved Shapes, Dark Overlays."
+  },
+  {
+    "name": "element_body",
+    "label": "What this element is",
+    "type": "richtext",
+    "default": "<p>3-4 pixel borders that frame content without becoming a design element in their own right. Used for cards, image frames, and quote pull-outs.</p>",
+    "help_text": "1-2 paragraphs explaining the element and its rules."
+  },
+  {
+    "name": "where_to_use",
+    "label": "Where to use this (optional callout)",
+    "type": "richtext",
+    "default": "<p><strong>Where to use:</strong> Cards, photo frames, quote callouts, section dividers.</p>",
+    "help_text": "Optional gold-bordered callout listing specific use cases."
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "label": "HCFM Voice Rule",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "A single rule in the HCFM voice and tone section — like 'Plain English' or 'Specific over general'. Use one module per rule.",
+  "host_template_types": [
+    "PAGE",
+    "BLOG_POST",
+    "BLOG_LISTING"
+  ],
+  "icon": null,
+  "inline_help_text": "Each rule has a short title and a one-paragraph explanation.",
+  "is_available_for_new_content": true,
+  "smart_type": "NOT_SMART",
+  "tags": [
+    "hcfm",
+    "brand",
+    "voice"
+  ],
+  "categories": [],
+  "label_localized": null,
+  "wrap_field_tag": "li",
+  "type": "module"
+}

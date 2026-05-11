@@ -1,0 +1,10 @@
+{# HCFM Design Element — one of the four approved elements card #}
+<article class="elt elt-card">
+  <div class="elt-text">
+    {% if module.element_title %}<h3>{{ module.element_title|escape }}</h3>{% endif %}
+    {% if module.element_body %}{{ module.element_body }}{% endif %}
+    {% if module.where_to_use %}
+      <div class="elt-where">{{ module.where_to_use }}</div>
+    {% endif %}
+  </div>
+</article>

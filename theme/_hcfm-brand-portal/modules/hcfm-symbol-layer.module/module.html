@@ -1,0 +1,15 @@
+{# HCFM Symbol Layer — one layer of meaning, matches site .sym-layer styles #}
+{% set is_reverse = module.image_position == "left" %}
+{% set is_dark = module.image_background == "dark" %}
+<div class="sym-layer{% if is_reverse %} sym-layer-reverse{% endif %}">
+  <div class="sym-layer-visual{% if is_dark %} sym-layer-visual-light{% endif %}">
+    {% if module.image_url.src %}
+      <img class="sym-visual-art" src="{{ module.image_url.src }}" alt="{{ module.image_url.alt|escape }}" loading="lazy">
+    {% endif %}
+  </div>
+  <div class="sym-layer-text">
+    {% if module.eyebrow %}<p class="sym-layer-eyebrow">{{ module.eyebrow|escape }}</p>{% endif %}
+    {% if module.heading %}<h2>{{ module.heading|escape }}</h2>{% endif %}
+    {% if module.body_text %}{{ module.body_text }}{% endif %}
+  </div>
+</div>
