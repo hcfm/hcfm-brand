@@ -190,6 +190,26 @@
     });
   });
 
+  /* ---------- Email-signature copy buttons ---------- */
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.email-sig-copy');
+    if (!btn) return;
+    e.preventDefault();
+    const targetId = btn.dataset.copyTarget;
+    const target = targetId && document.getElementById(targetId);
+    if (!target) return;
+    const text = target.textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      const originalLabel = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => { btn.textContent = originalLabel; }, 1800);
+      showToast('Signature copied to clipboard');
+    } catch {
+      showToast('Copy failed — select and copy manually');
+    }
+  });
+
   /* ---------- Sidebar search ---------- */
   const search = document.getElementById('search');
   if (search) {
@@ -466,7 +486,7 @@
     // Hide every pane
     document.querySelectorAll('.dl-pane').forEach(p => { p.classList.remove('active'); p.hidden = true; });
     // For Tier 1 tabs without unlock, show the gate pane in the content area
-    const isTier1Tab = ['parent', 'ministries', 'fonts'].includes(target);
+    const isTier1Tab = ['parent', 'ministries', 'fonts', 'templates'].includes(target);
     if (isTier1Tab && !isTier1Unlocked()) {
       if (tier1Gate) { tier1Gate.hidden = false; tier1Gate.classList.add('active'); }
       // Focus the password field for convenience

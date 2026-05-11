@@ -1091,7 +1091,15 @@
       <h2>Letterhead body type</h2>
       <p>Use Calluna for letter body text. It carries warmth and reads well in long-form letters. Whitney is acceptable for headers and signatory blocks. Avoid Times Roman; the older SharePoint guidance suggesting Times Roman is superseded.</p>
 
-      <p class="page-foot-link">Editable Word templates for the six sub-ministry letterheads are in <a href="#downloads">Resources / Downloads</a>.</p>
+      <h2>Mailing address</h2>
+      <p>The official HCFM mailing address. Use this on all formal correspondence, donor letters, sponsor materials, and printed stationery. Sub-ministries that operate from regional offices should use their own regional address — this is the parent HCFM address only.</p>
+      <div class="info-block">
+        <h3>HCFM Headquarters</h3>
+        <p><strong>Holy Cross Family Ministries</strong></p>
+        <p>508 Washington Street<br>North Easton, MA 02356<br>United States</p>
+      </div>
+
+      <p class="page-foot-link">Editable Word templates for the six sub-ministry letterheads are in <a href="#downloads">Resources / Downloads → Templates</a>.</p>
     </section>
 
     <!-- ==================== PLATFORM DIMENSIONS ==================== -->
@@ -1167,6 +1175,62 @@
           <tr><td>YouTube</td><td>Thumbnail</td><td>1280 × 720</td><td>16:9</td></tr>
         </tbody>
       </table>
+
+      <h2>Profile picture rule</h2>
+      <p>The most-asked question about HCFM on social media: what do I put as the profile picture? One rule across every platform.</p>
+
+      <div class="info-block">
+        <h3>The symbol — not the full logotype</h3>
+        <p>Profile pictures display as small as 32 × 32 px on Instagram mobile feed thumbnails and 88 × 88 px on YouTube channel icons. The wordmark "FAMILY MINISTRIES" becomes illegible at those sizes. <strong>Use the symbol alone.</strong></p>
+      </div>
+
+      <h3>Specifications</h3>
+      <table class="spec-table">
+        <thead><tr><th>Spec</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Source size</td><td>1080 × 1080 px (1:1 square)</td></tr>
+          <tr><td>Symbol fill</td><td>~70–80% of frame, centered</td></tr>
+          <tr><td>File format</td><td>PNG with <strong>solid</strong> background (not transparent)</td></tr>
+          <tr><td>One image, all platforms</td><td>Use the same avatar on Instagram, Facebook, LinkedIn, X, YouTube, TikTok</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Approved color combinations</h3>
+      <table class="spec-table">
+        <thead><tr><th>Background</th><th>Symbol color</th><th>Use for</th><th>Contrast</th></tr></thead>
+        <tbody>
+          <tr><td>White</td><td>HCFM Blue (#0047BB)</td><td>Institutional, formal, official channels</td><td>8.6:1 AAA</td></tr>
+          <tr><td>Black</td><td>Yellow Gold (#FFB500)</td><td><strong>2026 default for social feeds</strong> — high pop, dark-mode-friendly</td><td>11.7:1 AAA</td></tr>
+          <tr><td>HCFM Blue (#0047BB)</td><td>White</td><td>Marian feasts, formal devotional, partner pages</td><td>8.6:1 AAA</td></tr>
+          <tr><td>Black</td><td>White</td><td>Minimalist, conservative, Lent / Advent</td><td>21:1</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Never</h3>
+      <ul>
+        <li>The full logotype (illegible at avatar sizes)</li>
+        <li><strong>Yellow Gold on white</strong> — contrast is 1.9:1, fails accessibility, nearly invisible at thumbnail sizes</li>
+        <li>Muted Gold on white at avatar size — 3.4:1 fails AA at small renders</li>
+        <li>Photo or pattern backgrounds — symbol disappears</li>
+        <li>Drop shadows, glows, gradients, or strokes on the symbol</li>
+        <li>Cropped, partial, or rotated marks</li>
+      </ul>
+
+      <h3>Per-platform minimums</h3>
+      <p>One 1080 × 1080 PNG covers every platform's recommended source size. Platforms downsample for display; supplying a higher source than required keeps the avatar crisp on high-DPI mobile screens.</p>
+      <table class="spec-table">
+        <thead><tr><th>Platform</th><th>Min displayed</th><th>Recommended upload</th></tr></thead>
+        <tbody>
+          <tr><td>Instagram</td><td>320 × 320</td><td>1080 × 1080</td></tr>
+          <tr><td>Facebook page</td><td>170 × 170 (desktop) / 128 × 128 (mobile)</td><td>720 × 720+</td></tr>
+          <tr><td>LinkedIn organization</td><td>400 × 400</td><td>800 × 800+</td></tr>
+          <tr><td>X (Twitter)</td><td>400 × 400</td><td>1080 × 1080</td></tr>
+          <tr><td>YouTube channel</td><td>800 × 800</td><td>800 × 800</td></tr>
+          <tr><td>TikTok</td><td>200 × 200</td><td>1080 × 1080</td></tr>
+        </tbody>
+      </table>
+
+      <p class="page-foot-link">This rule replaces the older HCFM social-media guidance that defaulted to Muted Gold on white as the avatar. The 2026 system elevates Yellow Gold on black as the social-feed default — same symbol, optimized for how the avatar actually renders on a feed.</p>
     </section>
 
     <!-- ==================== MINISTRY CENTERS ==================== -->
@@ -1223,6 +1287,7 @@
           <button class="dl-tab" data-dl-tab="parent" data-tier="1">Parent logos</button>
           <button class="dl-tab" data-dl-tab="ministries" data-tier="1">Ministry centers</button>
           <button class="dl-tab" data-dl-tab="fonts" data-tier="1">Fonts</button>
+          <button class="dl-tab" data-dl-tab="templates" data-tier="1">Templates</button>
           {% if has_admin_access %}<button class="dl-tab dl-tab-admin" data-dl-tab="source" id="sourceTab">Source files <span class="dl-tab-lock">●</span></button>{% endif %}
         </nav>
 
@@ -1238,8 +1303,8 @@
         {# Tier 1 single password gate — covers Parent / Ministries / Fonts. Hidden when ministry-access member is signed in. #}
         <div class="dl-pane dl-pane-gate" data-dl-pane="tier1-gate" id="tier1Gate"{% if has_ministry_access %} hidden{% endif %}>
           <div class="dl-gate-inner">
-            <h2 class="dl-gate-h">Logo packs, ministry centers, and fonts</h2>
-            <p class="dl-gate-note">These three tabs share a <strong>single access password</strong>. Once you enter it, you can switch freely between them. Ministry centers: ask your director for the password — the same one works for everyone in your ministry.</p>
+            <h2 class="dl-gate-h">Logo packs, ministry centers, fonts, and templates</h2>
+            <p class="dl-gate-note">These four tabs share a <strong>single access password</strong>. Once you enter it, you can switch freely between them. Ministry centers: ask your director for the password — the same one works for everyone in your ministry.</p>
             <form class="dl-gate-form" id="tier1Form">
               <input type="password" placeholder="Access password" id="tier1Password" autocomplete="current-password">
               <button type="submit" class="btn btn-primary">Unlock</button>
@@ -1355,6 +1420,75 @@
             </article>
           </div>
         </div>
+
+        <!-- ==================== TEMPLATES PANE ==================== -->
+        <div class="dl-pane" data-dl-pane="templates" data-tier="1" hidden>
+          <p class="dl-pane-intro">Working templates for HCFM and the six sub-ministries with their own letterhead identity. These are <strong>editable Word documents</strong> — open, replace placeholder text, and save. The header artwork and brand-correct typography are baked in.</p>
+
+          <h2 class="dl-section-h">Letterhead templates</h2>
+          <p>One template per ministry that maintains its own letterhead identity. If your ministry isn't on this list, use the parent <strong>HCFM</strong> letterhead — the wordmark adapts to any sub-ministry signatory block.</p>
+          <ul class="download-list download-list-templates">
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/templates/letterheads/HCFM.docx" download><strong>HCFM (parent)</strong><span>Word · For Easton HQ and any sub-ministry without its own letterhead</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/templates/letterheads/Family%20Rosary.docx" download><strong>Family Rosary</strong><span>Word · For Family Rosary correspondence</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/templates/letterheads/Catholic%20Mom.docx" download><strong>Catholic Mom</strong><span>Word · For Catholic Mom correspondence</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/templates/letterheads/Museum%20of%20Family%20Prayer.docx" download><strong>Museum of Family Prayer</strong><span>Word · For Museum correspondence</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/templates/letterheads/Family%20Theater%20Productions.docx" download><strong>Family Theater Productions</strong><span>Word · For Family Theater correspondence</span></a></li>
+            <li><a href="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/templates/letterheads/Father%20Peyton%20Prayer%20Guild.docx" download><strong>Father Peyton Prayer Guild</strong><span>Word · For Prayer Guild correspondence</span></a></li>
+          </ul>
+          <p class="section-note"><em>The print specs (paper stock, ink Pantone codes, dimensions) for the printed version of each letterhead are documented in <a href="#stationery">Applications / Stationery</a>.</em></p>
+
+          <h2 class="dl-section-h">Email signature</h2>
+          <p>Use this signature on outbound HCFM email. Paste it into your email client's signature settings. Both a plain-text version (works everywhere) and a richer HTML version (for clients that support it) are provided.</p>
+
+          <div class="email-sig-row">
+            <div class="email-sig-card">
+              <div class="email-sig-card-h">
+                <strong>Plain text</strong>
+                <button class="btn btn-text email-sig-copy" data-copy-target="emailSigText">Copy to clipboard</button>
+              </div>
+              <pre class="email-sig-block" id="emailSigText">[Your Name]
+[Your Title] · [Your Ministry / Department]
+Holy Cross Family Ministries
+
+[Your phone, optional]
+[your-email]@hcfm.org
+www.hcfm.org
+
+"The Family That Prays Together Stays Together."
+                     — Venerable Patrick Peyton, C.S.C.</pre>
+            </div>
+
+            <div class="email-sig-card">
+              <div class="email-sig-card-h">
+                <strong>HTML (with mark)</strong>
+                <button class="btn btn-text email-sig-copy" data-copy-target="emailSigHtml">Copy HTML</button>
+              </div>
+              <pre class="email-sig-block" id="emailSigHtml">&lt;table cellpadding="0" cellspacing="0" style="font-family:Helvetica,Arial,sans-serif;font-size:13px;line-height:1.5;color:#1a1a1a;"&gt;
+  &lt;tr&gt;
+    &lt;td style="padding-right:14px;border-right:1px solid #e6e6e6;vertical-align:top;"&gt;
+      &lt;img src="https://www.hcfm.org/hubfs/_hcfm-brand/assets/logos/hcfm-symbol-blue.png" alt="HCFM" width="56" height="56" style="display:block;"&gt;
+    &lt;/td&gt;
+    &lt;td style="padding-left:14px;vertical-align:top;"&gt;
+      &lt;strong style="color:#0047BB;font-size:14px;"&gt;[Your Name]&lt;/strong&gt;&lt;br&gt;
+      &lt;span style="color:#5a5a5a;"&gt;[Your Title] · [Your Ministry]&lt;/span&gt;&lt;br&gt;
+      &lt;strong&gt;Holy Cross Family Ministries&lt;/strong&gt;&lt;br&gt;
+      &lt;a href="mailto:[your-email]@hcfm.org" style="color:#0047BB;text-decoration:none;"&gt;[your-email]@hcfm.org&lt;/a&gt; ·
+      &lt;a href="https://www.hcfm.org" style="color:#0047BB;text-decoration:none;"&gt;hcfm.org&lt;/a&gt;&lt;br&gt;
+      &lt;em style="color:#89764B;font-size:12px;"&gt;"The Family That Prays Together Stays Together." — Venerable Patrick Peyton, C.S.C.&lt;/em&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+            </div>
+          </div>
+
+          <div class="info-block">
+            <h3>How to install</h3>
+            <p><strong>Outlook (desktop or web):</strong> File → Options → Mail → Signatures. Paste the HTML into the editor. Replace bracketed placeholders.</p>
+            <p><strong>Apple Mail:</strong> Mail → Settings → Signatures → +. Paste. Replace placeholders.</p>
+            <p><strong>Gmail:</strong> Settings (gear icon) → See all settings → Signature → Create new. Paste. Replace placeholders.</p>
+          </div>
+        </div>
+        <!-- ==================== END TEMPLATES PANE ==================== -->
       </div>
     </section>
 
