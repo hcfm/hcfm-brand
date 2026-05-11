@@ -257,6 +257,13 @@
     return { label: 'Variant', dark: false };
   }
 
+  // Tier 1 unlock check — same logic as the Downloads section uses.
+  // Ministry-detail downloads share the same password gate.
+  function isMinistryDlUnlocked() {
+    return (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry)
+        || sessionStorage.getItem('hcfm-tier1-unlocked') === '1';
+  }
+
   function renderMinistryDetail(m) {
     const nameEl = document.getElementById('mdName');
     const h1 = document.getElementById('mdH1');
@@ -264,9 +271,13 @@
     const gallery = document.getElementById('mdGallery');
     if (!nameEl || !gallery) return;
 
+    const unlocked = isMinistryDlUnlocked();
+
     nameEl.textContent = m.name;
     h1.textContent = m.name;
-    intro.innerHTML = `<strong>${m.region}.</strong> Logo gallery for this ministry. Click any variant to download the PNG, or use the <em>Download all variants</em> button at the top of each section to grab the full pack at once.`;
+    intro.innerHTML = unlocked
+      ? `<strong>${m.region}.</strong> Logo gallery for this ministry. Click any variant to download the PNG, or use the <em>Download all variants</em> button at the top of each section to grab the full pack at once.`
+      : `<strong>${m.region}.</strong> Logo gallery for this ministry. <strong>Downloads are gated.</strong> Browse the variants below, then unlock downloads in the <a href="#downloads">Downloads tab</a>.`;
 
     // HCFM Foundation uses the parent HCFM logos directly (the wordmark is
     // 'Holy Cross Family Ministries' with no 'Foundation' suffix added).
@@ -297,14 +308,26 @@
     // ministry" button can save them all in one click.
     const allFiles = [];
 
+    // Gate banner shown above the gallery when Tier 1 is locked
+    const gateBanner = unlocked ? '' : `
+      <div class="md-gate" role="region" aria-label="Downloads gated">
+        <div class="md-gate-text">
+          <p class="md-gate-h">Logo downloads are password-gated.</p>
+          <p class="md-gate-p">Browse the variants below to confirm what you need, then enter the access password in the Downloads tab to enable downloads. Same password unlocks all ministry-center logo packs.</p>
+        </div>
+        <a href="#downloads" class="btn btn-primary">Unlock in Downloads →</a>
+      </div>
+    `;
+
     gallery.innerHTML = `
+      ${gateBanner}
       <div class="md-ministry-hero">
         <img src="assets/logos/hcfm-symbol-blue.png" alt="">
         <div>
           <h2>${m.name}</h2>
           <p>${m.region} · Code: ${m.code}</p>
         </div>
-        <button class="btn btn-primary md-bulk-download" data-ministry-bulk="${m.code}" title="Save every variant of every logotype for this ministry">Download all logos →</button>
+        ${unlocked ? `<button class="btn btn-primary md-bulk-download" data-ministry-bulk="${m.code}" title="Save every variant of every logotype for this ministry">Download all logos →</button>` : ''}
       </div>
       ${groups.map(g => {
         const ltLabel = g.folder.replace(/.*(Logotype\d)/, '$1').replace('Logotype', 'Logotype ');
@@ -315,6 +338,17 @@
           const path = `${groupBase}/${file}`;
           groupFiles.push({ path, name: file });
           allFiles.push({ path, name: file });
+          // When locked: render as a non-clickable card (just preview). When unlocked: full download link.
+          if (!unlocked) {
+            return `
+              <div class="md-variant" title="${v.label}">
+                <div class="md-variant-bg ${v.dark ? 'dark' : ''}">
+                  <img src="${path}" alt="${v.label}" loading="lazy">
+                </div>
+                <p class="md-variant-name">${v.label}</p>
+              </div>
+            `;
+          }
           return `
             <a class="md-variant md-variant-link" href="${path}" download="${file}" data-dl-url="${path}" data-dl-name="${file}" title="Download ${v.label} (${file})">
               <div class="md-variant-bg ${v.dark ? 'dark' : ''}">
@@ -328,7 +362,7 @@
         return `
           <div class="md-section-head">
             <h3 class="md-section-title">${ltLabel}</h3>
-            <button class="btn btn-text md-group-download" data-group-files='${JSON.stringify(groupFiles).replace(/'/g, '&#39;')}' title="Download every variant of ${ltLabel}">Download this set</button>
+            ${unlocked ? `<button class="btn btn-text md-group-download" data-group-files='${JSON.stringify(groupFiles).replace(/'/g, '&#39;')}' title="Download every variant of ${ltLabel}">Download this set</button>` : ''}
           </div>
           <div class="md-variants-grid">${variantsHtml}</div>
         `;
@@ -347,6 +381,17 @@
       bulkBtn.__ministry = m;
     }
   }
+
+  // Re-render the ministry-detail when Tier 1 gets unlocked, so a user who
+  // unlocks via password and then navigates back to a ministry detail page
+  // sees the download buttons appear without needing a full page refresh.
+  document.addEventListener('hcfm:tier1-unlocked', () => {
+    if (location.hash.startsWith('#ministry/')) {
+      const code = location.hash.split('/')[1];
+      const m = ministries.find(x => x.code === code);
+      if (m) renderMinistryDetail(m);
+    }
+  });
 
   /* ---------- Ministry download helpers ----------
      Files are hosted cross-origin (HubSpot CDN). The native <a download> attribute
@@ -511,6 +556,9 @@
       if (TIER1_PASSWORDS.includes(value)) {
         sessionStorage.setItem(TIER1_STORAGE_KEY, '1');
         renderTier1ContentIfNeeded();
+        // Notify ministry-detail (and any other listeners) so they re-render
+        // with download buttons enabled.
+        document.dispatchEvent(new CustomEvent('hcfm:tier1-unlocked'));
         showToast('Access granted');
         // Switch user to the Parent tab so they immediately see unlocked content
         showPane('parent');

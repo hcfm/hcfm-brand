@@ -670,18 +670,23 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .download-list-templates strong { font-size: var(--fs-base); }
 .download-list-templates span { font-size: var(--fs-xs); text-transform: none; letter-spacing: 0; white-space: normal; text-align: right; max-width: 50%; }
 
-/* Templates pane: section headings + email signature blocks */
+/* Templates pane: section headings + sample image figures */
 .dl-section-h { font-size: var(--fs-xl); margin: 32px 0 8px; padding-bottom: 8px; border-bottom: 2px solid var(--hcfm-gold); display: inline-block; }
-.email-sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
-.email-sig-card { background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
-.email-sig-card-h { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-page); border-bottom: 1px solid var(--rule); gap: 12px; }
-.email-sig-card-h strong { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 600; color: var(--text); }
-.email-sig-copy { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-xs); color: var(--hcfm-blue); background: none; border: 0; cursor: pointer; padding: 4px 0; border-bottom: 1px solid var(--hcfm-blue); transition: opacity 120ms; }
-.email-sig-copy:hover { opacity: 0.7; }
-.email-sig-block { margin: 0; padding: 16px 18px; font-family: 'Menlo', 'Consolas', 'Courier New', monospace; font-size: var(--fs-xs); line-height: 1.55; color: var(--text); background: #fafafa; white-space: pre-wrap; word-wrap: break-word; max-height: 320px; overflow-y: auto; border: 0; }
+.template-sample { margin: 16px 0 24px; padding: 0; background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.template-sample img { display: block; width: 100%; height: auto; background: #fff; }
+.template-sample figcaption { padding: 12px 18px; font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text-muted); border-top: 1px solid var(--rule); background: var(--bg-page); }
+.template-sample-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
+.template-sample-grid .template-sample { margin: 0; }
 @media (max-width: 880px) {
-  .email-sig-row { grid-template-columns: 1fr; }
+  .template-sample-grid { grid-template-columns: 1fr; }
 }
+
+/* Ministry-detail download gate (locked state for non-Tier-1 visitors) */
+.md-gate { margin: 0 0 24px; padding: 18px 22px; background: var(--bg-page); border-left: 3px solid var(--hcfm-gold); border-radius: 0 4px 4px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.md-gate-text { flex: 1; min-width: 280px; }
+.md-gate-h { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-base); color: var(--text); margin: 0 0 4px; }
+.md-gate-p { font-size: var(--fs-sm); color: var(--text-muted); margin: 0; line-height: 1.5; }
+.md-gate .btn { white-space: nowrap; }
 
 /* Download gallery (parent logos preview) */
 .dl-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
