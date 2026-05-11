@@ -1,4 +1,4 @@
-/* HCFM Brand Portal — Theme: _hcfm-brand-portal
+/* HCFM Brand Portal, Theme: _hcfm-brand-portal
  * Generated for HubSpot Theme system. URLs are absolute to HubSpot Files.
  */
 
@@ -45,7 +45,7 @@
     return rows;
   })();
 
-  // Manifest of actual file paths per ministry — loaded from JSON
+  // Manifest of actual file paths per ministry, loaded from JSON
   let ministryManifest = {};
 
   // HCFM Foundation uses the parent HCFM logo as-is (no "FOUNDATION" added
@@ -84,7 +84,7 @@
   // Logotype 2 (stacked) is preferred for grid thumbnails because mark-on-top
   // + wordmark-below fits naturally in a square preview slot.
   function ministryMarkUrl(code) {
-    // HCFM Foundation override — use parent HCFM Logotype 2 Blue
+    // HCFM Foundation override, use parent HCFM Logotype 2 Blue
     if (code === FOUNDATION_CODE) {
       return 'https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/previews/parent/HCFM_Logotype2/hcfm_logo2_pos_2728c.png';
     }
@@ -132,7 +132,7 @@
         if (m) renderMinistryDetail(m);
       }
       // If Tier 1 is unlocked (member or password), refresh the ministry grid now that
-      // the manifest is available. Safe to call multiple times — function is idempotent.
+      // the manifest is available. Safe to call multiple times, function is idempotent.
       if ((window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry)
           || sessionStorage.getItem('hcfm-tier1-unlocked') === '1') {
         renderDlMinistryGrid();
@@ -206,7 +206,7 @@
       setTimeout(() => { btn.textContent = originalLabel; }, 1800);
       showToast('Signature copied to clipboard');
     } catch {
-      showToast('Copy failed — select and copy manually');
+      showToast('Copy failed, select and copy manually');
     }
   });
 
@@ -257,7 +257,7 @@
     return { label: 'Variant', dark: false };
   }
 
-  // Tier 1 unlock check — same logic as the Downloads section uses.
+  // Tier 1 unlock check, same logic as the Downloads section uses.
   // Ministry-detail downloads share the same password gate.
   function isMinistryDlUnlocked() {
     return (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry)
@@ -370,7 +370,7 @@
 
       <div class="info-block">
         <h3>About these files</h3>
-        <p><strong>PNG only</strong> — these are production-ready raster files. Editable AI source files are restricted to the Easton brand owners; if you need a custom edit (resize for embroidery, vector edits for print), email <a href="mailto:vhassan@hcfm.org">Victoria</a> or <a href="mailto:eepau@hcfm.org">Emmanuel</a>.</p>
+        <p><strong>PNG only</strong>, these are production-ready raster files. Editable AI source files are restricted to the Easton brand owners; if you need a custom edit (resize for embroidery, vector edits for print), email <a href="mailto:vhassan@hcfm.org">Victoria</a> or <a href="mailto:eepau@hcfm.org">Emmanuel</a>.</p>
       </div>
     `;
 
@@ -395,7 +395,7 @@
 
   /* ---------- Ministry download helpers ----------
      Files are hosted cross-origin (HubSpot CDN). The native <a download> attribute
-     gets ignored cross-origin in most browsers — they navigate instead of saving.
+     gets ignored cross-origin in most browsers, they navigate instead of saving.
      We fetch the file as a Blob and trigger a save with an object URL, which gives
      a real download UX with the proper filename. */
   function saveBlobAs(blob, filename) {
@@ -491,7 +491,7 @@
   });
 
   /* ---------- Downloads: 3-tier hybrid gate ----------
-     Tier 0 (public): Brand documents — always visible, no gate.
+     Tier 0 (public): Brand documents, always visible, no gate.
      Tier 1 (password OR ministry-tier membership): Parent / Ministries / Fonts.
        Ministry-tier members auto-unlock via HubSpot Memberships (server-rendered).
        Anonymous users enter a single shared password (cached in sessionStorage).
@@ -515,7 +515,7 @@
   }
 
   function renderTier1ContentIfNeeded() {
-    // Only render once per page load — the underlying functions are also idempotent.
+    // Only render once per page load, the underlying functions are also idempotent.
     if (renderTier1ContentIfNeeded._done) return;
     renderTier1ContentIfNeeded._done = true;
     renderParentGallery();
@@ -574,7 +574,7 @@
   function unlockDownloads() { sessionStorage.setItem(TIER1_STORAGE_KEY, '1'); renderTier1ContentIfNeeded(); }
   function unlockAdmin() { document.body.classList.add('admin-active'); }
 
-  /* ---------- Parent gallery (PNG/JPG only — no AI files publicly) ---------- */
+  /* ---------- Parent gallery (PNG/JPG only, no AI files publicly) ---------- */
   function renderParentGallery() {
     const el = document.getElementById('parentGallery');
     if (!el) return;
@@ -595,7 +595,7 @@
         ]
       },
       {
-        title: 'Logotype 1 — Horizontal',
+        title: 'Logotype 1, Horizontal',
         sub: 'Mark left, wordmark right (single line)',
         zip: `${RELEASE_BASE}/parent/HCFM_Logotype1_SOURCE.zip`,
         zipSize: '2.6 MB',
@@ -609,7 +609,7 @@
         ]
       },
       {
-        title: 'Logotype 2 — Stacked',
+        title: 'Logotype 2, Stacked',
         sub: 'Mark on top, wordmark on two lines below',
         zip: `${RELEASE_BASE}/parent/HCFM_Logotype2_SOURCE.zip`,
         zipSize: '2.6 MB',
@@ -623,7 +623,7 @@
         ]
       },
       {
-        title: 'Logotype 3 — Compact stacked',
+        title: 'Logotype 3, Compact stacked',
         sub: 'Mark on top with a smaller wordmark',
         zip: `${RELEASE_BASE}/parent/HCFM_Logotype3_SOURCE.zip`,
         zipSize: '2.3 MB',
@@ -637,7 +637,7 @@
         ]
       },
       {
-        title: 'Logotype 4 — Single line',
+        title: 'Logotype 4, Single line',
         sub: 'Mark with full wordmark on a single line',
         zip: `${RELEASE_BASE}/parent/HCFM_Logotype4_SOURCE.zip`,
         zipSize: '2.5 MB',
@@ -803,12 +803,12 @@
       chatPanel.setAttribute('aria-hidden', 'false');
       setTimeout(() => chatInput && chatInput.focus(), 300);
       // Industry-standard help-bot pattern: open with value (starter pills)
-      // not a survey. No identity capture, no friction — user can start
+      // not a survey. No identity capture, no friction, user can start
       // asking immediately. Only render on a fresh session (empty body).
       setTimeout(() => {
         if (chatBody && chatBody.children.length === 0) {
           addChatMessage(
-            `<p class="chat-starter-intro">Ask anything about the HCFM brand — colors, fonts, logos, voice, the 2026 changes, downloads, or specific ministry-center situations.</p>`,
+            `<p class="chat-starter-intro">Ask anything about the HCFM brand, colors, fonts, logos, voice, the 2026 changes, downloads, or specific ministry-center situations.</p>`,
             false,
             {
               followUps: [
@@ -833,7 +833,7 @@
   if (chatFab) chatFab.addEventListener('click', openChat);
   if (chatClose) chatClose.addEventListener('click', closeChat);
 
-  // Knowledge base — pulled from the actual brand book and updated guidelines
+  // Knowledge base, pulled from the actual brand book and updated guidelines
   const knowledge = (function () {
     // Source of truth: HubDB table hcfm_chatbot_kb (id 282697845)
     // Server-rendered into hidden <template> tags inside #hcfm-bot-kb-host
@@ -927,7 +927,7 @@
     'i need': ''
   };
 
-  // Cheap stemmer — strip common suffixes so 'reels' matches 'reel' etc.
+  // Cheap stemmer, strip common suffixes so 'reels' matches 'reel' etc.
   function stem(w) {
     return w.replace(/(ies|ied|ying|ing|ed|es|s|ly)$/i, '');
   }
@@ -1022,7 +1022,7 @@
 
   // -------- SESSION STATE --------
   // Tracks what the user has already asked + topic thread. No identity
-  // capture — this is the industry-standard help-bot pattern. Persisted to
+  // capture, this is the industry-standard help-bot pattern. Persisted to
   // sessionStorage so dedup and topic-aware preface survive reloads.
   const chatSession = (function () {
     let saved = {};
@@ -1051,14 +1051,14 @@
     persistSession();
   }
 
-  // Stopword set for preface — these are too generic to count as "real" overlap.
+  // Stopword set for preface, these are too generic to count as "real" overlap.
   const PREFACE_STOP = new Set([
     'why', 'rule', 'rules', 'use', 'used', 'using', 'design', 'system', 'brand',
     'one', 'two', 'three', 'where', 'what', 'how', 'when', 'who',
     'color', 'colors', 'font', 'fonts', 'logo', 'logos', 'image', 'images',
   ]);
 
-  // Manual topic-relatedness clusters — semantic links the stem-overlap
+  // Manual topic-relatedness clusters, semantic links the stem-overlap
   // matcher can't catch (e.g. "playlist script" ↔ "typography" are related
   // but share no stems).
   const TOPIC_CLUSTERS = [
@@ -1073,7 +1073,7 @@
   ];
 
   // Build a "this connects to earlier" preface when the new topic relates
-  // to an earlier one — either by non-stopword stem overlap (≥1) or by
+  // to an earlier one, either by non-stopword stem overlap (≥1) or by
   // appearing in the same TOPIC_CLUSTERS group. Returns "" when nothing fits.
   // Note: this runs BEFORE rememberTopic() so chatSession.topics contains only
   // prior topics, not the current one. We need ≥1 prior topic to compare against.
@@ -1130,7 +1130,7 @@
       html += `</div>`;
     }
     if (opts.confirm) {
-      // Comprehension check — gives the user a way to say "that didn't land" without
+      // Comprehension check, gives the user a way to say "that didn't land" without
       // typing. The Yes/No queries are handled by the conversational KB entries
       // (priority 204/205 in the v2 expansion).
       html += `<div class="chat-confirm">
@@ -1142,7 +1142,7 @@
     if (opts.escalate) {
       html += `<div class="chat-escalate">
         <p class="chat-escalate-h">Want a human to take this?</p>
-        <p class="chat-escalate-p">Send Victoria and Emmanuel a quick message — they reply within two business days.</p>
+        <p class="chat-escalate-p">Send Victoria and Emmanuel a quick message, they reply within two business days.</p>
         <button class="chat-escalate-btn" id="chatEscalateBtn">Email Victoria & Emmanuel →</button>
       </div>`;
     }
@@ -1177,7 +1177,7 @@
     setTimeout(() => {
       if (!matches.length) {
         addChatMessage(
-          `I don't have a confident answer for that yet. I cover <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>, plus the <em>why</em> behind the 2026 changes. Try one of those topics — or send Victoria and Emmanuel a direct question below.`,
+          `I don't have a confident answer for that yet. I cover <em>colors, fonts, logos, voice, photography, design elements, ministries, downloads, transition, password</em>, plus the <em>why</em> behind the 2026 changes. Try one of those topics, or send Victoria and Emmanuel a direct question below.`,
           false,
           { escalate: true }
         );
@@ -1204,9 +1204,9 @@
       // ---- Topic-aware preface ----
       const preface = buildPreface(top.k.q[0]);
 
-      // ---- Conversational detector — short, casual greeting responses ----
+      // ---- Conversational detector, short, casual greeting responses ----
       const isConversational = renderedAnswer && renderedAnswer.length < 200
-        && /^(glad|got it|hi —|anytime|i'm a brand|if you want a person|sure\.|fair\.|definitely|welcome\.|bookmark)/i.test(
+        && /^(glad|got it|hi ,|anytime|i'm a brand|if you want a person|sure\.|fair\.|definitely|welcome\.|bookmark)/i.test(
             renderedAnswer.replace(/<[^>]+>/g, '').trim()
           );
 
@@ -1243,7 +1243,7 @@
     if (e.target.closest('#chatEscalateBtn')) showEscalateForm();
   });
 
-  // Embedded escalation form — keeps the user inside the chat
+  // Embedded escalation form, keeps the user inside the chat
   function showEscalateForm() {
     if (!chatBody) return;
     const div = document.createElement('div');
@@ -1264,7 +1264,7 @@
       const fd = new FormData(f);
       const subject = encodeURIComponent('HCFM Brand · question from chat');
       const body = encodeURIComponent(
-        `From: ${fd.get('name')} <${fd.get('email')}>\n\n${fd.get('message')}\n\n— Sent from the brand portal chat`
+        `From: ${fd.get('name')} <${fd.get('email')}>\n\n${fd.get('message')}\n\n, Sent from the brand portal chat`
       );
       window.location.href = `mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=${subject}&body=${body}`;
       addChatMessage('Thanks. Your email client should be opening with the message pre-filled. Send it from there and we will reply within two business days.', false);
@@ -1298,7 +1298,7 @@
       const body = bodyBuilder(fd);
       const url = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = url;
-      // Show a confirmation message under the button — same UX as chat escalate
+      // Show a confirmation message under the button, same UX as chat escalate
       const foot = form.querySelector('.form-foot');
       if (foot) {
         foot.innerHTML = '<strong>✓ Your email client should be opening.</strong> Hit send from there and we’ll reply within two business days.';
@@ -1313,13 +1313,13 @@
       `From: ${fd.get('name')} <${fd.get('email')}>\n` +
       `Ministry: ${fd.get('ministry')}\n\n` +
       `${fd.get('request')}\n\n` +
-      `— Sent from the HCFM Brand Portal asset-request form`
+      `, Sent from the HCFM Brand Portal asset-request form`
     ),
     'vhassan@hcfm.org,eepau@hcfm.org');
 
   /* Note: the feedback form now hyperlinks to the existing Microsoft Forms
      feedback channel (same one ministry centers already use). No JS handler
-     needed — it's just an anchor tag with target="_blank". */
+     needed, it's just an anchor tag with target="_blank". */
 
   /* ---------- Language switcher placeholder ---------- */
   document.querySelectorAll('.lang-btn').forEach(btn => {

@@ -1,4 +1,4 @@
-# GitHub Auto-Sync Setup — One-Time Configuration
+# GitHub Auto-Sync Setup, One-Time Configuration
 
 **What this does:** Replaces the manual `npx @hubspot/cli cms upload` command with automatic deployment. After setup, every `git push` to the `main` branch automatically pushes changes to HubSpot.
 
@@ -16,15 +16,15 @@
 |---|---|
 | Edit locally → run `npx @hubspot/cli cms upload …` → commit + push | Edit locally → commit + push → done |
 | One manual step per change | Zero manual steps |
-| Easy to forget the upload step | Can't forget — git push is the action |
+| Easy to forget the upload step | Can't forget, git push is the action |
 | Code in git can be out of sync with HubSpot | They stay in lockstep |
 | If a developer joins the team, they need CLI setup | They just need git access |
 
-It's not strictly necessary — the manual workflow works fine. But it removes friction and a class of "forgot to upload" bugs.
+It's not strictly necessary, the manual workflow works fine. But it removes friction and a class of "forgot to upload" bugs.
 
 ---
 
-## Two approaches — pick one
+## Two approaches, pick one
 
 ### Approach A: HubSpot's official CMS GitHub integration (recommended)
 
@@ -40,13 +40,13 @@ A GitHub Actions workflow (a YAML file in `.github/workflows/`) that runs on eve
 **Pros:** Full control, identical to manual workflow, supports any repo structure.
 **Cons:** Requires managing a GitHub Actions secret with the access token.
 
-**Recommended for HCFM:** Approach B (GitHub Actions). It mirrors exactly what Emmanuel does manually today, just automated. It's safer because we already understand the manual workflow — automation just runs the same commands.
+**Recommended for HCFM:** Approach B (GitHub Actions). It mirrors exactly what Emmanuel does manually today, just automated. It's safer because we already understand the manual workflow, automation just runs the same commands.
 
 The rest of this guide is for Approach B.
 
 ---
 
-## Approach B — Step-by-step setup
+## Approach B, Step-by-step setup
 
 ### Step 1: Verify the repo structure
 
@@ -72,13 +72,13 @@ This will be used only by GitHub Actions, separate from Emmanuel's personal CLI 
 2. Click your profile icon (top right) → **Profile & Preferences**.
 3. In the left sidebar, click **Integrations** → **Personal Access Keys**.
 4. Click **Create personal access key**.
-5. Name it: `GitHub Actions — Brand Portal Deploy`
+5. Name it: `GitHub Actions, Brand Portal Deploy`
 6. Permissions to enable:
    - ✅ CMS → Source code: **Write**
    - ✅ CMS → HubDB: **Write** (so the chatbot push scripts can run if needed)
    - ✅ Files: **Write** (for the File Manager uploads)
 7. Click **Create personal access key**.
-8. **Copy the key immediately** — HubSpot only shows it once. Paste somewhere safe (we'll use it in the next step).
+8. **Copy the key immediately**, HubSpot only shows it once. Paste somewhere safe (we'll use it in the next step).
 
 ### Step 3: Add the key as a GitHub Actions secret
 
@@ -243,7 +243,7 @@ This is faster but DOESN'T update the git repo, so the next push to `main` will 
 
 ## Troubleshooting
 
-### "Deploy failed — invalid access token"
+### "Deploy failed, invalid access token"
 
 The personal access key may have expired or been revoked.
 1. Generate a new one (Step 2 above).
@@ -275,19 +275,19 @@ Free. GitHub Actions has a generous free tier (2,000 minutes/month for private r
 
 ## Security considerations
 
-- The `HUBSPOT_PERSONAL_ACCESS_KEY` is stored as a GitHub repository secret — encrypted at rest, only accessible to workflow runs, never exposed in logs.
+- The `HUBSPOT_PERSONAL_ACCESS_KEY` is stored as a GitHub repository secret, encrypted at rest, only accessible to workflow runs, never exposed in logs.
 - The key has the **minimum permissions necessary** (CMS write, HubDB write, Files write). Not Marketing or CRM scopes.
 - If the key is ever compromised, rotate it: generate a new one, update the GitHub secret, revoke the old one in HubSpot.
 - Branch protection (Step 6) is recommended to prevent any single person from pushing changes without review.
 
 ---
 
-## After setup — telling the team
+## After setup, telling the team
 
 Once auto-sync is live, update the documentation:
 
 1. In `WORKFLOW.md`, the "Developer workflow" section should be updated to reflect that the CLI upload step is no longer manual.
-2. In `EDITOR_GUIDE.md`, no changes needed — the editor workflow is unaffected (HubDB / page editor / file manager still work the same way).
+2. In `EDITOR_GUIDE.md`, no changes needed, the editor workflow is unaffected (HubDB / page editor / file manager still work the same way).
 3. In `IT_HANDOFF.md`, add a note that GitHub Actions is now part of the deploy pipeline.
 
 ---
@@ -298,7 +298,7 @@ Once auto-sync is live, update the documentation:
 - If someone edits a file directly in HubSpot Design Manager, the change does NOT flow back to GitHub. The next git push will OVERWRITE the HubSpot change.
 - To avoid this: always edit locally, push via git. Or: when you've edited directly in HubSpot, `git pull` first AFTER pulling the change down via `hs cms fetch`.
 
-For most editorial work (HubDB, Files), this isn't an issue — those aren't part of the theme files. It's only an issue if someone edits HTML/CSS/JS directly in Design Manager.
+For most editorial work (HubDB, Files), this isn't an issue, those aren't part of the theme files. It's only an issue if someone edits HTML/CSS/JS directly in Design Manager.
 
 ---
 

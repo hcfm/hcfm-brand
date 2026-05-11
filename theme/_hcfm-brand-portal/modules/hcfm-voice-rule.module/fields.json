@@ -10,7 +10,7 @@
     "name": "rule_body",
     "label": "Rule explanation",
     "type": "richtext",
-    "default": "<p>\"The Family That Prays Together Stays Together\" — never \"intercessory familial communion.\" Catholic words are welcome; jargon is not.</p>",
+    "default": "<p>\"The Family That Prays Together Stays Together\", never \"intercessory familial communion.\" Catholic words are welcome; jargon is not.</p>",
     "help_text": "1-2 sentences explaining the rule with an example."
   }
 ]

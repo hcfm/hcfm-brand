@@ -1,4 +1,4 @@
-/* HCFM Brand Portal — Theme: _hcfm-brand-portal
+/* HCFM Brand Portal, Theme: _hcfm-brand-portal
  * Generated for HubSpot Theme system. Static asset URLs are absolute (point to Files Library).
  */
 
@@ -57,7 +57,7 @@
   --fs-eyebrow: 11px;     /* UPPERCASE caps tracking labels only */
   --fs-xs:      12px;     /* Tiny meta (timestamps, badges, footnotes) */
   --fs-sm:      14px;     /* Captions, dense data tables, secondary text */
-  --fs-base:    16px;     /* BODY DEFAULT — paragraphs, lists, card prose */
+  --fs-base:    16px;     /* BODY DEFAULT, paragraphs, lists, card prose */
   --fs-md:      18px;     /* Prominent card descriptions, callouts */
   --fs-lg:      20px;     /* Page intro / lead text */
   --fs-xl:      24px;     /* h3 size */
@@ -329,14 +329,14 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 /* Native symbol visuals */
 .sym-vis { position: relative; display: inline-block; }
 
-/* Hero Mark — Muted Gold (premium / reverent register, appropriate for the
+/* Hero Mark, Muted Gold (premium / reverent register, appropriate for the
    Symbol page where we explain the meaning of the mark). The source PNG is
    already Muted Gold, so no filter needed. */
 .sym-vis-mark img {
   width: 320px; height: 320px;
 }
 
-/* Layer 1 + 2 — user-provided transparent PNGs, rendered in Muted Gold */
+/* Layer 1 + 2, user-provided transparent PNGs, rendered in Muted Gold */
 .sym-visual-art {
   width: 100%;
   max-width: 420px;
@@ -345,7 +345,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   margin: 0 auto;
 }
 
-/* Father Peyton quote — readable italic, not the unreadable script */
+/* Father Peyton quote, readable italic, not the unreadable script */
 .peyton-quote {
   font-family: var(--font-body);
   font-size: var(--fs-md);
@@ -367,7 +367,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   margin-top: 6px;
 }
 
-/* Layer 3 — Floral Character: petals that suggest the Rose / Lily / Iris.
+/* Layer 3, Floral Character: petals that suggest the Rose / Lily / Iris.
    Mark rendered in Muted Gold; petals tone-matched in muted gold for cohesion. */
 .sym-vis-floral { padding: 40px; }
 .sym-vis-floral img {
@@ -384,7 +384,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .floral-petal-2 { width: 200px; height: 200px; top: 50%; right: -20px; transform: translateY(-50%) rotate(120deg); opacity: 0.7; }
 .floral-petal-3 { width: 200px; height: 200px; bottom: -10px; left: 50%; transform: translateX(-50%) rotate(240deg); opacity: 0.5; }
 
-/* Layer 4 — Moon and Light: the centre glows */
+/* Layer 4, Moon and Light: the centre glows */
 .sym-vis-moon { position: relative; padding: 40px; display: flex; align-items: center; justify-content: center; }
 .sym-vis-moon::before {
   content: '';
@@ -405,7 +405,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   position: relative; z-index: 2;
 }
 
-/* Layer 5 — Welcome and Invitation: concentric expanding rings */
+/* Layer 5, Welcome and Invitation: concentric expanding rings */
 .sym-vis-welcome { padding: 40px; }
 .sym-vis-welcome img {
   width: 280px; height: 280px;
@@ -549,15 +549,15 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .elt-row { display: grid; grid-template-columns: 240px 1fr; gap: 24px; padding: 20px; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; align-items: center; }
 .elt-demo { aspect-ratio: 16 / 9; background: var(--bg-page); border-radius: 4px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
 
-/* Thin border — actually thin, with type framed inside */
+/* Thin border, actually thin, with type framed inside */
 .elt-demo-border { padding: 12px; }
 .elt-border-frame { width: 90%; height: 80%; border: 2px solid var(--hcfm-muted-gold); border-radius: 2px; display: flex; align-items: center; justify-content: center; padding: 8px; }
 .elt-border-frame span { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-eyebrow); letter-spacing: 0.08em; text-transform: uppercase; color: var(--hcfm-blue); text-align: center; }
 
-/* Color fade — Yellow Gold to Black (the on-brand digital fade) */
+/* Color fade, Yellow Gold to Black (the on-brand digital fade) */
 .elt-demo-fade { background: linear-gradient(135deg, var(--hcfm-gold) 0%, #000 100%); }
 
-/* Curved shapes — actual abstract curves, NOT the mark */
+/* Curved shapes, actual abstract curves, NOT the mark */
 .elt-demo-curve { background: var(--bg-page); position: relative; overflow: hidden; }
 .elt-demo-curve::before, .elt-demo-curve::after { display: none; }
 .curve-shape { position: absolute; }
@@ -571,7 +571,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .elt-text p:last-child { margin: 0; }
 .elt-where { font-size: var(--fs-sm); color: var(--text-muted) !important; padding: 8px 12px; background: var(--bg-page); border-radius: 4px; border-left: 2px solid var(--hcfm-gold); }
 
-/* Worth doing / worth resisting — neutral, not green/red */
+/* Worth doing / worth resisting, neutral, not green/red */
 .elt-examples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; }
 .elt-ex { padding: 18px 22px; border-radius: 6px; background: var(--bg-page); border: 1px solid var(--rule); border-left: 3px solid var(--hcfm-gold); }
 .elt-ex-restraint { border-left-color: var(--text-quiet); background: #fff; }
@@ -626,7 +626,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .md-group-download:disabled { opacity: 0.5; cursor: progress; border-bottom-color: var(--text-muted); color: var(--text-muted); }
 
 .md-variants-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-/* The variant card is now an anchor — wrap entire card as the download trigger */
+/* The variant card is now an anchor, wrap entire card as the download trigger */
 .md-variant-link { display: block; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; padding: 16px; text-align: center; color: var(--text); text-decoration: none; transition: border-color 160ms, transform 160ms, box-shadow 160ms; cursor: pointer; }
 .md-variant-link:hover { border-color: var(--hcfm-gold); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); text-decoration: none; }
 /* Keep .md-variant for backward compat if it appears anywhere */
@@ -794,7 +794,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   .form-grid { grid-template-columns: 1fr; }
 }
 
-/* Downloads — Source Files admin tab styling */
+/* Downloads, Source Files admin tab styling */
 .dl-tab-admin { color: var(--hcfm-gold) !important; font-weight: 600 !important; }
 .dl-tab-lock { display: inline-block; width: 8px; height: 8px; background: var(--hcfm-gold); border-radius: 50%; margin-left: 6px; vertical-align: middle; }
 .dl-tab-admin.active { border-bottom-color: var(--hcfm-gold) !important; }
@@ -867,20 +867,20 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .chat-followups-h { display: block; width: 100%; font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin: 0 0 4px; }
 .chat-followups .chat-pill { font-size: var(--fs-eyebrow); }
 
-/* Topic-aware preface — "this connects to what you asked earlier" */
+/* Topic-aware preface, "this connects to what you asked earlier" */
 .chat-preface { font-size: var(--fs-eyebrow); color: var(--text-muted); font-style: italic; margin: 0 0 8px; padding: 6px 10px; background: rgba(255, 181, 0, 0.06); border-left: 2px solid var(--hcfm-gold); border-radius: 0 4px 4px 0; }
 .chat-preface em { font-style: normal; color: var(--hcfm-blue); font-weight: 600; }
 
-/* Multi-match synthesizer teaser — "Related angle: this also overlaps with X" */
+/* Multi-match synthesizer teaser, "Related angle: this also overlaps with X" */
 .chat-synth { font-size: var(--fs-xs); color: var(--text); margin: 12px 0 0; padding: 8px 10px; background: rgba(0, 71, 187, 0.04); border-left: 2px solid var(--hcfm-blue); border-radius: 0 4px 4px 0; }
 .chat-synth strong { color: var(--hcfm-blue); }
 .chat-pill-inline { display: inline-block; vertical-align: middle; margin-left: 4px; background: var(--hcfm-blue); color: #fff; border-color: var(--hcfm-blue); }
 .chat-pill-inline:hover { background: #003a99; border-color: #003a99; }
 
-/* Opening starter message — compact, no header decoration */
+/* Opening starter message, compact, no header decoration */
 .chat-starter-intro { font-size: var(--fs-sm); color: var(--text-muted); margin: 0 0 6px; line-height: 1.45; }
 
-/* Bot comprehension check — "did that help?" footer */
+/* Bot comprehension check, "did that help?" footer */
 .chat-confirm { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .chat-confirm-h { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin: 0 6px 0 0; flex-basis: 100%; }
 .chat-pill-confirm { background: var(--bg-page); border-color: var(--rule); }
@@ -962,7 +962,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 
 
 /* MS Forms feedback embed (Phase 4A) */
-/* .ms-forms-embed retired — both Help-page forms now use the unified
+/* .ms-forms-embed retired, both Help-page forms now use the unified
    .contact-form pattern with JS-driven mailto submission. */
 
 /* HubSpot Memberships gate (Phase 5) */

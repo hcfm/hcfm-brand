@@ -11,7 +11,7 @@
     "label": "Heading",
     "type": "text",
     "default": "The 10 Beads of the Rosary",
-    "help_text": "The layer's title — appears as H2."
+    "help_text": "The layer's title, appears as H2."
   },
   {
     "name": "body_text",

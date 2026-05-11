@@ -1,4 +1,4 @@
-# HCFM Brand Portal Chatbot — LLM-backed architecture proposal
+# HCFM Brand Portal Chatbot, LLM-backed architecture proposal
 
 **Status:** Proposal for review. Not yet implemented. Builds on the
 v3.1 keyword-matched bot that's currently live at
@@ -8,8 +8,8 @@ v3.1 keyword-matched bot that's currently live at
 keyword overlap → one canned answer. The v3 deep answers (2,500-3,500
 chars each) plus the v3.1 session/name/preface layer simulate
 conversation but can't actually reason. To get the behavior Emmanuel
-described — *"thinks ahead of the user, references by name, adapts
-answers to context, feels like talking to a colleague"* — we need an
+described, *"thinks ahead of the user, references by name, adapts
+answers to context, feels like talking to a colleague"*, we need an
 LLM call in the loop.
 
 This doc covers the architecture, the tradeoffs, and the implementation
@@ -41,7 +41,7 @@ Anything beyond it requires an LLM in the loop.**
 Concrete behaviors that become possible:
 
 1. **Novel questions get answered.** "Can I put the Yellow Gold logo on a
-   Marian Blue background for our March Marian feast?" — current bot has
+   Marian Blue background for our March Marian feast?", current bot has
    no entry for this. LLM synthesizes from: Yellow Gold logo rules + Marian
    Blue accent rules + Marian feast imagery direction + the WCAG contrast
    table. Returns a specific yes/no/conditional answer with the reasoning.
@@ -50,12 +50,12 @@ Concrete behaviors that become possible:
    should I use" gets the technical answer (Whitney 600/700, Calluna
    regular, weight pairing, Playlist Script seasoning rule). A non-designer
    ministry-center director asking the same question gets "use Whitney for
-   headlines, Calluna for body text — Canva templates are pre-set so you
+   headlines, Calluna for body text, Canva templates are pre-set so you
    don't need to think about this" plus a link to the Canva template kit.
 
 3. **Specific situations, not just topics.** "We're doing a Father's Day
-   campaign in June targeting young dads with kids under 5 — what's our
-   brand stance for this?" — current bot has no entry for this. LLM
+   campaign in June targeting young dads with kids under 5, what's our
+   brand stance for this?", current bot has no entry for this. LLM
    reasons from: brand voice + photography categories + Marian/family
    register + platform dimensions + 60-30-10 rule for digital + the
    younger-audience research. Returns a specific brief.
@@ -67,20 +67,20 @@ Concrete behaviors that become possible:
    to the blue-yellow pairing specifically…"
 
 5. **Cross-document reasoning.** Ministry-center asks "we're doing a
-   Family Rosary print booklet for a Filipino parish — Tagalog text,
+   Family Rosary print booklet for a Filipino parish, Tagalog text,
    donor sponsorship logos on back cover, photos of real families.
-   Which fonts and palette weights?" — LLM combines the print-context
+   Which fonts and palette weights?", LLM combines the print-context
    palette (White 60%, HCFM Blue 30%, Muted Gold 10%) + stationery
    specs + co-branding rules + photography rules + Filipino cultural
    notes. Current bot would need 5 separate pre-written answers
    stitched together by the user.
 
 6. **Genuine "didn't understand" handling.** Current bot is binary:
-   confident match or "I don't know." LLM can say "I'm not sure — is
+   confident match or "I don't know." LLM can say "I'm not sure, is
    this about [interpretation A] or [interpretation B]?" and let the
    user clarify.
 
-7. **Same answer in three languages.** Translation becomes trivial —
+7. **Same answer in three languages.** Translation becomes trivial ,
    prompt the LLM in Spanish or Tagalog and get the same answer in
    that language, grounded in the same brand knowledge.
 
@@ -89,7 +89,7 @@ Concrete behaviors that become possible:
 ## 3. The architecture (RAG with answer grounding)
 
 This is the standard "retrieval-augmented generation" pattern. The LLM
-isn't doing brand-design improv — it's a senior brand consultant who has
+isn't doing brand-design improv, it's a senior brand consultant who has
 the brand book open in front of them.
 
 ```
@@ -129,13 +129,13 @@ the brand book open in front of them.
   network call changes. Session state (name/role/history) is still
   client-side, sent in each request.
 - **Edge function does retrieval.** Keeps the API key off the client
-  (critical — never expose Anthropic keys in browser JS). Lets us run
+  (critical, never expose Anthropic keys in browser JS). Lets us run
   retrieval and grounding logic server-side.
 - **HubDB stays the source of truth.** The v3 KB rows become the
   retrieval corpus. No new database. Edits in HubSpot reflect in the
   bot's answers within minutes.
 - **Streaming**, not batch. User sees the answer appearing word-by-word
-  like ChatGPT — feels alive, not laggy.
+  like ChatGPT, feels alive, not laggy.
 
 ### What gets sent to the LLM each turn
 
@@ -158,7 +158,7 @@ Name: {name}  Role: {role}
 Earlier in this conversation they've asked about: {topics}
 
 ## BRAND KNOWLEDGE
-{retrieved KB entries — top 5 most-relevant v3 rewrites + brand-system summary}
+{retrieved KB entries, top 5 most-relevant v3 rewrites + brand-system summary}
 
 ## USER QUERY
 {query}
@@ -178,7 +178,7 @@ session = under 5K tokens.
 
 LLM returns HTML (we constrain via the prompt). Browser injects it into
 the chat panel exactly like it does today. The existing `parseAnswer`,
-`buildPreface`, etc. logic still runs — the LLM's output can have the
+`buildPreface`, etc. logic still runs, the LLM's output can have the
 same `<div class="chat-followups-data">` hidden marker if we want it to
 suggest specific KB topics as next pills.
 
@@ -186,7 +186,7 @@ suggest specific KB topics as next pills.
 
 ## 4. The three deployment options (with tradeoffs)
 
-### Option A — HubSpot Serverless Function (simplest, slowest)
+### Option A, HubSpot Serverless Function (simplest, slowest)
 
 HubSpot has serverless functions inside CMS Hub. We add a `.functions/`
 folder to the theme with a TypeScript handler. URL is automatic:
@@ -196,12 +196,12 @@ folder to the theme with a TypeScript handler. URL is automatic:
 (`hs cms upload`). HubSpot manages secrets via a UI.
 
 **Cons:** Slower cold starts (~1-2s). Limited to 10s execution per
-request — we'd need to ensure streaming responses keep the connection
+request, we'd need to ensure streaming responses keep the connection
 warm. May not support SSE natively (would need to check).
 
 **Cost:** Included in CMS Hub Pro+ (which we already pay for).
 
-### Option B — Cloudflare Worker (fastest, cheapest)
+### Option B, Cloudflare Worker (fastest, cheapest)
 
 Spin up a Cloudflare Worker at `chat.hcfm.org` or similar. ~10ms cold
 start. Native SSE support. Free tier handles 100,000 requests/day.
@@ -213,7 +213,7 @@ CORS for hcfm.org → workers.dev. Slightly more setup.
 
 **Cost:** Free for our volume. Anthropic API costs separate (below).
 
-### Option C — Vercel / Netlify Function (middle ground)
+### Option C, Vercel / Netlify Function (middle ground)
 
 Deploy the same handler as a Vercel or Netlify function. Similar to
 Cloudflare in performance, slightly more setup than HubSpot serverless.
@@ -276,31 +276,31 @@ This is the most important section. An ungrounded LLM is dangerous on a
 public brand portal because it will confidently invent rules that don't
 exist in the brand book.
 
-**Rule 1 — Retrieval is mandatory.** Every query triggers a retrieval
+**Rule 1, Retrieval is mandatory.** Every query triggers a retrieval
 against the v3 KB before the LLM call. The LLM sees the actual brand
 text in its context window.
 
-**Rule 2 — Strict prompt.** The system instruction includes:
+**Rule 2, Strict prompt.** The system instruction includes:
 
 > If the brand knowledge above doesn't directly cover the user's
-> question, say "I don't have that documented in the brand book —
+> question, say "I don't have that documented in the brand book ,
 > let me put you in touch with Victoria and Emmanuel directly" and
 > escalate. Never invent rules.
 
-**Rule 3 — Citations.** The LLM is asked to cite which KB entry each
+**Rule 3, Citations.** The LLM is asked to cite which KB entry each
 claim came from, formatted as `<sup class="kb-cite">[Yellow Gold rules]</sup>`.
 The browser renders these as small interactive footnotes that scroll
 to the source entry when clicked. Builds trust + audit trail.
 
-**Rule 4 — Refusal on edge cases.** The system prompt explicitly lists
+**Rule 4, Refusal on edge cases.** The system prompt explicitly lists
 "never claim research findings without specific citation; never invent
 historical claims about Father Peyton; never speculate about
-ministry-center cultural sensitivities — defer to local leadership."
+ministry-center cultural sensitivities, defer to local leadership."
 
-**Rule 5 — Human escalation path.** Every answer has a quiet "doesn't
+**Rule 5, Human escalation path.** Every answer has a quiet "doesn't
 match what you needed? → email Victoria & Emmanuel" link.
 
-**Rule 6 — Offline review.** Every query + response is logged
+**Rule 6, Offline review.** Every query + response is logged
 (PII-stripped) for monthly review. We catch hallucinations or bad
 behavior post-hoc and tune the prompt.
 
@@ -339,11 +339,11 @@ HCFM serves Catholic families across 18 countries. Some considerations:
 
 We do NOT switch off the keyword bot. We layer the LLM on top.
 
-### Phase 0 — Today
+### Phase 0, Today
 v3.1 keyword bot live. Deep answers + name + preface + followups.
 Baseline working, no LLM involvement.
 
-### Phase 1 — Add LLM as fallback (~2 days work)
+### Phase 1, Add LLM as fallback (~2 days work)
 When the keyword matcher returns `null` (no confident match), instead
 of "I don't have a confident answer," fall through to the LLM. User
 sees a streamed response. Logging captures every fallback query so we
@@ -352,25 +352,25 @@ can review what novel questions are being asked.
 **Risk:** Very low. LLM only fires for unmatched queries. Cost ~$0.01
 per fallback. If quality is bad, easy to revert.
 
-### Phase 2 — Promote LLM to primary, keep KB as ground (~2 days)
+### Phase 2, Promote LLM to primary, keep KB as ground (~2 days)
 Every query triggers retrieval + LLM. The 19 deep v3 entries become
-the LLM's "voice training" — it learns to write like that register.
+the LLM's "voice training", it learns to write like that register.
 Keyword bot kept as cache for repeat questions.
 
 **Risk:** Medium. Need to confirm answer quality is at or above v3.1.
 A/B test in production for a week before fully cutting over.
 
-### Phase 3 — Personalization layer (~3 days)
+### Phase 3, Personalization layer (~3 days)
 Use the captured role to actually tailor answers. "Marketing lead in
 Philippines" gets answers framed for that role automatically. Add a
 small admin UI where Victoria can flag "good answer" / "bad answer"
-on the query log — feedback loop into prompt tuning.
+on the query log, feedback loop into prompt tuning.
 
-### Phase 4 — Multi-language (~1 day per language)
+### Phase 4, Multi-language (~1 day per language)
 Spanish for Latin America centers. Tagalog for Philippines. No code
-change beyond a language picker — the LLM translates on the fly.
+change beyond a language picker, the LLM translates on the fly.
 
-### Phase 5 — Browse-aware (~1-2 days)
+### Phase 5, Browse-aware (~1-2 days)
 When the user is on a specific brand-portal page (e.g. Colors), the
 bot knows that. Questions like "is this allowed?" or "explain this
 more" become possible because the bot has the page context.
@@ -398,7 +398,7 @@ Most value lands in phases 1 and 2 (the first 4 days).
     └── hcfm-scripts.js          ← Modify handleChatQuery to POST + stream
 ```
 
-### The Worker handler (sketch — not full code)
+### The Worker handler (sketch, not full code)
 
 ```typescript
 import Anthropic from '@anthropic-ai/sdk';
@@ -518,7 +518,7 @@ async function handleChatQueryLLM(query) {
 - If quality is bad: stay on v3.1 and document why
 
 This is the safest way to learn whether the LLM architecture actually
-delivers on the "mini AI" vision Emmanuel described — without
+delivers on the "mini AI" vision Emmanuel described, without
 committing to a full rewrite based on hope.
 
 ---
@@ -549,7 +549,7 @@ committing to a full rewrite based on hope.
 6. **The "Catholic sensitivity" line.** Should the LLM be allowed to
    discuss anything beyond brand-design? Or strict: "this is a brand
    bot, for theology / pastoral questions please contact your ministry
-   center"? My instinct is strict — keeps the bot in its lane and
+   center"? My instinct is strict, keeps the bot in its lane and
    reduces risk.
 
 7. **Budget ceiling.** What's the monthly cap? Recommend $50 for

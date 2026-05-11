@@ -1,4 +1,4 @@
-# HCFM Brand Portal — Workflow Guide
+# HCFM Brand Portal, Workflow Guide
 
 **Audience:** Anyone who needs to understand how the brand portal works, where files live, and how changes get made.
 **Last updated:** 2026-05-11
@@ -84,7 +84,7 @@ A single source of truth for **how the HCFM Brand Portal operates**. Read this f
 
 ## The three places content lives
 
-### 1. Design Manager (theme code) — `_hcfm-brand-portal/`
+### 1. Design Manager (theme code), `_hcfm-brand-portal/`
 
 Path in HubSpot UI: **Content → Design Manager → `_hcfm-brand-portal`**
 Direct URL: `https://app.hubspot.com/design-manager/275132`
@@ -110,7 +110,7 @@ _hcfm-brand-portal/
 
 This is where the **technical build** lives. Most non-technical edits should go through the Editor's Guide, not direct code edits.
 
-### 2. File Manager (assets + downloads) — `_hcfm-brand/`
+### 2. File Manager (assets + downloads), `_hcfm-brand/`
 
 Path in HubSpot UI: **Content → Files → `_hcfm-brand`**
 Direct URL: `https://app.hubspot.com/files/275132`
@@ -148,13 +148,13 @@ Three tables drive dynamic content:
 | HCFM FAQ | 282697015 | 17 | FAQ section |
 | HCFM Ministry Centers | 282663491 | 24 | Sub-ministry directory cards |
 
-Editing rows in HubDB is the fastest way to update dynamic content — no code, no developer needed.
+Editing rows in HubDB is the fastest way to update dynamic content, no code, no developer needed.
 
 ---
 
 ## The standard workflow for changes
 
-### A. Editor workflow (Marketing team — no code)
+### A. Editor workflow (Marketing team, no code)
 
 ```
 You spot something to fix
@@ -199,7 +199,7 @@ GitHub history captures the change forever
 ```
 
 Once GitHub auto-sync is configured (see [GITHUB_AUTO_SYNC.md](GITHUB_AUTO_SYNC.md)),
-the **commit + push** step replaces the **CLI upload** step — push to main, HubSpot deploys automatically.
+the **commit + push** step replaces the **CLI upload** step, push to main, HubSpot deploys automatically.
 
 ---
 
@@ -222,7 +222,7 @@ HubSpot also keeps its own revision history per file (Design Manager) and per ro
 |---|---|
 | **Emmanuel Epau** | Full HubSpot Super Admin; full GitHub repo access; can edit anything |
 | **Victoria Hassan** | HubSpot Marketing access; can edit HubDB, Pages, Files, modules; cannot delete the theme |
-| **Margaret Dwyer Hogan** | (Set as needed) — HubSpot Marketing access |
+| **Margaret Dwyer Hogan** | (Set as needed), HubSpot Marketing access |
 | **Colum Devine** | HubSpot Marketing access (read-mostly for now) |
 | **IT team** | Standard HubSpot admin access on a need basis |
 | **Ministry-tier members** (added per request) | Auto-unlocks Tier 1 Downloads (logo packs, templates) when signed in |

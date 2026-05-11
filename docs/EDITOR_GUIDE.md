@@ -1,4 +1,4 @@
-# HCFM Brand Portal — Editor's Guide
+# HCFM Brand Portal, Editor's Guide
 
 **For:** Marketing team members (Victoria, Margaret, Colum, and anyone with HubSpot Marketing access) who want to edit content on the brand portal **without writing code**.
 **Last updated:** 2026-05-11
@@ -17,7 +17,7 @@ You do NOT need: any coding knowledge, the command line, or anything installed o
 
 ---
 
-## Quick reference — what to edit, where
+## Quick reference, what to edit, where
 
 | You want to change… | Go to | How long it takes |
 |---|---|---|
@@ -28,19 +28,19 @@ You do NOT need: any coding knowledge, the command line, or anything installed o
 | An uploaded image | **Content → Files → `_hcfm-brand/assets/`** → upload new with same name | 1 min |
 | A downloadable file (PDF, Word doc) | **Content → Files → `_hcfm-brand/downloads/`** → upload | 1 min |
 | The page title or URL | **Content → Website Pages** → click HCFM Brand Portal → Edit | 2 min |
-| Copy on Symbol / Voice / Design Elements sections | **Page editor** (after module refactor — see below) | 5 min |
+| Copy on Symbol / Voice / Design Elements sections | **Page editor** (after module refactor, see below) | 5 min |
 | Copy on other sections (most of them) | **Content → Design Manager → templates/hcfm-brand-portal.html** | 10 min, technical |
 
 ---
 
-## Editing the chatbot — the most common edit
+## Editing the chatbot, the most common edit
 
-The chatbot is driven by a HubDB table. **You can change any answer the chatbot gives, add new questions, or remove obsolete entries — all without writing code.**
+The chatbot is driven by a HubDB table. **You can change any answer the chatbot gives, add new questions, or remove obsolete entries, all without writing code.**
 
 ### Step-by-step
 
 1. Sign in to [app.hubspot.com](https://app.hubspot.com).
-2. In the left sidebar, click **Content** (3rd icon down — looks like a stack of pages).
+2. In the left sidebar, click **Content** (3rd icon down, looks like a stack of pages).
 3. From the Content menu, click **HubDB**.
 4. You'll see a list of tables. Click **HCFM Chatbot Knowledge Base** (271 rows).
 5. You're now looking at the chatbot's entire knowledge. Each row is one possible Q&A.
@@ -51,7 +51,7 @@ The chatbot is driven by a HubDB table. **You can change any answer the chatbot 
 |---|---|
 | `keywords` | Comma-separated phrases the chatbot looks for in user questions. **Example:** `why yellow gold, why elevated gold, gold change 2026`. The chatbot matches user input against these. |
 | `answer` | What the chatbot says back. You can use HTML tags: `<p>`, `<strong>`, `<em>`, `<ul>`, `<li>`. |
-| `category` | Topic bucket — used for organizing. Pick from existing values: `colors`, `logos`, `typography`, `voice`, `imagery`, etc. |
+| `category` | Topic bucket, used for organizing. Pick from existing values: `colors`, `logos`, `typography`, `voice`, `imagery`, etc. |
 | `priority` | Tie-breaker when multiple rows match. Higher wins. Use 1-100 for old entries, 200+ for new entries you want to override old ones. |
 
 ### Adding a new chatbot answer
@@ -59,12 +59,12 @@ The chatbot is driven by a HubDB table. **You can change any answer the chatbot 
 1. Click **"Add row"** (top right).
 2. Fill in keywords, answer, category, priority.
 3. Click **Save**.
-4. **IMPORTANT:** Click **"Publish"** at the top right of the table. Until you publish, your change is just a draft — the live chatbot won't see it.
+4. **IMPORTANT:** Click **"Publish"** at the top right of the table. Until you publish, your change is just a draft, the live chatbot won't see it.
 5. Wait ~1 minute. The chatbot is updated.
 
 ### Editing an existing answer
 
-1. Find the row (use the search box at the top — search by keyword or answer text).
+1. Find the row (use the search box at the top, search by keyword or answer text).
 2. Click the row to expand.
 3. Edit the field(s).
 4. Click **Save**.
@@ -114,14 +114,14 @@ The 24 ministry cards on the Ministry Centers section come from HubDB.
 
 | Column | What |
 |---|---|
-| `code` | Internal code — must match the folder name in File Manager (e.g. `03_FamRosary`). **Don't change this unless you're also updating files.** |
+| `code` | Internal code, must match the folder name in File Manager (e.g. `03_FamRosary`). **Don't change this unless you're also updating files.** |
 | `name` | Display name (e.g. "Family Rosary") |
 | `region` | Region label (e.g. "Easton, MA" or "Manila, Philippines") |
 | `priority` | Sort order in the directory grid |
 
 If you add a new ministry, you also need to:
 1. Upload its logo files to **Files → `_hcfm-brand/assets/previews/ministries/{NewCode}/`**
-2. Update `_hcfm-brand/assets/ministry-manifest.json` to list the files (this is a small JSON file — ask Emmanuel)
+2. Update `_hcfm-brand/assets/ministry-manifest.json` to list the files (this is a small JSON file, ask Emmanuel)
 
 For most cases, editing existing rows is what you'll do.
 
@@ -164,7 +164,7 @@ If a brand color changes (e.g., Yellow Gold gets a slight tweak), update it in o
 
 To replace an image (logo, photo, etc.) with a new version:
 
-### Option 1 — upload with the same filename (page auto-updates)
+### Option 1, upload with the same filename (page auto-updates)
 
 1. **Content → Files → `_hcfm-brand` → assets → (the relevant subfolder)**.
 2. Find the file you want to replace.
@@ -172,9 +172,9 @@ To replace an image (logo, photo, etc.) with a new version:
 4. Upload the new file. Same filename, new content.
 5. Wait ~1 minute for the CDN cache to refresh.
 
-This works because the URL stays the same — the brand portal still points to it. Just the content of the file changed.
+This works because the URL stays the same, the brand portal still points to it. Just the content of the file changed.
 
-### Option 2 — upload a new file with a different name
+### Option 2, upload a new file with a different name
 
 If the new image has a different name, you'll also need to update the reference in the template (technical step).
 
@@ -191,7 +191,7 @@ To swap out a PDF, Word document, or any download:
 3. To add a new file: click **Upload files** (top right).
 4. After upload, click the file → **Copy URL** (right sidebar).
 
-If you added a new file (not replaced an existing one), you'll need to add a link to it in the page. That's a small Design Manager edit — see below.
+If you added a new file (not replaced an existing one), you'll need to add a link to it in the page. That's a small Design Manager edit, see below.
 
 ---
 
@@ -239,7 +239,7 @@ For SEO and page-level settings:
 
 ---
 
-## Editing module-based sections — Symbol, Voice, Design Elements, etc.
+## Editing module-based sections, Symbol, Voice, Design Elements, etc.
 
 The brand portal includes a set of **reusable HubSpot modules** for the most-edited sections. Each module has a small set of fields (heading, body text, image, etc.) that you can edit without touching code. **This is the easiest, safest way to update copy.**
 
@@ -258,7 +258,7 @@ The brand portal includes a set of **reusable HubSpot modules** for the most-edi
 
 Modules can be edited in two places, depending on how the template uses them:
 
-#### Path A — Edit module defaults in Design Manager (technical but works for ALL modules)
+#### Path A, Edit module defaults in Design Manager (technical but works for ALL modules)
 
 1. **Content → Design Manager**.
 2. In the left sidebar, expand **`_hcfm-brand-portal`** → **`modules`**.
@@ -269,7 +269,7 @@ Modules can be edited in two places, depending on how the template uses them:
 
 This affects every NEW use of the module. Existing instances on the page keep their saved field values.
 
-#### Path B — Edit a specific module instance in the page editor (no code)
+#### Path B, Edit a specific module instance in the page editor (no code)
 
 1. **Content → Website Pages → HCFM Brand Portal → Edit**.
 2. The page opens in a visual editor.
@@ -316,7 +316,7 @@ The module *definitions* (the HTML and field schema) are technical. Don't edit `
 - You've tested the change in a draft first
 - You're prepared to roll back if something breaks
 
-For all routine content edits, **use Path B above** — the page editor's visual interface. It's safe, reversible, and doesn't require any code knowledge.
+For all routine content edits, **use Path B above**, the page editor's visual interface. It's safe, reversible, and doesn't require any code knowledge.
 
 ---
 
@@ -324,7 +324,7 @@ For all routine content edits, **use Path B above** — the page editor's visual
 
 Some things are technically editable in Design Manager but are easy to break. Don't touch these unless you know what you're doing:
 
-- **JavaScript files** (`js/hcfm-scripts.js`) — chatbot logic, downloads, interactive features
+- **JavaScript files** (`js/hcfm-scripts.js`), chatbot logic, downloads, interactive features
 - **HubL `{% module %}` tags** in the template
 - **Membership group IDs** in JS files (Tier 1 / Tier 2 unlock logic)
 - **The manifest.json file** in File Manager (controls ministry logo galleries)
@@ -358,7 +358,7 @@ If you uploaded a bad replacement, re-upload the original (you keep it locally, 
 
 ---
 
-## When in doubt — ask the chatbot
+## When in doubt, ask the chatbot
 
 Open [hcfm.org/brand](https://www.hcfm.org/brand), click "Ask the brand" (bottom-right), and ask the chatbot. It can explain rules, point to the right section, and tell you what's allowed.
 
@@ -366,7 +366,7 @@ For things outside the chatbot's scope, use the **Help** section's forms to emai
 
 ---
 
-## Cheat sheet — the URLs you'll bookmark
+## Cheat sheet, the URLs you'll bookmark
 
 | Tool | URL |
 |---|---|

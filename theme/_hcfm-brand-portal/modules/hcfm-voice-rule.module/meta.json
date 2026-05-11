@@ -3,7 +3,7 @@
   "css_assets": [],
   "external_js": [],
   "global": false,
-  "help_text": "A single rule in the HCFM voice and tone section — like 'Plain English' or 'Specific over general'. Use one module per rule.",
+  "help_text": "A single rule in the HCFM voice and tone section, like 'Plain English' or 'Specific over general'. Use one module per rule.",
   "host_template_types": [
     "PAGE",
     "BLOG_POST",

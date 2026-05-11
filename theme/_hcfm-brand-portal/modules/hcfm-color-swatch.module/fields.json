@@ -4,7 +4,7 @@
     "label": "Role label (small caps)",
     "type": "text",
     "default": "Foundation",
-    "help_text": "Tier or function — e.g. Foundation, Identifier, Energy"
+    "help_text": "Tier or function, e.g. Foundation, Identifier, Energy"
   },
   {
     "name": "color_name",
