@@ -119,7 +119,13 @@
     `).join('');
   }
 
-  fetch('https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/ministry-manifest.json')
+  /* Cache-busting: HubSpot's CDN aggressively caches the JSON file, so any
+     time we update the manifest (e.g., add a ministry, rename a logo file),
+     browsers can serve a stale version. The `cache: 'no-store'` option tells
+     the browser to bypass its HTTP cache for this specific fetch. Adding a
+     timestamp query parameter ensures the CDN intermediary doesn't serve a
+     cached response either. */
+  fetch('https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/ministry-manifest.json?v=' + Date.now(), { cache: 'no-store' })
     .then(r => r.json())
     .then(data => {
       ministryManifest = data;

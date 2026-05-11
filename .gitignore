@@ -32,3 +32,5 @@ hubspot.config.yml
 # Intermediate HubDB fetch results (have tokens / transient data)
 hubdb_*_check*.json
 hubdb_*_fetched.json
+/The Father Peyton Center/
+/Daily Homily Blog and Video.png
