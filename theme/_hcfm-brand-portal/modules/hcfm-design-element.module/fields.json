@@ -17,7 +17,7 @@
     "name": "where_to_use",
     "label": "Where to use this (optional callout)",
     "type": "richtext",
-    "default": "<p><strong>Where to use:</strong> Cards, photo frames, quote callouts, section dividers.</p>",
-    "help_text": "Optional gold-bordered callout listing specific use cases."
+    "default": "<p class=\"elt-where\">Where it works: Cards, photo frames, quote callouts, section dividers.</p>",
+    "help_text": "Optional gold-bordered callout listing specific use cases. Should be wrapped in <p class=\"elt-where\">...</p> to get the gold-border styling."
   }
 ]

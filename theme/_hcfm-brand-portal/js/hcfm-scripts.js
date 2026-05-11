@@ -1317,14 +1317,9 @@
     ),
     'vhassan@hcfm.org,eepau@hcfm.org');
 
-  wireHelpForm('feedbackForm', 'HCFM Brand · Feedback',
-    (fd) => (
-      `From: ${fd.get('name')} <${fd.get('email')}>\n` +
-      `Topic: ${fd.get('topic')}\n\n` +
-      `${fd.get('feedback')}\n\n` +
-      `— Sent from the HCFM Brand Portal feedback form`
-    ),
-    'vhassan@hcfm.org,eepau@hcfm.org');
+  /* Note: the feedback form now hyperlinks to the existing Microsoft Forms
+     feedback channel (same one ministry centers already use). No JS handler
+     needed — it's just an anchor tag with target="_blank". */
 
   /* ---------- Language switcher placeholder ---------- */
   document.querySelectorAll('.lang-btn').forEach(btn => {

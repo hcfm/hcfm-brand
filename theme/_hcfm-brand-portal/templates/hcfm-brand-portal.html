@@ -1004,20 +1004,20 @@
       <div class="elements-list">
         <article class="elt-row">
           <div class="elt-demo elt-demo-border"><div class="elt-border-frame"><span>Holy Cross Family Ministries</span></div></div>
-          <div class="elt-text">
-            <h3>Thin Border</h3>
-            <p>A thin frame in a brand color. Use to enclose a card, a photo block, or a quote. Keep it 3 to 4 pixels maximum. Use Muted Gold for traditional, reverent contexts (certificates, donor cards, formal print). Use Yellow Gold for digital and energetic applications.</p>
-            <p class="elt-where">Where it works: certificate edges, donor acknowledgement cards, prayer-card edges, formal invitations, framed quotes.</p>
-          </div>
+          {% module "elt_thin_border" path="../modules/hcfm-design-element",
+            element_title="Thin Border",
+            element_body="<p>A thin frame in a brand color. Use to enclose a card, a photo block, or a quote. Keep it 3 to 4 pixels maximum. Use Muted Gold for traditional, reverent contexts (certificates, donor cards, formal print). Use Yellow Gold for digital and energetic applications.</p>",
+            where_to_use="<p class=\"elt-where\">Where it works: certificate edges, donor acknowledgement cards, prayer-card edges, formal invitations, framed quotes.</p>"
+          %}
         </article>
 
         <article class="elt-row">
           <div class="elt-demo elt-demo-fade"></div>
-          <div class="elt-text">
-            <h3>Color Fade Effect</h3>
-            <p>A gradient using only colors within the brand palette. Yellow Gold to Black is the default for digital and social. HCFM Blue to White works for formal moments. Never introduce outside colors into a brand fade.</p>
-            <p class="elt-where">Where it works: hero backgrounds, social-media banners, video lower thirds, campaign covers. Avoid in body content.</p>
-          </div>
+          {% module "elt_color_fade" path="../modules/hcfm-design-element",
+            element_title="Color Fade Effect",
+            element_body="<p>A gradient using only colors within the brand palette. Yellow Gold to Black is the default for digital and social. HCFM Blue to White works for formal moments. Never introduce outside colors into a brand fade.</p>",
+            where_to_use="<p class=\"elt-where\">Where it works: hero backgrounds, social-media banners, video lower thirds, campaign covers. Avoid in body content.</p>"
+          %}
         </article>
 
         <article class="elt-row">
@@ -1026,20 +1026,20 @@
             <span class="curve-shape curve-shape-2"></span>
             <span class="curve-shape curve-shape-3"></span>
           </div>
-          <div class="elt-text">
-            <h3>Curved Shapes</h3>
-            <p>Soft, rounded shapes that supply visual interest without harsh lines. Half-circles framing photographs, gentle quarter-circle text containers, soft arcs as section dividers. They support a layout — they are not the mark. Use them as containers, frames, and accents that echo the brand's organic geometry while leaving the mark untouched as the singular identifier.</p>
-            <p class="elt-where">Where it works: photo frames in social posts, headline backgrounds, section dividers, accent shapes behind type.</p>
-          </div>
+          {% module "elt_curved_shapes" path="../modules/hcfm-design-element",
+            element_title="Curved Shapes",
+            element_body="<p>Soft, rounded shapes that supply visual interest without harsh lines. Half-circles framing photographs, gentle quarter-circle text containers, soft arcs as section dividers. They support a layout — they are not the mark. Use them as containers, frames, and accents that echo the brand's organic geometry while leaving the mark untouched as the singular identifier.</p>",
+            where_to_use="<p class=\"elt-where\">Where it works: photo frames in social posts, headline backgrounds, section dividers, accent shapes behind type.</p>"
+          %}
         </article>
 
         <article class="elt-row">
           <div class="elt-demo elt-demo-overlay"><span>Readable text on photo</span></div>
-          <div class="elt-text">
-            <h3>Dark Overlays</h3>
-            <p>Black transparent overlays on photos. Essential for making text readable over images. The single most-used element in HCFM digital design.</p>
-            <p class="elt-where">Adjust opacity by eye for each design. Light images with sparse text need less; busy images with longer copy need more. The rule is readability, not a specific number.</p>
-          </div>
+          {% module "elt_dark_overlays" path="../modules/hcfm-design-element",
+            element_title="Dark Overlays",
+            element_body="<p>Black transparent overlays on photos. Essential for making text readable over images. The single most-used element in HCFM digital design.</p>",
+            where_to_use="<p class=\"elt-where\">Adjust opacity by eye for each design. Light images with sparse text need less; busy images with longer copy need more. The rule is readability, not a specific number.</p>"
+          %}
         </article>
       </div>
 
@@ -1587,26 +1587,12 @@
           <p class="form-foot">Opens your email client with the request pre-filled. Replies within two business days.</p>
         </form>
 
-        <form class="contact-form" id="feedbackForm" novalidate>
+        <div class="contact-form contact-form-cta">
           <h3>Send feedback</h3>
-          <p class="form-sub">The brand system evolves. Tell us what's missing, what's confusing, what could be clearer, or what you'd like to see added.</p>
-          <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
-          <input type="email" name="email" placeholder="Your email" autocomplete="email" required>
-          <select name="topic" required>
-            <option value="" disabled selected>What this is about</option>
-            <option>Colors</option>
-            <option>Logos / Symbol</option>
-            <option>Typography</option>
-            <option>Voice and tone</option>
-            <option>Imagery / photography</option>
-            <option>Downloads / templates</option>
-            <option>Ministry-center specific question</option>
-            <option>Something else</option>
-          </select>
-          <textarea name="feedback" placeholder="Your feedback — be as specific as you can about which section or rule" rows="4" required></textarea>
-          <button type="submit" class="btn btn-primary">Send feedback →</button>
-          <p class="form-foot">Same channel, same response time. We read every one.</p>
-        </form>
+          <p class="form-sub">The brand system evolves. Tell us what's missing, what's confusing, what could be clearer, or what you'd like to see added — same Microsoft Forms feedback channel the Easton team and ministry centers already use.</p>
+          <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=KKJPDKgLzU2Hn2-25tYDCkf7HD1tm-tJtB-UhoW4DPdUQldHM01CRVRMQ05UUUM1N1VEM1JFRUNPVy4u" target="_blank" rel="noopener" class="btn btn-primary">Open feedback form →</a>
+          <p class="form-foot">Opens in a new tab. Responses route to the Easton team via the shared Microsoft Forms inbox — same channel ministry centers use internally.</p>
+        </div>
       </div>
 
       <div class="info-block">

@@ -785,6 +785,10 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .contact-form select { appearance: none; -webkit-appearance: none; -moz-appearance: none; cursor: pointer; padding-right: 36px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%235a5a5a' d='M6 8L0 0h12z'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
 .contact-form select:disabled { opacity: 0.6; cursor: not-allowed; }
 .contact-form .btn { margin-top: 6px; align-self: flex-start; padding: 11px 22px; }
+/* CTA variant for forms that link OUT (e.g. MS Forms feedback) instead of submitting inline */
+.contact-form-cta { justify-content: center; }
+.contact-form-cta .btn { margin-top: 20px; padding: 14px 28px; font-size: var(--fs-base); }
+.contact-form-cta .form-foot { margin-top: 16px; }
 .contact-form code { font-family: 'Courier New', monospace; font-size: var(--fs-xs); padding: 2px 6px; background: var(--bg-page); border-radius: 3px; }
 @media (max-width: 760px) {
   .form-grid { grid-template-columns: 1fr; }
