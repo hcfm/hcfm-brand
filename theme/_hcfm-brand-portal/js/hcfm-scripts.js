@@ -1273,6 +1273,59 @@
     persistChat();
   }
 
+  /* ---------- Help-page forms (asset request + feedback) ----------
+     Both forms use the same JS-driven mailto pattern as the chatbot escalate
+     form: no `action` attribute on the <form>, no `mailto:` form action that
+     Chrome flags as insecure and turns autofill off for. Instead, on submit
+     we build a structured mailto link with the form data and open the user's
+     email client. The form fields have proper `autocomplete` attributes so
+     Chrome behaves cleanly. */
+  function wireHelpForm(formId, subject, bodyBuilder, recipients) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Manual required-field check (we set `novalidate` on the form so we can
+      // control the UX, but we still want to require the same fields).
+      const required = Array.from(form.querySelectorAll('[required]'));
+      const missing = required.filter(el => !(el.value || '').trim());
+      if (missing.length) {
+        missing[0].focus();
+        showToast('Please fill in all required fields.');
+        return;
+      }
+      const fd = new FormData(form);
+      const body = bodyBuilder(fd);
+      const url = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = url;
+      // Show a confirmation message under the button — same UX as chat escalate
+      const foot = form.querySelector('.form-foot');
+      if (foot) {
+        foot.innerHTML = '<strong>✓ Your email client should be opening.</strong> Hit send from there and we’ll reply within two business days.';
+        foot.style.color = 'var(--hcfm-blue)';
+      }
+      form.querySelectorAll('input, textarea, select, button').forEach(el => { el.disabled = true; });
+    });
+  }
+
+  wireHelpForm('requestForm', 'HCFM Brand · Asset request',
+    (fd) => (
+      `From: ${fd.get('name')} <${fd.get('email')}>\n` +
+      `Ministry: ${fd.get('ministry')}\n\n` +
+      `${fd.get('request')}\n\n` +
+      `— Sent from the HCFM Brand Portal asset-request form`
+    ),
+    'vhassan@hcfm.org,eepau@hcfm.org');
+
+  wireHelpForm('feedbackForm', 'HCFM Brand · Feedback',
+    (fd) => (
+      `From: ${fd.get('name')} <${fd.get('email')}>\n` +
+      `Topic: ${fd.get('topic')}\n\n` +
+      `${fd.get('feedback')}\n\n` +
+      `— Sent from the HCFM Brand Portal feedback form`
+    ),
+    'vhassan@hcfm.org,eepau@hcfm.org');
+
   /* ---------- Language switcher placeholder ---------- */
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {

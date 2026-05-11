@@ -1573,35 +1573,40 @@
       </div>
 
       <h2>Send a request or feedback</h2>
-      <p class="section-note">Asset requests go to <strong>vhassan@hcfm.org</strong> and <strong>eepau@hcfm.org</strong>. General feedback uses the Microsoft Forms feedback channel the Easton team monitors.</p>
+      <p class="section-note">Both forms route to <strong>vhassan@hcfm.org</strong> and <strong>eepau@hcfm.org</strong>. Asset requests get a custom subject so they're easy to triage; feedback gets its own subject.</p>
 
       <div class="form-grid">
-        <form class="contact-form" id="requestForm" action="mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=Brand%20Asset%20Request" method="post" enctype="text/plain">
+        <form class="contact-form" id="requestForm" novalidate>
           <h3>Request brand assets</h3>
-          <p class="form-sub">Need something not in Downloads? Custom co-branded materials, regional adaptations, ministry-specific templates, or a file format we have not packaged.</p>
-          <input type="text" name="Name" placeholder="Your name" required>
-          <input type="email" name="Email" placeholder="Your email" required>
-          <input type="text" name="Ministry" placeholder="Ministry center">
-          <textarea name="Request" placeholder="What you need (and when, if there is a deadline)" rows="3" required></textarea>
-          <button type="submit" class="btn btn-primary">Send request</button>
-          <p class="form-foot">→ Goes to Victoria and Emmanuel.</p>
+          <p class="form-sub">Need something not in Downloads? Custom co-branded materials, regional adaptations, ministry-specific templates, or a file format we haven't packaged.</p>
+          <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+          <input type="email" name="email" placeholder="Your email" autocomplete="email" required>
+          <input type="text" name="ministry" placeholder="Ministry center (e.g. Family Rosary Philippines)" autocomplete="organization" required>
+          <textarea name="request" placeholder="What you need — and when, if there's a deadline" rows="4" required></textarea>
+          <button type="submit" class="btn btn-primary">Send request →</button>
+          <p class="form-foot">Opens your email client with the request pre-filled. Replies within two business days.</p>
         </form>
-        <div class="contact-form ms-forms-embed">
+
+        <form class="contact-form" id="feedbackForm" novalidate>
           <h3>Send feedback</h3>
-          <p class="form-sub">The brand system evolves. Tell us what is missing, what is confusing, or what you would like to see added — same form the Easton team uses internally.</p>
-          <iframe
-            src="https://forms.office.com/Pages/ResponsePage.aspx?id=KKJPDKgLzU2Hn2-25tYDCkf7HD1tm-tJtB-UhoW4DPdUQldHM01CRVRMQ05UUUM1N1VEM1JFRUNPVy4u&embed=true"
-            width="100%" height="540"
-            frameborder="0" marginwidth="0" marginheight="0"
-            style="border:0;background:transparent;border-radius:8px;"
-            allowfullscreen
-            webkitallowfullscreen
-            mozallowfullscreen
-            msallowfullscreen
-            title="HCFM brand portal feedback form"
-          ></iframe>
-          <p class="form-foot">→ Goes to the Easton team via the Microsoft Forms inbox.</p>
-        </div>
+          <p class="form-sub">The brand system evolves. Tell us what's missing, what's confusing, what could be clearer, or what you'd like to see added.</p>
+          <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+          <input type="email" name="email" placeholder="Your email" autocomplete="email" required>
+          <select name="topic" required>
+            <option value="" disabled selected>What this is about</option>
+            <option>Colors</option>
+            <option>Logos / Symbol</option>
+            <option>Typography</option>
+            <option>Voice and tone</option>
+            <option>Imagery / photography</option>
+            <option>Downloads / templates</option>
+            <option>Ministry-center specific question</option>
+            <option>Something else</option>
+          </select>
+          <textarea name="feedback" placeholder="Your feedback — be as specific as you can about which section or rule" rows="4" required></textarea>
+          <button type="submit" class="btn btn-primary">Send feedback →</button>
+          <p class="form-foot">Same channel, same response time. We read every one.</p>
+        </form>
       </div>
 
       <div class="info-block">
@@ -1611,7 +1616,7 @@
 
       <div class="info-block">
         <h3>How this works behind the scenes</h3>
-        <p>Asset requests submit directly to HubSpot — no email client needed — and create a record Victoria and Emmanuel can track. Feedback uses Microsoft Forms (the same channel the Easton team uses internally) so all feedback lands in one shared place. We respond within two business days either way.</p>
+        <p>Both forms open your existing email client with a structured message pre-filled. Hit send. The message reaches Victoria and Emmanuel directly — no third-party form service, no data left in someone else's database, and we respond within two business days.</p>
       </div>
     </section>
 

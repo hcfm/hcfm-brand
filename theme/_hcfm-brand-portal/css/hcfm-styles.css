@@ -772,15 +772,23 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .contact-card h3 { margin: 0 0 8px; font-size: var(--fs-md); }
 .contact-card a { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm); }
 
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.contact-form { background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; padding: 22px 26px; display: flex; flex-direction: column; gap: 8px; }
-.contact-form h2, .contact-form h3 { margin: 0; font-size: var(--fs-base); padding: 0; border: none; }
-.form-sub { font-size: var(--fs-xs); color: var(--text-muted); margin: 0 0 8px; line-height: 1.45; }
-.form-foot { font-size: var(--fs-eyebrow); color: var(--text-muted); font-family: var(--font-display); letter-spacing: 0.04em; margin: 8px 0 0; }
-.contact-form input, .contact-form textarea { padding: 9px 13px; border: 1px solid var(--rule); border-radius: 3px; font-size: var(--fs-sm); background: #fff; font-family: var(--font-display); }
-.contact-form textarea { resize: vertical; min-height: 64px; font-family: var(--font-body); }
-.contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--hcfm-blue); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.contact-form { background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; padding: 24px 28px; display: flex; flex-direction: column; gap: 10px; transition: border-color 160ms, box-shadow 160ms; }
+.contact-form:focus-within { border-color: var(--hcfm-gold); box-shadow: 0 4px 18px rgba(255, 181, 0, 0.08); }
+.contact-form h2, .contact-form h3 { margin: 0; font-size: var(--fs-md); padding: 0; border: none; color: var(--hcfm-blue); }
+.form-sub { font-size: var(--fs-sm); color: var(--text-muted); margin: 0 0 10px; line-height: 1.5; }
+.form-foot { font-size: var(--fs-xs); color: var(--text-muted); font-family: var(--font-display); margin: 8px 0 0; line-height: 1.5; }
+.contact-form input, .contact-form textarea, .contact-form select { padding: 11px 14px; border: 1px solid var(--rule); border-radius: 4px; font-size: var(--fs-sm); background: #fff; font-family: var(--font-display); color: var(--text); transition: border-color 120ms; }
+.contact-form textarea { resize: vertical; min-height: 96px; font-family: var(--font-body); line-height: 1.5; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text-quiet); }
+.contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { outline: none; border-color: var(--hcfm-blue); box-shadow: 0 0 0 3px rgba(0, 71, 187, 0.08); }
+.contact-form select { appearance: none; -webkit-appearance: none; -moz-appearance: none; cursor: pointer; padding-right: 36px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%235a5a5a' d='M6 8L0 0h12z'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
+.contact-form select:disabled { opacity: 0.6; cursor: not-allowed; }
+.contact-form .btn { margin-top: 6px; align-self: flex-start; padding: 11px 22px; }
 .contact-form code { font-family: 'Courier New', monospace; font-size: var(--fs-xs); padding: 2px 6px; background: var(--bg-page); border-radius: 3px; }
+@media (max-width: 760px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
 
 /* Downloads — Source Files admin tab styling */
 .dl-tab-admin { color: var(--hcfm-gold) !important; font-weight: 600 !important; }
@@ -950,9 +958,8 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 
 
 /* MS Forms feedback embed (Phase 4A) */
-.ms-forms-embed { display: flex; flex-direction: column; }
-.ms-forms-embed iframe { display: block; width: 100%; min-height: 540px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; }
-@media (max-width: 768px) { .ms-forms-embed iframe { min-height: 600px; } }
+/* .ms-forms-embed retired — both Help-page forms now use the unified
+   .contact-form pattern with JS-driven mailto submission. */
 
 /* HubSpot Memberships gate (Phase 5) */
 .dl-signed-in-banner {
