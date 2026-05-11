@@ -246,13 +246,13 @@
 
     nameEl.textContent = m.name;
     h1.textContent = m.name;
-    intro.innerHTML = `<strong>${m.region}.</strong> Logo gallery for this ministry. Below: each variant with a color preview. To download production files (PNG and JPG only), go to <a href="#downloads">Resources / Downloads</a> with your access password.`;
+    intro.innerHTML = `<strong>${m.region}.</strong> Logo gallery for this ministry. Click any variant to download the PNG, or use the <em>Download all variants</em> button at the top of each section to grab the full pack at once.`;
 
     // HCFM Foundation uses the parent HCFM logos directly (the wordmark is
     // 'Holy Cross Family Ministries' with no 'Foundation' suffix added).
     const isFoundation = m.code === FOUNDATION_CODE;
     if (isFoundation) {
-      intro.innerHTML += `<p style="margin-top:12px;font-size:13px;color:var(--text-muted);"><em>The HCFM Foundation uses the parent Holy Cross Family Ministries logo as its identity. The wordmark does not include "Foundation".</em></p>`;
+      intro.innerHTML += `<p style="margin-top:12px;font-size:var(--fs-sm);color:var(--text-muted);"><em>The HCFM Foundation uses the parent Holy Cross Family Ministries logo as its identity. The wordmark does not include "Foundation".</em></p>`;
     }
     const groups = isFoundation ? FOUNDATION_AS_PARENT : (ministryManifest[m.code] || []);
     const previewBase = isFoundation ? '' : `https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/previews/ministries/${encodeURIComponent(m.code)}`;
@@ -273,6 +273,10 @@
       return;
     }
 
+    // Collect every file URL across every group so the "download all for this
+    // ministry" button can save them all in one click.
+    const allFiles = [];
+
     gallery.innerHTML = `
       <div class="md-ministry-hero">
         <img src="assets/logos/hcfm-symbol-blue.png" alt="">
@@ -280,36 +284,146 @@
           <h2>${m.name}</h2>
           <p>${m.region} · Code: ${m.code}</p>
         </div>
+        <button class="btn btn-primary md-bulk-download" data-ministry-bulk="${m.code}" title="Save every variant of every logotype for this ministry">Download all logos →</button>
       </div>
       ${groups.map(g => {
-        // Folder name is e.g. "HCFM_KE_Logotype1", "FamRosary_Logotype1", or
-        // for Foundation override "HCFM_Logotype1" pointing at the parent.
         const ltLabel = g.folder.replace(/.*(Logotype\d)/, '$1').replace('Logotype', 'Logotype ');
         const groupBase = g.basePath ? `${g.basePath}/${encodeURIComponent(g.folder)}` : `${previewBase}/${encodeURIComponent(g.folder)}`;
+        const groupFiles = [];
         const variantsHtml = g.files.map(file => {
           const v = variantLabelFromFile(file);
           const path = `${groupBase}/${file}`;
+          groupFiles.push({ path, name: file });
+          allFiles.push({ path, name: file });
           return `
-            <div class="md-variant">
+            <a class="md-variant md-variant-link" href="${path}" download="${file}" data-dl-url="${path}" data-dl-name="${file}" title="Download ${v.label} (${file})">
               <div class="md-variant-bg ${v.dark ? 'dark' : ''}">
                 <img src="${path}" alt="${v.label}" loading="lazy">
+                <span class="md-variant-download" aria-hidden="true">↓ PNG</span>
               </div>
               <p class="md-variant-name">${v.label}</p>
-            </div>
+            </a>
           `;
         }).join('');
         return `
-          <h3 class="md-section-title">${ltLabel}</h3>
+          <div class="md-section-head">
+            <h3 class="md-section-title">${ltLabel}</h3>
+            <button class="btn btn-text md-group-download" data-group-files='${JSON.stringify(groupFiles).replace(/'/g, '&#39;')}' title="Download every variant of ${ltLabel}">Download this set</button>
+          </div>
           <div class="md-variants-grid">${variantsHtml}</div>
         `;
       }).join('')}
 
       <div class="info-block">
-        <h3>Download production files</h3>
-        <p>PNG and JPG packs for ${m.name} are available on the <a href="#downloads">Downloads tab</a> after you enter the access password. Editable AI source files are restricted to brand owners.</p>
+        <h3>About these files</h3>
+        <p><strong>PNG only</strong> — these are production-ready raster files. Editable AI source files are restricted to the Easton brand owners; if you need a custom edit (resize for embroidery, vector edits for print), email <a href="mailto:vhassan@hcfm.org">Victoria</a> or <a href="mailto:eepau@hcfm.org">Emmanuel</a>.</p>
       </div>
     `;
+
+    // Stash the all-files list on the bulk-download button for the click handler.
+    const bulkBtn = gallery.querySelector('.md-bulk-download');
+    if (bulkBtn) {
+      bulkBtn.__files = allFiles;
+      bulkBtn.__ministry = m;
+    }
   }
+
+  /* ---------- Ministry download helpers ----------
+     Files are hosted cross-origin (HubSpot CDN). The native <a download> attribute
+     gets ignored cross-origin in most browsers — they navigate instead of saving.
+     We fetch the file as a Blob and trigger a save with an object URL, which gives
+     a real download UX with the proper filename. */
+  function saveBlobAs(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  async function downloadOne(url, filename) {
+    try {
+      const res = await fetch(url, { mode: 'cors', cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const blob = await res.blob();
+      saveBlobAs(blob, filename);
+      return true;
+    } catch (e) {
+      console.warn('Download failed for', filename, e);
+      // Fallback: open the URL in a new tab so the user can save manually.
+      window.open(url, '_blank', 'noopener');
+      return false;
+    }
+  }
+
+  async function downloadMany(files, onProgress) {
+    let i = 0;
+    for (const f of files) {
+      i++;
+      if (onProgress) onProgress(i, files.length, f);
+      await downloadOne(f.path, f.name);
+      // Small delay so browsers don't bunch the downloads and trigger pop-up blockers.
+      await new Promise(r => setTimeout(r, 250));
+    }
+  }
+
+  // Per-variant click on the variant card → fetch + save the PNG
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.md-variant-link');
+    if (!link) return;
+    e.preventDefault();
+    const url = link.dataset.dlUrl;
+    const name = link.dataset.dlName || 'logo.png';
+    downloadOne(url, name).then(ok => {
+      if (ok) showToast(`Saved ${name}`);
+    });
+  });
+
+  // Per-section "Download this set" → fetch all variants of one logotype
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.md-group-download');
+    if (!btn) return;
+    e.preventDefault();
+    let files = [];
+    try { files = JSON.parse(btn.dataset.groupFiles); } catch { return; }
+    if (!files.length) return;
+    const originalLabel = btn.textContent;
+    btn.disabled = true;
+    showToast(`Saving ${files.length} files…`);
+    downloadMany(files, (i, total) => {
+      btn.textContent = `Saving ${i}/${total}…`;
+    }).then(() => {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      showToast(`Saved ${files.length} files`);
+    });
+  });
+
+  // Whole-ministry "Download all" → fetch every variant of every logotype
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.md-bulk-download');
+    if (!btn) return;
+    e.preventDefault();
+    const files = btn.__files || [];
+    if (!files.length) {
+      showToast('No files to download');
+      return;
+    }
+    const ministry = btn.__ministry || {};
+    const originalLabel = btn.textContent;
+    btn.disabled = true;
+    showToast(`Saving ${files.length} files for ${ministry.name || 'this ministry'}…`);
+    downloadMany(files, (i, total) => {
+      btn.textContent = `Saving ${i}/${total}…`;
+    }).then(() => {
+      btn.textContent = originalLabel;
+      btn.disabled = false;
+      showToast(`Saved ${files.length} files`);
+    });
+  });
 
   /* ---------- Downloads: 3-tier hybrid gate ----------
      Tier 0 (public): Brand documents — always visible, no gate.

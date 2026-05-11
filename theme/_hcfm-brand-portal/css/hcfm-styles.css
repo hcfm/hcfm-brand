@@ -612,17 +612,32 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .ministry-card:hover { border-color: var(--hcfm-gold); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,71,187,0.08); }
 
 /* Ministry detail page */
-.md-ministry-hero { display: grid; grid-template-columns: 100px 1fr; gap: 24px; align-items: center; padding: 24px; background: var(--bg-page); border-radius: 8px; margin-bottom: 32px; }
+.md-ministry-hero { display: grid; grid-template-columns: 100px 1fr auto; gap: 24px; align-items: center; padding: 24px; background: var(--bg-page); border-radius: 8px; margin-bottom: 32px; }
 .md-ministry-hero img { width: 100px; height: 100px; }
 .md-ministry-hero h2 { margin: 0 0 4px; padding: 0; border: none; font-size: var(--fs-xl); }
 .md-ministry-hero p { margin: 0; color: var(--text-muted); font-size: var(--fs-sm); }
+.md-bulk-download { white-space: nowrap; }
+.md-bulk-download:disabled { opacity: 0.6; cursor: progress; }
 
-.md-section-title { font-family: var(--font-display); font-size: var(--fs-sm); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin: 32px 0 16px; }
+.md-section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 32px 0 16px; }
+.md-section-title { font-family: var(--font-display); font-size: var(--fs-sm); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin: 0; }
+.md-group-download { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 600; color: var(--hcfm-blue); background: none; border: 0; cursor: pointer; padding: 4px 0; border-bottom: 1px solid var(--hcfm-blue); transition: opacity 120ms; }
+.md-group-download:hover { opacity: 0.7; }
+.md-group-download:disabled { opacity: 0.5; cursor: progress; border-bottom-color: var(--text-muted); color: var(--text-muted); }
+
 .md-variants-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+/* The variant card is now an anchor — wrap entire card as the download trigger */
+.md-variant-link { display: block; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; padding: 16px; text-align: center; color: var(--text); text-decoration: none; transition: border-color 160ms, transform 160ms, box-shadow 160ms; cursor: pointer; }
+.md-variant-link:hover { border-color: var(--hcfm-gold); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); text-decoration: none; }
+/* Keep .md-variant for backward compat if it appears anywhere */
 .md-variant { background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; padding: 16px; text-align: center; }
-.md-variant-bg { background: var(--bg-page); padding: 24px 16px; border-radius: 4px; min-height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.md-variant-bg { position: relative; background: var(--bg-page); padding: 24px 16px; border-radius: 4px; min-height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; overflow: hidden; }
 .md-variant-bg.dark { background: var(--hcfm-black); }
 .md-variant-bg img { max-width: 100%; max-height: 110px; height: auto; width: auto; object-fit: contain; }
+/* Download badge revealed on hover */
+.md-variant-download { position: absolute; bottom: 6px; right: 8px; font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.04em; color: var(--hcfm-blue); background: rgba(255,255,255,0.92); padding: 3px 8px; border-radius: 200px; opacity: 0; transform: translateY(4px); transition: opacity 160ms, transform 160ms; pointer-events: none; }
+.md-variant-bg.dark .md-variant-download { background: rgba(0,0,0,0.7); color: var(--hcfm-gold); }
+.md-variant-link:hover .md-variant-download { opacity: 1; transform: translateY(0); }
 .md-variant-name { font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 600; color: var(--text); margin: 0; }
 
 /* ---------- Downloads page (gated) ---------- */
