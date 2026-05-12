@@ -212,14 +212,26 @@
   if (navToggle) navToggle.addEventListener('click', toggleNav);
   if (navBackdrop) navBackdrop.addEventListener('click', closeNav);
 
-  // Close drawer when any nav link is tapped (so the user immediately sees
-  // the section they navigated to, not the drawer still over it)
-  if (sidebar) {
-    sidebar.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href^="#"]');
-      if (a) closeNav();
-    });
-  }
+  // Close drawer whenever the route changes — i.e. whenever the user picks
+  // anything from the sidebar nav. We listen on `hashchange` rather than on
+  // click because some host JS (HubSpot tools menu, parent-site smooth-scroll
+  // shims) intercepts clicks on `a[href^="#"]` and stops propagation before
+  // it can reach the sidebar. `hashchange` is fired by the browser itself and
+  // is not affected by any of that — bulletproof.
+  window.addEventListener('hashchange', () => {
+    if (sidebar && sidebar.classList.contains('is-open')) closeNav();
+  });
+
+  // Belt-and-suspenders: also attach a direct click listener to every nav
+  // link, in capture phase, so we close even if for some reason the hash
+  // doesn't actually change (e.g. user clicks the link for the current
+  // section). Capture-phase fires before any descendant handler can cancel
+  // the event.
+  document.querySelectorAll('.sidebar a[href^="#"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (sidebar && sidebar.classList.contains('is-open')) closeNav();
+    }, true);
+  });
 
   // Escape key closes the drawer
   document.addEventListener('keydown', (e) => {
