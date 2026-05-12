@@ -12,6 +12,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HCFM Brand Identity</title>
 <meta name="description" content="The visual identity guide for Holy Cross Family Ministries. One ministry, one mission, one world for families.">
+<meta name="color-scheme" content="light dark">
+<script>
+  // Set theme BEFORE stylesheet loads to avoid white-flash on dark-mode visitors.
+  // Stored preference wins; otherwise follow the OS setting.
+  (function () {
+    try {
+      var stored = localStorage.getItem('hcfm-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) { /* localStorage may be blocked; ignore */ }
+  })();
+</script>
 {{ require_css(get_asset_url("../css/hcfm-styles.css")) }}
 <link rel="icon" type="image/png" href="assets/logos/hcfm-symbol-blue.png">
   {{ standard_header_includes }}
@@ -36,6 +49,10 @@
       </svg>
       <input type="search" class="header-search" placeholder="Search the brand…" id="search" aria-label="Search">
     </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
 

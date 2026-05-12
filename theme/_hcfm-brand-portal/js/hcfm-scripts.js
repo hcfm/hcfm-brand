@@ -238,6 +238,39 @@
   window.addEventListener('hashchange', () => setRoute(location.hash));
   setRoute(location.hash);
 
+  /* ---------- Theme (dark mode) toggle ----------
+     The initial theme was set in <head> before stylesheet load to
+     avoid a white flash on dark-mode users. This handles the
+     user-initiated toggle and persistence. */
+  const themeToggle = document.getElementById('themeToggle');
+  function applyTheme(theme) {
+    if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+    if (themeToggle) themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  }
+  if (themeToggle) {
+    // sync aria-label with current state
+    applyTheme(currentTheme());
+    themeToggle.addEventListener('click', () => {
+      const next = currentTheme() === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('hcfm-theme', next); } catch (e) {}
+    });
+  }
+  // Track system preference changes if the user hasn't set a manual choice
+  if (window.matchMedia) {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    mq.addEventListener('change', (e) => {
+      try {
+        if (localStorage.getItem('hcfm-theme')) return; // user has chosen explicitly
+        applyTheme(e.matches ? 'dark' : 'light');
+      } catch (err) {}
+    });
+  }
+
   /* ---------- Mobile hamburger nav drawer ----------
      Slides the sidebar in from the left on phones (≤640px). Backdrop
      dims the rest of the page. Tapping a nav link, the backdrop, or the
