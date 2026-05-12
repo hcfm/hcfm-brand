@@ -1,0 +1,46 @@
+name: Purge jsDelivr cache for email banners
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'email-banners/**'
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Identify changed banner files
+        id: changed
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD | grep '^email-banners/' || true)
+          echo "Changed files:"
+          echo "$CHANGED"
+          {
+            echo 'files<<FILES_EOF'
+            echo "$CHANGED"
+            echo 'FILES_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Purge jsDelivr CDN for each changed file
+        if: steps.changed.outputs.files != ''
+        run: |
+          REPO='${{ github.repository }}'
+          BRANCH='${{ github.ref_name }}'
+          while IFS= read -r file; do
+            if [ -n "$file" ]; then
+              URL="https://purge.jsdelivr.net/gh/${REPO}@${BRANCH}/${file}"
+              echo "Purging: $URL"
+              curl -sS -X POST "$URL" -H 'cache-control: no-cache' -m 30 || echo "  (purge request failed but continuing)"
+              echo
+              sleep 2
+            fi
+          done <<< '${{ steps.changed.outputs.files }}'
+
+      - name: Done
+        run: echo 'jsDelivr cache purge complete. Banners propagate globally within ~30s.'
