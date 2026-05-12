@@ -36,7 +36,7 @@ jobs:
             if [ -n "$file" ]; then
               URL="https://purge.jsdelivr.net/gh/${REPO}@${BRANCH}/${file}"
               echo "Purging: $URL"
-              curl -sS -X POST "$URL" -H 'cache-control: no-cache' -m 30 || echo "  (purge request failed but continuing)"
+              curl -sS "$URL" --max-time 30 || echo "  (purge request failed but continuing)"
               echo
               sleep 2
             fi
