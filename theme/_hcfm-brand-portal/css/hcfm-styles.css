@@ -102,6 +102,17 @@ p { margin: 0 0 1em; }
 
 /* ---------- Header ---------- */
 .site-header { background: var(--hcfm-blue); height: 76px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.10); }
+
+/* Hamburger nav toggle — hidden on desktop, shown only on phones */
+.nav-toggle { display: none; background: transparent; border: 0; padding: 12px 8px; cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+.nav-toggle-bar { display: block; width: 22px; height: 2px; background: #fff; border-radius: 1px; transition: transform 220ms ease, opacity 180ms ease; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Backdrop behind open hamburger menu — full-screen dimming layer */
+.nav-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: opacity 220ms ease; z-index: 95; }
+.nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
 .header-inner { width: 100%; height: 100%; margin: 0; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
 .brand-mark { display: flex; align-items: center; gap: 16px; color: #fff; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg); letter-spacing: -0.015em; }
 .brand-mark img { width: 48px; height: 48px; }
@@ -172,9 +183,24 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .btn-secondary { background: transparent; color: var(--hcfm-gold); border: 1px solid var(--hcfm-gold); }
 .btn-secondary:hover { background: var(--hcfm-gold); color: var(--hcfm-black); text-decoration: none; }
 .hero-mark { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
-.hero-mark img { width: 100%; max-width: 380px; filter: brightness(0) saturate(100%) invert(72%) sepia(70%) saturate(2200%) hue-rotate(0deg) brightness(102%) contrast(104%) drop-shadow(0 16px 48px rgba(255,181,0,0.25)); animation: hero-rotate 90s linear infinite; }
+/* Hide the source img — we render the mark via CSS mask for exact-color fidelity.
+   The img tag stays in markup for screen-reader accessibility and as a fallback for
+   the (rare) browsers without mask support, where it'll show the black symbol. */
+.hero-mark img { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.hero-mark::before {
+  content: '';
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  background: var(--hcfm-gold);
+  -webkit-mask: url('https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-black.png') center / contain no-repeat;
+  mask: url('https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-black.png') center / contain no-repeat;
+  animation: hero-rotate 90s linear infinite;
+  filter: drop-shadow(0 16px 48px rgba(255,181,0,0.25));
+}
 @keyframes hero-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .hero-mark img { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-mark::before { animation: none; } }
 
 .btn-text { color: var(--hcfm-gold); font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm); border-bottom: 1px solid var(--hcfm-gold); padding-bottom: 2px; }
 .btn-text:hover { color: #fff; border-color: #fff; text-decoration: none; }
@@ -959,29 +985,62 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 }
 
 /* ==================== PHONE (≤640px) ====================
-   Tablet-down rules above cover 901-640px. This block is the specific
-   phone breakpoint, where layouts need more aggressive tightening:
-   smaller header, scrollable sidebar nav strip, scrollable tables,
-   reduced padding, single-column everywhere, stacked CTAs. */
+   Phone-specific overrides. The dominant change: sidebar becomes a proper
+   slide-in hamburger menu (not a wrapping pill row). This matches industry-
+   standard mobile nav patterns (Stripe, Linear, Notion, etc.). */
 @media (max-width: 640px) {
   /* Header tightening */
   .site-header { height: 60px; }
-  .header-inner { padding: 0 16px; gap: 12px; }
-  .brand-mark { gap: 10px; font-size: var(--fs-base); }
-  .brand-mark img { width: 36px; height: 36px; }
-  .header-search { width: 140px; padding: 6px 12px 6px 32px; font-size: var(--fs-xs); }
-  .header-search-icon { left: 10px; }
+  .header-inner { padding: 0 12px; gap: 8px; }
+  .brand-mark { gap: 8px; font-size: var(--fs-base); flex: 1; min-width: 0; }
+  .brand-mark img { width: 32px; height: 32px; flex-shrink: 0; }
+  .brand-mark span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .header-search { width: 110px; padding: 6px 10px 6px 28px; font-size: var(--fs-xs); }
+  .header-search-icon { left: 8px; width: 14px; height: 14px; }
 
-  /* Sidebar becomes a horizontally-scrollable nav strip (instead of
-     wrapping all 17 links into a tall block that takes 1/3 of the screen) */
-  .page-wrap { min-height: calc(100vh - 60px); }
-  .sidebar { padding: 8px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .sidebar-scroll { display: flex; flex-wrap: nowrap; align-items: center; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .sidebar-nav { flex-direction: row; flex-wrap: nowrap; gap: 4px; align-items: center; }
-  .nav-group { flex-direction: row; flex-wrap: nowrap; gap: 4px; align-items: center; margin: 0; flex-shrink: 0; }
-  .sidebar-nav > a, .nav-group a { padding: 6px 10px; font-size: var(--fs-xs); white-space: nowrap; border-bottom: 0; border-radius: 200px; background: var(--bg-page); flex-shrink: 0; }
-  .sidebar-nav > a.active, .nav-group a.active { background: var(--hcfm-blue); color: #fff; border-bottom: 0; }
-  .sidebar-foot { display: none; }
+  /* Show the hamburger toggle button on mobile */
+  .nav-toggle { display: flex; flex-shrink: 0; margin-right: 2px; }
+
+  /* Sidebar becomes a slide-in drawer from the left, NOT a wrapping pill row */
+  .page-wrap { grid-template-columns: 1fr; min-height: calc(100vh - 60px); }
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 280px;
+    max-width: 84vw;
+    height: calc(100vh - 60px);
+    background: var(--bg);
+    border-right: 1px solid var(--rule);
+    border-bottom: none;
+    padding: 20px 18px 32px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateX(-100%);
+    transition: transform 240ms ease;
+    z-index: 99;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+  }
+  .sidebar.is-open { transform: translateX(0); }
+  .sidebar-scroll { display: flex; flex-direction: column; gap: 4px; overflow: visible; }
+  .sidebar-nav { flex-direction: column; flex-wrap: nowrap; gap: 2px; align-items: stretch; }
+  .nav-group { flex-direction: column; flex-wrap: nowrap; gap: 2px; align-items: stretch; margin: 12px 0 4px; }
+  .nav-group-label { display: block; font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-quiet); padding: 0 8px 4px; }
+  .sidebar-nav > a, .nav-group a {
+    display: block;
+    padding: 12px 14px;
+    font-size: var(--fs-base);
+    font-weight: 500;
+    color: var(--text);
+    border-bottom: 0;
+    border-radius: 6px;
+    background: transparent;
+    transition: background 120ms;
+    width: auto;
+  }
+  .sidebar-nav > a:hover, .nav-group a:hover { background: var(--bg-page); }
+  .sidebar-nav > a.active, .nav-group a.active { background: var(--hcfm-blue); color: #fff; }
+  .sidebar-foot { display: block; margin-top: 20px; padding: 16px 8px 0; border-top: 1px solid var(--rule); font-size: var(--fs-xs); color: var(--text-quiet); }
 
   /* Content padding tighter */
   .content { padding: 20px 14px 48px; }
@@ -1016,6 +1075,36 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   .md-variant-link { padding: 12px; }
   .md-variant-bg { padding: 14px 8px; min-height: 90px; }
   .md-variant-bg img { max-height: 70px; }
+
+  /* Home page: "Start here" cards (.quick-grid-3) and "The rest of the system"
+     numbered cards (.more-grid) need to collapse cleanly */
+  .quick-grid, .quick-grid-3 { grid-template-columns: 1fr !important; gap: 10px; }
+  .quick-card { padding: 16px; }
+  .quick-card-feature { padding: 18px; }
+  .quick-card h3 { font-size: var(--fs-md); }
+  .quick-card p { font-size: var(--fs-sm); }
+  .qc-swatch, .qc-mark, .qc-marks, .qc-type { height: 80px; margin-bottom: 12px; }
+  .qc-aa { font-size: 40px; }
+  .qc-calluna { font-size: 36px; }
+  .qc-script { font-size: 52px; }
+  .qc-marks img { padding: 8px; }
+
+  /* The numbered "more-grid" cards — collapse to single column, simplify layout */
+  .more-grid { grid-template-columns: 1fr !important; gap: 8px; margin-bottom: 32px; }
+  .more-card { grid-template-columns: 40px 1fr 20px; gap: 14px; padding: 16px 18px; align-items: center; }
+  .more-num { font-size: var(--fs-xl); }
+  .more-text h3 { font-size: var(--fs-md); margin-bottom: 4px; line-height: 1.25; }
+  .more-text p { font-size: var(--fs-sm); }
+  .more-arrow { font-size: var(--fs-base); }
+
+  /* Brand statement (the "Mark / Wordmark / Combined" feature block) */
+  .brand-statement { padding: 28px 16px; }
+  .bs-line { font-size: var(--fs-xl); }
+  .bs-note { font-size: var(--fs-sm); }
+
+  /* Home-h2 section labels */
+  .home-h2 { font-size: var(--fs-eyebrow); margin: 36px 0 6px; }
+  .home-h2-sub { font-size: var(--fs-sm); margin-bottom: 16px; }
 
   /* Color cubes: 2 columns max on phones, smaller padding */
   .color-grid-4, .color-grid-3 { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }

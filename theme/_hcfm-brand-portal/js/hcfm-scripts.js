@@ -182,6 +182,55 @@
   window.addEventListener('hashchange', () => setRoute(location.hash));
   setRoute(location.hash);
 
+  /* ---------- Mobile hamburger nav drawer ----------
+     Slides the sidebar in from the left on phones (≤640px). Backdrop
+     dims the rest of the page. Tapping a nav link, the backdrop, or the
+     hamburger again closes it. Escape key also closes. */
+  const navToggle = document.getElementById('navToggle');
+  const sidebar = document.getElementById('sidebar');
+  const navBackdrop = document.getElementById('navBackdrop');
+
+  function openNav() {
+    if (!sidebar) return;
+    sidebar.classList.add('is-open');
+    if (navBackdrop) navBackdrop.classList.add('is-open');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeNav() {
+    if (!sidebar) return;
+    sidebar.classList.remove('is-open');
+    if (navBackdrop) navBackdrop.classList.remove('is-open');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  function toggleNav() {
+    if (!sidebar) return;
+    if (sidebar.classList.contains('is-open')) closeNav(); else openNav();
+  }
+
+  if (navToggle) navToggle.addEventListener('click', toggleNav);
+  if (navBackdrop) navBackdrop.addEventListener('click', closeNav);
+
+  // Close drawer when any nav link is tapped (so the user immediately sees
+  // the section they navigated to, not the drawer still over it)
+  if (sidebar) {
+    sidebar.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (a) closeNav();
+    });
+  }
+
+  // Escape key closes the drawer
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) closeNav();
+  });
+
+  // Close drawer automatically when viewport grows past mobile breakpoint
+  // (e.g., user rotates phone from portrait to landscape and is now on tablet)
+  const mobileQuery = window.matchMedia('(max-width: 640px)');
+  mobileQuery.addEventListener('change', (e) => { if (!e.matches) closeNav(); });
+
   /* ---------- Color cube click-to-copy ---------- */
   document.querySelectorAll('.color-cube').forEach(cube => {
     cube.addEventListener('click', async () => {

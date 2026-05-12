@@ -20,6 +20,11 @@
 
 <header class="site-header">
   <div class="header-inner">
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="sidebar">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
     <a href="#home" class="brand-mark">
       <img src="assets/logos/hcfm-symbol-white.png" alt="HCFM" width="36" height="36">
       <span>Holy Cross Family Ministries</span>
@@ -33,6 +38,8 @@
     </div>
   </div>
 </header>
+
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
 
 <div class="page-wrap">
 
@@ -97,7 +104,12 @@
           </div>
         </div>
         <div class="hero-mark">
-          <img src="assets/logos/hcfm-symbol-gold.png" alt="HCFM mark" id="heroMark">
+          {# The mark is rendered via CSS mask using the black-fill symbol PNG as the alpha
+             mask + HCFM Yellow Gold (#FFB500) as the fill. This guarantees the rotating
+             mark is mathematically exact #FFB500, instead of approximated via filter
+             chain on a Muted Gold source. Image kept for accessibility (alt text) +
+             fallback if CSS masks aren't supported. #}
+          <img src="assets/logos/hcfm-symbol-black.png" alt="HCFM mark" id="heroMark">
         </div>
       </div>
 
