@@ -173,6 +173,62 @@
     const page = document.getElementById(route);
     document.title = page ? `${page.dataset.title} · HCFM Brand Identity` : 'HCFM Brand Identity';
     window.scrollTo({ top: 0, behavior: 'auto' });
+    buildPageToc(page);
+  }
+
+  /* ---------- Right-rail "On this page" TOC ----------
+     Generated per route from the current section's h2's. Hidden when
+     there are fewer than 3 h2's (no value adding a 2-item TOC).
+     IntersectionObserver highlights the h2 currently in view. */
+  const pageToc = document.getElementById('pageToc');
+  const pageTocList = document.getElementById('pageTocList');
+  let tocObserver = null;
+
+  function slugify(s) {
+    return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+  }
+
+  function buildPageToc(page) {
+    if (!pageToc || !pageTocList || !page) return;
+    // Tear down any previous observer
+    if (tocObserver) { tocObserver.disconnect(); tocObserver = null; }
+    const h2s = [...page.querySelectorAll('h2')].filter(h => h.offsetParent !== null || h.getClientRects().length);
+    // Need at least 3 h2's to be worth showing
+    if (h2s.length < 3) {
+      pageToc.hidden = true;
+      pageTocList.innerHTML = '';
+      return;
+    }
+    pageTocList.innerHTML = '';
+    h2s.forEach((h, i) => {
+      if (!h.id) h.id = page.id + '-' + slugify(h.textContent) + (i ? '-' + i : '');
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent.trim();
+      a.dataset.tocFor = h.id;
+      a.addEventListener('click', (e) => {
+        // Don't change the page route — just scroll smoothly to the h2
+        e.preventDefault();
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', '#' + page.id);
+      });
+      li.appendChild(a);
+      pageTocList.appendChild(li);
+    });
+    pageToc.hidden = false;
+
+    // Track active h2 via IntersectionObserver
+    const tocLinks = [...pageTocList.querySelectorAll('a')];
+    tocObserver = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (!visible) return;
+      const id = visible.target.id;
+      tocLinks.forEach(l => l.classList.toggle('is-active', l.dataset.tocFor === id));
+    }, { rootMargin: '-80px 0px -60% 0px', threshold: [0, 1] });
+    h2s.forEach(h => tocObserver.observe(h));
+    // Default-highlight the first item
+    if (tocLinks[0]) tocLinks[0].classList.add('is-active');
   }
 
   function showPage(id) {
