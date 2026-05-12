@@ -136,6 +136,8 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .sidebar-foot p { margin: 0 0 2px; }
 .sidebar-foot p strong { color: var(--text); font-weight: 600; }
 .sidebar-mail { display: inline-block; margin-top: 10px; font-size: var(--fs-xs); color: var(--hcfm-blue); font-weight: 600; }
+.sidebar-updated { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); font-size: 11px; letter-spacing: 0.04em; color: var(--text-quiet); }
+.sidebar-updated time { font-variant-numeric: tabular-nums; }
 .sidebar-scroll::-webkit-scrollbar { width: 4px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 2px; }
 .sidebar-nav { display: flex; flex-direction: column; font-family: var(--font-display); }
