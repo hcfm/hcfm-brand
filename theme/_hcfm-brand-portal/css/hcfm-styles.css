@@ -958,6 +958,166 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
   .chat-fab-icon { font-size: var(--fs-md); }
 }
 
+/* ==================== PHONE (≤640px) ====================
+   Tablet-down rules above cover 901-640px. This block is the specific
+   phone breakpoint, where layouts need more aggressive tightening:
+   smaller header, scrollable sidebar nav strip, scrollable tables,
+   reduced padding, single-column everywhere, stacked CTAs. */
+@media (max-width: 640px) {
+  /* Header tightening */
+  .site-header { height: 60px; }
+  .header-inner { padding: 0 16px; gap: 12px; }
+  .brand-mark { gap: 10px; font-size: var(--fs-base); }
+  .brand-mark img { width: 36px; height: 36px; }
+  .header-search { width: 140px; padding: 6px 12px 6px 32px; font-size: var(--fs-xs); }
+  .header-search-icon { left: 10px; }
+
+  /* Sidebar becomes a horizontally-scrollable nav strip (instead of
+     wrapping all 17 links into a tall block that takes 1/3 of the screen) */
+  .page-wrap { min-height: calc(100vh - 60px); }
+  .sidebar { padding: 8px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .sidebar-scroll { display: flex; flex-wrap: nowrap; align-items: center; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .sidebar-nav { flex-direction: row; flex-wrap: nowrap; gap: 4px; align-items: center; }
+  .nav-group { flex-direction: row; flex-wrap: nowrap; gap: 4px; align-items: center; margin: 0; flex-shrink: 0; }
+  .sidebar-nav > a, .nav-group a { padding: 6px 10px; font-size: var(--fs-xs); white-space: nowrap; border-bottom: 0; border-radius: 200px; background: var(--bg-page); flex-shrink: 0; }
+  .sidebar-nav > a.active, .nav-group a.active { background: var(--hcfm-blue); color: #fff; border-bottom: 0; }
+  .sidebar-foot { display: none; }
+
+  /* Content padding tighter */
+  .content { padding: 20px 14px 48px; }
+
+  /* Headings */
+  h1 { font-size: 24px; }
+  h2 { font-size: var(--fs-xl); margin-top: 36px; }
+  h3 { font-size: var(--fs-md); }
+  .page-intro { font-size: var(--fs-base); margin-bottom: 24px; }
+
+  /* Hero */
+  .hero { padding: 24px 16px; gap: 24px; }
+  .hero-h1 { font-size: 32px !important; line-height: 1.1; }
+  .hero-sub { font-size: var(--fs-base); }
+  .hero-eyebrow { font-size: var(--fs-eyebrow); letter-spacing: 0.10em; margin-bottom: 14px; }
+  .hero-mark img { max-width: 140px; }
+  .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; }
+  .hero-cta .btn { width: 100%; text-align: center; }
+
+  /* Tables: wrap in a horizontal scroll surface so they don't bust layout */
+  .spec-table, .voice-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+  .spec-table thead, .voice-table thead { white-space: nowrap; }
+  .spec-table td, .voice-table td { padding: 10px 12px; font-size: var(--fs-sm); }
+  .spec-table th, .voice-table th { padding: 10px 12px; font-size: var(--fs-eyebrow); }
+
+  /* Cards / variants tighter */
+  .md-ministry-hero { grid-template-columns: 1fr; text-align: center; padding: 20px 16px; }
+  .md-ministry-hero img { margin: 0 auto; }
+  .md-bulk-download { width: 100%; }
+  .md-section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .md-variants-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .md-variant-link { padding: 12px; }
+  .md-variant-bg { padding: 14px 8px; min-height: 90px; }
+  .md-variant-bg img { max-height: 70px; }
+
+  /* Color cubes: 2 columns max on phones, smaller padding */
+  .color-grid-4, .color-grid-3 { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+  .color-cube { padding: 14px; }
+  .cube-codes { font-size: var(--fs-xs); }
+  .cube-codes strong { font-size: var(--fs-sm); }
+
+  /* Logo color grids */
+  .logo-color-grid, .logo-color-grid-3 { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+  .lc-card { padding: 16px 10px 10px; min-height: 110px; }
+  .lc-card-wide img { max-width: 160px; max-height: 56px; }
+  .dont-grid { grid-template-columns: 1fr !important; }
+
+  /* Dim cards / platform table */
+  .dim-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+  .dim-shape { transform: scale(0.7); transform-origin: center top; margin-bottom: 0; }
+  .dim-platform { font-size: var(--fs-sm); }
+  .dim-type { font-size: var(--fs-xs); }
+
+  /* Info blocks */
+  .info-block { padding: 16px 18px; margin: 24px 0; }
+  .info-block-strong { padding: 22px 18px; }
+  .info-block-strong .ib-headline { font-size: var(--fs-md); }
+
+  /* Stationery / address block */
+  .info-block h3 { font-size: var(--fs-sm); }
+
+  /* Downloads tabs scroll horizontally instead of wrapping */
+  .dl-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; padding-bottom: 4px; }
+  .dl-tab { flex-shrink: 0; padding: 10px 14px; font-size: var(--fs-sm); white-space: nowrap; }
+
+  /* Download list */
+  .download-list a { flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px 14px; }
+  .download-list-templates span { max-width: 100%; text-align: left; }
+
+  /* Email signature blocks: stack on phones (already does via .email-sig-row but adjust padding) */
+  .email-sig-card-h { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .email-sig-block { padding: 12px 14px; font-size: 10px; }
+
+  /* Symbol layer image height */
+  .sym-layer-visual { min-height: 160px; padding: 16px; }
+  .sym-vis-mark img,
+  .sym-vis-floral img,
+  .sym-vis-moon img,
+  .sym-vis-welcome img { width: 200px; height: 200px; }
+
+  /* Footer */
+  .site-footer { padding: 32px 16px 24px; }
+  .footer-inner { padding: 0; }
+
+  /* Chat: take MORE of the screen on phones for better usability */
+  .chat-panel { width: calc(100vw - 16px); right: 8px; bottom: 8px; left: 8px; height: 75vh; max-height: 75vh; border-radius: 14px; }
+
+  /* Quick / ministry / dl-ministry grids — keep 2 columns when room allows */
+  .ministry-grid, .dl-ministry-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+  .ministry-card { padding: 14px 10px; }
+  .ministry-mark { max-width: 80px; max-height: 50px; margin-bottom: 8px; }
+  .ministry-name { font-size: var(--fs-sm); }
+  .ministry-region { font-size: 9px; }
+}
+
+/* ==================== SMALL PHONE (≤420px) ====================
+   For older / smaller devices (iPhone SE, Android Compact, etc.).
+   Eliminates the last horizontal breathing room and prioritizes
+   maximum content readability. */
+@media (max-width: 420px) {
+  /* Hide the wordmark text in the header — symbol alone fits */
+  .brand-mark { font-size: 0; }
+  .brand-mark img { width: 32px; height: 32px; }
+  /* Show a screen-reader-only label so accessibility is preserved */
+  .brand-mark::after { content: 'HCFM'; font-size: var(--fs-base); margin-left: 8px; color: #fff; }
+
+  /* Tighter header */
+  .site-header { height: 54px; }
+  .header-inner { padding: 0 12px; }
+  .header-search { width: 110px; font-size: 11px; }
+
+  /* Content even tighter */
+  .content { padding: 16px 12px 36px; }
+
+  /* Hero */
+  .hero { padding: 20px 12px; }
+  .hero-h1 { font-size: 26px !important; }
+  .hero-sub { font-size: var(--fs-sm); }
+  .hero-mark img { max-width: 110px; }
+
+  /* Headings */
+  h1 { font-size: 22px; }
+  h2 { font-size: var(--fs-md); }
+
+  /* Color cubes: single column at this size */
+  .color-grid-4, .color-grid-3 { grid-template-columns: 1fr !important; }
+
+  /* Variants: single column too */
+  .md-variants-grid { grid-template-columns: 1fr !important; }
+
+  /* Ministry grid: 2 cols still works at 420 because ministry cards are compact */
+  /* Footer */
+  .site-footer { padding: 24px 12px 20px; }
+  .footer-sub { font-size: 10px; }
+}
+
 :focus-visible { outline: 2px solid var(--hcfm-gold); outline-offset: 2px; }
 
 
