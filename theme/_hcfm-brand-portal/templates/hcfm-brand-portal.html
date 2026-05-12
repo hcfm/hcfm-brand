@@ -92,11 +92,7 @@
       <div class="hero">
         <div class="hero-text">
           <p class="hero-eyebrow">HCFM · Brand Identity · 2026</p>
-          <h1 class="hero-h1">
-            The visual expression of a<br>
-            <span class="script-accent script-accent-xl">global</span>
-            <span class="hero-h1-end">family at prayer.</span>
-          </h1>
+          <h1 class="hero-h1">The visual expression of a<br><span class="script-accent script-accent-xl">global</span> <span class="hero-h1-end">family at prayer.</span></h1>
           <p class="hero-sub">Everything a ministry center, vendor, or partner needs to apply the HCFM brand correctly. The system, in plain English. The files, where you can find them. The rules, written so you can actually use them.</p>
           <div class="hero-cta">
             <a href="#colors" class="btn btn-primary btn-hero">Browse the system →</a>
@@ -671,7 +667,7 @@
         </div>
         <div class="font-specimen font-specimen-dark">
           <p class="playlist-output" id="playlistOutput">pray</p>
-          <input type="text" class="playlist-input" id="playlistInput" placeholder="Type a word" maxlength="18">
+          <input type="text" class="playlist-input" id="playlistInput" placeholder="Type a word" maxlength="18" aria-label="Type a word to preview in Playlist Script">
           <p class="playlist-caption">Type your own. The color cycles between the three approved colors.</p>
         </div>
       </article>
@@ -1318,10 +1314,10 @@
             <h2 class="dl-gate-h">Logo packs, ministry centers, fonts, and templates</h2>
             <p class="dl-gate-note">These four tabs share a <strong>single access password</strong>. Once you enter it, you can switch freely between them. Ministry centers: ask your director for the password, the same one works for everyone in your ministry.</p>
             <form class="dl-gate-form" id="tier1Form">
-              <input type="password" placeholder="Access password" id="tier1Password" autocomplete="current-password">
+              <input type="password" placeholder="Access password" id="tier1Password" autocomplete="current-password" aria-label="Tier 1 access password">
               <button type="submit" class="btn btn-primary">Unlock</button>
             </form>
-            <p class="dl-gate-help">Need the password? Email <a href="mailto:vhassan@hcfm.org">vhassan@hcfm.org</a> or <a href="mailto:eepau@hcfm.org">eepau@hcfm.org</a>.</p>
+            <p class="dl-gate-help">Need the password? Email <a href="mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=HCFM%20Brand%20Portal%20%E2%80%94%20Tier%201%20password%20request&amp;body=Hi%20Victoria%20and%20Emmanuel%2C%0A%0AI%E2%80%99d%20like%20the%20Tier%201%20password%20to%20access%20the%20brand-portal%20downloads%20(logo%20packs%2C%20ministry%20centers%2C%20fonts).%0A%0AName%3A%20%0AMinistry%20or%20vendor%3A%20%0APurpose%3A%20%0A%0AThank%20you%21">request the password →</a>.</p>
             {% if not is_logged_in %}<p class="dl-gate-help"><em>Easton internal team: <a href="/_hcms/mem/login?redirect_url=/brand%23downloads">sign in</a> instead, your account auto-unlocks this section plus source files.</em></p>{% endif %}
           </div>
         </div>
