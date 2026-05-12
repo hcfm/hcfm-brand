@@ -239,9 +239,10 @@
   setRoute(location.hash);
 
   /* ---------- Theme (dark mode) toggle ----------
-     The initial theme was set in <head> before stylesheet load to
-     avoid a white flash on dark-mode users. This handles the
-     user-initiated toggle and persistence. */
+     Always defaults to light on a first visit. The toggle button in
+     the header is always visible so anyone can switch whenever they
+     want. Choice persists in localStorage for return visits. OS
+     preference is intentionally NOT followed automatically. */
   const themeToggle = document.getElementById('themeToggle');
   function applyTheme(theme) {
     if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
@@ -252,22 +253,11 @@
     return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
   }
   if (themeToggle) {
-    // sync aria-label with current state
     applyTheme(currentTheme());
     themeToggle.addEventListener('click', () => {
       const next = currentTheme() === 'dark' ? 'light' : 'dark';
       applyTheme(next);
       try { localStorage.setItem('hcfm-theme', next); } catch (e) {}
-    });
-  }
-  // Track system preference changes if the user hasn't set a manual choice
-  if (window.matchMedia) {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    mq.addEventListener('change', (e) => {
-      try {
-        if (localStorage.getItem('hcfm-theme')) return; // user has chosen explicitly
-        applyTheme(e.matches ? 'dark' : 'light');
-      } catch (err) {}
     });
   }
 

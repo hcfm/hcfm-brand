@@ -14,14 +14,15 @@
 <meta name="description" content="The visual identity guide for Holy Cross Family Ministries. One ministry, one mission, one world for families.">
 <meta name="color-scheme" content="light dark">
 <script>
-  // Set theme BEFORE stylesheet loads to avoid white-flash on dark-mode visitors.
-  // Stored preference wins; otherwise follow the OS setting.
+  // Apply stored theme BEFORE stylesheet loads (no flash on return visits).
+  // First-time visitors always get light mode — the OS preference is NOT
+  // auto-followed. The toggle button is always visible in the header so
+  // anyone can switch whenever they want.
   (function () {
     try {
-      var stored = localStorage.getItem('hcfm-theme');
-      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var theme = stored || (prefersDark ? 'dark' : 'light');
-      if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      if (localStorage.getItem('hcfm-theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
     } catch (e) { /* localStorage may be blocked; ignore */ }
   })();
 </script>
