@@ -277,22 +277,59 @@
     }
   });
 
-  /* ---------- Sidebar search ---------- */
+  /* ---------- Sidebar search ----------
+     Filters the sidebar nav by section title. Surfaces a visible status
+     above the nav so the user can see what's been filtered and clear it
+     in one click (without this, the search looks like it does nothing). */
   const search = document.getElementById('search');
-  if (search) {
-    search.addEventListener('input', () => {
-      const q = search.value.trim().toLowerCase();
-      navLinks.forEach(a => {
-        const visible = !q || a.textContent.toLowerCase().includes(q);
-        a.style.display = visible ? '' : 'none';
-      });
-      document.querySelectorAll('.nav-group').forEach(g => {
-        const anyVisible = Array.from(g.querySelectorAll('a')).some(a => a.style.display !== 'none');
-        const label = g.querySelector('.nav-group-label');
-        if (label) label.style.display = anyVisible ? '' : 'none';
-      });
+  const searchStatus = document.getElementById('searchStatus');
+  const searchStatusQuery = document.getElementById('searchStatusQuery');
+  const searchStatusCount = document.getElementById('searchStatusCount');
+  const searchStatusClear = document.getElementById('searchStatusClear');
+  const searchEmpty = document.getElementById('searchEmpty');
+  const searchEmptyClear = document.getElementById('searchEmptyClear');
+
+  function runSearch() {
+    if (!search) return;
+    const q = search.value.trim().toLowerCase();
+    let matchCount = 0;
+    navLinks.forEach(a => {
+      const visible = !q || a.textContent.toLowerCase().includes(q);
+      a.style.display = visible ? '' : 'none';
+      if (visible && q) matchCount++;
     });
+    document.querySelectorAll('.nav-group').forEach(g => {
+      const anyVisible = Array.from(g.querySelectorAll('a')).some(a => a.style.display !== 'none');
+      const label = g.querySelector('.nav-group-label');
+      if (label) label.style.display = anyVisible ? '' : 'none';
+    });
+    if (searchStatus) {
+      if (q) {
+        if (searchStatusQuery) searchStatusQuery.textContent = '“' + search.value.trim() + '”';
+        if (searchStatusCount) searchStatusCount.textContent = String(matchCount);
+        searchStatus.hidden = false;
+        if (searchEmpty) searchEmpty.hidden = matchCount > 0;
+      } else {
+        searchStatus.hidden = true;
+        if (searchEmpty) searchEmpty.hidden = true;
+      }
+    }
   }
+
+  function clearSearch() {
+    if (!search) return;
+    search.value = '';
+    runSearch();
+    search.focus();
+  }
+
+  if (search) search.addEventListener('input', runSearch);
+  if (searchStatusClear) searchStatusClear.addEventListener('click', clearSearch);
+  if (searchEmptyClear) searchEmptyClear.addEventListener('click', clearSearch);
+  // Escape inside the search field clears it
+  if (search) search.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && search.value) { e.preventDefault(); clearSearch(); }
+  });
 
   /* ---------- Playlist Script playground ---------- */
   const playInput = document.getElementById('playlistInput');

@@ -45,6 +45,11 @@
 
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-scroll">
+      <div class="search-status" id="searchStatus" hidden role="status" aria-live="polite">
+        <span class="search-status-text"><span id="searchStatusQuery"></span> · <span id="searchStatusCount">0</span> matches</span>
+        <button type="button" class="search-status-clear" id="searchStatusClear" aria-label="Clear search">Clear</button>
+      </div>
+      <p class="search-empty" id="searchEmpty" hidden>No sections match. Try a different term or <button type="button" class="search-empty-clear" id="searchEmptyClear">clear the search</button>.</p>
       <nav class="sidebar-nav" id="sidebarNav">
         <a href="#home" data-route="home">Home</a>
 

@@ -137,6 +137,20 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .sidebar-foot p strong { color: var(--text); font-weight: 600; }
 .sidebar-mail { display: inline-block; margin-top: 10px; font-size: var(--fs-xs); color: var(--hcfm-blue); font-weight: 600; }
 .sidebar-updated { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); font-size: 11px; letter-spacing: 0.04em; color: var(--text-quiet); }
+
+/* Search status — visible chip that confirms search is active.
+   Appears inside the sidebar above the nav when the user has typed
+   something. Without this the search looks like it does nothing,
+   because filtering happens silently. */
+.search-status { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 8px 12px; padding: 8px 10px 8px 12px; background: var(--bg-page); border: 1px solid var(--rule); border-left: 3px solid var(--hcfm-gold); border-radius: 6px; font-family: var(--font-display); font-size: var(--fs-xs); color: var(--text); }
+.search-status[hidden] { display: none; }
+.search-status-text { line-height: 1.4; min-width: 0; }
+.search-status-text > #searchStatusQuery { font-weight: 600; color: var(--hcfm-blue); }
+.search-status-clear { flex-shrink: 0; padding: 4px 10px; background: transparent; border: 1px solid var(--rule); border-radius: 200px; font-family: inherit; font-size: 11px; font-weight: 600; color: var(--text); cursor: pointer; transition: background 150ms ease, border-color 150ms ease; }
+.search-status-clear:hover { background: var(--bg); border-color: var(--text); }
+.search-empty { margin: 0 8px 12px; padding: 10px 12px; background: var(--bg-page); border: 1px dashed var(--rule); border-radius: 6px; font-family: var(--font-display); font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.5; }
+.search-empty[hidden] { display: none; }
+.search-empty-clear { background: none; border: none; padding: 0; color: var(--hcfm-blue); font: inherit; cursor: pointer; text-decoration: underline; }
 .sidebar-updated time { font-variant-numeric: tabular-nums; }
 .sidebar-scroll::-webkit-scrollbar { width: 4px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 2px; }
