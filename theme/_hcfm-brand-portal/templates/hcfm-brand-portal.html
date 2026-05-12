@@ -642,6 +642,55 @@
           <tr><td><span class="fabric-swatch fabric-swatch-bordered" style="background:#fff"></span>White</td><td>Yellow Gold only</td><td>Poor contrast</td><td class="t-bad">✗ Avoid</td></tr>
         </tbody>
       </table>
+
+      <h2>Check your own combination</h2>
+      <p>Pick any text color and any background. See the actual WCAG contrast ratio and whether it passes accessibility standards. Run this before publishing anything where a brand color sits next to another brand color.</p>
+      <div class="contrast-checker" id="contrastChecker">
+        <div class="cc-controls">
+          <label class="cc-field">
+            <span class="cc-field-label">Text color</span>
+            <select id="ccText" aria-label="Text color">
+              <option value="#000000">Black</option>
+              <option value="#FFFFFF">White</option>
+              <option value="#0047BB">HCFM Blue</option>
+              <option value="#FFB500" selected>Yellow Gold</option>
+              <option value="#00A9E0">Marian Blue</option>
+              <option value="#89764B">Muted Gold</option>
+              <option value="#5F259F">Purple</option>
+              <option value="#CF3339">Red</option>
+              <option value="#3A913F">Green</option>
+            </select>
+          </label>
+          <label class="cc-field">
+            <span class="cc-field-label">Background</span>
+            <select id="ccBg" aria-label="Background color">
+              <option value="#000000" selected>Black</option>
+              <option value="#FFFFFF">White</option>
+              <option value="#0047BB">HCFM Blue</option>
+              <option value="#FFB500">Yellow Gold</option>
+              <option value="#00A9E0">Marian Blue</option>
+              <option value="#89764B">Muted Gold</option>
+              <option value="#5F259F">Purple</option>
+              <option value="#CF3339">Red</option>
+              <option value="#3A913F">Green</option>
+              <option value="#F8F6F1">Cream</option>
+            </select>
+          </label>
+        </div>
+        <div class="cc-preview" id="ccPreview" aria-live="off">
+          <span class="cc-preview-large">Family prayer changes everything.</span>
+          <span class="cc-preview-small">Brand consistency builds trust.</span>
+        </div>
+        <div class="cc-result" id="ccResult" role="status" aria-live="polite">
+          <div class="cc-ratio-wrap"><span class="cc-ratio" id="ccRatio">8.6:1</span><span class="cc-ratio-label">contrast ratio</span></div>
+          <div class="cc-grades">
+            <span class="cc-grade" id="ccGradeAA">AA · normal text</span>
+            <span class="cc-grade" id="ccGradeAAA">AAA · normal text</span>
+            <span class="cc-grade" id="ccGradeLarge">AA · large text</span>
+          </div>
+          <p class="cc-message" id="ccMessage">Excellent for any text size.</p>
+        </div>
+      </div>
     </section>
 
     <!-- ==================== TYPOGRAPHY ==================== -->

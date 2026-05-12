@@ -108,6 +108,42 @@
 /* Smooth the toggle so the page doesn't flash on switch */
 body, .sidebar, .sidebar-foot, .page-toc, .search-status, .search-empty { transition: var(--theme-tx); }
 
+/* ============================================================
+   CONTRAST CHECKER
+   Lives at the end of the Colors section. Users pick a text color
+   and a background from the brand palette and see the live WCAG
+   contrast ratio + AA/AAA pass/fail badges. Solves the documented
+   ministry-center mistake of putting Yellow Gold text on white.
+   ============================================================ */
+.contrast-checker { display: grid; grid-template-columns: 320px 1fr; gap: 28px; padding: 28px; background: var(--bg-page); border: 1px solid var(--rule); border-radius: 8px; margin: 24px 0 48px; }
+.cc-controls { display: flex; flex-direction: column; gap: 16px; }
+.cc-field { display: flex; flex-direction: column; gap: 6px; }
+.cc-field-label { font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-quiet); }
+.cc-field select { padding: 10px 12px; font-family: var(--font-display); font-size: var(--fs-sm); border: 1px solid var(--rule); background: var(--bg); color: var(--text); border-radius: 6px; cursor: pointer; transition: border-color 150ms ease; }
+.cc-field select:hover, .cc-field select:focus { border-color: var(--hcfm-gold); outline: none; }
+.cc-preview { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; justify-content: center; padding: 28px; border-radius: 6px; border: 1px solid var(--rule); min-height: 160px; transition: background 240ms ease, color 240ms ease; }
+.cc-preview-large { font-family: var(--font-display); font-size: 32px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+.cc-preview-small { font-family: var(--font-body); font-size: 14px; line-height: 1.5; }
+.cc-result { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; gap: 12px 24px; align-items: center; }
+.cc-ratio-wrap { display: flex; flex-direction: column; gap: 2px; }
+.cc-ratio { font-family: var(--font-display); font-size: 36px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+.cc-ratio-label { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-quiet); }
+.cc-grades { display: flex; flex-wrap: wrap; gap: 6px; }
+.cc-grade { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 8px; font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 600; border-radius: 200px; border: 1px solid var(--rule); background: var(--bg); color: var(--text-muted); transition: background 200ms ease, color 200ms ease, border-color 200ms ease; }
+.cc-grade::before { content: '○'; font-size: 14px; line-height: 1; color: var(--text-quiet); }
+.cc-grade.is-pass { background: rgba(58,145,63,0.10); color: var(--hcfm-green); border-color: rgba(58,145,63,0.30); }
+.cc-grade.is-pass::before { content: '✓'; color: var(--hcfm-green); }
+.cc-grade.is-fail { background: rgba(207,51,57,0.08); color: var(--hcfm-red); border-color: rgba(207,51,57,0.25); }
+.cc-grade.is-fail::before { content: '✕'; color: var(--hcfm-red); }
+.cc-message { grid-column: 1 / -1; margin: 0; padding-top: 16px; border-top: 1px solid var(--rule); font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.6; }
+@media (max-width: 720px) {
+  .contrast-checker { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+  .cc-preview { min-height: 120px; padding: 20px; }
+  .cc-preview-large { font-size: 24px; }
+  .cc-ratio { font-size: 28px; }
+  .cc-result { grid-template-columns: 1fr; gap: 14px; }
+}
+
 /* Theme toggle button in header */
 .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; padding: 0; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 200px; color: #fff; cursor: pointer; transition: background 160ms ease, border-color 160ms ease; }
 .theme-toggle:hover { background: rgba(255,255,255,0.18); border-color: var(--hcfm-gold); }

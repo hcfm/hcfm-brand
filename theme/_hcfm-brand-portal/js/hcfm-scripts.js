@@ -420,6 +420,64 @@
     if (e.key === 'Escape' && search.value) { e.preventDefault(); clearSearch(); }
   });
 
+  /* ---------- Contrast checker ----------
+     Live WCAG 2.1 contrast ratio. Formula: linearize each RGB channel,
+     compute relative luminance L = 0.2126R + 0.7152G + 0.0722B,
+     contrast = (L_lighter + 0.05) / (L_darker + 0.05). */
+  const ccText = document.getElementById('ccText');
+  const ccBg = document.getElementById('ccBg');
+  const ccPreview = document.getElementById('ccPreview');
+  const ccRatio = document.getElementById('ccRatio');
+  const ccGradeAA = document.getElementById('ccGradeAA');
+  const ccGradeAAA = document.getElementById('ccGradeAAA');
+  const ccGradeLarge = document.getElementById('ccGradeLarge');
+  const ccMessage = document.getElementById('ccMessage');
+
+  function hexToRgb(hex) {
+    const h = hex.replace('#', '');
+    const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function luminance([r, g, b]) {
+    const lin = c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+    return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+  }
+  function contrastRatio(fgHex, bgHex) {
+    const L1 = luminance(hexToRgb(fgHex));
+    const L2 = luminance(hexToRgb(bgHex));
+    const [lo, hi] = L1 > L2 ? [L2, L1] : [L1, L2];
+    return (hi + 0.05) / (lo + 0.05);
+  }
+  function updateContrastChecker() {
+    if (!ccText || !ccBg) return;
+    const fg = ccText.value;
+    const bg = ccBg.value;
+    const ratio = contrastRatio(fg, bg);
+    ccPreview.style.color = fg;
+    ccPreview.style.background = bg;
+    if (ccRatio) ccRatio.textContent = ratio.toFixed(2) + ':1';
+    // WCAG thresholds: AA normal 4.5, AAA normal 7, AA large 3
+    const passAA = ratio >= 4.5;
+    const passAAA = ratio >= 7;
+    const passLarge = ratio >= 3;
+    if (ccGradeAA) ccGradeAA.classList.toggle('is-pass', passAA), ccGradeAA.classList.toggle('is-fail', !passAA);
+    if (ccGradeAAA) ccGradeAAA.classList.toggle('is-pass', passAAA), ccGradeAAA.classList.toggle('is-fail', !passAAA);
+    if (ccGradeLarge) ccGradeLarge.classList.toggle('is-pass', passLarge), ccGradeLarge.classList.toggle('is-fail', !passLarge);
+    if (ccMessage) {
+      let msg;
+      if (fg.toLowerCase() === bg.toLowerCase()) msg = 'Same color front and back — the text would be invisible. Pick a different pair.';
+      else if (passAAA) msg = 'Excellent contrast. Safe for any text size, including body copy.';
+      else if (passAA) msg = 'Passes AA for body text. Safe for paragraphs, captions, and UI text.';
+      else if (passLarge) msg = 'Passes only for large display text (24px+ regular or 18.66px+ bold). Avoid for body copy.';
+      else msg = 'Fails WCAG. Hard to read. Use one of the recommended brand combinations instead — Black background with Yellow Gold or White, or White background with HCFM Blue.';
+      ccMessage.textContent = msg;
+    }
+  }
+  if (ccText) ccText.addEventListener('change', updateContrastChecker);
+  if (ccBg) ccBg.addEventListener('change', updateContrastChecker);
+  // Initial state
+  if (ccText && ccBg) updateContrastChecker();
+
   /* ---------- Playlist Script playground ---------- */
   const playInput = document.getElementById('playlistInput');
   const playOutput = document.getElementById('playlistOutput');
