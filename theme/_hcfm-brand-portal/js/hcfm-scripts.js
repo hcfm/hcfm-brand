@@ -1076,6 +1076,11 @@
     if (chatPanel) {
       chatPanel.classList.add('open');
       chatPanel.setAttribute('aria-hidden', 'false');
+      // Remove inert so focusable elements inside become tabbable. Setting
+      // aria-hidden=false alone isn't enough — axe-core (correctly) flags
+      // any element with aria-hidden=true that contains focusable nodes,
+      // because tab order leaks the panel even when "hidden" visually.
+      chatPanel.removeAttribute('inert');
       setTimeout(() => chatInput && chatInput.focus(), 300);
       // Industry-standard help-bot pattern: open with value (starter pills)
       // not a survey. No identity capture, no friction, user can start
@@ -1103,6 +1108,10 @@
     if (chatPanel) {
       chatPanel.classList.remove('open');
       chatPanel.setAttribute('aria-hidden', 'true');
+      // Set inert so descendants (input, send button, pills) drop out of
+      // the tab order along with the visual hide. Resolves the
+      // aria-hidden-focus violation.
+      chatPanel.setAttribute('inert', '');
     }
   }
   if (chatFab) chatFab.addEventListener('click', openChat);
