@@ -7,6 +7,22 @@
 <title>HCFM Banner Studio</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='49' fill='%23ffffff' stroke='%23ececec' stroke-width='2'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='36' fill='%2389764B'%3EH%3C/text%3E%3C/svg%3E">
 <style>
+  /* HCFM brand fonts (loaded from the brand repo) */
+  @font-face {
+    font-family: 'Whitney';
+    src: url('https://emmanuelepau.github.io/hcfm-brand/assets/fonts/Whitney-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Calluna';
+    src: url('https://emmanuelepau.github.io/hcfm-brand/assets/fonts/Calluna-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --hcfm-blue: #0047BB;
     --hcfm-blue-dark: #003590;
@@ -28,15 +44,25 @@
     --radius: 10px;
     --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
     --shadow-md: 0 8px 32px rgba(15, 23, 42, 0.12);
+
+    /* Brand font stacks */
+    --font-display: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body:    'Calluna', Georgia, 'Palatino Linotype', Palatino, 'Times New Roman', serif;
+    --font-ui:      'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: 'Helvetica Neue', 'Whitney', Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
     color: var(--ink);
     background: var(--bg);
-    line-height: 1.5;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.005em;
   }
   .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
 
@@ -71,9 +97,10 @@
   }
   header.brand .titles { flex: 1; min-width: 0; }
   header.brand h1 {
-    margin: 0; font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
+    margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.01em;
   }
-  header.brand .sub { margin: 2px 0 0; font-size: 13px; color: var(--ink-mute); }
+  header.brand .sub { margin: 4px 0 0; font-family: var(--font-body); font-size: 13.5px; color: var(--ink-mute); }
   header.brand .who {
     font-size: 12px; color: var(--ink-mute); text-align: right;
     display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
@@ -95,26 +122,26 @@
     padding: 24px;
     margin-bottom: 18px;
   }
-  .card h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
-  .card .hint { color: var(--ink-mute); font-size: 13px; margin: 0 0 16px; }
-  .card .req { color: var(--err); font-weight: 700; }
+  .card h2 { margin: 0 0 6px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; letter-spacing: -0.005em; }
+  .card .hint { color: var(--ink-mute); font-family: var(--font-body); font-size: 13.5px; margin: 0 0 16px; line-height: 1.55; }
+  .card .req { color: var(--err); font-weight: 700; font-family: var(--font-ui); }
 
   /* SIGN-IN */
   .gate { display: none; }
   .gate.active { display: block; }
   .gate .field { margin-bottom: 14px; }
-  .gate label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
+  .gate label { font-family: var(--font-ui); font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
   .gate input {
     width: 100%; padding: 12px 14px;
     border: 1px solid var(--line); border-radius: 8px;
-    font-family: inherit; font-size: 15px; background: #fff;
+    font-family: var(--font-ui); font-size: 15px; background: #fff;
     min-height: 44px;
   }
   .gate input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
   .gate .submit-row { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
   .gate .gate-error { color: var(--err); font-size: 13px; margin: 12px 0 0; display: none; }
   .gate .gate-error.active { display: block; }
-  .gate .help { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-soft); font-size: 12px; color: var(--ink-mute); }
+  .gate .help { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-soft); font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); line-height: 1.55; }
 
   /* APP */
   .app { display: none; }
@@ -140,8 +167,8 @@
     margin: 0 auto 10px;
     display: block;
   }
-  .dropzone .label { font-weight: 600; margin-bottom: 6px; font-size: 15px; color: var(--ink); }
-  .dropzone .meta { font-size: 12px; color: var(--ink-mute); }
+  .dropzone .label { font-family: var(--font-ui); font-weight: 600; margin-bottom: 6px; font-size: 15px; color: var(--ink); }
+  .dropzone .meta { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); }
   .dropzone input[type="file"] {
     position: absolute;
     width: 1px; height: 1px;
@@ -224,8 +251,8 @@
     min-height: 44px;
   }
   .selector label.checked { border-color: var(--hcfm-blue); background: #eef3ff; }
-  .selector label .name { font-weight: 700; font-size: 14px; display: block; }
-  .selector label .desc { font-size: 12px; color: var(--ink-mute); margin-top: 2px; display: block; }
+  .selector label .name { font-family: var(--font-display); font-weight: 700; font-size: 14.5px; display: block; }
+  .selector label .desc { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 3px; display: block; line-height: 1.45; }
   .selector input[type="radio"] {
     position: absolute;
     width: 1px; height: 1px;
@@ -238,22 +265,22 @@
 
   /* Reason field */
   .field-reason { margin-top: 16px; }
-  .field-reason label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
+  .field-reason label { font-family: var(--font-ui); font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
   .field-reason input[type="text"] {
     width: 100%; padding: 10px 12px;
     border: 1px solid var(--line); border-radius: 8px;
-    font-family: inherit; font-size: 14px;
+    font-family: var(--font-ui); font-size: 14px;
     min-height: 44px;
   }
   .field-reason input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
-  .field-reason .field-help { font-size: 12px; color: var(--ink-mute); margin-top: 6px; }
+  .field-reason .field-help { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 6px; line-height: 1.5; }
   .field-reason.error input { border-color: var(--err); }
   .field-reason.error .field-help { color: var(--err); }
 
   /* Buttons */
   .actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; flex-wrap: wrap; }
   button {
-    font-family: inherit; font-size: 14px; font-weight: 600;
+    font-family: var(--font-ui); font-size: 14px; font-weight: 600;
     padding: 12px 20px; border-radius: 8px; cursor: pointer;
     border: 1px solid transparent;
     min-height: 44px;
@@ -298,11 +325,12 @@
   }
   .activity-row .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .activity-row .body { min-width: 0; }
-  .activity-row .body .what { font-size: 13px; color: var(--ink); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .activity-row .body .meta { font-size: 12px; color: var(--ink-mute); margin-top: 2px; }
+  .activity-row .body .what { font-family: var(--font-body); font-size: 13.5px; color: var(--ink); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .activity-row .body .meta { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 3px; }
   .activity-row .body .meta .target-pill {
-    display: inline-block; padding: 1px 6px; border-radius: 3px;
-    background: var(--line-soft); color: var(--ink-soft); font-size: 11px; font-weight: 600;
+    display: inline-block; padding: 1px 7px; border-radius: 3px;
+    background: var(--line-soft); color: var(--ink-soft);
+    font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.01em;
     margin-right: 6px;
   }
   .activity-row .right-actions { display: flex; gap: 6px; align-items: center; }
@@ -343,14 +371,14 @@
     width: 100%;
     padding: 24px;
   }
-  .modal h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; }
-  .modal p { margin: 0 0 6px; font-size: 14px; color: var(--ink-soft); }
+  .modal h3 { margin: 0 0 8px; font-family: var(--font-display); font-size: 17.5px; font-weight: 700; letter-spacing: -0.005em; }
+  .modal p { margin: 0 0 6px; font-family: var(--font-body); font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
   .modal .summary {
     margin: 14px 0 0;
     background: var(--line-soft);
     border-radius: 8px;
     padding: 12px 14px;
-    font-size: 13px;
+    font-family: var(--font-ui); font-size: 13px;
     color: var(--ink);
   }
   .modal .summary div { padding: 3px 0; }
@@ -453,13 +481,13 @@
       <div class="preview" id="preview">
         <div class="preview-frame"><img id="preview-img" alt="The banner image you just chose"></div>
         <div class="preview-info">
-          <div class="pi" id="pi-dims"><span class="dot"></span><b>Dimensions:</b><span id="dims-val">&mdash;</span></div>
-          <div class="pi" id="pi-size"><span class="dot"></span><b>File size:</b><span id="size-val">&mdash;</span></div>
+          <div class="pi" id="pi-dims"><span class="dot"></span><b>Dimensions:</b><span id="dims-val">…</span></div>
+          <div class="pi" id="pi-size"><span class="dot"></span><b>File size:</b><span id="size-val">…</span></div>
         </div>
       </div>
 
       <div class="signature-mockup-wrap" id="signature-mockup-wrap">
-        <div class="mockup-title">Preview &mdash; how this looks at the bottom of an email</div>
+        <div class="mockup-title">Preview: how this looks at the bottom of an email</div>
         <div class="signature-mockup">
           <table cellpadding="0" cellspacing="0" border="0">
             <tr>
@@ -500,7 +528,7 @@
       <div class="field-reason" id="field-reason">
         <label for="msg">What is this banner for? <span class="req" aria-hidden="true">*</span></label>
         <input type="text" id="msg" placeholder="e.g. Grand Reopening, June 6 launch" maxlength="140" required>
-        <div class="field-help">Required &mdash; this shows up in the audit log so we can trace who published what and why.</div>
+        <div class="field-help">Required. This shows up in the audit log so we can trace who published what and why.</div>
       </div>
     </div>
 
@@ -770,7 +798,7 @@
       });
       const cacheBustUrl = `${data.liveUrl}?v=${Date.now()}`;
       showStatus('ok', `
-        <b>Done.</b> The ${escapeHtml(targetLabel(target))} signature banner is saved. Recipients will see it on the next email they open from any HCFM staff member (typically within 1&ndash;10 minutes).
+        <b>Done.</b> The ${escapeHtml(targetLabel(target))} signature banner is saved. Recipients will see it on the next email they open from any HCFM staff member (typically within 1 to 10 minutes).
         <small>
           <b>See the new banner:</b> <a href="${cacheBustUrl}" target="_blank" rel="noopener">open the live image in a new tab</a> (fresh-loaded, bypassing cache).<br>
           <b>One gotcha if checking your own Outlook:</b> your browser may still show the previous banner in your own compose view because it cached the image. Recipients don't share that cache. To force-refresh your own compose: hard-refresh your Outlook tab (Cmd+Shift+R or Ctrl+Shift+R) and open a fresh compose, or email yourself at a non-Outlook address (Gmail, iCloud) to see the recipient view.
