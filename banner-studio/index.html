@@ -528,16 +528,19 @@
       step('s-3', 'Confirming it\'s live (up to ~10 min)', '');
 
       const flippedAt = await pollLive(data.liveUrl, state.fileBytes, 600);
+      const cacheBustUrl = `${data.liveUrl}?v=${Date.now()}`;
       if (flippedAt > 0) {
         step('s-3', `Live after ${flippedAt}s`, 'done');
         showStatus('ok', `
-          <b>Done.</b> The ${targetLabel} signature banner is live now. Every staff member on that side will see it on the next email they open.
-          <small>It took about ${flippedAt} seconds. The new banner will keep showing until someone publishes a different one here.</small>
+          <b>Done.</b> The ${targetLabel} signature banner is live now. Recipients will see it on the next email they open from any HCFM staff member.
+          <small style="margin-top:10px"><b>See the new banner:</b> <a href="${cacheBustUrl}" target="_blank" rel="noopener">open the live image in a new tab</a> (the link includes a cache-buster so you'll see the latest).</small>
+          <small style="margin-top:10px"><b>One gotcha if you're checking in your own Outlook:</b> your browser may still show the OLD banner in your "New Email" compose view because it cached the image. <b>Recipients don't have that cache</b> — they see the new banner correctly. To force-refresh your own compose view, hard-refresh your Outlook tab (Cmd+Shift+R / Ctrl+Shift+R) and open a fresh compose. Best verification: email yourself at a non-Outlook address (Gmail, iCloud, etc.) and check there.</small>
         `);
       } else {
         step('s-3', 'Saved; the live banner usually updates within 10 minutes', 'done');
         showStatus('warn', `
           <b>Saved.</b> The new banner is committed. The live URL didn't show the change yet but it usually arrives within 10 minutes.
+          <small style="margin-top:10px"><a href="${cacheBustUrl}" target="_blank" rel="noopener">Check the live image in a new tab</a> in a few minutes.</small>
         `);
       }
       loadActivity();
