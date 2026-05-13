@@ -110,7 +110,7 @@
 [data-theme="dark"] .sidebar,
 [data-theme="dark"] .sidebar-foot { background: var(--bg) !important; }
 [data-theme="dark"] .page-wrap { background: var(--bg); }
-[data-theme="dark"] .nav-group-label { color: var(--text-muted); }
+[data-theme="dark"] .nav-group-label { color: var(--text-muted); background-color: var(--bg); }
 /* Logo color-variant cards and template samples keep a near-white
    backdrop in dark mode so PNG logos still read correctly. Use a soft
    off-white instead of pure white so it doesn't blast. */
