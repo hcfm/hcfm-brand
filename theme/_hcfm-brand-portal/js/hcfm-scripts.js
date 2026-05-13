@@ -599,16 +599,14 @@
           <h2>${m.name}</h2>
           <p>${m.region} · Code: ${m.code}</p>
         </div>
-        ${unlocked ? `<button class="btn btn-primary md-bulk-download" data-ministry-bulk="${m.code}" title="Save every variant of every logotype for this ministry">Download all logos →</button>` : ''}
+        ${unlocked ? `<a class="btn btn-primary md-bulk-zip" href="downloads/logo-packs/ministries/${m.code}_Pack.zip" download="${m.code}_Logo_Pack.zip" title="Download every logo for ${m.name} as a single ZIP with PNG/ and JPG/ folders">Download all logos (ZIP) →</a>` : ''}
       </div>
       ${groups.map(g => {
         const ltLabel = g.folder.replace(/.*(Logotype\d)/, '$1').replace('Logotype', 'Logotype ');
         const groupBase = g.basePath ? `${g.basePath}/${encodeURIComponent(g.folder)}` : `${previewBase}/${encodeURIComponent(g.folder)}`;
-        const groupFiles = [];
         const variantsHtml = g.files.map(file => {
           const v = variantLabelFromFile(file);
           const path = `${groupBase}/${file}`;
-          groupFiles.push({ path, name: file });
           allFiles.push({ path, name: file });
           // When locked: render as a non-clickable card (just preview). When unlocked: full download link.
           if (!unlocked) {
@@ -634,7 +632,6 @@
         return `
           <div class="md-section-head">
             <h3 class="md-section-title">${ltLabel}</h3>
-            ${unlocked ? `<button class="btn btn-text md-group-download" data-group-files='${JSON.stringify(groupFiles).replace(/'/g, '&#39;')}' title="Download every variant of ${ltLabel}">Download this set</button>` : ''}
           </div>
           <div class="md-variants-grid">${variantsHtml}</div>
         `;
@@ -642,16 +639,9 @@
 
       <div class="info-block">
         <h3>About these files</h3>
-        <p><strong>PNG only</strong>, these are production-ready raster files. Editable AI source files are restricted to the Easton brand owners; if you need a custom edit (resize for embroidery, vector edits for print), email <a href="mailto:vhassan@hcfm.org">Victoria</a> or <a href="mailto:eepau@hcfm.org">Emmanuel</a>.</p>
+        <p>The single-variant cards above download <strong>PNG</strong> (web/digital). The <strong>“Download all logos (ZIP)”</strong> button at the top contains both <strong>PNG</strong> and <strong>JPG</strong> versions of every variant, organized in <code>PNG/</code> and <code>JPG/</code> subfolders. Editable AI source files are restricted to the brand owners; if you need a custom edit (embroidery, vinyl, banner-size print), email <a href="mailto:vhassan@hcfm.org">Victoria</a> or <a href="mailto:eepau@hcfm.org">Emmanuel</a>.</p>
       </div>
     `;
-
-    // Stash the all-files list on the bulk-download button for the click handler.
-    const bulkBtn = gallery.querySelector('.md-bulk-download');
-    if (bulkBtn) {
-      bulkBtn.__files = allFiles;
-      bulkBtn.__ministry = m;
-    }
   }
 
   // Re-render the ministry-detail when Tier 1 gets unlocked, so a user who
@@ -719,48 +709,11 @@
     });
   });
 
-  // Per-section "Download this set" → fetch all variants of one logotype
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.md-group-download');
-    if (!btn) return;
-    e.preventDefault();
-    let files = [];
-    try { files = JSON.parse(btn.dataset.groupFiles); } catch { return; }
-    if (!files.length) return;
-    const originalLabel = btn.textContent;
-    btn.disabled = true;
-    showToast(`Saving ${files.length} files…`);
-    downloadMany(files, (i, total) => {
-      btn.textContent = `Saving ${i}/${total}…`;
-    }).then(() => {
-      btn.textContent = originalLabel;
-      btn.disabled = false;
-      showToast(`Saved ${files.length} files`);
-    });
-  });
-
-  // Whole-ministry "Download all" → fetch every variant of every logotype
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.md-bulk-download');
-    if (!btn) return;
-    e.preventDefault();
-    const files = btn.__files || [];
-    if (!files.length) {
-      showToast('No files to download');
-      return;
-    }
-    const ministry = btn.__ministry || {};
-    const originalLabel = btn.textContent;
-    btn.disabled = true;
-    showToast(`Saving ${files.length} files for ${ministry.name || 'this ministry'}…`);
-    downloadMany(files, (i, total) => {
-      btn.textContent = `Saving ${i}/${total}…`;
-    }).then(() => {
-      btn.textContent = originalLabel;
-      btn.disabled = false;
-      showToast(`Saved ${files.length} files`);
-    });
-  });
+  // Whole-ministry bulk download is now a direct <a href> link to a pre-built
+  // ZIP (`md-bulk-zip`) — no JS click handler needed. The browser handles the
+  // download natively. ZIP contains PNG/ and JPG/ subfolders with every
+  // configuration. Same for the per-logotype-set buttons (now removed; the
+  // whole-ministry ZIP covers them).
 
   /* ---------- Downloads: 3-tier hybrid gate ----------
      Tier 0 (public): Brand documents, always visible, no gate.
@@ -780,6 +733,9 @@
   const TIER1_PASSWORDS = ['hcfm2026', 'eastoncreatives', 'familyrosary'];
 
   const RELEASE_BASE = 'https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/source-files';
+  // Public-facing logo packs: PNG + JPG, organized in PNG/ and JPG/ subfolders.
+  // No AI files. These are the ZIPs every "Download all" button serves.
+  const PACKS_BASE = 'https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/downloads/logo-packs';
 
   function isTier1Unlocked() {
     return (window.HCFM_MEMBERSHIP && window.HCFM_MEMBERSHIP.hasMinistry)
@@ -855,7 +811,7 @@
       {
         title: 'HCFM Symbol',
         sub: 'The mark alone',
-        zip: `${RELEASE_BASE}/parent/HCFM_Symbol_SOURCE.zip`,
+        zip: `${PACKS_BASE}/parent/HCFM_Symbol_Pack.zip`,
         zipSize: '2.1 MB',
         folder: 'HCFM_Symbol',
         variants: [
@@ -869,7 +825,7 @@
       {
         title: 'Logotype 1, Horizontal',
         sub: 'Mark left, wordmark right (single line)',
-        zip: `${RELEASE_BASE}/parent/HCFM_Logotype1_SOURCE.zip`,
+        zip: `${PACKS_BASE}/parent/HCFM_Logotype1_Pack.zip`,
         zipSize: '2.6 MB',
         folder: 'HCFM_Logotype1',
         variants: [
@@ -883,7 +839,7 @@
       {
         title: 'Logotype 2, Stacked',
         sub: 'Mark on top, wordmark on two lines below',
-        zip: `${RELEASE_BASE}/parent/HCFM_Logotype2_SOURCE.zip`,
+        zip: `${PACKS_BASE}/parent/HCFM_Logotype2_Pack.zip`,
         zipSize: '2.6 MB',
         folder: 'HCFM_Logotype2',
         variants: [
@@ -897,7 +853,7 @@
       {
         title: 'Logotype 3, Compact stacked',
         sub: 'Mark on top with a smaller wordmark',
-        zip: `${RELEASE_BASE}/parent/HCFM_Logotype3_SOURCE.zip`,
+        zip: `${PACKS_BASE}/parent/HCFM_Logotype3_Pack.zip`,
         zipSize: '2.3 MB',
         folder: 'HCFM_Logotype3',
         variants: [
@@ -911,7 +867,7 @@
       {
         title: 'Logotype 4, Single line',
         sub: 'Mark with full wordmark on a single line',
-        zip: `${RELEASE_BASE}/parent/HCFM_Logotype4_SOURCE.zip`,
+        zip: `${PACKS_BASE}/parent/HCFM_Logotype4_Pack.zip`,
         zipSize: '2.5 MB',
         folder: 'HCFM_Logotype4',
         variants: [
@@ -944,7 +900,7 @@
             <h3>HCFM Parent Pack</h3>
             <p>Everything: Symbol + all 4 Logotypes, all colors, PNG and JPG. 12 MB.</p>
           </div>
-          <a href="${RELEASE_BASE}/parent/HCFM_Parent_SOURCE_Pack.zip" class="btn btn-primary">Download all <span class="btn-meta">12 MB</span></a>
+          <a href="${PACKS_BASE}/parent/HCFM_Parent_All_Pack.zip" download="HCFM_Parent_All_Pack.zip" class="btn btn-primary">Download all (ZIP) <span class="btn-meta">12 MB</span></a>
         </div>
         <div class="dl-variants dl-variants-feature">
           ${featuredPreviews.map(v => `
@@ -956,7 +912,7 @@
           `).join('')}
         </div>
         <div class="dl-gallery-foot">
-          <span class="dl-link">A representative sample. Click any variant above to download just that one. The full pack has every variant in every color across all 5 configurations.</span>
+          <span class="dl-link">A representative sample. Click any variant above to download just that one as PNG. The “Download all (ZIP)” button serves a single ZIP with <code>PNG/</code> and <code>JPG/</code> subfolders covering every variant in every color across all 5 configurations.</span>
         </div>
       </article>
     ` + groups.map(g => `
@@ -966,7 +922,7 @@
             <h3>${g.title}</h3>
             <p>${g.sub}</p>
           </div>
-          <a href="${g.zip}" download class="btn btn-primary">Download all <span class="btn-meta">${g.zipSize}</span></a>
+          <a href="${g.zip}" download="${g.folder}_Pack.zip" class="btn btn-primary">Download all (ZIP) <span class="btn-meta">${g.zipSize}</span></a>
         </div>
         <div class="dl-variants">
           ${g.variants.map(v => `
@@ -978,7 +934,7 @@
           `).join('')}
         </div>
         <div class="dl-gallery-foot">
-          <span class="dl-link">Click any variant to download just that one as a PNG. Use the “Download all” button above to grab the full ZIP. Source files (AI / EPS) are brand-owner restricted.</span>
+          <span class="dl-link">Click any variant to download just that one PNG. Use the “Download all (ZIP)” button above for the full pack with <code>PNG/</code> and <code>JPG/</code> subfolders. Source files (AI / EPS) are brand-owner restricted.</span>
         </div>
       </article>
     `).join('');
