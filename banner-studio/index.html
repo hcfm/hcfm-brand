@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>HCFM Banner Studio</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230047BB'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='28' fill='%23FFB500'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23000000'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='34' fill='%23FFB500'%3EH%3C/text%3E%3C/svg%3E">
 <style>
   :root {
     --hcfm-blue: #0047BB;
@@ -39,14 +39,17 @@
   .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
 
   header.brand {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
   }
   header.brand .mark {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--hcfm-blue);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #000;
     display: flex; align-items: center; justify-content: center;
-    color: var(--hcfm-gold); font-weight: 700; font-size: 15px;
-    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  header.brand .mark img {
+    width: 38px; height: 38px; display: block;
   }
   header.brand h1 {
     margin: 0; font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
@@ -89,20 +92,36 @@
 
   /* Drop zone */
   .dropzone {
+    position: relative;
+    display: block;
     border: 2px dashed var(--line);
     border-radius: var(--radius);
     background: var(--line-soft);
-    padding: 40px 24px;
+    padding: 44px 24px;
     text-align: center;
     cursor: pointer;
     transition: border-color 120ms ease, background 120ms ease;
   }
   .dropzone:hover { border-color: var(--hcfm-blue); background: #fbfcff; }
   .dropzone.dragover { border-color: var(--hcfm-blue); background: #eef3ff; }
-  .dropzone .icon { font-size: 28px; color: var(--hcfm-blue); margin-bottom: 6px; }
-  .dropzone .label { font-weight: 600; margin-bottom: 4px; font-size: 15px; }
+  .dropzone .icon {
+    width: 36px; height: 36px;
+    color: var(--hcfm-blue);
+    margin: 0 auto 10px;
+    display: block;
+  }
+  .dropzone .label { font-weight: 600; margin-bottom: 6px; font-size: 15px; color: var(--ink); }
   .dropzone .meta { font-size: 12px; color: var(--ink-mute); }
-  .dropzone input[type="file"] { display: none; }
+  /* Visually hide the native file input but keep it focusable for accessibility */
+  .dropzone input[type="file"] {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   /* Preview block */
   .preview {
@@ -211,10 +230,12 @@
 <div class="container">
 
   <header class="brand">
-    <div class="mark">HCFM</div>
+    <div class="mark">
+      <img src="https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="HCFM">
+    </div>
     <div>
       <h1>Banner Studio</h1>
-      <p class="sub">Update the banner that rides on every HCFM email signature.</p>
+      <p class="sub">Update the banner on every HCFM email signature.</p>
     </div>
     <div class="who" id="who"></div>
   </header>
@@ -250,9 +271,13 @@
       <p class="hint">PNG file, exactly <b>600 × 200 pixels</b>, recommended under 100&nbsp;KB.</p>
 
       <label class="dropzone" id="dropzone" for="file-input">
-        <div class="icon">&#8682;</div>
-        <div class="label">Drop a PNG here or click to browse</div>
-        <div class="meta">600 &times; 200 pixels &middot; up to 250&nbsp;KB</div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3"/>
+          <path d="M12 3v13"/>
+          <path d="M7 8l5-5 5 5"/>
+        </svg>
+        <div class="label">Drop a PNG here, or click to choose a file</div>
+        <div class="meta">600 by 200 pixels, under 100 KB</div>
         <input type="file" id="file-input" accept="image/png">
       </label>
 
@@ -284,13 +309,13 @@
 
       <div class="field-reason">
         <label for="msg">What is this banner for? <span style="color:var(--ink-mute);font-weight:400">(shows up in the audit log)</span></label>
-        <input type="text" id="msg" placeholder="e.g. Grand Reopening — June 6 launch" maxlength="140">
+        <input type="text" id="msg" placeholder="e.g. Grand Reopening, June 6 launch" maxlength="140">
       </div>
     </div>
 
     <div class="card">
       <h2>3. Publish</h2>
-      <p class="hint">When you click Publish, this banner replaces the current one. Every HCFM email signature on the side you picked starts showing it within about 10 minutes — usually under a minute. No action from anyone else.</p>
+      <p class="hint">When you click Publish, this banner replaces the current one. Every HCFM email signature on the side you picked starts showing it within about 10 minutes (usually under a minute). No action from anyone else.</p>
 
       <div class="actions">
         <button class="btn-primary" id="publish" disabled>Publish banner</button>
@@ -432,12 +457,18 @@
     els.preview.classList.add('active');
 
     const okDims = dims.w === 600 && dims.h === 200;
-    els.dimsVal.textContent = `${dims.w} × ${dims.h} ${okDims ? '✓' : '— must be 600 × 200'}`;
+    els.dimsVal.textContent = okDims
+      ? `${dims.w} × ${dims.h} ✓`
+      : `${dims.w} × ${dims.h} (must be 600 × 200)`;
     els.piDims.classList.toggle('bad', !okDims);
 
     const okSize = file.size <= 100 * 1024;
     const tooLarge = file.size > 250 * 1024;
-    els.sizeVal.textContent = `${fmtBytes(file.size)} ${okSize ? '✓' : (tooLarge ? '— too large (max 250 KB)' : '— large, consider compressing')}`;
+    els.sizeVal.textContent = okSize
+      ? `${fmtBytes(file.size)} ✓`
+      : tooLarge
+        ? `${fmtBytes(file.size)} (too large, max 250 KB)`
+        : `${fmtBytes(file.size)} (large, consider compressing)`;
     els.piSize.classList.toggle('bad', tooLarge);
     els.piSize.classList.toggle('warn', !okSize && !tooLarge);
 
