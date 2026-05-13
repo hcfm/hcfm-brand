@@ -468,7 +468,7 @@
 
     <div class="card">
       <h2>1. Choose the banner image</h2>
-      <p class="hint">PNG file, exactly <b>600 × 200 pixels</b>, recommended under 100&nbsp;KB.</p>
+      <p class="hint">PNG file, exactly <b>600 pixels wide</b>, height between <b>100 and 200 px</b> (150 recommended). File under 100&nbsp;KB.</p>
 
       <label class="dropzone" id="dropzone" for="file-input">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -477,7 +477,7 @@
           <path d="M7 8l5-5 5 5"/>
         </svg>
         <div class="label">Drop a PNG here, or click to choose a file</div>
-        <div class="meta">600 by 200 pixels, under 100 KB</div>
+        <div class="meta">600 px wide × 100–200 tall (150 recommended), under 100 KB</div>
         <input type="file" id="file-input" accept="image/png">
       </label>
 
@@ -714,7 +714,10 @@
   function clearStatus() { els.status.className = 'status'; els.status.innerHTML = ''; }
 
   function refreshPublishEnabled() {
-    const dimsOk = state.fileDims && state.fileDims.w === 600 && state.fileDims.h === 200;
+    const dimsOk = state.fileDims
+      && state.fileDims.w === 600
+      && state.fileDims.h >= 100
+      && state.fileDims.h <= 200;
     const sizeOk = state.fileBytes != null && state.fileBytes <= 250 * 1024;
     const reasonOk = (els.msg.value || '').trim().length >= 2;
     const ok = dimsOk && sizeOk && !!state.target && reasonOk;
@@ -741,10 +744,22 @@
     els.previewImg.src = dataUrl;
     els.preview.classList.add('active');
 
-    const okDims = dims.w === 600 && dims.h === 200;
-    els.dimsVal.textContent = okDims
-      ? `${dims.w} × ${dims.h} ✓`
-      : `${dims.w} × ${dims.h} (must be 600 × 200)`;
+    const okWidth = dims.w === 600;
+    const okHeight = dims.h >= 100 && dims.h <= 200;
+    const okDims = okWidth && okHeight;
+    let dimsMsg;
+    if (okDims) {
+      dimsMsg = `${dims.w} × ${dims.h} ✓`;
+    } else if (!okWidth && !okHeight) {
+      dimsMsg = `${dims.w} × ${dims.h} (need 600 wide, 100–200 tall)`;
+    } else if (!okWidth) {
+      dimsMsg = `${dims.w} × ${dims.h} (must be exactly 600 px wide)`;
+    } else if (dims.h < 100) {
+      dimsMsg = `${dims.w} × ${dims.h} (height too short, minimum 100 px)`;
+    } else {
+      dimsMsg = `${dims.w} × ${dims.h} (height too tall, maximum 200 px)`;
+    }
+    els.dimsVal.textContent = dimsMsg;
     els.piDims.classList.toggle('bad', !okDims);
 
     const okSize = file.size <= 100 * 1024;

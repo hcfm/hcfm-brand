@@ -18,8 +18,10 @@ const TARGETS = {
 };
 const SITE_BASE = 'https://emmanuelepau.github.io/hcfm-brand/';
 const MAX_BYTES = 250 * 1024;
-const REQUIRED_W = 600;
-const REQUIRED_H = 200;
+const REQUIRED_W = 600;        // Width is fixed (Outlook for Windows clips wider banners at the 600px reading-pane edge)
+const MIN_H = 100;             // Below this looks broken at scale
+const MAX_H = 200;             // Above this feels spammy on mobile per Litmus/Exclaimer research
+const RECOMMENDED_H = 150;     // The modern professional default (4:1 aspect ratio)
 const REPO_OWNER = 'EmmanuelEpau';
 const REPO_NAME  = 'hcfm-brand';
 const BRANCH     = 'main';
@@ -76,8 +78,14 @@ export default async function handler(req, res) {
   }
   const png = parsePng(buf);
   if (!png.ok) return res.status(400).json({ error: png.error });
-  if (png.width !== REQUIRED_W || png.height !== REQUIRED_H) {
-    return res.status(400).json({ error: `Image must be exactly ${REQUIRED_W} × ${REQUIRED_H} pixels (got ${png.width} × ${png.height}).` });
+  if (png.width !== REQUIRED_W) {
+    return res.status(400).json({ error: `Image must be exactly ${REQUIRED_W} pixels wide (got ${png.width}). Email clients clip wider banners in Outlook for Windows.` });
+  }
+  if (png.height < MIN_H) {
+    return res.status(400).json({ error: `Image height must be at least ${MIN_H} px (got ${png.height}). ${RECOMMENDED_H} is recommended.` });
+  }
+  if (png.height > MAX_H) {
+    return res.status(400).json({ error: `Image height must be no more than ${MAX_H} px (got ${png.height}). ${RECOMMENDED_H} is recommended.` });
   }
 
   const { path, label: targetLabel } = TARGETS[target];
