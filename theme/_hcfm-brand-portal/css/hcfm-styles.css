@@ -103,9 +103,12 @@
    rule. In light mode that's identical to our intent; in dark mode it
    breaks the chrome. These explicit dark-mode rules pin the surfaces
    to var(--bg)/(--bg-page) so the whole page actually swaps. */
-[data-theme="dark"] body { background: var(--bg); }
+/* HubSpot's parent stylesheet sets body bg with !important — match
+   their priority to make dark mode actually apply. .page-wrap rule
+   alone wins normally; body and .sidebar need the override. */
+[data-theme="dark"] body { background: var(--bg) !important; color: var(--text) !important; }
 [data-theme="dark"] .sidebar,
-[data-theme="dark"] .sidebar-foot { background: var(--bg); }
+[data-theme="dark"] .sidebar-foot { background: var(--bg) !important; }
 [data-theme="dark"] .page-wrap { background: var(--bg); }
 [data-theme="dark"] .nav-group-label { color: var(--text-muted); }
 /* Logo color-variant cards and template samples keep a near-white
