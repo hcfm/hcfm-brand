@@ -61,7 +61,7 @@ export default async function handler(req, res) {
   }
 
   const path = PATHS[target];
-  const targetLabel = target === 'parent' ? 'HCFM Parent' : 'Family Theater Productions';
+  const targetLabel = target === 'parent' ? 'HCFM North Easton' : 'Family Theater Productions';
 
   // 1. Fetch the banner content as it existed at <sha>
   let historical;

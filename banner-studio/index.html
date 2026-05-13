@@ -487,8 +487,8 @@
       <div class="selector" id="selector" role="radiogroup" aria-label="Which signature to update">
         <label data-key="parent">
           <input type="radio" name="target" value="parent">
-          <span class="name">Headquarters</span>
-          <span class="desc">All HCFM main-office staff (the default for most people)</span>
+          <span class="name">HCFM North Easton</span>
+          <span class="desc">Main-office staff in Easton, MA (the default for most people)</span>
         </label>
         <label data-key="ftp">
           <input type="radio" name="target" value="ftp">
@@ -638,7 +638,7 @@
     return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
   function targetLabel(t) {
-    return t === 'parent' ? 'Headquarters' : t === 'ftp' ? 'Family Theater Productions' : 'Unknown';
+    return t === 'parent' ? 'HCFM North Easton' : t === 'ftp' ? 'Family Theater Productions' : 'Unknown';
   }
   function announce(msg) {
     // Triggers screen reader announcement via aria-live region

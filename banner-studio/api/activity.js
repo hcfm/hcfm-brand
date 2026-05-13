@@ -11,7 +11,9 @@ const MAX_ITEMS  = 10;
 
 function inferTargetFromCommit(c) {
   const msg = (c.commit?.message || '').split('\n')[0];
-  if (/HCFM Parent|email-banners\/parent/i.test(msg)) return 'parent';
+  // New label first, then legacy labels, then path-based, then loose word match.
+  if (/HCFM North Easton|email-banners\/parent/i.test(msg)) return 'parent';
+  if (/HCFM Parent|Headquarters/i.test(msg)) return 'parent';
   if (/Family Theater Productions|email-banners\/ftp/i.test(msg)) return 'ftp';
   if (/\bparent\b/i.test(msg)) return 'parent';
   if (/\bftp\b/i.test(msg)) return 'ftp';
@@ -49,7 +51,9 @@ export default async function handler(req, res) {
       // Strip prefixes for a clean "what" line
       let what = m ? firstLine.replace(m[0], '').trim() : firstLine;
       what = what.replace(/^Banner Studio:\s*/i, '');
+      what = what.replace(/^HCFM North Easton\s*[—-]\s*/i, '');
       what = what.replace(/^HCFM Parent\s*[—-]\s*/i, '');
+      what = what.replace(/^Headquarters\s*[—-]\s*/i, '');
       what = what.replace(/^Family Theater Productions\s*[—-]\s*/i, '');
       if (!what || /^\(no reason given\)$/i.test(what)) what = '(no reason given)';
       return {

@@ -77,7 +77,7 @@ export default async function handler(req, res) {
   }
 
   const path = PATHS[target];
-  const targetLabel = target === 'parent' ? 'HCFM Parent' : 'Family Theater Productions';
+  const targetLabel = target === 'parent' ? 'HCFM North Easton' : 'Family Theater Productions';
 
   // 1. Get current SHA for this file (required for PUT)
   let current;
