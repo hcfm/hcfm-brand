@@ -106,11 +106,19 @@
 /* HubSpot's parent stylesheet sets body bg with !important — match
    their priority to make dark mode actually apply. .page-wrap rule
    alone wins normally; body and .sidebar need the override. */
-[data-theme="dark"] body { background: var(--bg) !important; color: var(--text) !important; }
+/* Force every chrome surface to paint with a literal hex in dark
+   mode. Using var(--bg) here was being dropped by something in
+   HubSpot's runtime style injection (var resolution failed at the
+   computed-style read level even though the rule was in the bundle).
+   Literal #0f1115 makes the cascade unambiguous. Light-mode unchanged. */
+[data-theme="dark"] body { background-color: #0f1115 !important; color: #e9eaee !important; }
 [data-theme="dark"] .sidebar,
-[data-theme="dark"] .sidebar-foot { background: var(--bg) !important; }
-[data-theme="dark"] .page-wrap { background: var(--bg); }
-[data-theme="dark"] .nav-group-label { color: var(--text-muted); background-color: var(--bg); }
+[data-theme="dark"] .sidebar-foot { background-color: #0f1115 !important; }
+[data-theme="dark"] .page-wrap { background-color: #0f1115 !important; }
+[data-theme="dark"] .nav-group-label { color: #a5a8b0; background-color: #0f1115; }
+[data-theme="dark"] .sidebar-foot p,
+[data-theme="dark"] .sidebar-foot p strong,
+[data-theme="dark"] .sidebar-updated { background-color: #0f1115; }
 /* Logo color-variant cards and template samples keep a near-white
    backdrop in dark mode so PNG logos still read correctly. Use a soft
    off-white instead of pure white so it doesn't blast. */
