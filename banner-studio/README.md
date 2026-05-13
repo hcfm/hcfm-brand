@@ -174,3 +174,5 @@ vercel dev               # studio at http://localhost:3000
 ## Relationship to the v1 studio (`banner-upload/`)
 
 The old `banner-upload/index.html` (at the root of this repo, served via GitHub Pages) still works as an Emmy-only fallback — it takes a personal access token directly in the browser. The v2 studio in this folder is the one for non-technical users. Once v2 is deployed and you're comfortable, the v1 page at `banner-upload/index.html` can be replaced with a redirect to the v2 URL.
+
+<!-- Deployed via Vercel -->
