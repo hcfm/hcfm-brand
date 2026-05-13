@@ -1,10 +1,22 @@
 // GET /api/activity
-// Returns the last 5 banner swaps in a sanitized, user-friendly format.
+// Returns the last N banner swaps in a sanitized, user-friendly format
+// including the commit sha and the inferred target so the client can render
+// a thumbnail and offer a one-click revert.
 import { requireSession } from '../lib/session.js';
 
 const REPO_OWNER = 'EmmanuelEpau';
 const REPO_NAME  = 'hcfm-brand';
 const BRANCH     = 'main';
+const MAX_ITEMS  = 10;
+
+function inferTargetFromCommit(c) {
+  const msg = (c.commit?.message || '').split('\n')[0];
+  if (/HCFM Parent|email-banners\/parent/i.test(msg)) return 'parent';
+  if (/Family Theater Productions|email-banners\/ftp/i.test(msg)) return 'ftp';
+  if (/\bparent\b/i.test(msg)) return 'parent';
+  if (/\bftp\b/i.test(msg)) return 'ftp';
+  return null;
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -19,7 +31,7 @@ export default async function handler(req, res) {
 
   try {
     const r = await fetch(
-      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=email-banners&per_page=5&sha=${BRANCH}`,
+      `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=email-banners&per_page=${MAX_ITEMS}&sha=${BRANCH}`,
       { headers: {
         'Accept': 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28',
@@ -30,16 +42,23 @@ export default async function handler(req, res) {
     if (!r.ok) return res.status(502).json({ error: 'Could not fetch recent activity.' });
     const commits = await r.json();
     const sanitized = commits.map(c => {
-      const fullMsg = (c.commit && c.commit.message) || '';
+      const fullMsg = c.commit?.message || '';
       const firstLine = fullMsg.split('\n')[0];
-      // For Banner Studio commits, parse uploader name from "(uploaded by X)" suffix
       const m = /\(uploaded by (.+)\)\s*$/.exec(firstLine);
-      const uploader = m ? m[1] : null;
-      const what = m ? firstLine.replace(m[0], '').trim() : firstLine;
+      const uploader = m ? m[1] : (c.commit?.author?.name || 'unknown');
+      // Strip prefixes for a clean "what" line
+      let what = m ? firstLine.replace(m[0], '').trim() : firstLine;
+      what = what.replace(/^Banner Studio:\s*/i, '');
+      what = what.replace(/^HCFM Parent\s*[—-]\s*/i, '');
+      what = what.replace(/^Family Theater Productions\s*[—-]\s*/i, '');
+      if (!what || /^\(no reason given\)$/i.test(what)) what = '(no reason given)';
       return {
+        sha: c.sha,
+        shaShort: c.sha.slice(0, 7),
         what,
         uploader,
-        when: c.commit.author && c.commit.author.date,
+        when: c.commit?.author?.date || c.commit?.committer?.date,
+        target: inferTargetFromCommit(c),
       };
     });
     return res.status(200).json({ items: sanitized });

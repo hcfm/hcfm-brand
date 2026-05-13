@@ -11,6 +11,7 @@
     --hcfm-blue: #0047BB;
     --hcfm-blue-dark: #003590;
     --hcfm-gold: #FFB500;
+    --hcfm-muted-gold: #89764B;
     --ink: #111418;
     --ink-soft: #444;
     --ink-mute: #6b7280;
@@ -26,6 +27,7 @@
     --err-bg: #fae9e7;
     --radius: 10px;
     --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 8px 32px rgba(15, 23, 42, 0.12);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -38,6 +40,17 @@
   }
   .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
 
+  /* Screen-reader-only utility for accessibility announcements */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   header.brand {
     display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
   }
@@ -49,23 +62,30 @@
     overflow: hidden;
     position: relative;
   }
-  /* Muted gold (#89764B) mark filling the whole circle.
-     Implemented as a CSS mask over the black symbol PNG, so we don't depend
-     on the brand repo shipping a muted-gold-tinted PNG variant. */
   header.brand .mark .symbol {
     position: absolute;
     inset: 0;
-    background-color: #89764B;
+    background-color: var(--hcfm-muted-gold);
     -webkit-mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
             mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
   }
+  header.brand .titles { flex: 1; min-width: 0; }
   header.brand h1 {
     margin: 0; font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
   }
   header.brand .sub { margin: 2px 0 0; font-size: 13px; color: var(--ink-mute); }
-  header.brand .who { margin-left: auto; font-size: 12px; color: var(--ink-mute); text-align: right; }
-  header.brand .who b { color: var(--ink); display: block; font-weight: 600; font-size: 13px; }
-  header.brand .who a { color: var(--ink-mute); text-decoration: underline; cursor: pointer; }
+  header.brand .who {
+    font-size: 12px; color: var(--ink-mute); text-align: right;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  }
+  header.brand .who .name { color: var(--ink); font-weight: 600; font-size: 13px; }
+  header.brand .who .sign-out-btn {
+    font-size: 12px; padding: 6px 10px; min-height: 28px;
+    background: transparent; border: 1px solid var(--line); border-radius: 6px;
+    color: var(--ink-soft); cursor: pointer;
+    transition: background 120ms, border-color 120ms;
+  }
+  header.brand .who .sign-out-btn:hover { background: var(--line-soft); border-color: var(--ink-mute); }
 
   .card {
     background: var(--card);
@@ -77,6 +97,7 @@
   }
   .card h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
   .card .hint { color: var(--ink-mute); font-size: 13px; margin: 0 0 16px; }
+  .card .req { color: var(--err); font-weight: 700; }
 
   /* SIGN-IN */
   .gate { display: none; }
@@ -87,6 +108,7 @@
     width: 100%; padding: 12px 14px;
     border: 1px solid var(--line); border-radius: 8px;
     font-family: inherit; font-size: 15px; background: #fff;
+    min-height: 44px;
   }
   .gate input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
   .gate .submit-row { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
@@ -110,7 +132,7 @@
     cursor: pointer;
     transition: border-color 120ms ease, background 120ms ease;
   }
-  .dropzone:hover { border-color: var(--hcfm-blue); background: #fbfcff; }
+  .dropzone:hover, .dropzone:focus-within { border-color: var(--hcfm-blue); background: #fbfcff; }
   .dropzone.dragover { border-color: var(--hcfm-blue); background: #eef3ff; }
   .dropzone .icon {
     width: 36px; height: 36px;
@@ -120,7 +142,6 @@
   }
   .dropzone .label { font-weight: 600; margin-bottom: 6px; font-size: 15px; color: var(--ink); }
   .dropzone .meta { font-size: 12px; color: var(--ink-mute); }
-  /* Visually hide the native file input but keep it focusable for accessibility */
   .dropzone input[type="file"] {
     position: absolute;
     width: 1px; height: 1px;
@@ -131,7 +152,7 @@
     border: 0;
   }
 
-  /* Preview block */
+  /* Preview block (validation pill) */
   .preview {
     display: none;
     margin-top: 18px;
@@ -154,21 +175,66 @@
     font-size: 13px;
   }
   .preview-info .pi { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
-  .preview-info .pi .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .preview-info .pi .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex-shrink: 0; }
   .preview-info .pi.bad .dot { background: var(--err); }
   .preview-info .pi.warn .dot { background: var(--warn); }
   .preview-info .pi b { color: var(--ink); margin-right: 4px; }
+
+  /* Signature mockup — live preview of the banner in context */
+  .signature-mockup-wrap {
+    display: none;
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 14px;
+  }
+  .signature-mockup-wrap.active { display: block; }
+  .signature-mockup-wrap .mockup-title {
+    font-size: 12px; font-weight: 600; color: var(--ink-mute);
+    margin-bottom: 12px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .signature-mockup {
+    background: #fff;
+    border-radius: 6px;
+    padding: 18px 16px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    color: #111;
+    overflow-x: auto;
+  }
+  .signature-mockup table { border-collapse: collapse; line-height: 1.35; }
+  .signature-mockup .sig-mark { width: 110px; height: 110px; vertical-align: top; padding-right: 18px; }
+  .signature-mockup .sig-mark img { width: 110px; height: auto; display: block; border: 0; }
+  .signature-mockup .sig-name { font-weight: 700; font-size: 13pt; color: #0047BB; }
+  .signature-mockup .sig-title { font-family: Georgia, serif; font-size: 11pt; color: #444; padding-top: 2px; }
+  .signature-mockup .sig-org { font-weight: 700; font-size: 11pt; color: #1a1a1a; padding-top: 4px; }
+  .signature-mockup .sig-contact { font-family: Georgia, serif; font-size: 11pt; color: #444; padding-top: 2px; }
+  .signature-mockup .sig-contact a { color: #0047BB; text-decoration: none; }
+  .signature-mockup .sig-tag { font-family: Georgia, serif; font-style: italic; font-size: 10.5pt; color: #444; padding-top: 6px; }
+  .signature-mockup .sig-banner { padding-top: 14px; }
+  .signature-mockup .sig-banner img { width: 600px; max-width: 100%; height: auto; display: block; border-radius: 3px; }
 
   /* Selector */
   .selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
   .selector label {
     border: 1px solid var(--line); border-radius: 8px; padding: 14px;
     cursor: pointer; transition: border-color 120ms, background 120ms;
+    min-height: 44px;
   }
   .selector label.checked { border-color: var(--hcfm-blue); background: #eef3ff; }
   .selector label .name { font-weight: 700; font-size: 14px; display: block; }
   .selector label .desc { font-size: 12px; color: var(--ink-mute); margin-top: 2px; display: block; }
-  .selector input[type="radio"] { display: none; }
+  .selector input[type="radio"] {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   /* Reason field */
   .field-reason { margin-top: 16px; }
@@ -177,15 +243,21 @@
     width: 100%; padding: 10px 12px;
     border: 1px solid var(--line); border-radius: 8px;
     font-family: inherit; font-size: 14px;
+    min-height: 44px;
   }
   .field-reason input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
+  .field-reason .field-help { font-size: 12px; color: var(--ink-mute); margin-top: 6px; }
+  .field-reason.error input { border-color: var(--err); }
+  .field-reason.error .field-help { color: var(--err); }
 
   /* Buttons */
-  .actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; }
+  .actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; flex-wrap: wrap; }
   button {
     font-family: inherit; font-size: 14px; font-weight: 600;
-    padding: 11px 18px; border-radius: 8px; cursor: pointer;
-    border: 1px solid transparent; transition: background 120ms, transform 60ms;
+    padding: 12px 20px; border-radius: 8px; cursor: pointer;
+    border: 1px solid transparent;
+    min-height: 44px;
+    transition: background 120ms, border-color 120ms, transform 60ms;
   }
   button:active:not(:disabled) { transform: translateY(1px); }
   button:disabled { opacity: 0.55; cursor: not-allowed; }
@@ -193,6 +265,8 @@
   .btn-primary:hover:not(:disabled) { background: var(--hcfm-blue-dark); }
   .btn-ghost { background: transparent; color: var(--ink-soft); border-color: var(--line); }
   .btn-ghost:hover:not(:disabled) { background: var(--line-soft); }
+  .btn-danger { background: var(--err); color: #fff; }
+  .btn-danger:hover:not(:disabled) { background: #8e1d17; }
 
   /* Status box */
   .status { margin-top: 18px; padding: 14px 16px; border-radius: 8px; font-size: 14px; display: none; }
@@ -201,24 +275,87 @@
   .status.ok   { background: var(--ok-bg);   color: var(--ok);   border: 1px solid #cce7d6; }
   .status.warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f1d9a8; }
   .status.err  { background: var(--err-bg);  color: var(--err);  border: 1px solid #efcdc9; }
-  .status .steps { margin: 8px 0 0; padding-left: 20px; font-size: 13px; }
-  .status .steps li { margin-bottom: 2px; }
-  .status .steps li.done::marker { color: var(--ok); }
-  .status .steps li.pending { opacity: 0.5; }
   .status a { color: inherit; font-weight: 600; }
-  .status small { display: block; margin-top: 6px; opacity: 0.85; }
+  .status small { display: block; margin-top: 8px; opacity: 0.85; font-size: 12px; line-height: 1.5; }
 
-  /* Activity feed */
+  /* Activity feed redesigned */
   .activity-list { margin: 0; padding: 0; list-style: none; }
-  .activity-list li {
-    padding: 10px 0; border-bottom: 1px solid var(--line-soft);
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  .activity-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-soft);
   }
-  .activity-list li:last-child { border-bottom: 0; }
-  .activity-list .when { font-size: 12px; color: var(--ink-mute); white-space: nowrap; }
-  .activity-list .what { font-size: 13px; color: var(--ink); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .activity-list .who { font-size: 12px; color: var(--ink-mute); }
+  .activity-row:last-child { border-bottom: 0; }
+  .activity-row .thumb {
+    width: 80px; height: 27px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--line-soft) repeating-conic-gradient(#f3f4f6 0 25%, #fff 0 50%) 0 0 / 8px 8px;
+    overflow: hidden;
+  }
+  .activity-row .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .activity-row .body { min-width: 0; }
+  .activity-row .body .what { font-size: 13px; color: var(--ink); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .activity-row .body .meta { font-size: 12px; color: var(--ink-mute); margin-top: 2px; }
+  .activity-row .body .meta .target-pill {
+    display: inline-block; padding: 1px 6px; border-radius: 3px;
+    background: var(--line-soft); color: var(--ink-soft); font-size: 11px; font-weight: 600;
+    margin-right: 6px;
+  }
+  .activity-row .right-actions { display: flex; gap: 6px; align-items: center; }
+  .activity-row .btn-revert {
+    font-size: 12px; padding: 6px 10px; min-height: 28px; font-weight: 600;
+    background: transparent; border: 1px solid var(--line); border-radius: 6px;
+    color: var(--ink-soft); cursor: pointer;
+    transition: background 120ms, border-color 120ms;
+  }
+  .activity-row .btn-revert:hover:not(:disabled) { background: var(--line-soft); border-color: var(--ink-mute); color: var(--ink); }
+  .activity-row .btn-revert:disabled { opacity: 0.4; cursor: not-allowed; }
+  .activity-row.current .btn-revert { display: none; }
+  .activity-row.current::before {
+    content: 'LIVE';
+    font-size: 10px; font-weight: 700; color: var(--ok);
+    background: var(--ok-bg); border: 1px solid #cce7d6;
+    padding: 1px 6px; border-radius: 3px;
+    grid-row: 1; grid-column: 3;
+    align-self: center;
+  }
   .activity-list .empty { color: var(--ink-mute); font-size: 13px; padding: 10px 0; }
+
+  /* Confirmation modal */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 24px;
+    z-index: 100;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    max-width: 480px;
+    width: 100%;
+    padding: 24px;
+  }
+  .modal h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; }
+  .modal p { margin: 0 0 6px; font-size: 14px; color: var(--ink-soft); }
+  .modal .summary {
+    margin: 14px 0 0;
+    background: var(--line-soft);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .modal .summary div { padding: 3px 0; }
+  .modal .summary b { color: var(--ink); margin-right: 6px; }
+  .modal .actions { margin-top: 18px; justify-content: flex-end; }
 
   footer.bottom {
     margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
@@ -230,7 +367,28 @@
     .container { padding: 24px 16px 64px; }
     .selector { grid-template-columns: 1fr; }
     .preview-info { grid-template-columns: 1fr; }
-    header.brand .who { display: none; }
+    .activity-row { grid-template-columns: 60px 1fr; row-gap: 8px; }
+    .activity-row .right-actions { grid-column: 2; justify-content: flex-end; }
+    .activity-row.current::before { grid-column: 2; justify-self: end; }
+    header.brand .who { font-size: 11px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Windows high-contrast / forced-colors fallback */
+  @media (forced-colors: active) {
+    .card, .modal, .preview, .signature-mockup-wrap { border: 1px solid CanvasText; }
+    .activity-row .thumb { border: 1px solid CanvasText; }
+    button { border: 1px solid CanvasText; }
+    .selector label.checked { border: 2px solid Highlight; }
+    .activity-row.current::before { border: 1px solid CanvasText; }
   }
 </style>
 </head>
@@ -241,12 +399,15 @@
     <div class="mark" role="img" aria-label="HCFM">
       <div class="symbol"></div>
     </div>
-    <div>
+    <div class="titles">
       <h1>Banner Studio</h1>
       <p class="sub">Update the banner on every HCFM email signature.</p>
     </div>
     <div class="who" id="who"></div>
   </header>
+
+  <!-- Live region for screen-reader status announcements -->
+  <div class="sr-only" aria-live="polite" aria-atomic="true" id="live-region"></div>
 
   <!-- SIGN-IN GATE -->
   <section class="card gate" id="gate">
@@ -264,10 +425,10 @@
     <div class="submit-row">
       <button class="btn-primary" id="sign-in">Sign in</button>
     </div>
-    <div class="gate-error" id="gate-error"></div>
+    <div class="gate-error" id="gate-error" role="alert"></div>
 
     <div class="help">
-      Don't have the team password? Ask Emmy (eepau@hcfm.org). He'll send it to you over Slack or email.
+      Don't have the team password? Ask Emmy (eepau@hcfm.org). He'll send it to you over Slack or text.
     </div>
   </section>
 
@@ -290,10 +451,31 @@
       </label>
 
       <div class="preview" id="preview">
-        <div class="preview-frame"><img id="preview-img" alt=""></div>
+        <div class="preview-frame"><img id="preview-img" alt="The banner image you just chose"></div>
         <div class="preview-info">
           <div class="pi" id="pi-dims"><span class="dot"></span><b>Dimensions:</b><span id="dims-val">&mdash;</span></div>
           <div class="pi" id="pi-size"><span class="dot"></span><b>File size:</b><span id="size-val">&mdash;</span></div>
+        </div>
+      </div>
+
+      <div class="signature-mockup-wrap" id="signature-mockup-wrap">
+        <div class="mockup-title">Preview &mdash; how this looks at the bottom of an email</div>
+        <div class="signature-mockup">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr>
+              <td rowspan="5" class="sig-mark">
+                <img src="https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="HCFM">
+              </td>
+              <td class="sig-name">Emmanuel Epau</td>
+            </tr>
+            <tr><td class="sig-title">Senior Marketing &amp; Communication Specialist (Analytics)</td></tr>
+            <tr><td class="sig-org">Holy Cross Family Ministries</td></tr>
+            <tr><td class="sig-contact"><a href="#">hcfm.org</a> <span style="color:#aaa;margin:0 6px;">|</span> 737-237-4274</td></tr>
+            <tr><td class="sig-tag">The Family That Prays Together Stays Together&trade;</td></tr>
+            <tr>
+              <td colspan="2" class="sig-banner"><img id="mockup-banner-img" alt="Campaign banner preview"></td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -302,28 +484,29 @@
       <h2>2. Which signature does this update?</h2>
       <p class="hint">Each sub-ministry's signature has its own banner. Pick the right one.</p>
 
-      <div class="selector" id="selector">
+      <div class="selector" id="selector" role="radiogroup" aria-label="Which signature to update">
         <label data-key="parent">
           <input type="radio" name="target" value="parent">
-          <span class="name">HCFM Parent</span>
-          <span class="desc">Headquarters and most HCFM staff</span>
+          <span class="name">Headquarters</span>
+          <span class="desc">All HCFM main-office staff (the default for most people)</span>
         </label>
         <label data-key="ftp">
           <input type="radio" name="target" value="ftp">
           <span class="name">Family Theater Productions</span>
-          <span class="desc">FTP staff signatures</span>
+          <span class="desc">FTP team only</span>
         </label>
       </div>
 
-      <div class="field-reason">
-        <label for="msg">What is this banner for? <span style="color:var(--ink-mute);font-weight:400">(shows up in the audit log)</span></label>
-        <input type="text" id="msg" placeholder="e.g. Grand Reopening, June 6 launch" maxlength="140">
+      <div class="field-reason" id="field-reason">
+        <label for="msg">What is this banner for? <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="msg" placeholder="e.g. Grand Reopening, June 6 launch" maxlength="140" required>
+        <div class="field-help">Required &mdash; this shows up in the audit log so we can trace who published what and why.</div>
       </div>
     </div>
 
     <div class="card">
       <h2>3. Publish</h2>
-      <p class="hint">When you click Publish, this banner replaces the current one. Every HCFM email signature on the side you picked starts showing it within about 10 minutes (usually under a minute). No action from anyone else.</p>
+      <p class="hint">When you click Publish, this banner replaces the current one. Recipients see it on the next email they open from any HCFM staff member.</p>
 
       <div class="actions">
         <button class="btn-primary" id="publish" disabled>Publish banner</button>
@@ -335,9 +518,9 @@
 
     <div class="card">
       <h2>Recent activity</h2>
-      <p class="hint">The last 5 banner updates. Every upload is recorded with who did it and when.</p>
+      <p class="hint">The most recent banner updates. Each row shows the actual image and who published it. Click <b>Revert</b> on an older row to roll back to that banner.</p>
       <ul class="activity-list" id="activity">
-        <li class="empty">Loading recent activity…</li>
+        <li class="empty">Loading recent activity&hellip;</li>
       </ul>
     </div>
 
@@ -350,10 +533,24 @@
 
 </div>
 
+<!-- Confirmation modal -->
+<div class="modal-overlay" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+  <div class="modal">
+    <h3 id="confirm-title">Publish this banner to everyone?</h3>
+    <p>This replaces the current banner on every HCFM email signature on the side you picked. Recipients will see it on the next email they open.</p>
+    <div class="summary" id="confirm-summary"></div>
+    <div class="actions">
+      <button class="btn-ghost" id="confirm-cancel">Cancel</button>
+      <button class="btn-primary" id="confirm-go">Yes, publish</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (() => {
   'use strict';
   const SESSION_KEY = 'hcfm-banner-studio:session-v2';
+  const BRAND_REPO = 'EmmanuelEpau/hcfm-brand';
 
   const state = {
     token: null,
@@ -363,6 +560,7 @@
     fileBytes: null,
     fileDims: null,
     target: null,
+    activity: [],
   };
   const saved = (() => { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch { return null; } })();
   if (saved && saved.token && saved.name) { state.token = saved.token; state.name = saved.name; }
@@ -377,11 +575,17 @@
     preview: $('#preview'), previewImg: $('#preview-img'),
     piDims: $('#pi-dims'), piSize: $('#pi-size'),
     dimsVal: $('#dims-val'), sizeVal: $('#size-val'),
+    mockupWrap: $('#signature-mockup-wrap'), mockupBannerImg: $('#mockup-banner-img'),
     selector: $('#selector'),
-    msg: $('#msg'),
+    fieldReason: $('#field-reason'), msg: $('#msg'),
     publish: $('#publish'), reset: $('#reset'),
     status: $('#status'),
     activity: $('#activity'),
+    confirmModal: $('#confirm-modal'),
+    confirmSummary: $('#confirm-summary'),
+    confirmCancel: $('#confirm-cancel'),
+    confirmGo: $('#confirm-go'),
+    live: $('#live-region'),
   };
 
   // ---------- API ----------
@@ -400,7 +604,7 @@
     return data;
   }
 
-  // ---------- Image helpers ----------
+  // ---------- Helpers ----------
   function readFileAsDataUrl(file) {
     return new Promise((resolve, reject) => {
       const r = new FileReader();
@@ -430,31 +634,47 @@
     if (sec < 86400) return `${Math.round(sec/3600)}h ago`;
     return `${Math.round(sec/86400)}d ago`;
   }
+  function escapeHtml(s) {
+    return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function targetLabel(t) {
+    return t === 'parent' ? 'Headquarters' : t === 'ftp' ? 'Family Theater Productions' : 'Unknown';
+  }
+  function announce(msg) {
+    // Triggers screen reader announcement via aria-live region
+    els.live.textContent = '';
+    setTimeout(() => { els.live.textContent = msg; }, 50);
+  }
 
-  // ---------- UI ----------
+  // ---------- UI: validation + preview ----------
   function showStatus(kind, html) {
     els.status.className = `status ${kind} active`;
     els.status.innerHTML = html;
+    if (kind === 'err' || kind === 'ok' || kind === 'warn') {
+      announce(els.status.textContent || '');
+    }
   }
   function clearStatus() { els.status.className = 'status'; els.status.innerHTML = ''; }
 
   function refreshPublishEnabled() {
     const dimsOk = state.fileDims && state.fileDims.w === 600 && state.fileDims.h === 200;
     const sizeOk = state.fileBytes != null && state.fileBytes <= 250 * 1024;
-    els.publish.disabled = !(dimsOk && sizeOk && state.target);
+    const reasonOk = (els.msg.value || '').trim().length >= 2;
+    const ok = dimsOk && sizeOk && !!state.target && reasonOk;
+    els.publish.disabled = !ok;
   }
 
   async function onFileSelected(file) {
     if (!file) return;
     clearStatus();
     if (!file.type.startsWith('image/') || !/\.png$/i.test(file.name)) {
-      showStatus('err', 'Please choose a <b>.png</b> file. Other formats are not supported by email programs.');
+      showStatus('err', 'Please choose a <b>.png</b> file. Other formats (JPG, GIF, WebP) aren\'t supported by email clients reliably.');
       return;
     }
     const dataUrl = await readFileAsDataUrl(file);
     let dims;
     try { dims = await imageDimensions(dataUrl); }
-    catch { showStatus('err', 'Could not read this image. It may be corrupted.'); return; }
+    catch { showStatus('err', 'Could not read this image. It may be corrupted. Try opening it in Preview to verify it\'s a real PNG, then try again.'); return; }
 
     state.file = file;
     state.fileDataUrl = dataUrl;
@@ -480,6 +700,15 @@
     els.piSize.classList.toggle('bad', tooLarge);
     els.piSize.classList.toggle('warn', !okSize && !tooLarge);
 
+    // Live signature mockup preview
+    if (okDims && !tooLarge) {
+      els.mockupBannerImg.src = dataUrl;
+      els.mockupWrap.classList.add('active');
+      announce(`Banner preview loaded. ${dims.w} by ${dims.h} pixels, ${fmtBytes(file.size)}.`);
+    } else {
+      els.mockupWrap.classList.remove('active');
+    }
+
     refreshPublishEnabled();
   }
 
@@ -497,105 +726,158 @@
     state.file = null; state.fileDataUrl = null; state.fileBytes = null; state.fileDims = null; state.target = null;
     els.fileInput.value = '';
     els.preview.classList.remove('active');
+    els.mockupWrap.classList.remove('active');
     [...els.selector.querySelectorAll('label')].forEach(l => l.classList.remove('checked'));
     [...els.selector.querySelectorAll('input')].forEach(i => i.checked = false);
     els.msg.value = '';
+    els.fieldReason.classList.remove('error');
     clearStatus();
     refreshPublishEnabled();
   }
 
+  // ---------- Confirmation modal ----------
+  function openConfirmModal() {
+    const reason = els.msg.value.trim();
+    const target = state.target;
+    els.confirmSummary.innerHTML = `
+      <div><b>Updating:</b> ${escapeHtml(targetLabel(target))} signature</div>
+      <div><b>Reason:</b> ${escapeHtml(reason)}</div>
+      <div><b>Image:</b> ${escapeHtml(state.file?.name || 'untitled.png')} (${fmtBytes(state.fileBytes||0)})</div>
+      <div><b>You're publishing as:</b> ${escapeHtml(state.name)}</div>
+    `;
+    els.confirmModal.classList.add('active');
+    setTimeout(() => els.confirmGo.focus(), 50);
+  }
+  function closeConfirmModal() {
+    els.confirmModal.classList.remove('active');
+  }
+
   // ---------- Publish flow ----------
-  async function publish() {
-    if (els.publish.disabled) return;
+  async function doPublish() {
+    closeConfirmModal();
     els.publish.disabled = true;
     const target = state.target;
     const b64 = state.fileDataUrl.replace(/^data:image\/png;base64,/, '');
-    const targetLabel = target === 'parent' ? 'HCFM Parent' : 'Family Theater Productions';
+    const reason = els.msg.value.trim();
 
-    showStatus('info', `
-      <b>Publishing …</b>
-      <ol class="steps">
-        <li id="s-1" class="pending">Sending your image</li>
-        <li id="s-2" class="pending">Saving the new banner</li>
-        <li id="s-3" class="pending">Confirming it's live</li>
-      </ol>
-    `);
-    const step = (id, txt, cls) => {
-      const el = document.getElementById(id);
-      if (el) { el.textContent = txt; el.className = cls || ''; }
-    };
+    showStatus('info', `<b>Publishing &hellip;</b> Saving your banner and notifying every HCFM signature.`);
+    announce('Publishing banner.');
 
     try {
-      step('s-1', 'Sending your image', '');
       const data = await api('/api/upload', {
         method: 'POST',
-        body: JSON.stringify({ image: b64, target, reason: els.msg.value }),
+        body: JSON.stringify({ image: b64, target, reason }),
       });
-      step('s-1', 'Sent your image', 'done');
-      step('s-2', 'Saved the new banner', 'done');
-      step('s-3', 'Confirming it\'s live (up to ~10 min)', '');
-
-      const flippedAt = await pollLive(data.liveUrl, state.fileBytes, 600);
       const cacheBustUrl = `${data.liveUrl}?v=${Date.now()}`;
-      if (flippedAt > 0) {
-        step('s-3', `Live after ${flippedAt}s`, 'done');
-        showStatus('ok', `
-          <b>Done.</b> The ${targetLabel} signature banner is live now. Recipients will see it on the next email they open from any HCFM staff member.
-          <small style="margin-top:10px"><b>See the new banner:</b> <a href="${cacheBustUrl}" target="_blank" rel="noopener">open the live image in a new tab</a> (the link includes a cache-buster so you'll see the latest).</small>
-          <small style="margin-top:10px"><b>One gotcha if you're checking in your own Outlook:</b> your browser may still show the OLD banner in your "New Email" compose view because it cached the image. <b>Recipients don't have that cache</b> — they see the new banner correctly. To force-refresh your own compose view, hard-refresh your Outlook tab (Cmd+Shift+R / Ctrl+Shift+R) and open a fresh compose. Best verification: email yourself at a non-Outlook address (Gmail, iCloud, etc.) and check there.</small>
-        `);
-      } else {
-        step('s-3', 'Saved; the live banner usually updates within 10 minutes', 'done');
-        showStatus('warn', `
-          <b>Saved.</b> The new banner is committed. The live URL didn't show the change yet but it usually arrives within 10 minutes.
-          <small style="margin-top:10px"><a href="${cacheBustUrl}" target="_blank" rel="noopener">Check the live image in a new tab</a> in a few minutes.</small>
-        `);
-      }
-      loadActivity();
+      showStatus('ok', `
+        <b>Done.</b> The ${escapeHtml(targetLabel(target))} signature banner is saved. Recipients will see it on the next email they open from any HCFM staff member (typically within 1&ndash;10 minutes).
+        <small>
+          <b>See the new banner:</b> <a href="${cacheBustUrl}" target="_blank" rel="noopener">open the live image in a new tab</a> (fresh-loaded, bypassing cache).<br>
+          <b>One gotcha if checking your own Outlook:</b> your browser may still show the previous banner in your own compose view because it cached the image. Recipients don't share that cache. To force-refresh your own compose: hard-refresh your Outlook tab (Cmd+Shift+R or Ctrl+Shift+R) and open a fresh compose, or email yourself at a non-Outlook address (Gmail, iCloud) to see the recipient view.
+        </small>
+      `);
+      announce(`Banner published successfully for ${targetLabel(target)}.`);
+      // Refresh activity feed so the new row appears
+      await loadActivity();
     } catch (err) {
       let msg = err.message || 'Something went wrong.';
       if (err.status === 401) {
         showSignedOut('Your sign-in expired. Please sign in again.');
         return;
       }
-      showStatus('err', `<b>Couldn't publish.</b> ${msg}`);
+      if (err.status === 403) msg = 'The studio\'s GitHub credential expired. Ask Emmy to refresh it (it rotates every 30 days).';
+      else if (err.status === 409) msg = 'Someone else updated the banner a moment ago. Reload the page and try your upload again.';
+      else if (err.status === 502 || err.status === 503) msg = 'GitHub or the studio backend is temporarily unavailable. Try again in a minute.';
+      showStatus('err', `<b>Couldn't publish.</b> ${escapeHtml(msg)}`);
     } finally {
       els.publish.disabled = false;
     }
   }
 
-  async function pollLive(url, targetBytes, maxSeconds) {
-    const start = Date.now();
-    const deadline = start + maxSeconds * 1000;
-    while (Date.now() < deadline) {
-      try {
-        const r = await fetch(`${url}?v=${Date.now()}`, { cache: 'no-store' });
-        if (r.ok) {
-          const blob = await r.blob();
-          if (blob.size === targetBytes) {
-            return Math.round((Date.now() - start) / 1000);
-          }
-        }
-      } catch {}
-      await new Promise(r => setTimeout(r, 8000));
+  async function startPublish() {
+    if (els.publish.disabled) return;
+    // Re-validate reason field (could be empty if user bypassed by Enter key)
+    if ((els.msg.value || '').trim().length < 2) {
+      els.fieldReason.classList.add('error');
+      els.msg.focus();
+      announce('Please tell us what this banner is for before publishing.');
+      return;
     }
-    return -1;
+    openConfirmModal();
   }
 
+  // ---------- Activity feed ----------
   async function loadActivity() {
     try {
       const { items } = await api('/api/activity');
-      if (!items.length) { els.activity.innerHTML = '<li class="empty">No banner updates recorded yet.</li>'; return; }
-      els.activity.innerHTML = items.map(it => `
-        <li>
-          <span class="what" title="${(it.what || '').replace(/"/g,'&quot;')}">${it.what || ''}</span>
-          <span class="who">${it.uploader || ''}</span>
-          <span class="when">${it.when ? fmtRelative(it.when) : ''}</span>
-        </li>
-      `).join('');
+      state.activity = items || [];
+      renderActivity();
     } catch (e) {
       if (e.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
-      els.activity.innerHTML = `<li class="empty">Couldn't load recent activity.</li>`;
+      els.activity.innerHTML = `<li class="empty">Couldn't load recent activity. ${escapeHtml(e.message || '')}</li>`;
+    }
+  }
+  function renderActivity() {
+    const items = state.activity;
+    if (!items.length) { els.activity.innerHTML = '<li class="empty">No banner updates recorded yet.</li>'; return; }
+    // The first item per target is the "current live" one.
+    const seenLive = new Set();
+    els.activity.innerHTML = items.map((it) => {
+      const tgt = it.target || 'parent';
+      const isCurrent = it.target && !seenLive.has(it.target);
+      if (it.target) seenLive.add(it.target);
+      const thumbUrl = `https://cdn.jsdelivr.net/gh/${BRAND_REPO}@${it.sha}/email-banners/${tgt}/banner.png`;
+      const reasonText = it.what || '(no reason given)';
+      return `
+        <li class="activity-row ${isCurrent ? 'current' : ''}" data-sha="${escapeHtml(it.sha)}" data-target="${escapeHtml(tgt)}">
+          <div class="thumb"><img src="${thumbUrl}" alt="Banner thumbnail" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="body">
+            <div class="what" title="${escapeHtml(reasonText)}">${escapeHtml(reasonText)}</div>
+            <div class="meta">
+              <span class="target-pill">${escapeHtml(targetLabel(tgt))}</span>
+              ${escapeHtml(it.uploader || '')}${it.uploader && it.when ? ' &middot; ' : ''}${it.when ? escapeHtml(fmtRelative(it.when)) : ''}
+            </div>
+          </div>
+          <div class="right-actions">
+            ${isCurrent ? '' : `<button class="btn-revert" data-revert-sha="${escapeHtml(it.sha)}" data-revert-target="${escapeHtml(tgt)}">Revert to this</button>`}
+          </div>
+        </li>
+      `;
+    }).join('');
+    [...els.activity.querySelectorAll('.btn-revert')].forEach(btn => {
+      btn.addEventListener('click', onRevertClick);
+    });
+  }
+
+  async function onRevertClick(e) {
+    const btn = e.currentTarget;
+    const sha = btn.getAttribute('data-revert-sha');
+    const tgt = btn.getAttribute('data-revert-target');
+    if (!sha || !tgt) return;
+    const tLabel = targetLabel(tgt);
+    if (!confirm(`Revert ${tLabel} signature to this banner version? Every HCFM signature on this side will switch back to it within minutes.`)) return;
+    btn.disabled = true;
+    btn.textContent = 'Reverting…';
+    clearStatus();
+    announce('Reverting banner.');
+    try {
+      const data = await api('/api/revert', {
+        method: 'POST',
+        body: JSON.stringify({ sha, target: tgt }),
+      });
+      if (data.noop) {
+        showStatus('warn', '<b>Already current.</b> That version is already the live banner.');
+      } else {
+        showStatus('ok', `<b>Reverted.</b> The ${escapeHtml(tLabel)} signature is back to the version from <code>${escapeHtml(data.revertedFrom||sha.slice(0,7))}</code>. New committed version: <code>${escapeHtml(data.sha||'')}</code>.`);
+        announce(`Reverted ${tLabel} banner.`);
+      }
+      await loadActivity();
+    } catch (err) {
+      let msg = err.message || 'Something went wrong.';
+      if (err.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
+      showStatus('err', `<b>Couldn't revert.</b> ${escapeHtml(msg)}`);
+      btn.disabled = false;
+      btn.textContent = 'Revert to this';
     }
   }
 
@@ -615,7 +897,8 @@
       localStorage.setItem(SESSION_KEY, JSON.stringify({ token: state.token, name: state.name }));
       showApp();
     } catch (err) {
-      els.gateError.textContent = err.message || 'Sign-in failed.';
+      let msg = err.message || 'Sign-in failed.';
+      els.gateError.textContent = msg;
       els.gateError.classList.add('active');
     } finally {
       els.signIn.disabled = false; els.signIn.textContent = 'Sign in';
@@ -625,7 +908,10 @@
   function showApp() {
     els.gate.classList.remove('active');
     els.app.classList.add('active');
-    els.who.innerHTML = `Signed in as <b>${state.name}</b><br><a id="sign-out">Sign out</a>`;
+    els.who.innerHTML = `
+      <span class="name">Signed in as ${escapeHtml(state.name)}</span>
+      <button type="button" class="sign-out-btn" id="sign-out">Sign out</button>
+    `;
     document.getElementById('sign-out').addEventListener('click', signOut);
     loadActivity();
   }
@@ -648,9 +934,6 @@
     els.signIn.addEventListener('click', signIn);
     [els.nameField, els.pwField].forEach(i => i.addEventListener('keydown', (e) => { if (e.key === 'Enter') signIn(); }));
 
-    // Note: the dropzone is a <label for="file-input"> — the browser handles
-    // click→open-picker natively. Do NOT add a click handler that calls
-    // preventDefault, it blocks the file picker from opening.
     els.fileInput.addEventListener('change', (e) => onFileSelected(e.target.files[0]));
     els.dropzone.addEventListener('dragover', (e) => { e.preventDefault(); els.dropzone.classList.add('dragover'); });
     els.dropzone.addEventListener('dragleave', () => els.dropzone.classList.remove('dragover'));
@@ -663,10 +946,29 @@
 
     [...els.selector.querySelectorAll('label')].forEach(l => {
       l.addEventListener('click', (e) => { e.preventDefault(); setTarget(l.dataset.key); });
+      // Keyboard support: enter/space on a radio label
+      l.tabIndex = 0;
+      l.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setTarget(l.dataset.key); }
+      });
     });
 
-    els.publish.addEventListener('click', publish);
+    els.msg.addEventListener('input', () => {
+      if (els.msg.value.trim().length >= 2) els.fieldReason.classList.remove('error');
+      refreshPublishEnabled();
+    });
+
+    els.publish.addEventListener('click', startPublish);
     els.reset.addEventListener('click', resetForm);
+
+    els.confirmCancel.addEventListener('click', closeConfirmModal);
+    els.confirmGo.addEventListener('click', doPublish);
+    els.confirmModal.addEventListener('click', (e) => {
+      if (e.target === els.confirmModal) closeConfirmModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && els.confirmModal.classList.contains('active')) closeConfirmModal();
+    });
   }
 
   bind();
