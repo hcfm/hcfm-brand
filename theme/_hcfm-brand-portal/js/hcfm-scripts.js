@@ -193,8 +193,10 @@
     // Tear down any previous observer
     if (tocObserver) { tocObserver.disconnect(); tocObserver = null; }
     const h2s = [...page.querySelectorAll('h2')].filter(h => h.offsetParent !== null || h.getClientRects().length);
-    // Need at least 3 h2's to be worth showing
-    if (h2s.length < 3) {
+    // Need at least 4 h2's to be worth showing. Home is a launch pad
+    // (3 h2's) — gets cleaner without a self-TOC. Stationery / Platforms
+    // / Design Elements also stay clean.
+    if (h2s.length < 4) {
       pageToc.hidden = true;
       pageTocList.innerHTML = '';
       return;
