@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>HCFM Banner Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230047BB'/%3E%3Ctext x='50' y='62' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='28' fill='%23FFB500'%3EH%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --hcfm-blue: #0047BB;
+    --hcfm-blue-dark: #003590;
+    --hcfm-gold: #FFB500;
+    --ink: #111418;
+    --ink-soft: #444;
+    --ink-mute: #6b7280;
+    --line: #e5e7eb;
+    --line-soft: #f1f3f5;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --ok: #1f7a3a;
+    --warn: #b06b00;
+    --err: #b3261e;
+    --ok-bg: #e9f5ee;
+    --warn-bg: #fdf3e0;
+    --err-bg: #fae9e7;
+    --radius: 10px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', 'Whitney', Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
+
+  header.brand {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+  }
+  header.brand .mark {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--hcfm-blue);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--hcfm-gold); font-weight: 700; font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+  header.brand h1 {
+    margin: 0; font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
+  }
+  header.brand .sub { margin: 2px 0 0; font-size: 13px; color: var(--ink-mute); }
+  header.brand .who { margin-left: auto; font-size: 12px; color: var(--ink-mute); text-align: right; }
+  header.brand .who b { color: var(--ink); display: block; font-weight: 600; font-size: 13px; }
+  header.brand .who a { color: var(--ink-mute); text-decoration: underline; cursor: pointer; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    margin-bottom: 18px;
+  }
+  .card h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
+  .card .hint { color: var(--ink-mute); font-size: 13px; margin: 0 0 16px; }
+
+  /* SIGN-IN */
+  .gate { display: none; }
+  .gate.active { display: block; }
+  .gate .field { margin-bottom: 14px; }
+  .gate label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
+  .gate input {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; font-size: 15px; background: #fff;
+  }
+  .gate input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
+  .gate .submit-row { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+  .gate .gate-error { color: var(--err); font-size: 13px; margin: 12px 0 0; display: none; }
+  .gate .gate-error.active { display: block; }
+  .gate .help { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-soft); font-size: 12px; color: var(--ink-mute); }
+
+  /* APP */
+  .app { display: none; }
+  .app.active { display: block; }
+
+  /* Drop zone */
+  .dropzone {
+    border: 2px dashed var(--line);
+    border-radius: var(--radius);
+    background: var(--line-soft);
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .dropzone:hover { border-color: var(--hcfm-blue); background: #fbfcff; }
+  .dropzone.dragover { border-color: var(--hcfm-blue); background: #eef3ff; }
+  .dropzone .icon { font-size: 28px; color: var(--hcfm-blue); margin-bottom: 6px; }
+  .dropzone .label { font-weight: 600; margin-bottom: 4px; font-size: 15px; }
+  .dropzone .meta { font-size: 12px; color: var(--ink-mute); }
+  .dropzone input[type="file"] { display: none; }
+
+  /* Preview block */
+  .preview {
+    display: none;
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 14px;
+  }
+  .preview.active { display: block; }
+  .preview-frame {
+    background: repeating-conic-gradient(#f3f4f6 0 25%, #fff 0 50%) 0 0 / 16px 16px;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex; justify-content: center;
+  }
+  .preview img { display: block; max-width: 100%; height: auto; border-radius: 4px; }
+  .preview-info {
+    margin-top: 10px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    font-size: 13px;
+  }
+  .preview-info .pi { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+  .preview-info .pi .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); }
+  .preview-info .pi.bad .dot { background: var(--err); }
+  .preview-info .pi.warn .dot { background: var(--warn); }
+  .preview-info .pi b { color: var(--ink); margin-right: 4px; }
+
+  /* Selector */
+  .selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+  .selector label {
+    border: 1px solid var(--line); border-radius: 8px; padding: 14px;
+    cursor: pointer; transition: border-color 120ms, background 120ms;
+  }
+  .selector label.checked { border-color: var(--hcfm-blue); background: #eef3ff; }
+  .selector label .name { font-weight: 700; font-size: 14px; display: block; }
+  .selector label .desc { font-size: 12px; color: var(--ink-mute); margin-top: 2px; display: block; }
+  .selector input[type="radio"] { display: none; }
+
+  /* Reason field */
+  .field-reason { margin-top: 16px; }
+  .field-reason label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
+  .field-reason input[type="text"] {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; font-size: 14px;
+  }
+  .field-reason input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
+
+  /* Buttons */
+  .actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; }
+  button {
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    padding: 11px 18px; border-radius: 8px; cursor: pointer;
+    border: 1px solid transparent; transition: background 120ms, transform 60ms;
+  }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-primary { background: var(--hcfm-blue); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--hcfm-blue-dark); }
+  .btn-ghost { background: transparent; color: var(--ink-soft); border-color: var(--line); }
+  .btn-ghost:hover:not(:disabled) { background: var(--line-soft); }
+
+  /* Status box */
+  .status { margin-top: 18px; padding: 14px 16px; border-radius: 8px; font-size: 14px; display: none; }
+  .status.active { display: block; }
+  .status.info { background: #eef3ff; color: var(--hcfm-blue-dark); border: 1px solid #d6e0ff; }
+  .status.ok   { background: var(--ok-bg);   color: var(--ok);   border: 1px solid #cce7d6; }
+  .status.warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f1d9a8; }
+  .status.err  { background: var(--err-bg);  color: var(--err);  border: 1px solid #efcdc9; }
+  .status .steps { margin: 8px 0 0; padding-left: 20px; font-size: 13px; }
+  .status .steps li { margin-bottom: 2px; }
+  .status .steps li.done::marker { color: var(--ok); }
+  .status .steps li.pending { opacity: 0.5; }
+  .status a { color: inherit; font-weight: 600; }
+  .status small { display: block; margin-top: 6px; opacity: 0.85; }
+
+  /* Activity feed */
+  .activity-list { margin: 0; padding: 0; list-style: none; }
+  .activity-list li {
+    padding: 10px 0; border-bottom: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .activity-list li:last-child { border-bottom: 0; }
+  .activity-list .when { font-size: 12px; color: var(--ink-mute); white-space: nowrap; }
+  .activity-list .what { font-size: 13px; color: var(--ink); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .activity-list .who { font-size: 12px; color: var(--ink-mute); }
+  .activity-list .empty { color: var(--ink-mute); font-size: 13px; padding: 10px 0; }
+
+  footer.bottom {
+    margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--ink-mute);
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 64px; }
+    .selector { grid-template-columns: 1fr; }
+    .preview-info { grid-template-columns: 1fr; }
+    header.brand .who { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="brand">
+    <div class="mark">HCFM</div>
+    <div>
+      <h1>Banner Studio</h1>
+      <p class="sub">Update the banner that rides on every HCFM email signature.</p>
+    </div>
+    <div class="who" id="who"></div>
+  </header>
+
+  <!-- SIGN-IN GATE -->
+  <section class="card gate" id="gate">
+    <h2>Sign in</h2>
+    <p class="hint">Enter your name (so we know who uploaded what) and the team password Emmy gave you.</p>
+
+    <div class="field">
+      <label for="name-field">Your name</label>
+      <input type="text" id="name-field" placeholder="e.g. Victoria Hassan" autocomplete="name" maxlength="60">
+    </div>
+    <div class="field">
+      <label for="password-field">Team password</label>
+      <input type="password" id="password-field" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div class="submit-row">
+      <button class="btn-primary" id="sign-in">Sign in</button>
+    </div>
+    <div class="gate-error" id="gate-error"></div>
+
+    <div class="help">
+      Don't have the team password? Ask Emmy (eepau@hcfm.org). He'll send it to you over Slack or email.
+    </div>
+  </section>
+
+  <!-- MAIN APP -->
+  <section class="app" id="app">
+
+    <div class="card">
+      <h2>1. Choose the banner image</h2>
+      <p class="hint">PNG file, exactly <b>600 × 200 pixels</b>, recommended under 100&nbsp;KB.</p>
+
+      <label class="dropzone" id="dropzone" for="file-input">
+        <div class="icon">&#8682;</div>
+        <div class="label">Drop a PNG here or click to browse</div>
+        <div class="meta">600 &times; 200 pixels &middot; up to 250&nbsp;KB</div>
+        <input type="file" id="file-input" accept="image/png">
+      </label>
+
+      <div class="preview" id="preview">
+        <div class="preview-frame"><img id="preview-img" alt=""></div>
+        <div class="preview-info">
+          <div class="pi" id="pi-dims"><span class="dot"></span><b>Dimensions:</b><span id="dims-val">&mdash;</span></div>
+          <div class="pi" id="pi-size"><span class="dot"></span><b>File size:</b><span id="size-val">&mdash;</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Which signature does this update?</h2>
+      <p class="hint">Each sub-ministry's signature has its own banner. Pick the right one.</p>
+
+      <div class="selector" id="selector">
+        <label data-key="parent">
+          <input type="radio" name="target" value="parent">
+          <span class="name">HCFM Parent</span>
+          <span class="desc">Headquarters and most HCFM staff</span>
+        </label>
+        <label data-key="ftp">
+          <input type="radio" name="target" value="ftp">
+          <span class="name">Family Theater Productions</span>
+          <span class="desc">FTP staff signatures</span>
+        </label>
+      </div>
+
+      <div class="field-reason">
+        <label for="msg">What is this banner for? <span style="color:var(--ink-mute);font-weight:400">(shows up in the audit log)</span></label>
+        <input type="text" id="msg" placeholder="e.g. Grand Reopening — June 6 launch" maxlength="140">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Publish</h2>
+      <p class="hint">When you click Publish, this banner replaces the current one. Every HCFM email signature on the side you picked starts showing it within about 10 minutes — usually under a minute. No action from anyone else.</p>
+
+      <div class="actions">
+        <button class="btn-primary" id="publish" disabled>Publish banner</button>
+        <button class="btn-ghost" id="reset">Start over</button>
+      </div>
+
+      <div class="status" id="status"></div>
+    </div>
+
+    <div class="card">
+      <h2>Recent activity</h2>
+      <p class="hint">The last 5 banner updates. Every upload is recorded with who did it and when.</p>
+      <ul class="activity-list" id="activity">
+        <li class="empty">Loading recent activity…</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <footer class="bottom">
+    <div>HCFM Banner Studio</div>
+    <div><a href="https://hcfm.org/brand" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Brand book</a></div>
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const SESSION_KEY = 'hcfm-banner-studio:session-v2';
+
+  const state = {
+    token: null,
+    name:  null,
+    file: null,
+    fileDataUrl: null,
+    fileBytes: null,
+    fileDims: null,
+    target: null,
+  };
+  const saved = (() => { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch { return null; } })();
+  if (saved && saved.token && saved.name) { state.token = saved.token; state.name = saved.name; }
+
+  const $ = (sel) => document.querySelector(sel);
+  const els = {
+    gate: $('#gate'), app: $('#app'),
+    nameField: $('#name-field'), pwField: $('#password-field'),
+    signIn: $('#sign-in'), gateError: $('#gate-error'),
+    who: $('#who'),
+    dropzone: $('#dropzone'), fileInput: $('#file-input'),
+    preview: $('#preview'), previewImg: $('#preview-img'),
+    piDims: $('#pi-dims'), piSize: $('#pi-size'),
+    dimsVal: $('#dims-val'), sizeVal: $('#size-val'),
+    selector: $('#selector'),
+    msg: $('#msg'),
+    publish: $('#publish'), reset: $('#reset'),
+    status: $('#status'),
+    activity: $('#activity'),
+  };
+
+  // ---------- API ----------
+  async function api(path, opts = {}) {
+    const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
+    if (state.token) headers['Authorization'] = `Bearer ${state.token}`;
+    const res = await fetch(path, { ...opts, headers });
+    const text = await res.text();
+    let data = null;
+    try { data = text ? JSON.parse(text) : null; } catch {}
+    if (!res.ok) {
+      const e = new Error((data && data.error) || `Request failed (${res.status}).`);
+      e.status = res.status;
+      throw e;
+    }
+    return data;
+  }
+
+  // ---------- Image helpers ----------
+  function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+      r.readAsDataURL(file);
+    });
+  }
+  function imageDimensions(dataUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
+      img.onerror = () => reject(new Error('Could not decode image.'));
+      img.src = dataUrl;
+    });
+  }
+  function fmtBytes(n) {
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+    return `${(n / 1024 / 1024).toFixed(2)} MB`;
+  }
+  function fmtRelative(iso) {
+    const then = new Date(iso).getTime();
+    const sec = Math.max(0, Math.round((Date.now() - then) / 1000));
+    if (sec < 60)   return `${sec}s ago`;
+    if (sec < 3600) return `${Math.round(sec/60)}m ago`;
+    if (sec < 86400) return `${Math.round(sec/3600)}h ago`;
+    return `${Math.round(sec/86400)}d ago`;
+  }
+
+  // ---------- UI ----------
+  function showStatus(kind, html) {
+    els.status.className = `status ${kind} active`;
+    els.status.innerHTML = html;
+  }
+  function clearStatus() { els.status.className = 'status'; els.status.innerHTML = ''; }
+
+  function refreshPublishEnabled() {
+    const dimsOk = state.fileDims && state.fileDims.w === 600 && state.fileDims.h === 200;
+    const sizeOk = state.fileBytes != null && state.fileBytes <= 250 * 1024;
+    els.publish.disabled = !(dimsOk && sizeOk && state.target);
+  }
+
+  async function onFileSelected(file) {
+    if (!file) return;
+    clearStatus();
+    if (!file.type.startsWith('image/') || !/\.png$/i.test(file.name)) {
+      showStatus('err', 'Please choose a <b>.png</b> file. Other formats are not supported by email programs.');
+      return;
+    }
+    const dataUrl = await readFileAsDataUrl(file);
+    let dims;
+    try { dims = await imageDimensions(dataUrl); }
+    catch { showStatus('err', 'Could not read this image. It may be corrupted.'); return; }
+
+    state.file = file;
+    state.fileDataUrl = dataUrl;
+    state.fileBytes = file.size;
+    state.fileDims  = dims;
+
+    els.previewImg.src = dataUrl;
+    els.preview.classList.add('active');
+
+    const okDims = dims.w === 600 && dims.h === 200;
+    els.dimsVal.textContent = `${dims.w} × ${dims.h} ${okDims ? '✓' : '— must be 600 × 200'}`;
+    els.piDims.classList.toggle('bad', !okDims);
+
+    const okSize = file.size <= 100 * 1024;
+    const tooLarge = file.size > 250 * 1024;
+    els.sizeVal.textContent = `${fmtBytes(file.size)} ${okSize ? '✓' : (tooLarge ? '— too large (max 250 KB)' : '— large, consider compressing')}`;
+    els.piSize.classList.toggle('bad', tooLarge);
+    els.piSize.classList.toggle('warn', !okSize && !tooLarge);
+
+    refreshPublishEnabled();
+  }
+
+  function setTarget(key) {
+    state.target = key;
+    [...els.selector.querySelectorAll('label')].forEach(l => {
+      l.classList.toggle('checked', l.dataset.key === key);
+      const input = l.querySelector('input');
+      if (input) input.checked = (l.dataset.key === key);
+    });
+    refreshPublishEnabled();
+  }
+
+  function resetForm() {
+    state.file = null; state.fileDataUrl = null; state.fileBytes = null; state.fileDims = null; state.target = null;
+    els.fileInput.value = '';
+    els.preview.classList.remove('active');
+    [...els.selector.querySelectorAll('label')].forEach(l => l.classList.remove('checked'));
+    [...els.selector.querySelectorAll('input')].forEach(i => i.checked = false);
+    els.msg.value = '';
+    clearStatus();
+    refreshPublishEnabled();
+  }
+
+  // ---------- Publish flow ----------
+  async function publish() {
+    if (els.publish.disabled) return;
+    els.publish.disabled = true;
+    const target = state.target;
+    const b64 = state.fileDataUrl.replace(/^data:image\/png;base64,/, '');
+    const targetLabel = target === 'parent' ? 'HCFM Parent' : 'Family Theater Productions';
+
+    showStatus('info', `
+      <b>Publishing …</b>
+      <ol class="steps">
+        <li id="s-1" class="pending">Sending your image</li>
+        <li id="s-2" class="pending">Saving the new banner</li>
+        <li id="s-3" class="pending">Confirming it's live</li>
+      </ol>
+    `);
+    const step = (id, txt, cls) => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = txt; el.className = cls || ''; }
+    };
+
+    try {
+      step('s-1', 'Sending your image', '');
+      const data = await api('/api/upload', {
+        method: 'POST',
+        body: JSON.stringify({ image: b64, target, reason: els.msg.value }),
+      });
+      step('s-1', 'Sent your image', 'done');
+      step('s-2', 'Saved the new banner', 'done');
+      step('s-3', 'Confirming it\'s live (up to ~10 min)', '');
+
+      const flippedAt = await pollLive(data.liveUrl, state.fileBytes, 600);
+      if (flippedAt > 0) {
+        step('s-3', `Live after ${flippedAt}s`, 'done');
+        showStatus('ok', `
+          <b>Done.</b> The ${targetLabel} signature banner is live now. Every staff member on that side will see it on the next email they open.
+          <small>It took about ${flippedAt} seconds. The new banner will keep showing until someone publishes a different one here.</small>
+        `);
+      } else {
+        step('s-3', 'Saved; the live banner usually updates within 10 minutes', 'done');
+        showStatus('warn', `
+          <b>Saved.</b> The new banner is committed. The live URL didn't show the change yet but it usually arrives within 10 minutes.
+        `);
+      }
+      loadActivity();
+    } catch (err) {
+      let msg = err.message || 'Something went wrong.';
+      if (err.status === 401) {
+        showSignedOut('Your sign-in expired. Please sign in again.');
+        return;
+      }
+      showStatus('err', `<b>Couldn't publish.</b> ${msg}`);
+    } finally {
+      els.publish.disabled = false;
+    }
+  }
+
+  async function pollLive(url, targetBytes, maxSeconds) {
+    const start = Date.now();
+    const deadline = start + maxSeconds * 1000;
+    while (Date.now() < deadline) {
+      try {
+        const r = await fetch(`${url}?v=${Date.now()}`, { cache: 'no-store' });
+        if (r.ok) {
+          const blob = await r.blob();
+          if (blob.size === targetBytes) {
+            return Math.round((Date.now() - start) / 1000);
+          }
+        }
+      } catch {}
+      await new Promise(r => setTimeout(r, 8000));
+    }
+    return -1;
+  }
+
+  async function loadActivity() {
+    try {
+      const { items } = await api('/api/activity');
+      if (!items.length) { els.activity.innerHTML = '<li class="empty">No banner updates recorded yet.</li>'; return; }
+      els.activity.innerHTML = items.map(it => `
+        <li>
+          <span class="what" title="${(it.what || '').replace(/"/g,'&quot;')}">${it.what || ''}</span>
+          <span class="who">${it.uploader || ''}</span>
+          <span class="when">${it.when ? fmtRelative(it.when) : ''}</span>
+        </li>
+      `).join('');
+    } catch (e) {
+      if (e.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
+      els.activity.innerHTML = `<li class="empty">Couldn't load recent activity.</li>`;
+    }
+  }
+
+  // ---------- Sign-in flow ----------
+  async function signIn() {
+    els.gateError.classList.remove('active');
+    els.gateError.textContent = '';
+    const name = (els.nameField.value || '').trim();
+    const password = els.pwField.value || '';
+    if (name.length < 2) { els.gateError.textContent = 'Please enter your name.'; els.gateError.classList.add('active'); return; }
+    if (!password) { els.gateError.textContent = 'Please enter the team password.'; els.gateError.classList.add('active'); return; }
+    els.signIn.disabled = true;
+    els.signIn.textContent = 'Signing in…';
+    try {
+      const data = await api('/api/auth', { method: 'POST', body: JSON.stringify({ name, password }) });
+      state.token = data.token; state.name = data.name;
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ token: state.token, name: state.name }));
+      showApp();
+    } catch (err) {
+      els.gateError.textContent = err.message || 'Sign-in failed.';
+      els.gateError.classList.add('active');
+    } finally {
+      els.signIn.disabled = false; els.signIn.textContent = 'Sign in';
+    }
+  }
+
+  function showApp() {
+    els.gate.classList.remove('active');
+    els.app.classList.add('active');
+    els.who.innerHTML = `Signed in as <b>${state.name}</b><br><a id="sign-out">Sign out</a>`;
+    document.getElementById('sign-out').addEventListener('click', signOut);
+    loadActivity();
+  }
+  function showSignedOut(reason) {
+    state.token = null; state.name = null;
+    localStorage.removeItem(SESSION_KEY);
+    els.app.classList.remove('active');
+    els.gate.classList.add('active');
+    els.pwField.value = '';
+    els.who.innerHTML = '';
+    if (reason) { els.gateError.textContent = reason; els.gateError.classList.add('active'); }
+  }
+  function signOut() {
+    if (!confirm('Sign out of this device?')) return;
+    showSignedOut(null);
+  }
+
+  // ---------- Init ----------
+  function bind() {
+    els.signIn.addEventListener('click', signIn);
+    [els.nameField, els.pwField].forEach(i => i.addEventListener('keydown', (e) => { if (e.key === 'Enter') signIn(); }));
+
+    els.dropzone.addEventListener('click', (e) => { if (e.target !== els.fileInput) e.preventDefault?.(); });
+    els.fileInput.addEventListener('change', (e) => onFileSelected(e.target.files[0]));
+    els.dropzone.addEventListener('dragover', (e) => { e.preventDefault(); els.dropzone.classList.add('dragover'); });
+    els.dropzone.addEventListener('dragleave', () => els.dropzone.classList.remove('dragover'));
+    els.dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      els.dropzone.classList.remove('dragover');
+      const f = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) onFileSelected(f);
+    });
+
+    [...els.selector.querySelectorAll('label')].forEach(l => {
+      l.addEventListener('click', (e) => { e.preventDefault(); setTarget(l.dataset.key); });
+    });
+
+    els.publish.addEventListener('click', publish);
+    els.reset.addEventListener('click', resetForm);
+  }
+
+  bind();
+  if (state.token && state.name) showApp(); else els.gate.classList.add('active');
+})();
+</script>
+</body>
+</html>
