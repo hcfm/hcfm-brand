@@ -7,17 +7,51 @@ import { requireSession } from '../lib/session.js';
 const REPO_OWNER = 'EmmanuelEpau';
 const REPO_NAME  = 'hcfm-brand';
 const BRANCH     = 'main';
-const MAX_ITEMS  = 10;
+// 20 lets each of the six ministries' current-live row appear even
+// after a busy stretch concentrated on one target.
+const MAX_ITEMS  = 20;
+
+// All known ministry identifiers + the labels they go by in commit messages
+// (current + legacy). Used for inference when the commit message is the
+// only source of truth.
+const TARGET_INFERENCE = [
+  // key, regexes
+  { key: 'parent',           patterns: [/HCFM North Easton/i, /HCFM Parent/i, /Headquarters/i, /email-banners\/parent/i] },
+  { key: 'ftp',              patterns: [/Family Theater Productions/i, /\bftp\b/i, /email-banners\/ftp/i] },
+  { key: 'family-rosary',    patterns: [/Family Rosary/i, /email-banners\/family-rosary/i] },
+  { key: 'catholic-mom',     patterns: [/Catholic Mom/i, /email-banners\/catholic-mom/i] },
+  { key: 'catholic-central', patterns: [/Catholic Central/i, /email-banners\/catholic-central/i] },
+  { key: 'peyton-institute', patterns: [/Peyton Institute/i, /Peyton/i, /email-banners\/peyton-institute/i] },
+];
 
 function inferTargetFromCommit(c) {
   const msg = (c.commit?.message || '').split('\n')[0];
-  // New label first, then legacy labels, then path-based, then loose word match.
-  if (/HCFM North Easton|email-banners\/parent/i.test(msg)) return 'parent';
-  if (/HCFM Parent|Headquarters/i.test(msg)) return 'parent';
-  if (/Family Theater Productions|email-banners\/ftp/i.test(msg)) return 'ftp';
+  for (const { key, patterns } of TARGET_INFERENCE) {
+    if (patterns.some(re => re.test(msg))) return key;
+  }
+  // Last resort: 'parent' if message mentions parent path (legacy TEST commits)
   if (/\bparent\b/i.test(msg)) return 'parent';
-  if (/\bftp\b/i.test(msg)) return 'ftp';
   return null;
+}
+
+// Strip prefixes for a clean "what" line in the activity feed.
+const STRIP_PREFIXES = [
+  /^Banner Studio:\s*/i,
+  /^HCFM North Easton\s*[—-]\s*/i,
+  /^HCFM Parent\s*[—-]\s*/i,
+  /^Headquarters\s*[—-]\s*/i,
+  /^Family Theater Productions\s*[—-]\s*/i,
+  /^Family Rosary\s*[—-]\s*/i,
+  /^Catholic Mom\s*[—-]\s*/i,
+  /^Catholic Central\s*[—-]\s*/i,
+  /^The Peyton Institute(?: for Domestic Church Life)?\s*[—-]\s*/i,
+  /^Peyton Institute\s*[—-]\s*/i,
+];
+function cleanWhat(line) {
+  let what = line;
+  for (const re of STRIP_PREFIXES) what = what.replace(re, '');
+  if (!what || /^\(no reason given\)$/i.test(what)) what = '(no reason given)';
+  return what;
 }
 
 export default async function handler(req, res) {
@@ -48,18 +82,11 @@ export default async function handler(req, res) {
       const firstLine = fullMsg.split('\n')[0];
       const m = /\(uploaded by (.+)\)\s*$/.exec(firstLine);
       const uploader = m ? m[1] : (c.commit?.author?.name || 'unknown');
-      // Strip prefixes for a clean "what" line
-      let what = m ? firstLine.replace(m[0], '').trim() : firstLine;
-      what = what.replace(/^Banner Studio:\s*/i, '');
-      what = what.replace(/^HCFM North Easton\s*[—-]\s*/i, '');
-      what = what.replace(/^HCFM Parent\s*[—-]\s*/i, '');
-      what = what.replace(/^Headquarters\s*[—-]\s*/i, '');
-      what = what.replace(/^Family Theater Productions\s*[—-]\s*/i, '');
-      if (!what || /^\(no reason given\)$/i.test(what)) what = '(no reason given)';
+      const rawWhat = m ? firstLine.replace(m[0], '').trim() : firstLine;
       return {
         sha: c.sha,
         shaShort: c.sha.slice(0, 7),
-        what,
+        what: cleanWhat(rawWhat),
         uploader,
         when: c.commit?.author?.date || c.commit?.committer?.date,
         target: inferTargetFromCommit(c),

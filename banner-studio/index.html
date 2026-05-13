@@ -243,8 +243,8 @@
   .signature-mockup .sig-banner { padding-top: 14px; }
   .signature-mockup .sig-banner img { width: 600px; max-width: 100%; height: auto; display: block; border-radius: 3px; }
 
-  /* Selector */
-  .selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+  /* Selector (6 ministry cards: 3 columns on desktop, 1 on mobile) */
+  .selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 18px; }
   .selector label {
     border: 1px solid var(--line); border-radius: 8px; padding: 14px;
     cursor: pointer; transition: border-color 120ms, background 120ms;
@@ -391,6 +391,9 @@
     font-size: 12px; color: var(--ink-mute);
   }
 
+  @media (max-width: 880px) {
+    .selector { grid-template-columns: 1fr 1fr; }
+  }
   @media (max-width: 600px) {
     .container { padding: 24px 16px 64px; }
     .selector { grid-template-columns: 1fr; }
@@ -512,16 +515,36 @@
       <h2>2. Which signature does this update?</h2>
       <p class="hint">Each sub-ministry's signature has its own banner. Pick the right one.</p>
 
-      <div class="selector" id="selector" role="radiogroup" aria-label="Which signature to update">
+      <div class="selector" id="selector" role="radiogroup" aria-label="Which ministry signature to update">
         <label data-key="parent">
           <input type="radio" name="target" value="parent">
           <span class="name">HCFM North Easton</span>
-          <span class="desc">Main-office staff in Easton, MA (the default for most people)</span>
+          <span class="desc">Main-office staff in Easton, MA</span>
         </label>
         <label data-key="ftp">
           <input type="radio" name="target" value="ftp">
           <span class="name">Family Theater Productions</span>
-          <span class="desc">FTP team only</span>
+          <span class="desc">FTP team</span>
+        </label>
+        <label data-key="family-rosary">
+          <input type="radio" name="target" value="family-rosary">
+          <span class="name">Family Rosary</span>
+          <span class="desc">Family Rosary staff</span>
+        </label>
+        <label data-key="catholic-mom">
+          <input type="radio" name="target" value="catholic-mom">
+          <span class="name">Catholic Mom</span>
+          <span class="desc">Catholic Mom team</span>
+        </label>
+        <label data-key="catholic-central">
+          <input type="radio" name="target" value="catholic-central">
+          <span class="name">Catholic Central</span>
+          <span class="desc">Catholic Central team</span>
+        </label>
+        <label data-key="peyton-institute">
+          <input type="radio" name="target" value="peyton-institute">
+          <span class="name">The Peyton Institute</span>
+          <span class="desc">Peyton Institute staff</span>
         </label>
       </div>
 
@@ -665,9 +688,15 @@
   function escapeHtml(s) {
     return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
-  function targetLabel(t) {
-    return t === 'parent' ? 'HCFM North Easton' : t === 'ftp' ? 'Family Theater Productions' : 'Unknown';
-  }
+  const TARGET_LABELS = {
+    'parent':           'HCFM North Easton',
+    'ftp':              'Family Theater Productions',
+    'family-rosary':    'Family Rosary',
+    'catholic-mom':     'Catholic Mom',
+    'catholic-central': 'Catholic Central',
+    'peyton-institute': 'The Peyton Institute',
+  };
+  function targetLabel(t) { return TARGET_LABELS[t] || 'Unknown'; }
   function announce(msg) {
     // Triggers screen reader announcement via aria-live region
     els.live.textContent = '';

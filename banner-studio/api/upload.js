@@ -1,18 +1,22 @@
 // POST /api/upload
 // Headers: Authorization: Bearer <session>
-// Body: { image: base64-png, target: 'parent'|'ftp', reason: string }
+// Body: { image: base64-png, target: <ministry-key>, reason: string }
 // Commits the new banner image to the brand repo and returns commit info.
 import { requireSession } from '../lib/session.js';
 import { parsePng } from '../lib/png.js';
 
-const PATHS = {
-  parent: 'email-banners/parent/banner.png',
-  ftp:    'email-banners/ftp/banner.png',
+// Single source of truth for the six HCFM-family signature targets.
+// upload.js, revert.js, and activity.js all reference this shape so the
+// list never drifts. Adding a new sub-ministry = one new entry here.
+const TARGETS = {
+  'parent':           { path: 'email-banners/parent/banner.png',           label: 'HCFM North Easton' },
+  'ftp':              { path: 'email-banners/ftp/banner.png',              label: 'Family Theater Productions' },
+  'family-rosary':    { path: 'email-banners/family-rosary/banner.png',    label: 'Family Rosary' },
+  'catholic-mom':     { path: 'email-banners/catholic-mom/banner.png',     label: 'Catholic Mom' },
+  'catholic-central': { path: 'email-banners/catholic-central/banner.png', label: 'Catholic Central' },
+  'peyton-institute': { path: 'email-banners/peyton-institute/banner.png', label: 'The Peyton Institute' },
 };
-const LIVE_URLS = {
-  parent: 'https://emmanuelepau.github.io/hcfm-brand/email-banners/parent/banner.png',
-  ftp:    'https://emmanuelepau.github.io/hcfm-brand/email-banners/ftp/banner.png',
-};
+const SITE_BASE = 'https://emmanuelepau.github.io/hcfm-brand/';
 const MAX_BYTES = 250 * 1024;
 const REQUIRED_W = 600;
 const REQUIRED_H = 200;
@@ -54,8 +58,8 @@ export default async function handler(req, res) {
   if (!session) return res.status(401).json({ error: 'Please sign in again.' });
 
   const { image, target, reason } = req.body || {};
-  if (target !== 'parent' && target !== 'ftp') {
-    return res.status(400).json({ error: 'Pick HCFM Parent or Family Theater Productions.' });
+  if (!TARGETS[target]) {
+    return res.status(400).json({ error: 'Pick one of the six ministry signatures.' });
   }
   if (typeof image !== 'string' || !image) {
     return res.status(400).json({ error: 'No image was sent. Try dropping it again.' });
@@ -76,8 +80,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: `Image must be exactly ${REQUIRED_W} × ${REQUIRED_H} pixels (got ${png.width} × ${png.height}).` });
   }
 
-  const path = PATHS[target];
-  const targetLabel = target === 'parent' ? 'HCFM North Easton' : 'Family Theater Productions';
+  const { path, label: targetLabel } = TARGETS[target];
+  const liveUrl = SITE_BASE + path;
 
   // 1. Get current SHA for this file (required for PUT)
   let current;
@@ -119,7 +123,7 @@ export default async function handler(req, res) {
     ok: true,
     sha: result.commit.sha.slice(0, 7),
     bytes: buf.length,
-    liveUrl: LIVE_URLS[target],
+    liveUrl,
     uploader: session.name,
     target,
     targetLabel,
@@ -127,7 +131,7 @@ export default async function handler(req, res) {
   });
 }
 
-// Vercel: increase body size limit to accommodate base64-encoded 250KB image (~333KB)
+// Vercel: bump body parser to comfortably handle a base64-encoded 250KB image (~333KB)
 export const config = {
   api: { bodyParser: { sizeLimit: '500kb' } },
 };

@@ -7,14 +7,18 @@
 // surfaced as "Revert" buttons in the activity feed.
 import { requireSession } from '../lib/session.js';
 
-const PATHS = {
-  parent: 'email-banners/parent/banner.png',
-  ftp:    'email-banners/ftp/banner.png',
+// Mirror of TARGETS in upload.js — single source of truth would be a
+// shared module, but the JS-files-as-routes Vercel layout keeps these
+// duplicated. If you add a ministry, update BOTH this list and upload.js.
+const TARGETS = {
+  'parent':           { path: 'email-banners/parent/banner.png',           label: 'HCFM North Easton' },
+  'ftp':              { path: 'email-banners/ftp/banner.png',              label: 'Family Theater Productions' },
+  'family-rosary':    { path: 'email-banners/family-rosary/banner.png',    label: 'Family Rosary' },
+  'catholic-mom':     { path: 'email-banners/catholic-mom/banner.png',     label: 'Catholic Mom' },
+  'catholic-central': { path: 'email-banners/catholic-central/banner.png', label: 'Catholic Central' },
+  'peyton-institute': { path: 'email-banners/peyton-institute/banner.png', label: 'The Peyton Institute' },
 };
-const LIVE_URLS = {
-  parent: 'https://emmanuelepau.github.io/hcfm-brand/email-banners/parent/banner.png',
-  ftp:    'https://emmanuelepau.github.io/hcfm-brand/email-banners/ftp/banner.png',
-};
+const SITE_BASE = 'https://emmanuelepau.github.io/hcfm-brand/';
 const REPO_OWNER = 'EmmanuelEpau';
 const REPO_NAME  = 'hcfm-brand';
 const BRANCH     = 'main';
@@ -53,15 +57,15 @@ export default async function handler(req, res) {
   if (!session) return res.status(401).json({ error: 'Please sign in again.' });
 
   const { sha, target } = req.body || {};
-  if (target !== 'parent' && target !== 'ftp') {
-    return res.status(400).json({ error: 'Pick HCFM Parent or Family Theater Productions.' });
+  if (!TARGETS[target]) {
+    return res.status(400).json({ error: 'Pick one of the six ministry signatures.' });
   }
   if (typeof sha !== 'string' || !/^[a-f0-9]{7,40}$/i.test(sha)) {
     return res.status(400).json({ error: 'That activity entry isn\'t valid to revert from.' });
   }
 
-  const path = PATHS[target];
-  const targetLabel = target === 'parent' ? 'HCFM North Easton' : 'Family Theater Productions';
+  const { path, label: targetLabel } = TARGETS[target];
+  const liveUrl = SITE_BASE + path;
 
   // 1. Fetch the banner content as it existed at <sha>
   let historical;
@@ -114,7 +118,6 @@ export default async function handler(req, res) {
     return res.status(502).json({ error: 'GitHub could not save the revert.' });
   }
 
-  // Decode raw size for the client polling
   let bytes = 0;
   try { bytes = Buffer.from(base64Content, 'base64').length; } catch {}
 
@@ -122,7 +125,7 @@ export default async function handler(req, res) {
     ok: true,
     sha: result.commit.sha.slice(0, 7),
     bytes,
-    liveUrl: LIVE_URLS[target],
+    liveUrl,
     uploader: session.name,
     target,
     targetLabel,
