@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>HCFM Banner Studio</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23000000'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='34' fill='%23FFB500'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='49' fill='%23ffffff' stroke='%23ececec' stroke-width='2'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='36' fill='%2389764B'%3EH%3C/text%3E%3C/svg%3E">
 <style>
   :root {
     --hcfm-blue: #0047BB;
@@ -43,13 +43,21 @@
   }
   header.brand .mark {
     width: 56px; height: 56px; border-radius: 50%;
-    background: #000;
-    display: flex; align-items: center; justify-content: center;
+    background: #ffffff;
+    border: 1px solid #ececec;
     flex-shrink: 0;
     overflow: hidden;
+    position: relative;
   }
-  header.brand .mark img {
-    width: 38px; height: 38px; display: block;
+  /* Muted gold (#89764B) mark filling the whole circle.
+     Implemented as a CSS mask over the black symbol PNG, so we don't depend
+     on the brand repo shipping a muted-gold-tinted PNG variant. */
+  header.brand .mark .symbol {
+    position: absolute;
+    inset: 0;
+    background-color: #89764B;
+    -webkit-mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
+            mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
   }
   header.brand h1 {
     margin: 0; font-size: 22px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
@@ -230,8 +238,8 @@
 <div class="container">
 
   <header class="brand">
-    <div class="mark">
-      <img src="https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="HCFM">
+    <div class="mark" role="img" aria-label="HCFM">
+      <div class="symbol"></div>
     </div>
     <div>
       <h1>Banner Studio</h1>
@@ -640,7 +648,9 @@
     els.signIn.addEventListener('click', signIn);
     [els.nameField, els.pwField].forEach(i => i.addEventListener('keydown', (e) => { if (e.key === 'Enter') signIn(); }));
 
-    els.dropzone.addEventListener('click', (e) => { if (e.target !== els.fileInput) e.preventDefault?.(); });
+    // Note: the dropzone is a <label for="file-input"> — the browser handles
+    // click→open-picker natively. Do NOT add a click handler that calls
+    // preventDefault, it blocks the file picker from opening.
     els.fileInput.addEventListener('change', (e) => onFileSelected(e.target.files[0]));
     els.dropzone.addEventListener('dragover', (e) => { e.preventDefault(); els.dropzone.classList.add('dragover'); });
     els.dropzone.addEventListener('dragleave', () => els.dropzone.classList.remove('dragover'));
