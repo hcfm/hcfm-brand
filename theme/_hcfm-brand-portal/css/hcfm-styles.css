@@ -668,6 +668,27 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .lc-dark p { color: rgba(255,255,255,0.65); }
 .lc-dark p strong { color: #fff; }
 
+/* ============================================================
+   FILE-FORMAT GUIDE
+   Lives at the top of Downloads. Three cards (PNG / JPG / AI)
+   with use-case + technical guidance per format. Answers the
+   "why didn't I get a sharp print?" question before it happens.
+   ============================================================ */
+.format-guide { margin: 16px 0 40px; padding: 24px; background: var(--bg-page); border: 1px solid var(--rule); border-left: 4px solid var(--hcfm-gold); border-radius: 8px; }
+.format-guide-h { margin: 0 0 8px; font-size: var(--fs-xl); font-weight: 700; letter-spacing: -0.01em; }
+.format-guide-intro { margin: 0 0 20px; font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.55; }
+.format-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.format-card { padding: 18px 20px; background: var(--bg); border: 1px solid var(--rule); border-radius: 6px; display: flex; flex-direction: column; gap: 10px; }
+.format-tag { margin: 0; display: inline-flex; align-self: flex-start; align-items: center; padding: 4px 12px; font-family: var(--font-display); font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 200px; }
+.format-tag-png { background: rgba(0,71,187,0.10); color: var(--hcfm-blue); }
+.format-tag-jpg { background: rgba(137,118,75,0.12); color: var(--hcfm-muted-gold); }
+.format-tag-ai { background: rgba(0,0,0,0.06); color: var(--text); }
+.format-when { margin: 0; font-family: var(--font-display); font-size: var(--fs-md); line-height: 1.35; color: var(--text); }
+.format-use { margin: 0; font-size: var(--fs-sm); line-height: 1.55; color: var(--text); }
+.format-tech { margin: 0; padding-top: 12px; border-top: 1px solid var(--rule); font-size: var(--fs-xs); line-height: 1.55; color: var(--text-muted); }
+.format-foot { margin: 20px 0 0; padding: 14px 18px; background: var(--bg); border-radius: 6px; font-size: var(--fs-sm); line-height: 1.55; color: var(--text); }
+@media (max-width: 900px) { .format-grid { grid-template-columns: 1fr; } }
+
 .dont-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .dont-card { padding: 12px 14px 12px 38px; background: var(--bg-page); border: 1px solid var(--rule); border-radius: 4px; font-size: var(--fs-sm); position: relative; line-height: 1.4; }
 .dont-card::before { content: '✕'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #b91c1c; font-size: var(--fs-xs); }

@@ -1339,6 +1339,32 @@
       <h1>Downloads</h1>
       <p class="page-intro">Three tiers: <strong>Brand documents</strong> are public, anyone can grab them. <strong>Logo packs, ministry centers, and fonts</strong> share a single access password (request it from Victoria or Emmanuel). <strong>Source AI files</strong> are restricted to the Easton internal team via individual sign-in.</p>
 
+      <div class="format-guide">
+        <h2 class="format-guide-h">File formats — when to use each</h2>
+        <p class="format-guide-intro">A logo only works as well as the file you put behind it. Pick the right format for the job, and never scale a raster file above 100% — both PNG and JPG pixelate when stretched.</p>
+        <div class="format-grid">
+          <article class="format-card">
+            <p class="format-tag format-tag-png">.PNG</p>
+            <p class="format-when"><strong>Web, social media, digital docs.</strong></p>
+            <p class="format-use">Best for websites, Instagram, Facebook, LinkedIn, X, YouTube, Word, PowerPoint, Google Slides, email signatures, any digital screen.</p>
+            <p class="format-tech"><strong>Why:</strong> Supports transparency. Sharp lines at original size. Universal format. <strong>Watch out for:</strong> Don't scale above 100%; pixelates.</p>
+          </article>
+          <article class="format-card">
+            <p class="format-tag format-tag-jpg">.JPG</p>
+            <p class="format-when"><strong>Alternative for systems that don't accept PNG.</strong></p>
+            <p class="format-use">Use only when PNG isn't supported — some older Word templates, print houses that require JPG, certain third-party vendor portals. JPGs are included in every ZIP pack.</p>
+            <p class="format-tech"><strong>Why:</strong> Smaller file size, broadly compatible. <strong>Watch out for:</strong> No transparency (white background). Don't scale above 100%; pixelates.</p>
+          </article>
+          <article class="format-card">
+            <p class="format-tag format-tag-ai">.AI / .EPS</p>
+            <p class="format-when"><strong>Print, signage, banners, large-format anything.</strong></p>
+            <p class="format-use">Vector format. Required for offset print, banners, billboards, embroidery, vinyl cut, etched signage, or any application that scales above letter size.</p>
+            <p class="format-tech"><strong>Why:</strong> Infinitely scalable, no quality loss at any size. <strong>Access:</strong> Brand-owner restricted. Need one? Email <a href="mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=HCFM%20Brand%20Portal%20%E2%80%94%20AI%2FEPS%20file%20request">Victoria or Emmanuel</a>.</p>
+          </article>
+        </div>
+        <p class="format-foot"><strong>The most common mistake:</strong> grabbing a small PNG, stretching it across a banner, and printing the result. If you need a logo above 8 inches in print or any digital banner wider than 1920 pixels, ask for an AI file. It takes one email and saves the final piece from looking blurry.</p>
+      </div>
+
       {# HCFM Memberships gate, used ONLY for the source-files (admin) tier. Ministry tier members also auto-unlock the password-gated section without entering the password. #}
       {% set is_logged_in = request.contact.is_logged_in %}
       {% set group_ids = [] %}
