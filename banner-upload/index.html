@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>HCFM Banner Studio</title>
+<style>
+  :root {
+    --hcfm-blue: #0047BB;
+    --hcfm-blue-dark: #003590;
+    --hcfm-gold: #FFB500;
+    --ink: #111418;
+    --ink-soft: #444;
+    --ink-mute: #6b7280;
+    --line: #e5e7eb;
+    --line-soft: #f1f3f5;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --ok: #1f7a3a;
+    --warn: #b06b00;
+    --err: #b3261e;
+    --ok-bg: #e9f5ee;
+    --warn-bg: #fdf3e0;
+    --err-bg: #fae9e7;
+    --radius: 10px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', 'Whitney', Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 36px 24px 80px; }
+
+  header.brand {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+  }
+  header.brand .mark {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--hcfm-blue);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--hcfm-gold); font-weight: 700; font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  header.brand h1 {
+    margin: 0; font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em;
+  }
+  header.brand .sub { margin: 0; font-size: 13px; color: var(--ink-mute); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    margin-bottom: 18px;
+  }
+  .card h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
+  .card .hint { color: var(--ink-mute); font-size: 13px; margin: 0 0 16px; }
+
+  /* SETUP GATE */
+  .gate { display: none; }
+  .gate.active { display: block; }
+  .gate ol { padding-left: 22px; margin: 12px 0; }
+  .gate ol li { margin-bottom: 10px; font-size: 14px; }
+  .gate code {
+    background: var(--line-soft); padding: 2px 6px; border-radius: 4px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px;
+  }
+  .gate a { color: var(--hcfm-blue); text-decoration: underline; }
+  .gate .token-input {
+    display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 14px;
+  }
+  .gate input[type="password"], .gate input[type="text"] {
+    width: 100%; padding: 11px 12px;
+    border: 1px solid var(--line); border-radius: 8px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px;
+    background: #fff;
+  }
+  .gate input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
+
+  /* MAIN APP */
+  .app { display: none; }
+  .app.active { display: block; }
+
+  /* Drop zone */
+  .dropzone {
+    border: 2px dashed var(--line);
+    border-radius: var(--radius);
+    background: var(--line-soft);
+    padding: 36px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .dropzone:hover { border-color: var(--hcfm-blue); background: #fbfcff; }
+  .dropzone.dragover { border-color: var(--hcfm-blue); background: #eef3ff; }
+  .dropzone .icon { font-size: 28px; color: var(--hcfm-blue); margin-bottom: 6px; }
+  .dropzone .label { font-weight: 600; margin-bottom: 4px; }
+  .dropzone .meta { font-size: 12px; color: var(--ink-mute); }
+  .dropzone input[type="file"] { display: none; }
+
+  /* Preview block */
+  .preview {
+    display: none;
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 14px;
+  }
+  .preview.active { display: block; }
+  .preview-frame {
+    background: repeating-conic-gradient(#f3f4f6 0 25%, #fff 0 50%) 0 0 / 16px 16px;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex; justify-content: center;
+  }
+  .preview img { display: block; max-width: 100%; height: auto; border-radius: 4px; }
+  .preview-info {
+    margin-top: 10px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    font-size: 13px;
+  }
+  .preview-info .pi { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
+  .preview-info .pi .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--ok);
+  }
+  .preview-info .pi.bad .dot { background: var(--err); }
+  .preview-info .pi.warn .dot { background: var(--warn); }
+  .preview-info .pi b { color: var(--ink); margin-right: 4px; }
+
+  /* Selector */
+  .selector {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px;
+  }
+  .selector label {
+    border: 1px solid var(--line); border-radius: 8px; padding: 14px;
+    cursor: pointer; transition: border-color 120ms, background 120ms;
+  }
+  .selector label.checked { border-color: var(--hcfm-blue); background: #eef3ff; }
+  .selector label .name { font-weight: 700; font-size: 14px; display: block; }
+  .selector label .desc { font-size: 12px; color: var(--ink-mute); margin-top: 2px; display: block; }
+  .selector input[type="radio"] { display: none; }
+
+  /* Commit message */
+  .field { margin-top: 16px; }
+  .field label { font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
+  .field input[type="text"] {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; font-size: 14px;
+  }
+  .field input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
+
+  /* Buttons */
+  .actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; }
+  button {
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    padding: 11px 18px; border-radius: 8px; cursor: pointer;
+    border: 1px solid transparent; transition: background 120ms, transform 60ms;
+  }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-primary { background: var(--hcfm-blue); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--hcfm-blue-dark); }
+  .btn-ghost { background: transparent; color: var(--ink-soft); border-color: var(--line); }
+  .btn-ghost:hover:not(:disabled) { background: var(--line-soft); }
+  .btn-danger-ghost { background: transparent; color: var(--err); border-color: var(--line); }
+  .btn-danger-ghost:hover:not(:disabled) { background: var(--err-bg); }
+
+  /* Status box */
+  .status {
+    margin-top: 18px; padding: 14px 16px; border-radius: 8px;
+    font-size: 14px; display: none;
+  }
+  .status.active { display: block; }
+  .status.info { background: #eef3ff; color: var(--hcfm-blue-dark); border: 1px solid #d6e0ff; }
+  .status.ok   { background: var(--ok-bg);   color: var(--ok);   border: 1px solid #cce7d6; }
+  .status.warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f1d9a8; }
+  .status.err  { background: var(--err-bg);  color: var(--err);  border: 1px solid #efcdc9; }
+  .status .steps { margin: 8px 0 0; padding-left: 20px; font-size: 13px; }
+  .status .steps li { margin-bottom: 2px; }
+  .status .steps li.done::marker { color: var(--ok); }
+  .status .steps li.pending { opacity: 0.5; }
+  .status a { color: inherit; font-weight: 600; }
+
+  /* Activity feed */
+  .activity-list { margin: 0; padding: 0; list-style: none; }
+  .activity-list li {
+    padding: 10px 0; border-bottom: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .activity-list li:last-child { border-bottom: 0; }
+  .activity-list .when { font-size: 12px; color: var(--ink-mute); white-space: nowrap; }
+  .activity-list .what { font-size: 13px; color: var(--ink); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .activity-list .who { font-size: 12px; color: var(--ink-mute); }
+  .activity-list .empty { color: var(--ink-mute); font-size: 13px; padding: 10px 0; }
+
+  /* Footer */
+  footer.bottom {
+    margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--ink-mute);
+  }
+  footer.bottom .links a { color: var(--ink-mute); margin-left: 14px; text-decoration: none; }
+  footer.bottom .links a:hover { color: var(--hcfm-blue); }
+
+  @media (max-width: 600px) {
+    .container { padding: 24px 16px 64px; }
+    .selector { grid-template-columns: 1fr; }
+    .preview-info { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="brand">
+    <div class="mark">HCFM</div>
+    <div>
+      <h1>Banner Studio</h1>
+      <p class="sub">Update the email signature banner for every staff member, worldwide.</p>
+    </div>
+  </header>
+
+  <!-- SETUP GATE (shown when no PAT in localStorage) -->
+  <section class="card gate" id="gate">
+    <h2>First-time setup &mdash; one-time</h2>
+    <p class="hint">To upload banners, you need a personal access token from GitHub. This is a long string that proves you have permission to update the brand repo. Get yours from Emmy or generate one yourself.</p>
+
+    <ol>
+      <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> in a new tab.</li>
+      <li>Token name: <code>HCFM Banner Studio</code>. Expiration: <code>90 days</code> (or your team policy).</li>
+      <li>Repository access: <b>Only select repositories</b> &rarr; <code>EmmanuelEpau/hcfm-brand</code>.</li>
+      <li>Repository permissions &rarr; <b>Contents</b>: <code>Read and write</code>. Leave everything else as default.</li>
+      <li>Click <b>Generate token</b>. Copy the token (starts with <code>github_pat_</code>) and paste it below.</li>
+    </ol>
+
+    <p class="hint" style="margin-top:14px">Your token is stored only in this browser (localStorage). It's never sent anywhere except GitHub's own API. Clear it any time from the Settings panel below.</p>
+
+    <div class="token-input">
+      <input type="password" id="token-field" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
+      <button class="btn-primary" id="save-token">Save token</button>
+    </div>
+    <div class="status err" id="gate-error" style="margin-top:14px"></div>
+  </section>
+
+  <!-- MAIN APP (shown when PAT is saved + valid) -->
+  <section class="app" id="app">
+
+    <div class="card">
+      <h2>1. Choose the banner image</h2>
+      <p class="hint">PNG only. Required size: <b>600 &times; 200 pixels</b>. Recommended under 100&nbsp;KB.</p>
+
+      <label class="dropzone" id="dropzone" for="file-input">
+        <div class="icon">&#8682;</div>
+        <div class="label">Drop a PNG here or click to browse</div>
+        <div class="meta">600 &times; 200 pixels &middot; up to 250&nbsp;KB</div>
+        <input type="file" id="file-input" accept="image/png">
+      </label>
+
+      <div class="preview" id="preview">
+        <div class="preview-frame"><img id="preview-img" alt=""></div>
+        <div class="preview-info">
+          <div class="pi" id="pi-dims"><span class="dot"></span><b>Dimensions:</b><span id="dims-val">&mdash;</span></div>
+          <div class="pi" id="pi-size"><span class="dot"></span><b>File size:</b><span id="size-val">&mdash;</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Which signature does this update?</h2>
+      <p class="hint">Each sub-ministry's signature has its own banner file. Pick the right one.</p>
+
+      <div class="selector" id="selector">
+        <label data-key="parent">
+          <input type="radio" name="target" value="parent">
+          <span class="name">HCFM Parent</span>
+          <span class="desc">Holy Cross Family Ministries headquarters / Easton</span>
+        </label>
+        <label data-key="ftp">
+          <input type="radio" name="target" value="ftp">
+          <span class="name">Family Theater Productions</span>
+          <span class="desc">FTP staff signatures</span>
+        </label>
+      </div>
+
+      <div class="field">
+        <label for="msg">What is this banner for? <span style="color:var(--ink-mute);font-weight:400">(shows up in the audit log)</span></label>
+        <input type="text" id="msg" placeholder="e.g. Grand Reopening &mdash; June 6 launch">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Publish</h2>
+      <p class="hint">Pushing this banner replaces the current one on the brand repo. Every HCFM email signature on this side picks it up automatically within about 10 minutes.</p>
+
+      <div class="actions">
+        <button class="btn-primary" id="publish" disabled>Publish banner</button>
+        <button class="btn-ghost" id="reset">Start over</button>
+      </div>
+
+      <div class="status" id="status"></div>
+    </div>
+
+    <div class="card">
+      <h2>Recent activity</h2>
+      <p class="hint">Last 5 banner swaps on this repo. Every upload here gets logged with who did it and when.</p>
+      <ul class="activity-list" id="activity">
+        <li class="empty">Loading recent activity...</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Settings</h2>
+      <p class="hint">Token is stored in this browser only. Clearing it logs you out of this tool.</p>
+      <div class="actions">
+        <button class="btn-danger-ghost" id="clear-token">Clear my token &amp; sign out</button>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="bottom">
+    <div>HCFM Banner Studio &middot; v1.0</div>
+    <div class="links">
+      <a href="https://hcfm.org/brand" target="_blank" rel="noopener">Brand book</a>
+      <a href="https://github.com/EmmanuelEpau/hcfm-brand/commits/main/email-banners" target="_blank" rel="noopener">Full history</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  const REPO_OWNER = 'EmmanuelEpau';
+  const REPO_NAME  = 'hcfm-brand';
+  const BRANCH     = 'main';
+  const PATHS = {
+    parent: 'email-banners/parent/banner.png',
+    ftp:    'email-banners/ftp/banner.png',
+  };
+  const LIVE_URLS = {
+    parent: 'https://emmanuelepau.github.io/hcfm-brand/email-banners/parent/banner.png',
+    ftp:    'https://emmanuelepau.github.io/hcfm-brand/email-banners/ftp/banner.png',
+  };
+  const TOKEN_KEY = 'hcfm-banner-studio:token-v1';
+  const USER_KEY  = 'hcfm-banner-studio:user-v1';
+
+  // ----- State -----
+  const state = {
+    token: localStorage.getItem(TOKEN_KEY) || '',
+    user:  JSON.parse(localStorage.getItem(USER_KEY) || 'null'),
+    file: null,
+    fileDataUrl: null,
+    fileBytes: null,
+    fileDims: null,
+    target: null,
+  };
+
+  // ----- DOM helpers -----
+  const $ = (sel) => document.querySelector(sel);
+  const els = {
+    gate:        $('#gate'),
+    app:         $('#app'),
+    tokenField:  $('#token-field'),
+    saveToken:   $('#save-token'),
+    gateError:   $('#gate-error'),
+    dropzone:    $('#dropzone'),
+    fileInput:   $('#file-input'),
+    preview:     $('#preview'),
+    previewImg:  $('#preview-img'),
+    piDims:      $('#pi-dims'),
+    piSize:      $('#pi-size'),
+    dimsVal:     $('#dims-val'),
+    sizeVal:     $('#size-val'),
+    selector:    $('#selector'),
+    msg:         $('#msg'),
+    publish:     $('#publish'),
+    reset:       $('#reset'),
+    status:      $('#status'),
+    activity:    $('#activity'),
+    clearToken:  $('#clear-token'),
+  };
+
+  // ----- GitHub API -----
+  async function gh(path, opts = {}) {
+    const url = `https://api.github.com${path}`;
+    const res = await fetch(url, {
+      ...opts,
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Authorization': `Bearer ${state.token}`,
+        ...(opts.headers || {}),
+      },
+    });
+    const text = await res.text();
+    let data = null;
+    try { data = text ? JSON.parse(text) : null; } catch { data = null; }
+    if (!res.ok) {
+      const msg = (data && data.message) || `HTTP ${res.status}`;
+      const err = new Error(msg);
+      err.status = res.status;
+      err.data = data;
+      throw err;
+    }
+    return data;
+  }
+
+  async function validateToken(token) {
+    state.token = token;
+    const user = await gh('/user');
+    // Sanity check: can we see the brand repo's contents endpoint for email-banners?
+    await gh(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/email-banners?ref=${BRANCH}`);
+    return { login: user.login, name: user.name, avatar_url: user.avatar_url };
+  }
+
+  async function getCurrentFile(target) {
+    const path = PATHS[target];
+    return gh(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodeURIComponent(path).replace(/%2F/g, '/')}?ref=${BRANCH}`);
+  }
+
+  async function putFile(target, base64Content, sha, message) {
+    const path = PATHS[target];
+    return gh(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${encodeURIComponent(path).replace(/%2F/g, '/')}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        content: base64Content,
+        sha,
+        branch: BRANCH,
+        committer: state.user ? { name: state.user.name || state.user.login, email: `${state.user.login}@users.noreply.github.com` } : undefined,
+      }),
+    });
+  }
+
+  async function listRecentCommits() {
+    return gh(`/repos/${REPO_OWNER}/${REPO_NAME}/commits?path=email-banners&per_page=5&sha=${BRANCH}`);
+  }
+
+  // ----- Image helpers -----
+  function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+      r.readAsDataURL(file);
+    });
+  }
+  function imageDimensions(dataUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
+      img.onerror = () => reject(new Error('Could not decode image.'));
+      img.src = dataUrl;
+    });
+  }
+  function fmtBytes(n) {
+    if (n < 1024) return `${n} B`;
+    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
+    return `${(n / 1024 / 1024).toFixed(2)} MB`;
+  }
+  function fmtRelative(iso) {
+    const then = new Date(iso).getTime();
+    const now = Date.now();
+    const sec = Math.max(0, Math.round((now - then) / 1000));
+    if (sec < 60)   return `${sec}s ago`;
+    if (sec < 3600) return `${Math.round(sec/60)}m ago`;
+    if (sec < 86400) return `${Math.round(sec/3600)}h ago`;
+    return `${Math.round(sec/86400)}d ago`;
+  }
+
+  // ----- UI updates -----
+  function showStatus(kind, html) {
+    els.status.className = `status ${kind} active`;
+    els.status.innerHTML = html;
+  }
+  function clearStatus() {
+    els.status.className = 'status';
+    els.status.innerHTML = '';
+  }
+  function refreshPublishEnabled() {
+    const dimsOk = state.fileDims && state.fileDims.w === 600 && state.fileDims.h === 200;
+    const sizeOk = state.fileBytes != null && state.fileBytes <= 250 * 1024;
+    const targetOk = !!state.target;
+    els.publish.disabled = !(dimsOk && sizeOk && targetOk);
+  }
+
+  async function onFileSelected(file) {
+    if (!file) return;
+    clearStatus();
+    if (!file.type.startsWith('image/') || !/\.png$/i.test(file.name)) {
+      showStatus('err', 'Please choose a <b>.png</b> file. Other formats are not supported by email clients.');
+      return;
+    }
+    const dataUrl = await readFileAsDataUrl(file);
+    let dims;
+    try { dims = await imageDimensions(dataUrl); }
+    catch (e) { showStatus('err', 'Could not read this image. It may be corrupted.'); return; }
+
+    state.file = file;
+    state.fileDataUrl = dataUrl;
+    state.fileBytes = file.size;
+    state.fileDims  = dims;
+
+    els.previewImg.src = dataUrl;
+    els.preview.classList.add('active');
+
+    const okDims = dims.w === 600 && dims.h === 200;
+    els.dimsVal.textContent = `${dims.w} × ${dims.h} ${okDims ? '✓' : '— must be 600 × 200'}`;
+    els.piDims.classList.toggle('bad', !okDims);
+
+    const okSize = file.size <= 100 * 1024;
+    const tooLarge = file.size > 250 * 1024;
+    els.sizeVal.textContent = `${fmtBytes(file.size)} ${okSize ? '✓' : (tooLarge ? '— too large (max 250 KB)' : '— large, consider compressing')}`;
+    els.piSize.classList.toggle('bad', tooLarge);
+    els.piSize.classList.toggle('warn', !okSize && !tooLarge);
+
+    refreshPublishEnabled();
+  }
+
+  function setTarget(key) {
+    state.target = key;
+    [...els.selector.querySelectorAll('label')].forEach(l => {
+      l.classList.toggle('checked', l.dataset.key === key);
+      const input = l.querySelector('input');
+      if (input) input.checked = (l.dataset.key === key);
+    });
+    refreshPublishEnabled();
+  }
+
+  function resetForm() {
+    state.file = null; state.fileDataUrl = null; state.fileBytes = null; state.fileDims = null; state.target = null;
+    els.fileInput.value = '';
+    els.preview.classList.remove('active');
+    [...els.selector.querySelectorAll('label')].forEach(l => l.classList.remove('checked'));
+    [...els.selector.querySelectorAll('input')].forEach(i => i.checked = false);
+    els.msg.value = '';
+    clearStatus();
+    refreshPublishEnabled();
+  }
+
+  // ----- Publish flow -----
+  async function publish() {
+    if (els.publish.disabled) return;
+    els.publish.disabled = true;
+    const target = state.target;
+    const liveUrl = LIVE_URLS[target];
+    const reason = els.msg.value.trim() || '(no reason given)';
+    const targetLabel = target === 'parent' ? 'HCFM Parent' : 'Family Theater Productions';
+    const commitMsg = `Banner Studio: update ${target} banner — ${reason}`;
+
+    showStatus('info', `
+      <b>Publishing &hellip;</b>
+      <ol class="steps">
+        <li id="s-1" class="pending">Fetching current banner version</li>
+        <li id="s-2" class="pending">Committing your new banner</li>
+        <li id="s-3" class="pending">Waiting for it to go live</li>
+      </ol>
+    `);
+    const step = (id, txt, cls) => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = txt; el.className = cls || ''; }
+    };
+
+    try {
+      step('s-1', 'Fetching current banner version', '');
+      const current = await getCurrentFile(target);
+      step('s-1', 'Fetched current banner version', 'done');
+
+      step('s-2', 'Committing your new banner', '');
+      // Strip data:URL prefix to get raw base64
+      const b64 = state.fileDataUrl.replace(/^data:image\/png;base64,/, '');
+      const result = await putFile(target, b64, current.sha, commitMsg);
+      step('s-2', `Committed (${result.commit.sha.slice(0,7)})`, 'done');
+
+      step('s-3', 'Waiting for it to go live (up to ~10 min)', '');
+      const newSize = state.fileBytes;
+      const flippedAt = await pollLive(liveUrl, newSize, 600);
+
+      if (flippedAt > 0) {
+        const mins = (flippedAt / 60).toFixed(1);
+        step('s-3', `Live in ~${flippedAt}s on GitHub Pages`, 'done');
+        showStatus('ok', `
+          <b>Done.</b> The ${targetLabel} signature banner is now live globally on GitHub Pages.<br>
+          <small>Live URL: <a href="${liveUrl}" target="_blank" rel="noopener">${liveUrl}</a> &middot; Took about ${mins} minute(s). Recipients see the new banner on the next email they open.</small>
+        `);
+      } else {
+        step('s-3', 'Commit succeeded; flip detection timed out (banner will still update soon)', 'done');
+        showStatus('warn', `
+          <b>Commit went through.</b> We didn't see the change on the live URL yet, but it usually arrives within 10 minutes.<br>
+          <small>Check it here in a few minutes: <a href="${liveUrl}" target="_blank" rel="noopener">${liveUrl}</a></small>
+        `);
+      }
+      loadActivity();
+      els.publish.disabled = false;
+    } catch (err) {
+      console.error(err);
+      let msg = err.message || 'Unknown error.';
+      if (err.status === 401) msg = 'GitHub rejected your token. Open Settings and replace it.';
+      else if (err.status === 403) msg = 'Your token doesn\'t have permission to write to email-banners. Re-create it with Contents: Read and write.';
+      else if (err.status === 409 || err.status === 422) msg = 'Someone else updated the banner just before you. Reload the page and try again.';
+      showStatus('err', `<b>Publish failed.</b> ${msg}`);
+      els.publish.disabled = false;
+    }
+  }
+
+  async function pollLive(url, targetBytes, maxSeconds) {
+    const start = Date.now();
+    const deadline = start + maxSeconds * 1000;
+    while (Date.now() < deadline) {
+      try {
+        const r = await fetch(`${url}?v=${Date.now()}`, { cache: 'no-store' });
+        if (r.ok) {
+          const blob = await r.blob();
+          if (blob.size === targetBytes) {
+            return Math.round((Date.now() - start) / 1000);
+          }
+        }
+      } catch { /* ignore, retry */ }
+      await new Promise(r => setTimeout(r, 8000));
+    }
+    return -1;
+  }
+
+  async function loadActivity() {
+    try {
+      const commits = await listRecentCommits();
+      if (!commits.length) { els.activity.innerHTML = '<li class="empty">No banner swaps recorded yet.</li>'; return; }
+      els.activity.innerHTML = commits.map(c => {
+        const msg = (c.commit.message || '').split('\n')[0];
+        const who = (c.author && c.author.login) || (c.commit.author && c.commit.author.name) || 'unknown';
+        const when = (c.commit.author && c.commit.author.date) || (c.commit.committer && c.commit.committer.date);
+        return `<li>
+          <span class="what" title="${msg.replace(/"/g,'&quot;')}">${msg}</span>
+          <span class="who">${who}</span>
+          <span class="when">${when ? fmtRelative(when) : ''}</span>
+        </li>`;
+      }).join('');
+    } catch (e) {
+      els.activity.innerHTML = `<li class="empty">Couldn't load activity (${e.message}).</li>`;
+    }
+  }
+
+  // ----- Gate (PAT setup) -----
+  async function trySaveToken() {
+    els.gateError.classList.remove('active');
+    els.gateError.textContent = '';
+    const tok = els.tokenField.value.trim();
+    if (!tok) {
+      els.gateError.textContent = 'Paste your token first.';
+      els.gateError.classList.add('active');
+      return;
+    }
+    els.saveToken.disabled = true;
+    els.saveToken.textContent = 'Checking...';
+    try {
+      const user = await validateToken(tok);
+      state.user = user;
+      state.token = tok;
+      localStorage.setItem(TOKEN_KEY, tok);
+      localStorage.setItem(USER_KEY, JSON.stringify(user));
+      showApp();
+    } catch (err) {
+      let msg = err.message || 'Token validation failed.';
+      if (err.status === 401) msg = 'GitHub rejected this token. Check you copied it correctly.';
+      else if (err.status === 404) msg = 'This token doesn\'t have access to EmmanuelEpau/hcfm-brand. Re-create it and select that repository.';
+      els.gateError.textContent = msg;
+      els.gateError.classList.add('active');
+    } finally {
+      els.saveToken.disabled = false;
+      els.saveToken.textContent = 'Save token';
+    }
+  }
+
+  function showApp() {
+    els.gate.classList.remove('active');
+    els.app.classList.add('active');
+    loadActivity();
+  }
+  function showGate() {
+    els.app.classList.remove('active');
+    els.gate.classList.add('active');
+    els.tokenField.value = '';
+  }
+
+  // ----- Init -----
+  function bind() {
+    els.saveToken.addEventListener('click', trySaveToken);
+    els.tokenField.addEventListener('keydown', (e) => { if (e.key === 'Enter') trySaveToken(); });
+
+    els.dropzone.addEventListener('click', (e) => {
+      // Native label/for already triggers the input — prevent double-firing
+      if (e.target !== els.fileInput) e.preventDefault?.();
+    });
+    els.fileInput.addEventListener('change', (e) => onFileSelected(e.target.files[0]));
+    els.dropzone.addEventListener('dragover', (e) => { e.preventDefault(); els.dropzone.classList.add('dragover'); });
+    els.dropzone.addEventListener('dragleave', () => els.dropzone.classList.remove('dragover'));
+    els.dropzone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      els.dropzone.classList.remove('dragover');
+      const f = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) onFileSelected(f);
+    });
+
+    [...els.selector.querySelectorAll('label')].forEach(l => {
+      l.addEventListener('click', (e) => {
+        e.preventDefault();
+        setTarget(l.dataset.key);
+      });
+    });
+
+    els.publish.addEventListener('click', publish);
+    els.reset.addEventListener('click', resetForm);
+    els.clearToken.addEventListener('click', () => {
+      if (!confirm('Sign out and remove your token from this browser?')) return;
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
+      state.token = ''; state.user = null;
+      showGate();
+    });
+  }
+
+  async function init() {
+    bind();
+    if (state.token) {
+      try {
+        const user = await validateToken(state.token);
+        state.user = user;
+        localStorage.setItem(USER_KEY, JSON.stringify(user));
+        showApp();
+      } catch (err) {
+        // Token went stale
+        localStorage.removeItem(TOKEN_KEY);
+        state.token = '';
+        showGate();
+        els.gateError.textContent = 'Your saved token is no longer valid. Generate a new one.';
+        els.gateError.classList.add('active');
+      }
+    } else {
+      showGate();
+    }
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
