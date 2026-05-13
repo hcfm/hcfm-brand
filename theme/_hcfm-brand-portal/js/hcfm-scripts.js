@@ -418,6 +418,27 @@
     if (e.key === 'Escape' && search.value) { e.preventDefault(); clearSearch(); }
   });
 
+  /* ---------- Video chapter jumps ----------
+     Each chapter button has data-t="seconds". On click, reload the
+     iframe with ?start=Xs&autoplay=1 so YouTube jumps to that
+     timestamp and starts playing. The previously-clicked chapter
+     button gets an is-playing highlight. */
+  document.querySelectorAll('.video-detail').forEach(card => {
+    const ytId = card.dataset.ytId;
+    const iframe = card.querySelector('.video-frame iframe');
+    if (!ytId || !iframe) return;
+    const chapters = [...card.querySelectorAll('.chapter-jump')];
+    chapters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const t = parseInt(btn.dataset.t || '0', 10) || 0;
+        iframe.src = 'https://www.youtube.com/embed/' + ytId + '?start=' + t + '&autoplay=1&rel=0';
+        chapters.forEach(b => b.classList.toggle('is-playing', b === btn));
+        // Smooth-scroll the frame back into view so the user sees it after click
+        iframe.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  });
+
   /* ---------- Contrast checker ----------
      Live WCAG 2.1 contrast ratio. Formula: linearize each RGB channel,
      compute relative luminance L = 0.2126R + 0.7152G + 0.0722B,

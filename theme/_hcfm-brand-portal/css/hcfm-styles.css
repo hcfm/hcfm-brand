@@ -394,6 +394,38 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .video-card p { margin: 0 20px 18px; font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.5; }
 
 /* ============================================================
+   VIDEO DETAIL (used on the dedicated Videos page)
+   Each video has the embed on the left, then "What you'll learn"
+   + clickable chapter timestamps on the right. Chapters reload
+   the iframe with ?start=Xs&autoplay=1 to jump to that moment.
+   ============================================================ */
+.video-detail { margin: 0 0 64px; border-top: 1px solid var(--rule); padding-top: 36px; }
+.video-detail:first-of-type { border-top: 0; padding-top: 0; }
+.video-detail-head h2 { margin: 0 0 6px; font-size: var(--fs-2xl); letter-spacing: -0.015em; }
+.video-detail-head .video-meta { margin: 0 0 24px; font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.55; }
+.video-detail-body { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.video-detail-body .video-frame { border-radius: 6px; overflow: hidden; border: 1px solid var(--rule); }
+.video-side { display: flex; flex-direction: column; gap: 24px; }
+.video-learn h3, .video-chapters h3 { margin: 0 0 10px; font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-quiet); }
+.video-learn ul { margin: 0; padding: 0 0 0 18px; font-size: var(--fs-sm); line-height: 1.55; color: var(--text); }
+.video-learn li { margin: 0 0 8px; }
+.chapter-list { list-style: none; counter-reset: chapter; margin: 0; padding: 0; max-height: 360px; overflow-y: auto; border: 1px solid var(--rule); border-radius: 6px; }
+.chapter-list li { counter-increment: chapter; border-bottom: 1px solid var(--rule); }
+.chapter-list li:last-child { border-bottom: 0; }
+.chapter-jump { display: flex; gap: 10px; width: 100%; padding: 8px 12px; background: transparent; border: 0; text-align: left; font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text); cursor: pointer; align-items: baseline; line-height: 1.35; transition: background 140ms ease; }
+.chapter-jump:hover { background: var(--bg-page); }
+.chapter-jump:focus-visible { outline: 2px solid var(--hcfm-gold); outline-offset: -2px; }
+.chapter-jump.is-playing { background: var(--bg-page); border-left: 3px solid var(--hcfm-gold); padding-left: 9px; }
+.chapter-jump .ch-time { flex-shrink: 0; min-width: 44px; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--hcfm-blue); font-size: var(--fs-xs); }
+.chapter-jump .ch-title { color: var(--text); }
+.video-foot-note { margin: 16px 0 0; font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.55; }
+
+@media (max-width: 980px) {
+  .video-detail-body { grid-template-columns: 1fr; gap: 20px; }
+  .chapter-list { max-height: 280px; }
+}
+
+/* ============================================================
    COLOR CUBES
    ============================================================ */
 .color-grid { display: grid; gap: 12px; margin-bottom: 32px; }
