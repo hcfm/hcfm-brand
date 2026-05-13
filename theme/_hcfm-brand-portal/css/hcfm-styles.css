@@ -98,6 +98,16 @@
 [data-theme="dark"] .chat-mini-form input,
 [data-theme="dark"] .chat-mini-form textarea { background: var(--bg-page); color: var(--text); border-color: var(--rule); }
 [data-theme="dark"] .chat-pill:hover { background: var(--bg); }
+/* HubSpot's parent-site CSS sets body { background: #fff } at a
+   slightly higher specificity than our `body { background: var(--bg) }`
+   rule. In light mode that's identical to our intent; in dark mode it
+   breaks the chrome. These explicit dark-mode rules pin the surfaces
+   to var(--bg)/(--bg-page) so the whole page actually swaps. */
+[data-theme="dark"] body { background: var(--bg); }
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .sidebar-foot { background: var(--bg); }
+[data-theme="dark"] .page-wrap { background: var(--bg); }
+[data-theme="dark"] .nav-group-label { color: var(--text-muted); }
 /* Logo color-variant cards and template samples keep a near-white
    backdrop in dark mode so PNG logos still read correctly. Use a soft
    off-white instead of pure white so it doesn't blast. */
