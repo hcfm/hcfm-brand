@@ -203,23 +203,31 @@
     h2s.forEach((h, i) => {
       if (!h.id) h.id = page.id + '-' + slugify(h.textContent) + (i ? '-' + i : '');
       const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = '#' + h.id;
-      a.textContent = h.textContent.trim();
-      a.dataset.tocFor = h.id;
-      a.addEventListener('click', (e) => {
-        // Don't change the page route — just scroll smoothly to the h2
-        e.preventDefault();
+      // Use <button> not <a href="#..."> — host JS (HubSpot tools menu,
+      // page-level jQuery) intercepts hash-link clicks before our
+      // preventDefault can fire, which triggers the router with a non-
+      // existent route and blanks the page. Buttons have no default
+      // navigation, so there's nothing to intercept.
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = h.textContent.trim();
+      btn.dataset.tocFor = h.id;
+      btn.addEventListener('click', () => {
         h.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        history.replaceState(null, '', '#' + page.id);
+        // Brief visible highlight so the user sees "I landed here"
+        h.classList.remove('toc-flash');
+        // Force reflow so animation re-triggers when same item is clicked twice
+        void h.offsetWidth;
+        h.classList.add('toc-flash');
+        setTimeout(() => h.classList.remove('toc-flash'), 1400);
       });
-      li.appendChild(a);
+      li.appendChild(btn);
       pageTocList.appendChild(li);
     });
     pageToc.hidden = false;
 
     // Track active h2 via IntersectionObserver
-    const tocLinks = [...pageTocList.querySelectorAll('a')];
+    const tocLinks = [...pageTocList.querySelectorAll('button')];
     tocObserver = new IntersectionObserver((entries) => {
       const visible = entries.filter(e => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
       if (!visible) return;
@@ -903,6 +911,9 @@
       { folder: 'HCFM_Symbol',    file: 'hcfm_symbol_rev_1245c.png',      label: 'Symbol · Gold reverse', dark: true }
     ];
 
+    // Each variant is now an <a> link with download attribute so the user
+    // can grab a single Symbol/Logotype/color combination as one PNG file
+    // (same UX as the sub-ministry galleries).
     el.innerHTML = `
       <article class="dl-gallery-item dl-gallery-item-feature">
         <div class="dl-gallery-head">
@@ -914,14 +925,15 @@
         </div>
         <div class="dl-variants dl-variants-feature">
           ${featuredPreviews.map(v => `
-            <div class="dl-variant ${v.dark ? 'dark' : ''}">
+            <a class="dl-variant ${v.dark ? 'dark' : ''}" href="assets/previews/parent/${v.folder}/${v.file}" download="${v.file}" title="Download ${v.label} (${v.file})">
               <img src="assets/previews/parent/${v.folder}/${v.file}" alt="${v.label}" loading="lazy" onerror="this.style.opacity='0.3'">
               <span class="dl-variant-name">${v.label}</span>
-            </div>
+              <span class="dl-variant-download" aria-hidden="true">↓ PNG</span>
+            </a>
           `).join('')}
         </div>
         <div class="dl-gallery-foot">
-          <span class="dl-link">A representative sample. Download to see every variant in every color across all 5 configurations.</span>
+          <span class="dl-link">A representative sample. Click any variant above to download just that one. The full pack has every variant in every color across all 5 configurations.</span>
         </div>
       </article>
     ` + groups.map(g => `
@@ -931,18 +943,19 @@
             <h3>${g.title}</h3>
             <p>${g.sub}</p>
           </div>
-          <a href="${g.zip}" download class="btn btn-primary">Download <span class="btn-meta">${g.zipSize}</span></a>
+          <a href="${g.zip}" download class="btn btn-primary">Download all <span class="btn-meta">${g.zipSize}</span></a>
         </div>
         <div class="dl-variants">
           ${g.variants.map(v => `
-            <div class="dl-variant ${v.dark ? 'dark' : ''}">
+            <a class="dl-variant ${v.dark ? 'dark' : ''}" href="assets/previews/parent/${g.folder}/${v.file}" download="${v.file}" title="Download ${v.label} (${v.file})">
               <img src="assets/previews/parent/${g.folder}/${v.file}" alt="${v.label}" loading="lazy" onerror="this.style.opacity='0.3'">
               <span class="dl-variant-name">${v.label}</span>
-            </div>
+              <span class="dl-variant-download" aria-hidden="true">↓ PNG</span>
+            </a>
           `).join('')}
         </div>
         <div class="dl-gallery-foot">
-          <span class="dl-link">PNG and JPG variants included. Source files (AI / EPS) are brand-owner restricted.</span>
+          <span class="dl-link">Click any variant to download just that one as a PNG. Use the “Download all” button above to grab the full ZIP. Source files (AI / EPS) are brand-owner restricted.</span>
         </div>
       </article>
     `).join('');
