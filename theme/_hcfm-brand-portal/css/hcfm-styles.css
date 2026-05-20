@@ -925,7 +925,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
    of letterhead, envelope, mailing label, business cards.
    ============================================================ */
 .stationery-figure { margin: 16px 0 32px; padding: 0; background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
-.stationery-figure img { display: block; width: 100%; height: auto; background: #fff; }
+.stationery-figure img { display: block; width: auto; height: auto; max-width: 100%; max-height: 480px; margin: 0 auto; background: #fff; }
 .stationery-figure figcaption { padding: 12px 18px; font-family: var(--font-display); font-size: var(--fs-sm); color: var(--text-muted); border-top: 1px solid var(--rule); background: var(--bg-page); line-height: 1.5; }
 .stationery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0 24px; }
 .bizcard-sample-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0 24px; }
