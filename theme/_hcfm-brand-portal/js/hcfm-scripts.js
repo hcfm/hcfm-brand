@@ -698,12 +698,16 @@
   }
 
   // Per-variant click on the variant card → fetch + save the PNG
+  // Covers BOTH the sub-ministry galleries (.md-variant-link) and the
+  // Parent gallery (.dl-variant which is itself an <a>). Without this,
+  // Parent variant clicks would just open the image in a new tab because
+  // the HubSpot CDN serves PNG with Content-Disposition: inline.
   document.addEventListener('click', (e) => {
-    const link = e.target.closest('.md-variant-link');
+    const link = e.target.closest('.md-variant-link, a.dl-variant[href]');
     if (!link) return;
     e.preventDefault();
-    const url = link.dataset.dlUrl;
-    const name = link.dataset.dlName || 'logo.png';
+    const url = link.dataset.dlUrl || link.getAttribute('href');
+    const name = link.dataset.dlName || link.getAttribute('download') || 'logo.png';
     downloadOne(url, name).then(ok => {
       if (ok) showToast(`Saved ${name}`);
     });
