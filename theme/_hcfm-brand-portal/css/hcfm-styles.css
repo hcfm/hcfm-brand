@@ -317,7 +317,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 /* ============================================================
    HOME PAGE
    ============================================================ */
-.hero { background: var(--hcfm-black); color: #fff; border-radius: 8px; padding: 96px 96px; margin-bottom: 64px; display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 80px; align-items: center; position: relative; overflow: hidden; }
+.hero { background: var(--hcfm-blue); color: #fff; border-radius: 8px; padding: 96px 96px; margin-bottom: 64px; display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 80px; align-items: center; position: relative; overflow: hidden; }
 .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(900px 600px at 80% 50%, rgba(255,181,0,0.20), transparent 65%); pointer-events: none; }
 .hero-text { position: relative; z-index: 2; }
 .hero-eyebrow { font-family: var(--font-display); font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hcfm-gold); margin: 0 0 24px; }
@@ -742,6 +742,9 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 .voice-list { list-style: none; padding: 0; margin: 0; }
 .voice-list li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
 .voice-list li:last-child { border-bottom: none; }
+/* Single-column voice list (after collapsing the two-voice grid) — same
+   look as inside a voice-col card, but standalone in the page flow. */
+.voice-list-single { background: var(--bg-page); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 24px; margin: 16px 0 24px; }
 .voice-list strong { font-family: var(--font-display); font-weight: 600; color: var(--hcfm-blue); display: block; margin-bottom: 4px; font-size: var(--fs-base); }
 .voice-list p { font-size: var(--fs-base); line-height: 1.55; color: var(--text); margin: 0; }
 .voice-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -1078,7 +1081,7 @@ body.admin-active .sidebar-admin-badge { display: inline-block; padding: 4px 10p
 /* ============================================================
    CHAT ASSISTANT (floating)
    ============================================================ */
-.chat-fab { position: fixed; bottom: 24px; right: 24px; background: var(--hcfm-blue); color: #fff; padding: 12px 18px; border: 0; border-radius: 200px; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm); cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,71,187,0.35); transition: all 200ms; z-index: 150; }
+.chat-fab { position: fixed; bottom: 24px; right: 24px; background: var(--hcfm-marian-blue); color: #fff; padding: 12px 18px; border: 0; border-radius: 200px; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-sm); cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,169,224,0.35); transition: all 200ms; z-index: 150; }
 .chat-fab:hover { background: var(--hcfm-black); transform: translateY(-2px); }
 .chat-fab-icon { font-size: var(--fs-base); }
 
