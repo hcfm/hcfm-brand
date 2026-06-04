@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>HCFM Signature Installer</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='49' fill='%23ffffff' stroke='%23ececec' stroke-width='2'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='36' fill='%2389764B'%3EH%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --hcfm-blue: #0047BB;
+    --hcfm-blue-dark: #003590;
+    --hcfm-muted-gold: #89764B;
+    --ink: #111418;
+    --ink-soft: #444;
+    --ink-mute: #6b7280;
+    --line: #e5e7eb;
+    --line-soft: #f1f3f5;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --ok: #1f7a3a;
+    --ok-bg: #e9f5ee;
+    --warn-bg: #fdf3e0;
+    --warn: #b06b00;
+    --err: #b3261e;
+    --err-bg: #fae9e7;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: var(--ink); background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 36px 24px 80px; }
+
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+  header .mark { width: 56px; height: 56px; border-radius: 50%; background: #fff; border: 1px solid #ececec; flex-shrink: 0; position: relative; overflow: hidden; }
+  header .mark .symbol { position: absolute; inset: 0; background-color: var(--hcfm-muted-gold); -webkit-mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%; mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%; }
+  header h1 { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+  header .sub { margin: 2px 0 0; font-size: 13px; color: var(--ink-mute); }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06); padding: 24px; margin-bottom: 18px; }
+  .card h2 { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
+  .card .hint { color: var(--ink-mute); font-size: 13px; margin: 0 0 16px; line-height: 1.5; }
+
+  label.fld { display: block; margin-bottom: 14px; }
+  label.fld span.lbl { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  label.fld input, label.fld select {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 8px;
+    font-family: inherit; font-size: 14px;
+    min-height: 44px; background: #fff; color: var(--ink);
+  }
+  label.fld input:focus, label.fld select:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
+  label.fld .help { font-size: 12px; color: var(--ink-mute); margin-top: 4px; }
+
+  button.btn-primary, .btn-primary {
+    background: var(--hcfm-blue); color: #fff;
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    padding: 12px 20px; border-radius: 8px; cursor: pointer;
+    border: 1px solid transparent; min-height: 44px;
+    transition: background 120ms;
+  }
+  button.btn-primary:hover, .btn-primary:hover { background: var(--hcfm-blue-dark); }
+  button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  #result { display: none; }
+  #result.active { display: block; }
+
+  .bookmark-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--hcfm-blue); color: #fff;
+    padding: 14px 22px; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 15px;
+    cursor: grab;
+    box-shadow: 0 2px 6px rgba(0, 71, 187, 0.25);
+    user-select: none;
+  }
+  .bookmark-link:active { cursor: grabbing; }
+  .bookmark-link::before { content: "📌"; }
+
+  ol.steps { padding-left: 22px; margin: 14px 0 0; }
+  ol.steps li { margin-bottom: 8px; font-size: 14px; line-height: 1.55; }
+  ol.steps b { color: var(--ink); }
+
+  .note { background: var(--warn-bg); border: 1px solid #f1d9a8; color: var(--warn); padding: 12px 14px; border-radius: 8px; font-size: 13px; margin: 14px 0 0; line-height: 1.55; }
+  .note.ok { background: var(--ok-bg); color: var(--ok); border-color: #cce7d6; }
+
+  footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-mute); }
+  footer a { color: inherit; text-decoration: none; }
+  footer a:hover { color: var(--hcfm-blue); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark"><div class="symbol"></div></div>
+    <div>
+      <h1>HCFM Signature Installer</h1>
+      <p class="sub">One-click install of the new email signature, no copy-paste needed.</p>
+    </div>
+  </header>
+
+  <section class="card" id="form-card">
+    <h2>1. Tell us who you are</h2>
+    <p class="hint">Three personal fields. The org name, address, website, and banner are filled in automatically based on which ministry you pick.</p>
+
+    <label class="fld">
+      <span class="lbl">Which ministry signature do you need?</span>
+      <select id="ministry">
+        <option value="parent">HCFM North Easton (Holy Cross Family Ministries headquarters)</option>
+        <option value="ftp">Family Theater Productions</option>
+        <option value="family-rosary">Family Rosary</option>
+        <option value="catholic-mom">Catholic Mom</option>
+        <option value="catholic-central">Catholic Central</option>
+        <option value="peyton-institute">The Peyton Institute for Domestic Church Life</option>
+      </select>
+    </label>
+
+    <label class="fld">
+      <span class="lbl">Your full name</span>
+      <input type="text" id="name" placeholder="e.g. Stephanie Whelan" autocomplete="name" maxlength="80">
+    </label>
+
+    <label class="fld">
+      <span class="lbl">Your job title</span>
+      <input type="text" id="title" placeholder="e.g. Director of Operations" maxlength="120">
+    </label>
+
+    <label class="fld">
+      <span class="lbl">Your phone number</span>
+      <input type="text" id="phone" placeholder="e.g. 508.238.4095 or 508.238.4095, Ext. 2014" maxlength="60">
+      <span class="help">Format with dots between sections. Add ", Ext. NNNN" if you have an extension.</span>
+    </label>
+
+    <button class="btn-primary" id="generate">Generate my install button</button>
+  </section>
+
+  <section class="card" id="result">
+    <h2>2. Drag this button to your bookmarks bar</h2>
+    <p class="hint">This button holds a one-click installer personalized just for you. Drag it up to your browser's bookmarks bar so you can click it later.</p>
+
+    <div style="text-align: center; padding: 8px 0 4px;">
+      <a id="bookmarklet" class="bookmark-link" href="#" draggable="true">Install HCFM Signature</a>
+    </div>
+    <p class="hint" style="text-align: center; margin: 10px 0 0;">Don't see your bookmarks bar? In Chrome / Edge, press <b>Cmd+Shift+B</b> (Mac) or <b>Ctrl+Shift+B</b> (Windows).</p>
+
+    <h2 style="margin-top: 24px;">3. Use it on your Outlook signature</h2>
+    <ol class="steps">
+      <li>Open <b>outlook.office.com</b> (Outlook on the Web).</li>
+      <li>Click the <b>gear icon</b> in the top right, then <b>Mail</b>, then <b>Signatures</b>.</li>
+      <li>Either create a <b>+ New signature</b> or click the pencil icon to edit your existing one.</li>
+      <li>Once the signature editor is open and visible, <b>click the bookmark you just saved</b> from your bookmarks bar.</li>
+      <li>The signature will appear in the editor automatically, properly formatted.</li>
+      <li>Make sure <b>Set default for new messages</b> and <b>Set default for replies and forwards</b> are checked, then click <b>Save</b>.</li>
+    </ol>
+
+    <div class="note ok">
+      <b>Why this works:</b> Outlook's normal copy-paste process strips some formatting (which is why every previous test showed weird gaps). The bookmark installs the signature directly into Outlook's editor, bypassing the paste filter, so you get the exact pixel-perfect signature.
+    </div>
+
+    <div class="note" style="margin-top: 10px;">
+      <b>If clicking the bookmark shows an error</b> about not finding the editor: you didn't open the signature edit dialog yet. Go to Settings → Mail → Signatures, click the pencil to edit a signature so the editor appears, THEN click the bookmark.
+    </div>
+
+    <button class="btn-primary" id="redo" style="background: transparent; color: var(--ink-soft); border: 1px solid var(--line); margin-top: 18px;">Start over</button>
+  </section>
+
+  <footer>
+    <div>HCFM Signature Installer</div>
+    <div><a href="https://hcfm.org/brand" target="_blank" rel="noopener">Brand book</a></div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  // Ministry data — the FIXED fields per ministry that the user doesn't edit.
+  const MINISTRIES = {
+    'parent': {
+      display: 'Holy Cross Family Ministries',
+      url: 'https://www.hcfm.org',
+      urlText: 'hcfm.org',
+      address: '518 Washington St, North Easton, MA 02356',
+      bannerPath: 'parent',
+    },
+    'ftp': {
+      display: 'Family Theater Productions',
+      url: 'https://www.familytheater.org',
+      urlText: 'familytheater.org',
+      address: '518 Washington St, North Easton, MA 02356',
+      bannerPath: 'ftp',
+    },
+    'family-rosary': {
+      display: 'Family Rosary',
+      url: 'https://www.familyrosary.org',
+      urlText: 'familyrosary.org',
+      address: '518 Washington St, North Easton, MA 02356',
+      bannerPath: 'family-rosary',
+    },
+    'catholic-mom': {
+      display: 'Catholic Mom',
+      url: 'https://www.catholicmom.com',
+      urlText: 'catholicmom.com',
+      address: '518 Washington St, North Easton, MA 02356',
+      bannerPath: 'catholic-mom',
+    },
+    'catholic-central': {
+      display: 'Catholic Central',
+      url: 'https://www.catholiccentral.com',
+      urlText: 'catholiccentral.com',
+      address: 'Sunset Boulevard, Hollywood, CA',
+      bannerPath: 'catholic-central',
+    },
+    'peyton-institute': {
+      display: 'The Peyton Institute for Domestic Church Life',
+      url: 'https://www.peytonfamilyinstitute.org',
+      urlText: 'peytonfamilyinstitute.org',
+      address: '518 Washington St, North Easton, MA 02356',
+      bannerPath: 'peyton-institute',
+    },
+  };
+
+  const BANNER_BASE = 'https://emmanuelepau.github.io/hcfm-brand/email-banners';
+  const MARK_URL = 'https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-gold.png';
+
+  // Read URL param ?m= to optionally preselect a ministry (lets us send pre-filtered links)
+  const params = new URLSearchParams(location.search);
+  if (params.get('m') && MINISTRIES[params.get('m')]) {
+    document.getElementById('ministry').value = params.get('m');
+  }
+
+  // Build the HTML for the signature given the user's inputs
+  function buildSignatureHTML(ministryKey, name, title, phone) {
+    const m = MINISTRIES[ministryKey];
+    const phoneDigits = String(phone || '').replace(/\D/g, '');
+    const banner = `${BANNER_BASE}/${m.bannerPath}/banner.png`;
+    const safe = (s) => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return [
+      `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; line-height: 1.25; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">`,
+      `<tr>`,
+      `<td rowspan="6" style="vertical-align: middle; padding: 0 10px 0 0; width: 110px;">`,
+      `<a href="${m.url}" style="text-decoration: none;">`,
+      `<img src="${MARK_URL}" alt="HCFM" width="110" style="width: 110px; height: auto; display: block; border: 0;">`,
+      `</a></td>`,
+      `<td style="vertical-align: top; padding: 0; font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: bold; font-size: 11pt; line-height: 1.25; color: #0047BB; letter-spacing: 0.01em;">${safe(name)}</td>`,
+      `</tr>`,
+      `<tr><td style="vertical-align: top; padding: 2px 0 0 0; font-family: 'Calluna', Georgia, 'Palatino Linotype', Palatino, 'Times New Roman', serif; font-size: 11pt; line-height: 1.25; color: #444444;">${safe(title)}</td></tr>`,
+      `<tr><td style="vertical-align: top; padding: 2px 0 0 0; font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: bold; font-size: 11pt; line-height: 1.25; color: #1a1a1a; letter-spacing: 0.01em;">${safe(m.display)}</td></tr>`,
+      `<tr><td style="vertical-align: top; padding: 2px 0 0 0; font-family: 'Calluna', Georgia, 'Palatino Linotype', Palatino, 'Times New Roman', serif; font-size: 10.5pt; line-height: 1.25; color: #444444;">${safe(m.address)}</td></tr>`,
+      `<tr><td style="vertical-align: top; padding: 2px 0 0 0; font-family: 'Calluna', Georgia, 'Palatino Linotype', Palatino, 'Times New Roman', serif; font-size: 11pt; line-height: 1.25; color: #444444;"><a href="${m.url}" style="color: #0047BB; text-decoration: none;">${safe(m.urlText)}</a><span><span style="color: #aaaaaa; margin: 0 6px;">|</span><a href="tel:+1${phoneDigits}" style="color: #444444; text-decoration: none;">${safe(phone)}</a></span></td></tr>`,
+      `<tr><td style="vertical-align: top; padding: 3px 0 0 0; font-family: 'Calluna', Georgia, 'Palatino Linotype', Palatino, 'Times New Roman', serif; font-style: italic; font-size: 10.5pt; line-height: 1.25; color: #444444;">The Family That Prays Together Stays Together&trade;</td></tr>`,
+      `<tr><td colspan="2" style="vertical-align: top; padding: 6px 0 0 0;"><a href="${m.url}" style="text-decoration: none;"><img src="${banner}" alt="${safe(m.display)} Campaign" width="600" style="width: 600px; max-width: 100%; height: auto; display: block; border: 0;"></a></td></tr>`,
+      `</table>`,
+    ].join('');
+  }
+
+  // Build the bookmarklet — a single-line javascript: URL that, when clicked,
+  // finds the Outlook signature editor and injects the personalized HTML.
+  function buildBookmarklet(htmlString) {
+    // The bookmarklet body. Uses var (not const/let) for maximum browser compat.
+    const body =
+      "(function(){" +
+        "var e=document.querySelector('[aria-label=\"Signature\"][contenteditable=\"true\"]');" +
+        "if(!e){alert('Open your Outlook signature editor first (Settings > Mail > Signatures > Edit a signature so the edit box appears), then click this bookmark again.');return;}" +
+        "e.focus();" +
+        "e.innerHTML=" + JSON.stringify(htmlString) + ";" +
+        "e.dispatchEvent(new Event('input',{bubbles:true}));" +
+        "e.dispatchEvent(new Event('change',{bubbles:true}));" +
+        "alert('Signature installed. Now click Save in the signature editor.');" +
+      "})();";
+    return 'javascript:' + encodeURIComponent(body);
+  }
+
+  const formCard = document.getElementById('form-card');
+  const resultCard = document.getElementById('result');
+  const bookmarkLink = document.getElementById('bookmarklet');
+  const generateBtn = document.getElementById('generate');
+  const redoBtn = document.getElementById('redo');
+
+  generateBtn.addEventListener('click', () => {
+    const ministry = document.getElementById('ministry').value;
+    const name = document.getElementById('name').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || name.length < 2) { alert('Please enter your full name.'); return; }
+    if (!title) { alert('Please enter your job title.'); return; }
+    if (!phone) { alert('Please enter your phone number.'); return; }
+
+    const html = buildSignatureHTML(ministry, name, title, phone);
+    const href = buildBookmarklet(html);
+    bookmarkLink.href = href;
+    bookmarkLink.textContent = `Install ${MINISTRIES[ministry].display} Signature`;
+    // Re-prepend the pin emoji via ::before in CSS
+    formCard.style.display = 'none';
+    resultCard.classList.add('active');
+    window.scrollTo({ top: resultCard.offsetTop - 24, behavior: 'smooth' });
+  });
+
+  redoBtn.addEventListener('click', () => {
+    resultCard.classList.remove('active');
+    formCard.style.display = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
