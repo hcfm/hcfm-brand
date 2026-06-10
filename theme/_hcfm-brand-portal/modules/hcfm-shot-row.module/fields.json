@@ -1,0 +1,5 @@
+[
+  {"name":"shot_number","label":"Shot number","type":"text","default":"1","help_text":"Display number shown on the left. Use numerals: 1, 2, 3..."},
+  {"name":"shot_title","label":"Shot type","type":"text","default":"Details","help_text":"Short label for this category of shots (e.g. Details, Venue photos, Attendees)."},
+  {"name":"shot_body","label":"Guidance","type":"richtext","default":"<p>Describe what to photograph and why it matters.</p>","help_text":"One to three sentences of photography direction for this shot type."}
+]

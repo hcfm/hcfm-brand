@@ -1,0 +1,9 @@
+[
+  {"name":"eyebrow","label":"Eyebrow text","type":"text","default":"HCFM · Brand Identity · 2026","help_text":"Small all-caps line above the headline."},
+  {"name":"headline","label":"Headline","type":"richtext","default":"<p>The visual expression of a<br><span class=\"script-accent script-accent-xl\">global</span> <span class=\"hero-h1-end\">family at prayer.</span></p>","help_text":"Main hero heading. Use the HTML editor to add the script accent span if needed."},
+  {"name":"hero_body","label":"Body text","type":"richtext","default":"<p>Everything a ministry center, vendor, or partner needs to apply the HCFM brand correctly. The system, in plain English. The files, where you can find them. The rules, written so you can actually use them.</p>","help_text":"Descriptive paragraph under the headline."},
+  {"name":"cta1_text","label":"Primary button text","type":"text","default":"Browse the system →"},
+  {"name":"cta1_href","label":"Primary button link","type":"text","default":"#colors"},
+  {"name":"cta2_text","label":"Secondary button text","type":"text","default":"Get the files"},
+  {"name":"cta2_href","label":"Secondary button link","type":"text","default":"#downloads"}
+]

@@ -1,0 +1,6 @@
+[
+  {"name":"platform","label":"Platform name","type":"text","default":"Instagram","help_text":"Social media platform (e.g. Instagram, Facebook, LinkedIn, X (Twitter), YouTube)."},
+  {"name":"content_type","label":"Content type","type":"text","default":"Static image (portrait)","help_text":"Format label shown below the platform name (e.g. Static image (portrait), Reel / Story, Thumbnail)."},
+  {"name":"dimensions","label":"Dimensions","type":"text","default":"1080×1350","help_text":"Width × height in pixels. No spaces around the × symbol (e.g. 1080×1350)."},
+  {"name":"shape_class","label":"Shape class","type":"choice","default":"dim-portrait","choices":[["dim-portrait","Portrait (4:5, e.g. 1080×1350)"],["dim-vertical","Vertical (9:16, e.g. 1080×1920)"],["dim-landscape","Landscape (16:9, e.g. 1280×720)"],["dim-wide","Wide (1.91:1, e.g. 1200×627 or 1200×675)"],["dim-square","Square (1:1)"]],"help_text":"Controls the CSS shape of the visual preview. Match to the aspect ratio."}
+]

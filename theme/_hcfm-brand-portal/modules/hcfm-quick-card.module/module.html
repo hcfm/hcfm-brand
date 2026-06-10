@@ -1,0 +1,23 @@
+{# HCFM Quick Card — Start Here section on the Home page.
+   Update card title, description, and section link in the HubSpot editor.
+   The visual preview (swatch, marks, type) is fixed per card type — it matches the brand spec. #}
+<a class="quick-card quick-card-feature" href="{{ module.card_href }}">
+  {% if module.card_variant == "colors" %}
+    <div class="qc-swatch"><span style="background:#000"></span><span style="background:#0047BB"></span><span style="background:#FFB500"></span></div>
+  {% elif module.card_variant == "logos" %}
+    <div class="qc-marks">
+      <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-blue.png" alt="HCFM Blue mark">
+      <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="Gold mark">
+      <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-black.png" alt="Black mark">
+      <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-white.png" alt="White mark" class="qc-mark-dark">
+    </div>
+  {% elif module.card_variant == "typography" %}
+    <div class="qc-type">
+      <span class="qc-aa qc-whitney">Aa</span>
+      <span class="qc-aa qc-calluna">Aa</span>
+      <span class="qc-aa qc-script">Aa</span>
+    </div>
+  {% endif %}
+  <h3>{{ module.card_title }}</h3>
+  <p>{{ module.card_description }}</p>
+</a>

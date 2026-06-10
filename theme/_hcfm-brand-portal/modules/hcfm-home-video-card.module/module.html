@@ -1,0 +1,9 @@
+{# HCFM Home Video Card — Embedded YouTube video on the Home page.
+   Update the YouTube ID, title, and description in the HubSpot editor when new videos are recorded. #}
+<article class="video-card">
+  <div class="video-frame">
+    <iframe loading="lazy" src="https://www.youtube.com/embed/{{ module.youtube_id }}" title="{{ module.video_title }}" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <h3>{{ module.video_title }}</h3>
+  {% if module.video_description %}<p>{{ module.video_description }}</p>{% endif %}
+</article>

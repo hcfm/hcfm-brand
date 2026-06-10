@@ -1,0 +1,6 @@
+[
+  {"name":"card_number","label":"Card number","type":"text","default":"01","help_text":"Two-digit display number shown in the top-left corner."},
+  {"name":"card_title","label":"Section title","type":"text","default":"Symbol","help_text":"Name of the section this card links to."},
+  {"name":"card_description","label":"Description","type":"text","default":"The HCFM mark, broken down.","help_text":"One to two sentences describing what is in this section."},
+  {"name":"card_href","label":"Section link","type":"text","default":"#symbol","help_text":"Internal hash link — must match the section ID."}
+]

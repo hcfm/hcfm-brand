@@ -115,143 +115,109 @@
 
     <!-- ==================== HOME ==================== -->
     <section class="page page-home" id="home" data-title="Home">
-      <div class="hero">
-        <div class="hero-text">
-          <p class="hero-eyebrow">HCFM · Brand Identity · 2026</p>
-          <h1 class="hero-h1">The visual expression of a<br><span class="script-accent script-accent-xl">global</span> <span class="hero-h1-end">family at prayer.</span></h1>
-          <p class="hero-sub">Everything a ministry center, vendor, or partner needs to apply the HCFM brand correctly. The system, in plain English. The files, where you can find them. The rules, written so you can actually use them.</p>
-          <div class="hero-cta">
-            <a href="#colors" class="btn btn-primary btn-hero">Browse the system →</a>
-            <a href="#downloads" class="btn btn-secondary btn-hero">Get the files</a>
-          </div>
-        </div>
-        <div class="hero-mark">
-          {# The mark is rendered via CSS mask using the black-fill symbol PNG as the alpha
-             mask + HCFM Yellow Gold (#FFB500) as the fill. This guarantees the rotating
-             mark is mathematically exact #FFB500, instead of approximated via filter
-             chain on a Muted Gold source. Image kept for accessibility (alt text) +
-             fallback if CSS masks aren't supported. #}
-          <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-black.png" alt="HCFM mark" id="heroMark">
-        </div>
-      </div>
+      {# Hero — update headline, body text, and CTA labels in HubSpot editor. No code needed. #}
+      {% module "home_hero" path="../modules/hcfm-home-hero",
+        eyebrow="HCFM · Brand Identity · 2026",
+        headline="<p>The visual expression of a<br><span class=\"script-accent script-accent-xl\">global</span> <span class=\"hero-h1-end\">family at prayer.</span></p>",
+        hero_body="<p>Everything a ministry center, vendor, or partner needs to apply the HCFM brand correctly. The system, in plain English. The files, where you can find them. The rules, written so you can actually use them.</p>",
+        cta1_text="Browse the system →",
+        cta1_href="#colors",
+        cta2_text="Get the files",
+        cta2_href="#downloads"
+      %}
 
-      <h2 class="home-h2">Start here</h2>
+      {% module "home_start_here_heading" path="../modules/hcfm-rich-text-block",
+        heading="Start here", heading_level="h2", content=""
+      %}
       <div class="quick-grid quick-grid-3">
-        <a class="quick-card quick-card-feature" href="#colors">
-          <div class="qc-swatch"><span style="background:#000"></span><span style="background:#0047BB"></span><span style="background:#FFB500"></span></div>
-          <h3>Colors</h3>
-          <p>Three primary, three accent, plus the liturgical palette.</p>
-        </a>
-        <a class="quick-card quick-card-feature" href="#logos">
-          <div class="qc-marks">
-            <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-blue.png" alt="HCFM Blue mark">
-            <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="Gold mark">
-            <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-black.png" alt="Black mark">
-            <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-white.png" alt="White mark" class="qc-mark-dark">
-          </div>
-          <h3>Logos</h3>
-          <p>Mark, four logotype configurations, color variants.</p>
-        </a>
-        <a class="quick-card quick-card-feature" href="#typography">
-          <div class="qc-type">
-            <span class="qc-aa qc-whitney">Aa</span>
-            <span class="qc-aa qc-calluna">Aa</span>
-            <span class="qc-aa qc-script">Aa</span>
-          </div>
-          <h3>Typography</h3>
-          <p>Whitney, Calluna, Playlist Script.</p>
-        </a>
+        {# Quick cards — update title, description, and link in HubSpot editor.
+           The visual preview (color swatch, mark images, type specimens) matches the brand spec and stays fixed. #}
+        {% module "quick_card_colors" path="../modules/hcfm-quick-card",
+          card_variant="colors", card_title="Colors",
+          card_description="Three primary, three accent, plus the liturgical palette.",
+          card_href="#colors"
+        %}
+        {% module "quick_card_logos" path="../modules/hcfm-quick-card",
+          card_variant="logos", card_title="Logos",
+          card_description="Mark, four logotype configurations, color variants.",
+          card_href="#logos"
+        %}
+        {% module "quick_card_typography" path="../modules/hcfm-quick-card",
+          card_variant="typography", card_title="Typography",
+          card_description="Whitney, Calluna, Playlist Script.",
+          card_href="#typography"
+        %}
       </div>
 
-      <h2 class="home-h2">The rest of the system</h2>
-      <p class="home-h2-sub">From the meaning behind the mark to the print specs on the back of a business card.</p>
+      {% module "home_rest_heading" path="../modules/hcfm-rich-text-block",
+        heading="The rest of the system", heading_level="h2",
+        content="<p>From the meaning behind the mark to the print specs on the back of a business card.</p>"
+      %}
       <div class="more-grid">
-        <a class="more-card" href="#symbol">
-          <span class="more-num">01</span>
-          <div class="more-text">
-            <h3>Symbol</h3>
-            <p>The HCFM mark, broken down. The 10 beads of the Rosary, the family of prayer, the welcome and invitation.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
-        <a class="more-card" href="#voice">
-          <span class="more-num">02</span>
-          <div class="more-text">
-            <h3>Voice</h3>
-            <p>How HCFM sounds in writing. The two registers we use, what we always say, what we never say.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
-        <a class="more-card" href="#imagery">
-          <span class="more-num">03</span>
-          <div class="more-text">
-            <h3>Imagery</h3>
-            <p>Photography samples and the composition curriculum. Rule of thirds, leading lines, frame within a frame.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
-        <a class="more-card" href="#design-elements">
-          <span class="more-num">04</span>
-          <div class="more-text">
-            <h3>Design Elements</h3>
-            <p>The four approved stylistic elements: thin border, color fade, curved shapes, dark overlays. Used sparingly.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
-        <a class="more-card" href="#stationery">
-          <span class="more-num">05</span>
-          <div class="more-text">
-            <h3>Stationery</h3>
-            <p>Print specifications. Letterhead 8.5×11 on Strathmore. Business card on 130# DTC. Pantone inks named.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
-        <a class="more-card" href="#platforms">
-          <span class="more-num">06</span>
-          <div class="more-text">
-            <h3>Platform Dimensions</h3>
-            <p>Approved sizes for every platform. Instagram, Facebook, LinkedIn, X, YouTube. Use these dimensions exactly.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
-        <a class="more-card" href="#ministries">
-          <span class="more-num">07</span>
-          <div class="more-text">
-            <h3>Ministry Centers</h3>
-            <p>Twenty-four sub-ministries across 18 countries. Each click opens that ministry's logo gallery.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
-        <a class="more-card" href="#checklist">
-          <span class="more-num">08</span>
-          <div class="more-text">
-            <h3>Pre-flight Checklist</h3>
-            <p>Run through this before you ship anything. Colors, fonts, design elements, platform, all four checked.</p>
-          </div>
-          <span class="more-arrow">→</span>
-        </a>
+        {# Rest of system nav cards — update number, title, description, and link in HubSpot editor. #}
+        {% module "more_card_symbol" path="../modules/hcfm-more-card",
+          card_number="01", card_title="Symbol",
+          card_description="The HCFM mark, broken down. The 10 beads of the Rosary, the family of prayer, the welcome and invitation.",
+          card_href="#symbol"
+        %}
+        {% module "more_card_voice" path="../modules/hcfm-more-card",
+          card_number="02", card_title="Voice",
+          card_description="How HCFM sounds in writing. The two registers we use, what we always say, what we never say.",
+          card_href="#voice"
+        %}
+        {% module "more_card_imagery" path="../modules/hcfm-more-card",
+          card_number="03", card_title="Imagery",
+          card_description="Photography samples and the composition curriculum. Rule of thirds, leading lines, frame within a frame.",
+          card_href="#imagery"
+        %}
+        {% module "more_card_design_elements" path="../modules/hcfm-more-card",
+          card_number="04", card_title="Design Elements",
+          card_description="The four approved stylistic elements: thin border, color fade, curved shapes, dark overlays. Used sparingly.",
+          card_href="#design-elements"
+        %}
+        {% module "more_card_stationery" path="../modules/hcfm-more-card",
+          card_number="05", card_title="Stationery",
+          card_description="Print specifications. Letterhead 8.5×11 on Strathmore. Business card on 130# DTC. Pantone inks named.",
+          card_href="#stationery"
+        %}
+        {% module "more_card_platforms" path="../modules/hcfm-more-card",
+          card_number="06", card_title="Platform Dimensions",
+          card_description="Approved sizes for every platform. Instagram, Facebook, LinkedIn, X, YouTube. Use these dimensions exactly.",
+          card_href="#platforms"
+        %}
+        {% module "more_card_ministries" path="../modules/hcfm-more-card",
+          card_number="07", card_title="Ministry Centers",
+          card_description="Twenty-four sub-ministries across 18 countries. Each click opens that ministry\'s logo gallery.",
+          card_href="#ministries"
+        %}
+        {% module "more_card_checklist" path="../modules/hcfm-more-card",
+          card_number="08", card_title="Pre-flight Checklist",
+          card_description="Run through this before you ship anything. Colors, fonts, design elements, platform, all four checked.",
+          card_href="#checklist"
+        %}
       </div>
 
-      <h2 class="home-h2">Watch the walkthroughs</h2>
+      {% module "home_walkthroughs_heading" path="../modules/hcfm-rich-text-block",
+        heading="Watch the walkthroughs", heading_level="h2", content=""
+      %}
       <div class="video-grid">
-        <article class="video-card">
-          <div class="video-frame">
-            <iframe loading="lazy" src="https://www.youtube.com/embed/tdYuca88vKw" title="Visual Identity Walkthrough" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <h3>Visual Identity Walkthrough</h3>
-          <p>Twelve minutes. Victoria and Emmanuel introduce the system, the symbol, and the choices behind every element.</p>
-        </article>
-        <article class="video-card">
-          <div class="video-frame">
-            <iframe loading="lazy" src="https://www.youtube.com/embed/PCmjheZrrpU" title="Brand Color Guidelines" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <h3>Brand Color Guidelines</h3>
-          <p>Eight minutes. The primary, accent, and liturgical palettes explained with worked examples and the 60–30–10 rule.</p>
-        </article>
+        {# Update YouTube ID, title, and description in HubSpot editor. To add a video: duplicate the module. #}
+        {% module "home_video_1" path="../modules/hcfm-home-video-card",
+          youtube_id="tdYuca88vKw",
+          video_title="Visual Identity Walkthrough",
+          video_description="Twelve minutes. Victoria and Emmanuel introduce the system, the symbol, and the choices behind every element."
+        %}
+        {% module "home_video_2" path="../modules/hcfm-home-video-card",
+          youtube_id="PCmjheZrrpU",
+          video_title="Brand Color Guidelines",
+          video_description="Eight minutes. The primary, accent, and liturgical palettes explained with worked examples and the 60–30–10 rule."
+        %}
       </div>
 
       <div class="home-foot">
-        <p>HCFMMarketing 2026 · Maintained by Easton Creatives.</p>
+        {% module "home_footer_text" path="../modules/hcfm-rich-text-block",
+          content="<p>HCFMMarketing 2026 · Maintained by Easton Creatives.</p>"
+        %}
       </div>
     </section>
 
@@ -921,13 +887,15 @@
         vision_text="<p>Holy Cross Family Ministries strives to be a respected and reliable catalyst for inspiration, support, and dynamic content on family life through a focus on spirituality and prayer, especially the Rosary.</p>"
       %}
 
-      <h2>How HCFM sounds</h2>
-      <p class="prose-quote">"Your prayer matters. Your family's evening Rosary at the kitchen table, that is the work."</p>
-      <p>Notice what the sentence does. It speaks <em>to</em> the reader. It names something specific they already do or could do tonight. It treats the family's prayer as the subject of the verb. HCFM is not in the sentence at all, and that is correct. Our copy is at its best when the reader closes the page thinking about their own family, not about us.</p>
-      <p>Every line we write follows this pattern. Specific over general. The reader's life over the institution. What a family does over what HCFM offers. The result reads less like a non-profit pitch and more like a letter from someone who knows the household.</p>
+      {% module "voice_how_sounds" path="../modules/hcfm-rich-text-block",
+        heading="How HCFM sounds", heading_level="h2",
+        content="<p class=\"prose-quote\">\"Your prayer matters. Your family's evening Rosary at the kitchen table, that is the work.\"</p> <p>Notice what the sentence does. It speaks <em>to</em> the reader. It names something specific they already do or could do tonight. It treats the family's prayer as the subject of the verb. HCFM is not in the sentence at all, and that is correct. Our copy is at its best when the reader closes the page thinking about their own family, not about us.</p> <p>Every line we write follows this pattern. Specific over general. The reader's life over the institution. What a family does over what HCFM offers. The result reads less like a non-profit pitch and more like a letter from someone who knows the household.</p>"
+      %}
 
-      <h2>Voice principles</h2>
-      <p>Six principles synthesized from the Mission Statement, the Vision, Father Peyton's two messages, and the HCFM Content Style Guide. They apply across every audience and medium — from a pastoral letter to a vendor brief, the voice stays recognizable.</p>
+      {% module "voice_principles_intro" path="../modules/hcfm-rich-text-block",
+        heading="Voice principles", heading_level="h2",
+        content="<p>Six principles synthesized from the Mission Statement, the Vision, Father Peyton\'s two messages, and the HCFM Content Style Guide. They apply across every audience and medium — from a pastoral letter to a vendor brief, the voice stays recognizable.</p>"
+      %}
 
       {# Voice principles — add, remove, or reword principles in HubSpot without code #}
       <ul class="voice-list voice-list-single">
@@ -957,111 +925,31 @@
         %}
       </ul>
 
-      <h2>What we always say, what we never say</h2>
-      <p>The fastest way to learn a voice is to see it side by side with what it is not. Two columns we keep open while reviewing copy.</p>
+      {# We say / We avoid — edit each bullet in the rich text editor. #}
+      {% module "voice_say_avoid" path="../modules/hcfm-rich-text-block",
+        heading="What we always say, what we never say", heading_level="h2",
+        content="<p>The fastest way to learn a voice is to see it side by side with what it is not. Two columns we keep open while reviewing copy.</p> <div class=\"voice-rules\"> <div class=\"vr-col\"> <p class=\"vr-h\">We say</p> <ul> <li><em>\"The family that prays together stays together.\"</em> Father Peyton's actual phrase.</li> <li><em>\"Holy Cross Family Ministries\"</em> spelled out on first reference. <em>HCFM</em> is fine after.</li> <li><em>\"Venerable Patrick Peyton\"</em> OR <em>\"Father Patrick Peyton, C.S.C.\"</em> on first reference. Per Church guidelines, never both at once.</li> <li><em>\"Father Peyton\"</em> on second reference, never just \"Patrick.\"</li> <li>Country names by name. Ministry centers by their actual name.</li> <li><em>\"The Rosary\"</em> as a proper noun. Capital R.</li> </ul> </div> <div class=\"vr-col vr-col-foil\"> <p class=\"vr-h\">We avoid</p> <ul> <li>Theological jargon where plain English works.</li> <li><em>\"Intercessory familial communion\"</em> when we mean family prayer.</li> <li><em>\"Stakeholders\"</em> or <em>\"audience segments\"</em> for the people we serve.</li> <li>Hyperbole. We do not \"transform lives.\" Families transform their own lives. We support them.</li> <li>Generic mission language. Every sentence should be unmistakably HCFM.</li> <li><em>\"Catholic content\"</em> as a category. We make HCFM content. It is Catholic by virtue of who we are.</li> <li>Acronyms before they have been spelled out.</li> </ul> </div> </div>"
+      %}
 
-      <div class="voice-rules">
-        <div class="vr-col">
-          <p class="vr-h">We say</p>
-          <ul>
-            <li><em>"The family that prays together stays together."</em> Father Peyton's actual phrase.</li>
-            <li><em>"Holy Cross Family Ministries"</em> spelled out on first reference. <em>HCFM</em> is fine after.</li>
-            <li><em>"Venerable Patrick Peyton"</em> OR <em>"Father Patrick Peyton, C.S.C."</em> on first reference. Per Church guidelines, never both at once.</li>
-            <li><em>"Father Peyton"</em> on second reference, never just "Patrick."</li>
-            <li>Country names by name. Ministry centers by their actual name.</li>
-            <li><em>"The Rosary"</em> as a proper noun. Capital R.</li>
-          </ul>
-        </div>
-        <div class="vr-col vr-col-foil">
-          <p class="vr-h">We avoid</p>
-          <ul>
-            <li>Theological jargon where plain English works.</li>
-            <li><em>"Intercessory familial communion"</em> when we mean family prayer.</li>
-            <li><em>"Stakeholders"</em> or <em>"audience segments"</em> for the people we serve.</li>
-            <li>Hyperbole. We do not "transform lives." Families transform their own lives. We support them.</li>
-            <li>Generic mission language. Every sentence should be unmistakably HCFM.</li>
-            <li><em>"Catholic content"</em> as a category. We make HCFM content. It is Catholic by virtue of who we are.</li>
-            <li>Acronyms before they have been spelled out.</li>
-          </ul>
-        </div>
-      </div>
+      {% module "voice_tone_table" path="../modules/hcfm-rich-text-block",
+        heading="Tone by context", heading_level="h2",
+        content="<p>The same brand has different volumes in different rooms. Match the tone to the moment.</p> <table class=\"spec-table voice-table\"> <thead><tr><th>Context</th><th>Tone</th><th>Example openings</th></tr></thead> <tbody> <tr><td>Donor letter</td><td>Warm, grateful, named</td><td>\"Dear friends in Christ, your support this year has reached…\"</td></tr> <tr><td>Social caption</td><td>Plain, devotional, short</td><td>\"Today, we honor the Holy Name of Jesus…\"</td></tr> <tr><td>Pastoral reflection</td><td>Reverent, narrative</td><td>\"On a rocky hill outside Jerusalem…\"</td></tr> <tr><td>Vendor brief</td><td>Direct, specific</td><td>\"Use HCFM Blue (#0047BB / Pantone 2728C). Yellow Gold accents only above 18 px.\"</td></tr> <tr><td>Ministry-center directive</td><td>Practical, actionable</td><td>\"Effective immediately, all new social posts use the 2026 system. Existing posts can phase out as they cycle.\"</td></tr> <tr><td>Press release</td><td>Formal, named, factual</td><td>\"Holy Cross Family Ministries today announced…\"</td></tr> </tbody> </table>"
+      %}
 
-      <h2>Tone by context</h2>
-      <p>The same brand has different volumes in different rooms. Match the tone to the moment.</p>
+      {% module "voice_editorial_naming" path="../modules/hcfm-rich-text-block",
+        heading="Editorial conventions", heading_level="h2",
+        content="<p>The reference for writers, editors, content reviewers, and ministry-center communicators. These are the rules HCFM applies consistently across email, social, print, video, and web. Follow them and your copy reads like HCFM.</p> <h3>Naming and word usage</h3> <table class=\"spec-table\"> <thead><tr><th>Convention</th><th>Rule</th></tr></thead> <tbody> <tr><td>HCFM is a singular noun</td><td>\"HCFM serves families…\", never \"HCFM serve.\" The word \"well-being\" in the mission statement is hyphenated.</td></tr> <tr><td>The Congregation of Holy Cross</td><td>The correct full name. Never \"the Holy Cross.\" HCFM is sponsored by the Congregation, not by \"the Holy Cross.\"</td></tr> <tr><td>Father, not Fr.</td><td>Use \"Father Name\" rather than the abbreviated \"Fr. Name\" whenever possible. Use of first or last name depends on the priest's preference and the formality of the copy.</td></tr> <tr><td>C.S.C.</td><td>The Congregation of Holy Cross initials use periods. Typically set off with commas: \"Father Fred Jenga, C.S.C., is the president.\"</td></tr> <tr><td>Father Peyton, naming rules</td><td>Refer to him as <em>Venerable Patrick Peyton</em> OR <em>Father Patrick Peyton, C.S.C.</em>, never both at once. Per Catholic Church guidelines, when a sainthood title is used (Saint, Venerable, Blessed), the title \"Father\" or \"Brother\" is dropped, and the Congregation initials are not appended after the name. After first reference, \"Father Peyton\" is fine.</td></tr> <tr><td>Father Peyton's birth date</td><td>Father Peyton is no longer living. Avoid the word \"birthday.\" Events scheduled on or around his birth date should be titled \"Anniversary of Birth,\" \"Celebration of Birth,\" or \"Anniversary of Birthday.\"</td></tr> <tr><td>Father Moreau</td><td>Use the English version of his name: <em>Basil Anthony Mary Moreau, C.S.C.</em>, or <em>Blessed Basil Anthony Moreau</em>.</td></tr> <tr><td>The Rosary</td><td>Always capital R, in all circumstances. (AP grammar standards lowercase it; this is an HCFM convention. Vendor materials may render it altered.) \"Rosary makers\" is two words.</td></tr> <tr><td>Ministry Centers</td><td>All HCFM offices around the world are referred to as <em>Ministry Centers</em>. Never use \"office.\" Never use \"Mission Center.\"</td></tr> <tr><td>The Father Peyton Center</td><td>The building and campus in North Easton, and the official name of the sub-ministry (formerly \"Museum of Family Prayer\"). The chapel there is \"Our Lady of the Holy Rosary Chapel.\" The chapel at the Holy Cross Center is \"St. Joseph Chapel\", not \"St. Joseph's.\"</td></tr> <tr><td>Catholic Mom</td><td>Refer to as <em>Catholic Mom</em> or <em>Catholic Mom.com</em> (include the \".com\" whenever possible). Tagline: \"A community of women celebrating all things faith, family, and fun.\"</td></tr> <tr><td>Family Theater Productions</td><td>Use the full name in external communications. The abbreviation \"FTP\" may be used internally when space is tight, but is not the preferred format. Never just \"Family Theater.\" Mission: \"Inspire, Educate, and Entertain.\" Tagline: \"Produces family, faith-based media.\"</td></tr> <tr><td>Catholic Central</td><td>Two separate words. Include the \".com\" whenever possible. Taglines: \"Insights on all things Catholic\" and \"Entertaining and Informing #Enterforming\", note the hashtag has a capital E and remains one word.</td></tr> <tr><td>Ireland visitors center</td><td>\"The Father Patrick Peyton, C.S.C., Memorial Centre.\"</td></tr> <tr><td>Reverential capitalization</td><td>Names, adjectives, and pronouns referring to God are capitalized: \"Creator God,\" \"Your love for us,\" \"His blessings on us.\"</td></tr> </tbody> </table>"
+      %}
 
-      <table class="spec-table voice-table">
-        <thead><tr><th>Context</th><th>Tone</th><th>Example openings</th></tr></thead>
-        <tbody>
-          <tr><td>Donor letter</td><td>Warm, grateful, named</td><td>"Dear friends in Christ, your support this year has reached…"</td></tr>
-          <tr><td>Social caption</td><td>Plain, devotional, short</td><td>"Today, we honor the Holy Name of Jesus…"</td></tr>
-          <tr><td>Pastoral reflection</td><td>Reverent, narrative</td><td>"On a rocky hill outside Jerusalem…"</td></tr>
-          <tr><td>Vendor brief</td><td>Direct, specific</td><td>"Use HCFM Blue (#0047BB / Pantone 2728C). Yellow Gold accents only above 18 px."</td></tr>
-          <tr><td>Ministry-center directive</td><td>Practical, actionable</td><td>"Effective immediately, all new social posts use the 2026 system. Existing posts can phase out as they cycle."</td></tr>
-          <tr><td>Press release</td><td>Formal, named, factual</td><td>"Holy Cross Family Ministries today announced…"</td></tr>
-        </tbody>
-      </table>
+      {% module "voice_peyton_messages" path="../modules/hcfm-rich-text-block",
+        heading="Father Peyton's two messages", heading_level="h3",
+        content="<p>Father Peyton's vision lives in two phrases. They are intentionally specific, treat them as <strong>messages</strong>, not slogans.</p> <div class=\"voice-grid\"> <article class=\"voice-col\"> <p class=\"voice-col-eyebrow\">Trademark, ™</p> <h3>The Family That Prays Together Stays Together</h3> <p class=\"voice-col-intro\">Family Rosary, Inc. holds a trademark (™) on this phrase. It is paired with the Vision and is the foundational HCFM message. Use upper, lower, or mixed case depending on the communication piece.</p> </article> <article class=\"voice-col\"> <p class=\"voice-col-eyebrow\">Registered trademark, ®</p> <h3>A World at Prayer is a World at Peace</h3> <p class=\"voice-col-intro\">Family Rosary, Inc. holds a registered trademark (®) on this phrase. Use as a complementary message in donor, ministry-center, and event communications.</p> </article> </div> <div class=\"info-block\"> <h3>Punctuation and usage rules, both messages</h3> <ul> <li><strong>No period</strong> at the end of the phrase if it stands alone in a graphic.</li> <li><strong>Period</strong> at the end if used in body copy or quoted as Father Peyton's words.</li> <li><strong>A comma is never used</strong> within either phrase.</li> <li>Refer to them as <em>messages</em> or <em>Father Peyton's vision</em>. Do not call them \"slogan\" or \"motto.\"</li> <li>HCFM does not stop people or organizations from using these phrases. We do, on occasion, ask people to attribute them to Father Peyton.</li> </ul> </div>"
+      %}
 
-      <h2>Editorial conventions</h2>
-      <p>The reference for writers, editors, content reviewers, and ministry-center communicators. These are the rules HCFM applies consistently across email, social, print, video, and web. Follow them and your copy reads like HCFM.</p>
-
-      <h3>Naming and word usage</h3>
-      <table class="spec-table">
-        <thead><tr><th>Convention</th><th>Rule</th></tr></thead>
-        <tbody>
-          <tr><td>HCFM is a singular noun</td><td>"HCFM serves families…", never "HCFM serve." The word "well-being" in the mission statement is hyphenated.</td></tr>
-          <tr><td>The Congregation of Holy Cross</td><td>The correct full name. Never "the Holy Cross." HCFM is sponsored by the Congregation, not by "the Holy Cross."</td></tr>
-          <tr><td>Father, not Fr.</td><td>Use "Father Name" rather than the abbreviated "Fr. Name" whenever possible. Use of first or last name depends on the priest's preference and the formality of the copy.</td></tr>
-          <tr><td>C.S.C.</td><td>The Congregation of Holy Cross initials use periods. Typically set off with commas: "Father Fred Jenga, C.S.C., is the president."</td></tr>
-          <tr><td>Father Peyton, naming rules</td><td>Refer to him as <em>Venerable Patrick Peyton</em> OR <em>Father Patrick Peyton, C.S.C.</em>, never both at once. Per Catholic Church guidelines, when a sainthood title is used (Saint, Venerable, Blessed), the title "Father" or "Brother" is dropped, and the Congregation initials are not appended after the name. After first reference, "Father Peyton" is fine.</td></tr>
-          <tr><td>Father Peyton's birth date</td><td>Father Peyton is no longer living. Avoid the word "birthday." Events scheduled on or around his birth date should be titled "Anniversary of Birth," "Celebration of Birth," or "Anniversary of Birthday."</td></tr>
-          <tr><td>Father Moreau</td><td>Use the English version of his name: <em>Basil Anthony Mary Moreau, C.S.C.</em>, or <em>Blessed Basil Anthony Moreau</em>.</td></tr>
-          <tr><td>The Rosary</td><td>Always capital R, in all circumstances. (AP grammar standards lowercase it; this is an HCFM convention. Vendor materials may render it altered.) "Rosary makers" is two words.</td></tr>
-          <tr><td>Ministry Centers</td><td>All HCFM offices around the world are referred to as <em>Ministry Centers</em>. Never use "office." Never use "Mission Center."</td></tr>
-          <tr><td>The Father Peyton Center</td><td>The building and campus in North Easton, and the official name of the sub-ministry (formerly "Museum of Family Prayer"). The chapel there is "Our Lady of the Holy Rosary Chapel." The chapel at the Holy Cross Center is "St. Joseph Chapel", not "St. Joseph's."</td></tr>
-          <tr><td>Catholic Mom</td><td>Refer to as <em>Catholic Mom</em> or <em>Catholic Mom.com</em> (include the ".com" whenever possible). Tagline: "A community of women celebrating all things faith, family, and fun."</td></tr>
-          <tr><td>Family Theater Productions</td><td>Use the full name in external communications. The abbreviation "FTP" may be used internally when space is tight, but is not the preferred format. Never just "Family Theater." Mission: "Inspire, Educate, and Entertain." Tagline: "Produces family, faith-based media."</td></tr>
-          <tr><td>Catholic Central</td><td>Two separate words. Include the ".com" whenever possible. Taglines: "Insights on all things Catholic" and "Entertaining and Informing #Enterforming", note the hashtag has a capital E and remains one word.</td></tr>
-          <tr><td>Ireland visitors center</td><td>"The Father Patrick Peyton, C.S.C., Memorial Centre."</td></tr>
-          <tr><td>Reverential capitalization</td><td>Names, adjectives, and pronouns referring to God are capitalized: "Creator God," "Your love for us," "His blessings on us."</td></tr>
-        </tbody>
-      </table>
-
-      <h3>Father Peyton's two messages</h3>
-      <p>Father Peyton's vision lives in two phrases. They are intentionally specific, treat them as <strong>messages</strong>, not slogans.</p>
-
-      <div class="voice-grid">
-        <article class="voice-col">
-          <p class="voice-col-eyebrow">Trademark, ™</p>
-          <h3>The Family That Prays Together Stays Together</h3>
-          <p class="voice-col-intro">Family Rosary, Inc. holds a trademark (™) on this phrase. It is paired with the Vision and is the foundational HCFM message. Use upper, lower, or mixed case depending on the communication piece.</p>
-        </article>
-        <article class="voice-col">
-          <p class="voice-col-eyebrow">Registered trademark, ®</p>
-          <h3>A World at Prayer is a World at Peace</h3>
-          <p class="voice-col-intro">Family Rosary, Inc. holds a registered trademark (®) on this phrase. Use as a complementary message in donor, ministry-center, and event communications.</p>
-        </article>
-      </div>
-
-      <div class="info-block">
-        <h3>Punctuation and usage rules, both messages</h3>
-        <ul>
-          <li><strong>No period</strong> at the end of the phrase if it stands alone in a graphic.</li>
-          <li><strong>Period</strong> at the end if used in body copy or quoted as Father Peyton's words.</li>
-          <li><strong>A comma is never used</strong> within either phrase.</li>
-          <li>Refer to them as <em>messages</em> or <em>Father Peyton's vision</em>. Do not call them "slogan" or "motto."</li>
-          <li>HCFM does not stop people or organizations from using these phrases. We do, on occasion, ask people to attribute them to Father Peyton.</li>
-        </ul>
-      </div>
-
-      <h3>Trademark and copyright notation</h3>
-      <table class="spec-table">
-        <thead><tr><th>Mark</th><th>Notation</th><th>Where to apply</th></tr></thead>
-        <tbody>
-          <tr><td>Copyright</td><td>© (year) The Family Rosary, Inc., All Rights Reserved.</td><td>Packaging, product, formal publications. Space-permitting use the full notation; otherwise the year + © symbol is acceptable.</td></tr>
-          <tr><td>Trademark ™</td><td>"The family that prays together stays together."<sup>™</sup></td><td>First reference in any external publication, packaging, or product where the message appears.</td></tr>
-          <tr><td>Registered ®</td><td>"A world at prayer is a world at peace."<sup>®</sup></td><td>First reference in any external publication, packaging, or product where the message appears.</td></tr>
-        </tbody>
-      </table>
+      {% module "voice_trademark_table" path="../modules/hcfm-rich-text-block",
+        heading="Trademark and copyright notation", heading_level="h3",
+        content="<table class=\"spec-table\"> <thead><tr><th>Mark</th><th>Notation</th><th>Where to apply</th></tr></thead> <tbody> <tr><td>Copyright</td><td>© (year) The Family Rosary, Inc., All Rights Reserved.</td><td>Packaging, product, formal publications. Space-permitting use the full notation; otherwise the year + © symbol is acceptable.</td></tr> <tr><td>Trademark ™</td><td>\"The family that prays together stays together.\"<sup>™</sup></td><td>First reference in any external publication, packaging, or product where the message appears.</td></tr> <tr><td>Registered ®</td><td>\"A world at prayer is a world at peace.\"<sup>®</sup></td><td>First reference in any external publication, packaging, or product where the message appears.</td></tr> </tbody> </table>"
+      %}
     </section>
 
     <!-- ==================== IMAGERY ==================== -->
@@ -1083,76 +971,63 @@
         ]
       %}
 
-      <h2>Best practices</h2>
-      <p>What we look for when selecting or commissioning imagery.</p>
-      <div class="info-block">
-        <ul>
-          <li><strong>Use high-quality images only.</strong> No grainy, low-resolution, or compressed-to-death photos.</li>
-          <li><strong>Apply dark overlays when text goes over a photo.</strong> Adjust opacity by eye until the text is readable.</li>
-          <li><strong>Choose real over staged.</strong> Real families, real prayer, real local context. Avoid stock photography.</li>
-          <li><strong>Honor the local culture.</strong> Imagery from ministry centers should reflect the actual culture, not a generic "international" aesthetic.</li>
-          <li><strong>The image serves the message.</strong> Never crop, color-grade, or stylize an image to the point that the message is lost.</li>
-        </ul>
-      </div>
+      {% module "imagery_best_practices" path="../modules/hcfm-rich-text-block",
+        heading="Best practices", heading_level="h2",
+        content="<p>What we look for when selecting or commissioning imagery.</p> <div class=\"info-block\"> <ul> <li><strong>Use high-quality images only.</strong> No grainy, low-resolution, or compressed-to-death photos.</li> <li><strong>Apply dark overlays when text goes over a photo.</strong> Adjust opacity by eye until the text is readable.</li> <li><strong>Choose real over staged.</strong> Real families, real prayer, real local context. Avoid stock photography.</li> <li><strong>Honor the local culture.</strong> Imagery from ministry centers should reflect the actual culture, not a generic \"international\" aesthetic.</li> <li><strong>The image serves the message.</strong> Never crop, color-grade, or stylize an image to the point that the message is lost.</li> </ul> </div>"
+      %}
 
-      <h2>Composition techniques</h2>
-      <p>Five composition techniques every HCFM photographer should know. They come from the Philippines and East Africa Photography Guide and apply across all ministry centers.</p>
+      {% module "imagery_comp_intro" path="../modules/hcfm-rich-text-block",
+        heading="Composition techniques", heading_level="h2",
+        content="<p>Five composition techniques every HCFM photographer should know. They come from the Philippines and East Africa Photography Guide and apply across all ministry centers.</p>"
+      %}
 
       <div class="comp-grid">
-        <article class="comp-card">
-          <h3>Rule of thirds</h3>
-          <p>Divide the image into nine equal parts with two vertical and two horizontal lines. Place the main subject at the intersections or along the lines to create a balanced scene.</p>
-        </article>
-        <article class="comp-card">
-          <h3>Frame within a frame</h3>
-          <p>Use natural elements like trees or rocks, or man-made objects like windows and doorways, to draw attention to the subject. Adds depth and visual interest.</p>
-        </article>
-        <article class="comp-card">
-          <h3>Leading lines</h3>
-          <p>Use natural elements (rivers, roads, pathways) or man-made elements (fences, walls, staircases) to create a visual path that guides the viewer's eye to the subject.</p>
-        </article>
-        <article class="comp-card">
-          <h3>Filling the frame</h3>
-          <p>Move closer to the subject. The focus falls on facial expression and details that would otherwise be missed. Bonus: distracting backgrounds disappear.</p>
-        </article>
-        <article class="comp-card">
-          <h3>Unusual point of view</h3>
-          <p>Shoot from above, below, or an angle most photographers will not bother with. Even if you look funny taking the photo, the result is usually more compelling.</p>
-        </article>
+        {# Composition cards — update title and body in HubSpot editor. To add a technique: duplicate a module. #}
+        {% module "comp_card_rule_of_thirds" path="../modules/hcfm-comp-card",
+          card_title="Rule of thirds",
+          card_body="<p>Divide the image into nine equal parts with two vertical and two horizontal lines. Place the main subject at the intersections or along the lines to create a balanced scene.</p>"
+        %}
+        {% module "comp_card_frame_within_frame" path="../modules/hcfm-comp-card",
+          card_title="Frame within a frame",
+          card_body="<p>Use natural elements like trees or rocks, or man-made objects like windows and doorways, to draw attention to the subject. Adds depth and visual interest.</p>"
+        %}
+        {% module "comp_card_leading_lines" path="../modules/hcfm-comp-card",
+          card_title="Leading lines",
+          card_body="<p>Use natural elements (rivers, roads, pathways) or man-made elements (fences, walls, staircases) to create a visual path that guides the viewer\'s eye to the subject.</p>"
+        %}
+        {% module "comp_card_filling_frame" path="../modules/hcfm-comp-card",
+          card_title="Filling the frame",
+          card_body="<p>Move closer to the subject. The focus falls on facial expression and details that would otherwise be missed. Bonus: distracting backgrounds disappear.</p>"
+        %}
+        {% module "comp_card_unusual_pov" path="../modules/hcfm-comp-card",
+          card_title="Unusual point of view",
+          card_body="<p>Shoot from above, below, or an angle most photographers will not bother with. Even if you look funny taking the photo, the result is usually more compelling.</p>"
+        %}
       </div>
 
-      <h2>Event shot lists</h2>
-      <p>For HCFM events, ministry-center launches, donor gatherings, and ceremonial occasions, work from a shot list. A photographer with a list captures the story; a photographer without one captures whatever happens to walk in front of the camera.</p>
+      {% module "imagery_shot_intro" path="../modules/hcfm-rich-text-block",
+        heading="Event shot lists", heading_level="h2",
+        content="<p>For HCFM events, ministry-center launches, donor gatherings, and ceremonial occasions, work from a shot list. A photographer with a list captures the story; a photographer without one captures whatever happens to walk in front of the camera.</p>"
+      %}
 
       <div class="shot-list">
-        <article class="shot-row">
-          <span class="shot-num">1</span>
-          <div class="shot-text">
-            <h3>Details</h3>
-            <p>Anything unique to the event with branding on it. Signs, programs, gift bags, related collateral. For dinners and feasts, photograph food and set-up. The details are the event's signature.</p>
-          </div>
-        </article>
-        <article class="shot-row">
-          <span class="shot-num">2</span>
-          <div class="shot-text">
-            <h3>Venue photos</h3>
-            <p>Take a "before" shot before attendees arrive. Take another shot mid-event when the venue is full. Both serve different purposes in the recap.</p>
-          </div>
-        </article>
-        <article class="shot-row">
-          <span class="shot-num">3</span>
-          <div class="shot-text">
-            <h3>Attendees</h3>
-            <p>A wide variety of candid shots. Capture emotion, conversation, prayer, joy. Include both close-ups and wide-angle shots that show the size and scope of the event.</p>
-          </div>
-        </article>
-        <article class="shot-row">
-          <span class="shot-num">4</span>
-          <div class="shot-text">
-            <h3>Speakers and special guests</h3>
-            <p>Photographs of speakers and special guests on stage or interacting with the audience demonstrate respect for their contributions. Capture key moments, never miss the keynote.</p>
-          </div>
-        </article>
+        {# Shot list items — update number, heading, and description in HubSpot editor. To add a shot: duplicate a module. #}
+        {% module "shot_row_1" path="../modules/hcfm-shot-row",
+          shot_number="1", shot_title="Details",
+          shot_body="<p>Anything unique to the event with branding on it. Signs, programs, gift bags, related collateral. For dinners and feasts, photograph food and set-up. The details are the event\'s signature.</p>"
+        %}
+        {% module "shot_row_2" path="../modules/hcfm-shot-row",
+          shot_number="2", shot_title="Venue photos",
+          shot_body="<p>Take a \"before\" shot before attendees arrive. Take another shot mid-event when the venue is full. Both serve different purposes in the recap.</p>"
+        %}
+        {% module "shot_row_3" path="../modules/hcfm-shot-row",
+          shot_number="3", shot_title="Attendees",
+          shot_body="<p>A wide variety of candid shots. Capture emotion, conversation, prayer, joy. Include both close-ups and wide-angle shots that show the size and scope of the event.</p>"
+        %}
+        {% module "shot_row_4" path="../modules/hcfm-shot-row",
+          shot_number="4", shot_title="Speakers and special guests",
+          shot_body="<p>Photographs of speakers and special guests on stage or interacting with the audience demonstrate respect for their contributions. Capture key moments, never miss the keynote.</p>"
+        %}
       </div>
     </section>
 
@@ -1164,7 +1039,9 @@
         page_intro="Approved stylistic elements that give HCFM designs their distinctive look. Use them thoughtfully. Less is more. The four elements below are the only approved decorative treatments."
       %}
 
-      <h2>The four approved elements</h2>
+      {% module "de_four_heading" path="../modules/hcfm-rich-text-block",
+        heading="The four approved elements", heading_level="h2", content=""
+      %}
 
       <div class="elements-list">
         <article class="elt-row">
@@ -1208,30 +1085,15 @@
         </article>
       </div>
 
-      <h2>How to use them</h2>
-      <p>The single most important rule about design elements is restraint. Less is more. The four elements above are tools, not requirements. Most HCFM designs use one element well; some combine two carefully; almost none should combine three or more.</p>
+      {% module "de_how_to_use" path="../modules/hcfm-rich-text-block",
+        heading="How to use them", heading_level="h2",
+        content="<p>The single most important rule about design elements is restraint. Less is more. The four elements above are tools, not requirements. Most HCFM designs use one element well; some combine two carefully; almost none should combine three or more.</p> <div class=\"info-block info-block-strong\"> <p class=\"ib-headline\">The rule: one or two elements per design.</p> <p>Combining too many creates visual clutter. A clean, focused design always outperforms a busy one.</p> </div> <div class=\"elt-examples\"> <div class=\"elt-ex\"> <p class=\"elt-ex-tag\">Worth doing</p> <p>A social post with a photo, a 50 percent dark overlay for text readability, and a thin gold border framing the composition. Three elements working together, each doing one job, none competing.</p> </div> <div class=\"elt-ex elt-ex-restraint\"> <p class=\"elt-ex-tag\">Worth resisting</p> <p>A design with a color fade background, curved shapes behind every word, a gold border, multiple font styles, and animation on top. Each element fighting for attention. The brand reads weaker, not stronger.</p> </div> </div>"
+      %}
 
-      <div class="info-block info-block-strong">
-        <p class="ib-headline">The rule: one or two elements per design.</p>
-        <p>Combining too many creates visual clutter. A clean, focused design always outperforms a busy one.</p>
-      </div>
-
-      <div class="elt-examples">
-        <div class="elt-ex">
-          <p class="elt-ex-tag">Worth doing</p>
-          <p>A social post with a photo, a 50 percent dark overlay for text readability, and a thin gold border framing the composition. Three elements working together, each doing one job, none competing.</p>
-        </div>
-        <div class="elt-ex elt-ex-restraint">
-          <p class="elt-ex-tag">Worth resisting</p>
-          <p>A design with a color fade background, curved shapes behind every word, a gold border, multiple font styles, and animation on top. Each element fighting for attention. The brand reads weaker, not stronger.</p>
-        </div>
-      </div>
-
-      <h2>Visual effects</h2>
-      <div class="info-block info-block-warning">
-        <p><em>Visual effects should be handled sparingly and respectfully. Excessive animation or "over-the-top" treatments will damage brand recognition and diminish the reputation of Holy Cross Family Ministries.</em></p>
-        <p>When in doubt, keep it simple. A clean, clear design is always better than a busy one.</p>
-      </div>
+      {% module "de_visual_effects" path="../modules/hcfm-rich-text-block",
+        heading="Visual effects", heading_level="h2",
+        content="<div class=\"info-block info-block-warning\"> <p><em>Visual effects should be handled sparingly and respectfully. Excessive animation or \"over-the-top\" treatments will damage brand recognition and diminish the reputation of Holy Cross Family Ministries.</em></p> <p>When in doubt, keep it simple. A clean, clear design is always better than a busy one.</p> </div>"
+      %}
     </section>
 
     <!-- ==================== STATIONERY ==================== -->
@@ -1242,28 +1104,24 @@
         page_intro="Print specifications for HCFM letterhead, envelopes, business cards, and mailing labels. Editable Word templates are in <a href=\"#downloads\">Resources / Downloads</a>."
       %}
 
-      <h2>Print specifications</h2>
-      <p>The specs below come directly from the production specifications used at the Easton headquarters. Vendors who produce HCFM stationery should match these exactly.</p>
+      {% module "stationery_print_spec" path="../modules/hcfm-rich-text-block",
+        heading="Print specifications", heading_level="h2",
+        content="<p>The specs below come directly from the production specifications used at the Easton headquarters. Vendors who produce HCFM stationery should match these exactly.</p> <table class=\"spec-table\"> <thead><tr><th>Item</th><th>Dimensions</th><th>Stock</th><th>Inks</th></tr></thead> <tbody> <tr><td>Letterhead</td><td>8.5 × 11 in</td><td>Strathmore 24# Bright White Wove</td><td>Pantone 871 U + 2728 U</td></tr> <tr><td>#10 Envelope</td><td>9.5 × 4.125 in</td><td>Strathmore 24# Bright White Wove</td><td>Pantone 871 U + 2728 U</td></tr> <tr><td>Mailing Label</td><td>5.625 × 4 in</td><td>Crack-n-Peel</td><td>Pantone 2728 U</td></tr> <tr><td>Business Card</td><td>3.5 × 2 in</td><td>Strathmore 130# DTC Cover</td><td>Pantone 871 U + 2728 U</td></tr> </tbody> </table>"
+      %}
 
-      <table class="spec-table">
-        <thead><tr><th>Item</th><th>Dimensions</th><th>Stock</th><th>Inks</th></tr></thead>
-        <tbody>
-          <tr><td>Letterhead</td><td>8.5 × 11 in</td><td>Strathmore 24# Bright White Wove</td><td>Pantone 871 U + 2728 U</td></tr>
-          <tr><td>#10 Envelope</td><td>9.5 × 4.125 in</td><td>Strathmore 24# Bright White Wove</td><td>Pantone 871 U + 2728 U</td></tr>
-          <tr><td>Mailing Label</td><td>5.625 × 4 in</td><td>Crack-n-Peel</td><td>Pantone 2728 U</td></tr>
-          <tr><td>Business Card</td><td>3.5 × 2 in</td><td>Strathmore 130# DTC Cover</td><td>Pantone 871 U + 2728 U</td></tr>
-        </tbody>
-      </table>
-
-      <h2>Letterhead</h2>
-      <p>The Letterhead layout is carefully set up in Adobe InDesign and should not be changed. When typing the letter body, use Times or Times Roman with the spacing rules called out on the right. The Peyton attribution line and mailing address footer are part of the system; copy them exactly when producing a sub-ministry letterhead.</p>
+      {% module "stationery_letterhead_intro" path="../modules/hcfm-rich-text-block",
+        heading="Letterhead", heading_level="h2",
+        content="<p>The Letterhead layout is carefully set up in Adobe InDesign and should not be changed. When typing the letter body, use Times or Times Roman with the spacing rules called out on the right. The Peyton attribution line and mailing address footer are part of the system; copy them exactly when producing a sub-ministry letterhead.</p>"
+      %}
       <figure class="stationery-figure">
         <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/visuals/hcfm_letterhead.webp" alt="HCFM letterhead layout at full size with 2.3 inch top margin, 1.5 inch left margin, and the Peyton attribution and mailing address footer" loading="lazy">
         <figcaption>The canonical HCFM letterhead. 2.3″ top margin, 1.5″ left margin, Peyton attribution + mailing-address footer.</figcaption>
       </figure>
 
-      <h2>#10 Envelope</h2>
-      <p>The #10 Business Envelope layout is carefully set up in Adobe InDesign and should not be changed. When typing the send-to address, use Times or Times Roman. The address begins 1.75 inches from the top and 4.875 inches from the left.</p>
+      {% module "stationery_envelope_intro" path="../modules/hcfm-rich-text-block",
+        heading="#10 Envelope", heading_level="h2",
+        content="<p>The #10 Business Envelope layout is carefully set up in Adobe InDesign and should not be changed. When typing the send-to address, use Times or Times Roman. The address begins 1.75 inches from the top and 4.875 inches from the left.</p>"
+      %}
       <div class="stationery-grid">
         <figure class="stationery-figure">
           <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/visuals/hcfm_envelope_front.webp" alt="HCFM #10 envelope front with return address in HCFM Blue and Muted Gold mark in upper left" loading="lazy">
@@ -1275,15 +1133,19 @@
         </figure>
       </div>
 
-      <h2>Mailing Label</h2>
-      <p>The Mailing Label layout is carefully set up in Adobe InDesign and should not be changed. Use Times or Times Roman for the send-to address. White Crack-n-Peel uncoated stock, single ink (Pantone 2728 U).</p>
+      {% module "stationery_label_intro" path="../modules/hcfm-rich-text-block",
+        heading="Mailing Label", heading_level="h2",
+        content="<p>The Mailing Label layout is carefully set up in Adobe InDesign and should not be changed. Use Times or Times Roman for the send-to address. White Crack-n-Peel uncoated stock, single ink (Pantone 2728 U).</p>"
+      %}
       <figure class="stationery-figure">
         <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/visuals/hcfm_mailing_label.webp" alt="HCFM mailing label with mark and address block in HCFM Blue on white" loading="lazy">
         <figcaption>Mailing label · 5.625 × 4 in · Pantone 2728 U on Crack-n-Peel.</figcaption>
       </figure>
 
-      <h2>Business Cards</h2>
-      <p>The Business Card layout is carefully composed and should not be changed. Same Pantone ink combination as the letterhead (871 U + 2728 U) so a single print run can cover both. To request a personalized card, email <a href="mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=HCFM%20Business%20Card%20Request">Victoria or Emmanuel</a> with your name, title, and contact details.</p>
+      {% module "stationery_bizcards_intro" path="../modules/hcfm-rich-text-block",
+        heading="Business Cards", heading_level="h2",
+        content="<p>The Business Card layout is carefully composed and should not be changed. Same Pantone ink combination as the letterhead (871 U + 2728 U) so a single print run can cover both. To request a personalized card, email <a href=\"mailto:vhassan@hcfm.org,eepau@hcfm.org?subject=HCFM%20Business%20Card%20Request\">Victoria or Emmanuel</a> with your name, title, and contact details.</p>"
+      %}
       {# Business cards — update names, titles, phones, and emails in HubSpot editor.
          To add a new person: duplicate one of the front-card modules and fill in their details.
          The back card never changes — it is always the standard HCFM brand back. #}
@@ -1310,19 +1172,9 @@
         %}
       </div>
 
-      <h2>Letterhead body type</h2>
-      <p>Use Calluna for letter body text. It carries warmth and reads well in long-form letters. Whitney is acceptable for headers and signatory blocks. Avoid Times Roman; the older SharePoint guidance suggesting Times Roman is superseded.</p>
-
-      <h2>Mailing address</h2>
-      <p>The official HCFM mailing address. Use this on all formal correspondence, donor letters, sponsor materials, and printed stationery. Sub-ministries that operate from regional offices should use their own regional address, this is the parent HCFM address only.</p>
-      <div class="info-block">
-        <h3>HCFM Headquarters</h3>
-        <p><strong>Holy Cross Family Ministries</strong></p>
-        <p>518 Washington Street<br>North Easton, MA 02356<br>United States</p>
-      </div>
-
-      <p class="page-foot-link">Editable Word templates for the six sub-ministry letterheads are in <a href="#downloads">Resources / Downloads → Templates</a>.</p>
-    </section>
+      {% module "stationery_body_type_address" path="../modules/hcfm-rich-text-block",
+        content="<h3>Letterhead body type</h3> <p>Use Calluna for letter body text. It carries warmth and reads well in long-form letters. Whitney is acceptable for headers and signatory blocks. Avoid Times Roman; the older SharePoint guidance suggesting Times Roman is superseded.</p> <h3>Mailing address</h3> <p>The official HCFM mailing address. Use this on all formal correspondence, donor letters, sponsor materials, and printed stationery. Sub-ministries that operate from regional offices should use their own regional address, this is the parent HCFM address only.</p> <div class=\"info-block\"> <h3>HCFM Headquarters</h3> <p><strong>Holy Cross Family Ministries</strong></p> <p>518 Washington Street<br>North Easton, MA 02356<br>United States</p> </div> <p class=\"page-foot-link\">Editable Word templates for the six sub-ministry letterheads are in <a href=\"#downloads\">Resources / Downloads → Templates</a>.</p>"
+      %}    </section>
 
     <!-- ==================== PLATFORM DIMENSIONS ==================== -->
     <section class="page" id="platforms" data-title="Platform Dimensions">
@@ -1332,129 +1184,61 @@
         page_intro="Approved sizes for content across the major social and content platforms. Designs that fall short get cropped. Designs that overshoot get downsized awkwardly. Use these dimensions exactly."
       %}
 
-      <h2>At a glance</h2>
-      <p>Each platform's accepted aspect ratios shown at scale. Hover for the pixel dimensions.</p>
+      {% module "platforms_atglance_intro" path="../modules/hcfm-rich-text-block",
+        heading="At a glance", heading_level="h2",
+        content="<p>Each platform\'s accepted aspect ratios shown at scale. Hover for the pixel dimensions.</p>"
+      %}
 
       <div class="dim-grid">
-        <article class="dim-card">
-          <div class="dim-shape dim-portrait" title="1080 × 1350"><span>1080×1350</span></div>
-          <p class="dim-platform">Instagram</p>
-          <p class="dim-type">Static image (portrait)</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-vertical" title="1080 × 1920"><span>1080×1920</span></div>
-          <p class="dim-platform">Instagram</p>
-          <p class="dim-type">Reel / Story</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-portrait" title="1080 × 1350"><span>1080×1350</span></div>
-          <p class="dim-platform">Facebook</p>
-          <p class="dim-type">Static image (portrait)</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-landscape" title="1280 × 720"><span>1280×720</span></div>
-          <p class="dim-platform">Facebook</p>
-          <p class="dim-type">Video (feed)</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-vertical" title="1080 × 1920"><span>1080×1920</span></div>
-          <p class="dim-platform">Facebook</p>
-          <p class="dim-type">Reels</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-wide" title="1200 × 627"><span>1200×627</span></div>
-          <p class="dim-platform">LinkedIn</p>
-          <p class="dim-type">Static image</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-portrait" title="1080 × 1350"><span>1080×1350</span></div>
-          <p class="dim-platform">LinkedIn</p>
-          <p class="dim-type">Portrait image</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-wide" title="1200 × 675"><span>1200×675</span></div>
-          <p class="dim-platform">X (Twitter)</p>
-          <p class="dim-type">Static image</p>
-        </article>
-        <article class="dim-card">
-          <div class="dim-shape dim-landscape" title="1280 × 720"><span>1280×720</span></div>
-          <p class="dim-platform">YouTube</p>
-          <p class="dim-type">Thumbnail</p>
-        </article>
+        {# Platform dimension cards — update platform name, content type, dimensions, and shape in HubSpot editor.
+           To add a new size: duplicate a module. shape_class options: dim-portrait, dim-vertical, dim-landscape, dim-wide, dim-square #}
+        {% module "dim_card_ig_portrait" path="../modules/hcfm-dim-card",
+          platform="Instagram", content_type="Static image (portrait)",
+          dimensions="1080×1350", shape_class="dim-portrait"
+        %}
+        {% module "dim_card_ig_reel" path="../modules/hcfm-dim-card",
+          platform="Instagram", content_type="Reel / Story",
+          dimensions="1080×1920", shape_class="dim-vertical"
+        %}
+        {% module "dim_card_fb_portrait" path="../modules/hcfm-dim-card",
+          platform="Facebook", content_type="Static image (portrait)",
+          dimensions="1080×1350", shape_class="dim-portrait"
+        %}
+        {% module "dim_card_fb_video" path="../modules/hcfm-dim-card",
+          platform="Facebook", content_type="Video (feed)",
+          dimensions="1280×720", shape_class="dim-landscape"
+        %}
+        {% module "dim_card_fb_reels" path="../modules/hcfm-dim-card",
+          platform="Facebook", content_type="Reels",
+          dimensions="1080×1920", shape_class="dim-vertical"
+        %}
+        {% module "dim_card_li_static" path="../modules/hcfm-dim-card",
+          platform="LinkedIn", content_type="Static image",
+          dimensions="1200×627", shape_class="dim-wide"
+        %}
+        {% module "dim_card_li_portrait" path="../modules/hcfm-dim-card",
+          platform="LinkedIn", content_type="Portrait image",
+          dimensions="1080×1350", shape_class="dim-portrait"
+        %}
+        {% module "dim_card_x_static" path="../modules/hcfm-dim-card",
+          platform="X (Twitter)", content_type="Static image",
+          dimensions="1200×675", shape_class="dim-wide"
+        %}
+        {% module "dim_card_yt_thumb" path="../modules/hcfm-dim-card",
+          platform="YouTube", content_type="Thumbnail",
+          dimensions="1280×720", shape_class="dim-landscape"
+        %}
       </div>
 
-      <h2>Reference table</h2>
-      <p>Same data, sortable and copyable.</p>
-      <table class="spec-table">
-        <thead><tr><th>Platform</th><th>Content type</th><th>Dimensions (px)</th><th>Aspect ratio</th></tr></thead>
-        <tbody>
-          <tr><td>Instagram</td><td>Static image (portrait)</td><td>1080 × 1350</td><td>4:5</td></tr>
-          <tr><td>Instagram</td><td>Reel / Story</td><td>1080 × 1920</td><td>9:16</td></tr>
-          <tr><td>Facebook</td><td>Static image (portrait)</td><td>1080 × 1350</td><td>4:5</td></tr>
-          <tr><td>Facebook</td><td>Video (feed)</td><td>1280 × 720</td><td>16:9</td></tr>
-          <tr><td>Facebook</td><td>Reels</td><td>1080 × 1920</td><td>9:16</td></tr>
-          <tr><td>LinkedIn</td><td>Static image</td><td>1200 × 627</td><td>1.91:1</td></tr>
-          <tr><td>LinkedIn</td><td>Portrait image</td><td>1080 × 1350</td><td>4:5</td></tr>
-          <tr><td>X (Twitter)</td><td>Static image</td><td>1200 × 675</td><td>16:9</td></tr>
-          <tr><td>YouTube</td><td>Thumbnail</td><td>1280 × 720</td><td>16:9</td></tr>
-        </tbody>
-      </table>
+      {% module "platforms_reftable" path="../modules/hcfm-rich-text-block",
+        heading="Reference table", heading_level="h2",
+        content="<p>Same data, sortable and copyable.</p> <table class=\"spec-table\"> <thead><tr><th>Platform</th><th>Content type</th><th>Dimensions (px)</th><th>Aspect ratio</th></tr></thead> <tbody> <tr><td>Instagram</td><td>Static image (portrait)</td><td>1080 × 1350</td><td>4:5</td></tr> <tr><td>Instagram</td><td>Reel / Story</td><td>1080 × 1920</td><td>9:16</td></tr> <tr><td>Facebook</td><td>Static image (portrait)</td><td>1080 × 1350</td><td>4:5</td></tr> <tr><td>Facebook</td><td>Video (feed)</td><td>1280 × 720</td><td>16:9</td></tr> <tr><td>Facebook</td><td>Reels</td><td>1080 × 1920</td><td>9:16</td></tr> <tr><td>LinkedIn</td><td>Static image</td><td>1200 × 627</td><td>1.91:1</td></tr> <tr><td>LinkedIn</td><td>Portrait image</td><td>1080 × 1350</td><td>4:5</td></tr> <tr><td>X (Twitter)</td><td>Static image</td><td>1200 × 675</td><td>16:9</td></tr> <tr><td>YouTube</td><td>Thumbnail</td><td>1280 × 720</td><td>16:9</td></tr> </tbody> </table>"
+      %}
 
-      <h2>Profile picture rule</h2>
-      <p>The most-asked question about HCFM on social media: what do I put as the profile picture? One rule across every platform.</p>
-
-      <div class="info-block">
-        <h3>The symbol, not the full logotype</h3>
-        <p>Profile pictures display as small as 32 × 32 px on Instagram mobile feed thumbnails and 88 × 88 px on YouTube channel icons. The wordmark "FAMILY MINISTRIES" becomes illegible at those sizes. <strong>Use the symbol alone.</strong></p>
-      </div>
-
-      <h3>Specifications</h3>
-      <table class="spec-table">
-        <thead><tr><th>Spec</th><th>Value</th></tr></thead>
-        <tbody>
-          <tr><td>Source size</td><td>1080 × 1080 px (1:1 square)</td></tr>
-          <tr><td>Symbol fill</td><td>~70–80% of frame, centered</td></tr>
-          <tr><td>File format</td><td>PNG with <strong>solid</strong> background (not transparent)</td></tr>
-          <tr><td>One image, all platforms</td><td>Use the same avatar on Instagram, Facebook, LinkedIn, X, YouTube, TikTok</td></tr>
-        </tbody>
-      </table>
-
-      <h3>Approved color combinations</h3>
-      <table class="spec-table">
-        <thead><tr><th>Background</th><th>Symbol color</th><th>Use for</th><th>Contrast</th></tr></thead>
-        <tbody>
-          <tr><td>White</td><td>HCFM Blue (#0047BB)</td><td>Institutional, formal, official channels</td><td>8.6:1 AAA</td></tr>
-          <tr><td>Black</td><td>Yellow Gold (#FFB500)</td><td><strong>2026 default for social feeds</strong>, high pop, dark-mode-friendly</td><td>11.7:1 AAA</td></tr>
-          <tr><td>HCFM Blue (#0047BB)</td><td>White</td><td>Marian feasts, formal devotional, partner pages</td><td>8.6:1 AAA</td></tr>
-          <tr><td>Black</td><td>White</td><td>Minimalist, conservative, Lent / Advent</td><td>21:1</td></tr>
-        </tbody>
-      </table>
-
-      <h3>Never</h3>
-      <ul>
-        <li>The full logotype (illegible at avatar sizes)</li>
-        <li><strong>Yellow Gold on white</strong>, contrast is 1.9:1, fails accessibility, nearly invisible at thumbnail sizes</li>
-        <li>Muted Gold on white at avatar size, 3.4:1 fails AA at small renders</li>
-        <li>Photo or pattern backgrounds, symbol disappears</li>
-        <li>Drop shadows, glows, gradients, or strokes on the symbol</li>
-        <li>Cropped, partial, or rotated marks</li>
-      </ul>
-
-      <h3>Per-platform minimums</h3>
-      <p>One 1080 × 1080 PNG covers every platform's recommended source size. Platforms downsample for display; supplying a higher source than required keeps the avatar crisp on high-DPI mobile screens.</p>
-      <table class="spec-table">
-        <thead><tr><th>Platform</th><th>Min displayed</th><th>Recommended upload</th></tr></thead>
-        <tbody>
-          <tr><td>Instagram</td><td>320 × 320</td><td>1080 × 1080</td></tr>
-          <tr><td>Facebook page</td><td>170 × 170 (desktop) / 128 × 128 (mobile)</td><td>720 × 720+</td></tr>
-          <tr><td>LinkedIn organization</td><td>400 × 400</td><td>800 × 800+</td></tr>
-          <tr><td>X (Twitter)</td><td>400 × 400</td><td>1080 × 1080</td></tr>
-          <tr><td>YouTube channel</td><td>800 × 800</td><td>800 × 800</td></tr>
-          <tr><td>TikTok</td><td>200 × 200</td><td>1080 × 1080</td></tr>
-        </tbody>
-      </table>
-
-      <p class="page-foot-link">This rule replaces the older HCFM social-media guidance that defaulted to Muted Gold on white as the avatar. The 2026 system elevates Yellow Gold on black as the social-feed default, same symbol, optimized for how the avatar actually renders on a feed.</p>
+      {% module "platforms_profile_pic" path="../modules/hcfm-rich-text-block",
+        heading="Profile picture rule", heading_level="h2",
+        content="<p>The most-asked question about HCFM on social media: what do I put as the profile picture? One rule across every platform.</p> <div class=\"info-block\"> <h3>The symbol, not the full logotype</h3> <p>Profile pictures display as small as 32 × 32 px on Instagram mobile feed thumbnails and 88 × 88 px on YouTube channel icons. The wordmark \"FAMILY MINISTRIES\" becomes illegible at those sizes. <strong>Use the symbol alone.</strong></p> </div> <h3>Specifications</h3> <table class=\"spec-table\"> <thead><tr><th>Spec</th><th>Value</th></tr></thead> <tbody> <tr><td>Source size</td><td>1080 × 1080 px (1:1 square)</td></tr> <tr><td>Symbol fill</td><td>~70–80% of frame, centered</td></tr> <tr><td>File format</td><td>PNG with <strong>solid</strong> background (not transparent)</td></tr> <tr><td>One image, all platforms</td><td>Use the same avatar on Instagram, Facebook, LinkedIn, X, YouTube, TikTok</td></tr> </tbody> </table> <h3>Approved color combinations</h3> <table class=\"spec-table\"> <thead><tr><th>Background</th><th>Symbol color</th><th>Use for</th><th>Contrast</th></tr></thead> <tbody> <tr><td>White</td><td>HCFM Blue (#0047BB)</td><td>Institutional, formal, official channels</td><td>8.6:1 AAA</td></tr> <tr><td>Black</td><td>Yellow Gold (#FFB500)</td><td><strong>2026 default for social feeds</strong>, high pop, dark-mode-friendly</td><td>11.7:1 AAA</td></tr> <tr><td>HCFM Blue (#0047BB)</td><td>White</td><td>Marian feasts, formal devotional, partner pages</td><td>8.6:1 AAA</td></tr> <tr><td>Black</td><td>White</td><td>Minimalist, conservative, Lent / Advent</td><td>21:1</td></tr> </tbody> </table> <h3>Never</h3> <ul> <li>The full logotype (illegible at avatar sizes)</li> <li><strong>Yellow Gold on white</strong>, contrast is 1.9:1, fails accessibility, nearly invisible at thumbnail sizes</li> <li>Muted Gold on white at avatar size, 3.4:1 fails AA at small renders</li> <li>Photo or pattern backgrounds, symbol disappears</li> <li>Drop shadows, glows, gradients, or strokes on the symbol</li> <li>Cropped, partial, or rotated marks</li> </ul> <h3>Per-platform minimums</h3> <p>One 1080 × 1080 PNG covers every platform's recommended source size. Platforms downsample for display; supplying a higher source than required keeps the avatar crisp on high-DPI mobile screens.</p> <table class=\"spec-table\"> <thead><tr><th>Platform</th><th>Min displayed</th><th>Recommended upload</th></tr></thead> <tbody> <tr><td>Instagram</td><td>320 × 320</td><td>1080 × 1080</td></tr> <tr><td>Facebook page</td><td>170 × 170 (desktop) / 128 × 128 (mobile)</td><td>720 × 720+</td></tr> <tr><td>LinkedIn organization</td><td>400 × 400</td><td>800 × 800+</td></tr> <tr><td>X (Twitter)</td><td>400 × 400</td><td>1080 × 1080</td></tr> <tr><td>YouTube channel</td><td>800 × 800</td><td>800 × 800</td></tr> <tr><td>TikTok</td><td>200 × 200</td><td>1080 × 1080</td></tr> </tbody> </table> <p class=\"page-foot-link\">This rule replaces the older HCFM social-media guidance that defaulted to Muted Gold on white as the avatar. The 2026 system elevates Yellow Gold on black as the social-feed default, same symbol, optimized for how the avatar actually renders on a feed.</p>"
+      %}
     </section>
 
     <!-- ==================== MINISTRY CENTERS ==================== -->
@@ -1893,8 +1677,10 @@
         %}
       </div>
 
-      <h2>Send a request or feedback</h2>
-      <p class="section-note">Both forms route to <strong>vhassan@hcfm.org</strong> and <strong>eepau@hcfm.org</strong>. Asset requests get a custom subject so they're easy to triage; feedback gets its own subject.</p>
+      {% module "help_request_heading" path="../modules/hcfm-rich-text-block",
+        heading="Send a request or feedback", heading_level="h2",
+        content="<p class=\"section-note\">Both forms route to <strong>vhassan@hcfm.org</strong> and <strong>eepau@hcfm.org</strong>. Asset requests get a custom subject so they're easy to triage; feedback gets its own subject.</p>"
+      %}
 
       <div class="form-grid">
         <form class="contact-form" id="requestForm" novalidate>
@@ -1916,15 +1702,13 @@
         </div>
       </div>
 
-      <div class="info-block">
-        <h3>For vendors</h3>
-        <p>Use only the materials and rules on this page. For collaboration inquiries, contact Victoria or Emmanuel directly. Do not redistribute logo files outside the approved scope of work.</p>
-      </div>
+      {% module "help_for_vendors" path="../modules/hcfm-rich-text-block",
+        content="<div class=\"info-block\"><h3>For vendors</h3><p>Use only the materials and rules on this page. For collaboration inquiries, contact Victoria or Emmanuel directly. Do not redistribute logo files outside the approved scope of work.</p></div>"
+      %}
 
-      <div class="info-block">
-        <h3>How this works behind the scenes</h3>
-        <p>Both forms open your existing email client with a structured message pre-filled. Hit send. The message reaches Victoria and Emmanuel directly, no third-party form service, no data left in someone else's database, and we respond within two business days.</p>
-      </div>
+      {% module "help_how_it_works" path="../modules/hcfm-rich-text-block",
+        content="<div class=\"info-block\"><h3>How this works behind the scenes</h3><p>Both forms open your existing email client with a structured message pre-filled. Hit send. The message reaches Victoria and Emmanuel directly, no third-party form service, no data left in someone else's database, and we respond within two business days.</p></div>"
+      %}
     </section>
 
   </main>

@@ -1,0 +1,5 @@
+[
+  {"name":"youtube_id","label":"YouTube video ID","type":"text","default":"tdYuca88vKw","help_text":"The 11-character ID from the YouTube URL. For youtube.com/watch?v=tdYuca88vKw, the ID is tdYuca88vKw."},
+  {"name":"video_title","label":"Video title","type":"text","default":"Visual Identity Walkthrough","help_text":"Short title shown below the embed."},
+  {"name":"video_description","label":"Video description","type":"text","default":"Twelve minutes. Victoria and Emmanuel introduce the system, the symbol, and the choices behind every element.","help_text":"One to two sentences describing what is in the video."}
+]

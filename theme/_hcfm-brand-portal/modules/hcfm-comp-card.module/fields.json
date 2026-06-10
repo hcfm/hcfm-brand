@@ -1,0 +1,4 @@
+[
+  {"name":"card_title","label":"Principle name","type":"text","default":"Rule of thirds","help_text":"Short name of the composition principle."},
+  {"name":"card_body","label":"Explanation","type":"richtext","default":"<p>Describe the composition principle here.</p>","help_text":"One to three sentences explaining the principle and how to apply it."}
+]

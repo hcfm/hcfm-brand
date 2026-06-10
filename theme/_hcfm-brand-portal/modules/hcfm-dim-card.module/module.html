@@ -1,0 +1,8 @@
+{# HCFM Platform Dimension Card — Platform Dimensions section.
+   Update platform, content type, dimensions, and shape in the HubSpot editor.
+   When a platform updates its required dimensions, only the numbers and shape need to change here — no code. #}
+<article class="dim-card">
+  <div class="dim-shape {{ module.shape_class }}" title="{{ module.dimensions }}"><span>{{ module.dimensions }}</span></div>
+  <p class="dim-platform">{{ module.platform }}</p>
+  <p class="dim-type">{{ module.content_type }}</p>
+</article>

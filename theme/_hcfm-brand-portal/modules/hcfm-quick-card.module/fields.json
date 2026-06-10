@@ -1,0 +1,6 @@
+[
+  {"name":"card_variant","label":"Card type","type":"choice","default":"colors","choices":[["colors","Colors"],["logos","Logos"],["typography","Typography"]],"help_text":"Determines the visual preview at the top of the card. One card per type."},
+  {"name":"card_title","label":"Card heading","type":"text","default":"Colors","help_text":"Short title. Shown as the card heading."},
+  {"name":"card_description","label":"Card description","type":"text","default":"Three primary, three accent, plus the liturgical palette.","help_text":"One sentence describing what the user will find in this section."},
+  {"name":"card_href","label":"Section link","type":"text","default":"#colors","help_text":"Internal hash link to the section this card points to."}
+]

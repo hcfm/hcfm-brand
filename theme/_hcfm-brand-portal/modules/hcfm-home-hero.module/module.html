@@ -1,0 +1,17 @@
+{# HCFM Home Hero
+   Update headline, body text, and CTA button labels in the HubSpot editor.
+   No code changes needed when the annual system tagline or CTA destinations change. #}
+<div class="hero">
+  <div class="hero-text">
+    {% if module.eyebrow %}<p class="hero-eyebrow">{{ module.eyebrow }}</p>{% endif %}
+    <h1 class="hero-h1">{{ module.headline }}</h1>
+    <div class="hero-sub">{{ module.hero_body }}</div>
+    <div class="hero-cta">
+      {% if module.cta1_text %}<a href="{{ module.cta1_href }}" class="btn btn-primary btn-hero">{{ module.cta1_text }}</a>{% endif %}
+      {% if module.cta2_text %}<a href="{{ module.cta2_href }}" class="btn btn-secondary btn-hero">{{ module.cta2_text }}</a>{% endif %}
+    </div>
+  </div>
+  <div class="hero-mark">
+    <img src="https://275132.fs1.hubspotusercontent-na1.net/hubfs/275132/_hcfm-brand/assets/logos/hcfm-symbol-black.png" alt="HCFM mark" id="heroMark">
+  </div>
+</div>
