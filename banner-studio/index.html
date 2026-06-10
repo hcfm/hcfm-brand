@@ -10,14 +10,14 @@
   /* HCFM brand fonts (loaded from the brand repo) */
   @font-face {
     font-family: 'Whitney';
-    src: url('https://emmanuelepau.github.io/hcfm-brand/assets/fonts/Whitney-Bold.otf') format('opentype');
+    src: url('https://hcfm.github.io/hcfm-brand/assets/fonts/Whitney-Bold.otf') format('opentype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Calluna';
-    src: url('https://emmanuelepau.github.io/hcfm-brand/assets/fonts/Calluna-Regular.otf') format('opentype');
+    src: url('https://hcfm.github.io/hcfm-brand/assets/fonts/Calluna-Regular.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -92,8 +92,8 @@
     position: absolute;
     inset: 0;
     background-color: var(--hcfm-muted-gold);
-    -webkit-mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
-            mask: url('https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
+    -webkit-mask: url('https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
+            mask: url('https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
   }
   header.brand .titles { flex: 1; min-width: 0; }
   header.brand h1 {
@@ -495,7 +495,7 @@
           <table cellpadding="0" cellspacing="0" border="0">
             <tr>
               <td rowspan="5" class="sig-mark">
-                <img src="https://emmanuelepau.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="HCFM">
+                <img src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="HCFM">
               </td>
               <td class="sig-name">Emmanuel Epau</td>
             </tr>
@@ -601,7 +601,7 @@
 (() => {
   'use strict';
   const SESSION_KEY = 'hcfm-banner-studio:session-v2';
-  const BRAND_REPO = 'EmmanuelEpau/hcfm-brand';
+  const BRAND_REPO = 'hcfm/hcfm-brand';
 
   const state = {
     token: null,

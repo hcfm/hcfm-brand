@@ -4,7 +4,7 @@
 // a thumbnail and offer a one-click revert.
 import { requireSession } from '../lib/session.js';
 
-const REPO_OWNER = 'EmmanuelEpau';
+const REPO_OWNER = 'hcfm';
 const REPO_NAME  = 'hcfm-brand';
 const BRANCH     = 'main';
 // 20 lets each of the six ministries' current-live row appear even

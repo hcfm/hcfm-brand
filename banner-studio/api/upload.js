@@ -16,13 +16,13 @@ const TARGETS = {
   'catholic-central': { path: 'email-banners/catholic-central/banner.png', label: 'Catholic Central' },
   'peyton-institute': { path: 'email-banners/peyton-institute/banner.png', label: 'The Peyton Institute' },
 };
-const SITE_BASE = 'https://emmanuelepau.github.io/hcfm-brand/';
+const SITE_BASE = 'https://hcfm.github.io/hcfm-brand/';
 const MAX_BYTES = 250 * 1024;
 const REQUIRED_W = 600;        // Width is fixed (Outlook for Windows clips wider banners at the 600px reading-pane edge)
 const MIN_H = 100;             // Below this looks broken at scale
 const MAX_H = 200;             // Above this feels spammy on mobile per Litmus/Exclaimer research
 const RECOMMENDED_H = 150;     // The modern professional default (4:1 aspect ratio)
-const REPO_OWNER = 'EmmanuelEpau';
+const REPO_OWNER = 'hcfm';
 const REPO_NAME  = 'hcfm-brand';
 const BRANCH     = 'main';
 

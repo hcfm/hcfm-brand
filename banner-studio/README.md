@@ -49,7 +49,7 @@ openssl rand -base64 48
 #    https://github.com/settings/personal-access-tokens/new
 #      Name: HCFM Banner Studio (server)
 #      Expiration: 90 days
-#      Repository access: Only select repositories → EmmanuelEpau/hcfm-brand
+#      Repository access: Only select repositories → hcfm/hcfm-brand
 #      Repository permissions → Contents: Read and write
 #    Copy the github_pat_… string.
 ```
@@ -85,7 +85,7 @@ Keep these three values in a notes app for the next step.
 3. Drop a test 600×200 PNG, pick HCFM Parent, type "test" as the reason, click Publish
 4. Wait for the green "Done" message
 5. Verify the live banner URL shows your test image:
-   `https://emmanuelepau.github.io/hcfm-brand/email-banners/parent/banner.png`
+   `https://hcfm.github.io/hcfm-brand/email-banners/parent/banner.png`
 6. Swap back to your real banner the same way
 
 ### Step 4 — Distribute to your team
@@ -124,7 +124,7 @@ When the `GITHUB_TOKEN` expires (90 days) or you want to swap it:
 Every upload becomes a Git commit with the message:
 `Banner Studio: <target> — <reason> (uploaded by <name>)`
 
-Full history: https://github.com/EmmanuelEpau/hcfm-brand/commits/main/email-banners
+Full history: https://github.com/hcfm/hcfm-brand/commits/main/email-banners
 
 The studio also shows the last 5 uploads in its "Recent activity" panel.
 
@@ -133,7 +133,7 @@ The studio also shows the last 5 uploads in its "Recent activity" panel.
 Two ways, pick whichever is easier in the moment:
 
 - **Via the studio:** ask whoever uploaded the bad banner to upload the right one. Same flow.
-- **Via GitHub:** github.com/EmmanuelEpau/hcfm-brand/commits/main/email-banners → click the commit BEFORE the bad one → click the banner file at that commit → **Raw** → save the image → drop it into the studio and re-publish.
+- **Via GitHub:** github.com/hcfm/hcfm-brand/commits/main/email-banners → click the commit BEFORE the bad one → click the banner file at that commit → **Raw** → save the image → drop it into the studio and re-publish.
 
 ### Disabling the studio
 

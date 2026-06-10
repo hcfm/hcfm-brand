@@ -18,8 +18,8 @@ const TARGETS = {
   'catholic-central': { path: 'email-banners/catholic-central/banner.png', label: 'Catholic Central' },
   'peyton-institute': { path: 'email-banners/peyton-institute/banner.png', label: 'The Peyton Institute' },
 };
-const SITE_BASE = 'https://emmanuelepau.github.io/hcfm-brand/';
-const REPO_OWNER = 'EmmanuelEpau';
+const SITE_BASE = 'https://hcfm.github.io/hcfm-brand/';
+const REPO_OWNER = 'hcfm';
 const REPO_NAME  = 'hcfm-brand';
 const BRANCH     = 'main';
 
