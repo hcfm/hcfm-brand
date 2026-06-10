@@ -11,6 +11,6 @@
   "module_id": null,
   "smart_type": "NOT_SMART",
   "tags": ["hcfm", "brand", "content"],
-  "categories": ["CONTENT"],
+  "categories": ["TEXT"],
   "type": "module"
 }
