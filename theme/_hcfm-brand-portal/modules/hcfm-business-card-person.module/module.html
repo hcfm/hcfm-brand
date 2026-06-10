@@ -1,0 +1,28 @@
+{# HCFM Business Card Person
+   Renders one CSS business card — either a front (person details) or the standard
+   HCFM brand back. Use inside .bizcard-css-grid in the Stationery section.
+   Change card_name, card_title, card_phone, and card_email to update the card.
+   No code, no design file needed. #}
+{% if module.card_type == "back" %}
+<figure class="bizcard-css bizcard-css-back">
+  <div class="bizcard-css-card bizcard-css-card-back">
+    <div class="bizcard-css-mark-light"></div>
+    <p class="bizcard-css-wordmark-back"><span>HOLY CROSS</span><span>FAMILY MINISTRIES</span></p>
+    <p class="bizcard-css-quote">The family that prays together stays together.</p>
+  </div>
+  {% if module.figure_caption %}<figcaption>{{ module.figure_caption }}</figcaption>{% endif %}
+</figure>
+{% else %}
+<figure class="bizcard-css bizcard-css-front">
+  <div class="bizcard-css-card">
+    <div class="bizcard-css-mark"></div>
+    <div class="bizcard-css-info">
+      <p class="bizcard-css-name">{{ module.card_name }}</p>
+      <p class="bizcard-css-title">{{ module.card_title }}</p>
+      <p class="bizcard-css-wordmark"><span>HOLY CROSS</span><span>FAMILY MINISTRIES</span></p>
+      <p class="bizcard-css-contact">{{ module.card_phone }}<br>{{ module.card_email }}<br>hcfm.org</p>
+    </div>
+  </div>
+  {% if module.figure_caption %}<figcaption>{{ module.figure_caption }}</figcaption>{% endif %}
+</figure>
+{% endif %}

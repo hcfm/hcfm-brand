@@ -1,0 +1,16 @@
+{
+  "label": "HCFM Mission and Vision",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "The two Mission and Vision cards in the Voice section. Edit both statements here.",
+  "host_template_types": ["PAGE", "BLOG_POST"],
+  "icon": null,
+  "inline_help_text": "Edit the Mission Statement and Vision text directly in this module.",
+  "is_available_for_new_content": true,
+  "module_id": null,
+  "smart_type": "NOT_SMART",
+  "tags": ["hcfm", "brand", "voice"],
+  "categories": ["CONTENT"],
+  "type": "module"
+}

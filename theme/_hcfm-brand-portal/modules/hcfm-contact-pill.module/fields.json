@@ -1,0 +1,23 @@
+[
+  {
+    "name": "email",
+    "label": "Email address",
+    "type": "text",
+    "default": "vhassan@hcfm.org",
+    "help_text": "The email this pill links to. Update when someone's email changes."
+  },
+  {
+    "name": "display_email",
+    "label": "Display email (shown on pill)",
+    "type": "text",
+    "default": "vhassan@hcfm.org",
+    "help_text": "Usually the same as the email address. Shown as the main text on the pill."
+  },
+  {
+    "name": "person_name",
+    "label": "Person's name",
+    "type": "text",
+    "default": "Victoria Hassan",
+    "help_text": "Shown in smaller text below the email. Used to identify who this is."
+  }
+]

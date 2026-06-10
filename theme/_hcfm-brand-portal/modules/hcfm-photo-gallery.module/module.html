@@ -1,0 +1,16 @@
+{# HCFM Photo Gallery
+   Album-style grid of photos. Clicking any image triggers the lightbox.
+   Add, remove, or replace photos entirely from the HubSpot editor — no code. #}
+{% if module.section_heading %}<h2>{{ module.section_heading }}</h2>{% endif %}
+{% if module.section_intro %}<p>{{ module.section_intro }}</p>{% endif %}
+{% if module.photos %}
+<div class="photo-grid photo-grid-album">
+  {% for photo in module.photos %}
+  {% if photo.photo_image.src %}
+  <figure class="photo-card photo-card-album" data-zoom="{{ photo.photo_image.src }}">
+    <img src="{{ photo.photo_image.src }}" alt="{{ photo.photo_alt }}" loading="lazy">
+  </figure>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endif %}

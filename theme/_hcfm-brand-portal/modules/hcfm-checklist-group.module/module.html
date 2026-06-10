@@ -1,0 +1,12 @@
+{# HCFM Pre-flight Checklist Group
+   One category column of the checklist. Checkboxes are functional on the live page.
+   To add a new check: click the module in the HubSpot editor, add an item under 'Checklist items'. #}
+<div class="checklist-col">
+  {% if module.group_heading %}<h3>{{ module.group_heading }}</h3>{% endif %}
+  {% for item in module.items %}
+  <label class="check">
+    <input type="checkbox">
+    <span>{{ item.item_text }}</span>
+  </label>
+  {% endfor %}
+</div>

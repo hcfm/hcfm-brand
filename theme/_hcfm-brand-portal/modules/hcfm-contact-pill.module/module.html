@@ -1,0 +1,7 @@
+{# HCFM Contact Pill
+   A single mailto link styled as a pill with email and name.
+   Update email/name fields in the HubSpot editor when contact info changes. #}
+<a class="contact-pill" href="mailto:{{ module.email }}">
+  {{ module.display_email }}
+  {% if module.person_name %}<span>{{ module.person_name }}</span>{% endif %}
+</a>

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "breadcrumb",
+    "label": "Breadcrumb path",
+    "type": "text",
+    "default": "Foundations / Section",
+    "help_text": "Shown above the title. e.g. 'Foundations / Colors' or 'Applications / Stationery'."
+  },
+  {
+    "name": "page_title",
+    "label": "Page title (H1)",
+    "type": "text",
+    "default": "Section Title",
+    "help_text": "The main heading for this section."
+  },
+  {
+    "name": "page_intro",
+    "label": "Introductory paragraph",
+    "type": "richtext",
+    "default": "<p>A brief overview of this section and what it covers.</p>",
+    "help_text": "Shown in larger muted text below the H1. Can include links."
+  }
+]

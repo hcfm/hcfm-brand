@@ -1,0 +1,31 @@
+[
+  {
+    "name": "group_heading",
+    "label": "Group heading",
+    "type": "text",
+    "default": "Colors",
+    "help_text": "H3 for this checklist category. e.g. 'Colors', 'Fonts', 'Design Elements', 'Platform'."
+  },
+  {
+    "name": "items",
+    "label": "Checklist items",
+    "type": "group",
+    "occurrence": {
+      "min": 1,
+      "max": 15,
+      "sorting_label_field": "item_text"
+    },
+    "default": [
+      { "item_text": "Am I using only HCFM brand colors?" }
+    ],
+    "children": [
+      {
+        "name": "item_text",
+        "label": "Item text",
+        "type": "text",
+        "default": "Check item",
+        "help_text": "The question shown next to the checkbox. Write as a yes/no question."
+      }
+    ]
+  }
+]

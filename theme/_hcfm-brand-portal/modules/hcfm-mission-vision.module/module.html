@@ -1,0 +1,15 @@
+{# HCFM Mission and Vision
+   Renders the two-card Mission / Vision block used in the Voice section.
+   Both card texts are editable fields — no code needed to update either statement. #}
+{% if module.section_heading %}<h2>{{ module.section_heading }}</h2>{% endif %}
+{% if module.section_intro %}<p>{{ module.section_intro }}</p>{% endif %}
+<div class="mv-grid">
+  <article class="mv-card">
+    {% if module.mission_eyebrow %}<p class="mv-eyebrow">{{ module.mission_eyebrow }}</p>{% endif %}
+    <div class="mv-body">{{ module.mission_text }}</div>
+  </article>
+  <article class="mv-card">
+    {% if module.vision_eyebrow %}<p class="mv-eyebrow">{{ module.vision_eyebrow }}</p>{% endif %}
+    <div class="mv-body">{{ module.vision_text }}</div>
+  </article>
+</div>

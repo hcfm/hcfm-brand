@@ -1,0 +1,16 @@
+{
+  "label": "HCFM Video with Chapters",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "A full video section with embed, 'what you will learn' list, and clickable chapter timestamps. Used in the Videos section.",
+  "host_template_types": ["PAGE", "BLOG_POST"],
+  "icon": null,
+  "inline_help_text": "Paste the YouTube video ID, update the title and chapters, done. No embed code needed.",
+  "is_available_for_new_content": true,
+  "module_id": null,
+  "smart_type": "NOT_SMART",
+  "tags": ["hcfm", "brand", "video"],
+  "categories": ["MEDIA"],
+  "type": "module"
+}

@@ -1,0 +1,16 @@
+{
+  "label": "HCFM Rich Text Block",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "A general-purpose editable text block with optional heading. Use wherever prose content needs to be editable without touching code.",
+  "host_template_types": ["PAGE", "BLOG_POST"],
+  "icon": null,
+  "inline_help_text": "Edit the heading and content directly. Supports bold, italic, lists, and links.",
+  "is_available_for_new_content": true,
+  "module_id": null,
+  "smart_type": "NOT_SMART",
+  "tags": ["hcfm", "brand", "content"],
+  "categories": ["CONTENT"],
+  "type": "module"
+}

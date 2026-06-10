@@ -1,0 +1,24 @@
+[
+  {
+    "name": "heading",
+    "label": "Heading (optional)",
+    "type": "text",
+    "default": "",
+    "help_text": "H2 or H3 above the content. Leave blank to skip the heading entirely."
+  },
+  {
+    "name": "heading_level",
+    "label": "Heading level",
+    "type": "choice",
+    "default": "h2",
+    "choices": [["h2", "H2 — main section heading"], ["h3", "H3 — sub-section heading"]],
+    "help_text": "H2 for top-level section headings. H3 for sub-sections within a section."
+  },
+  {
+    "name": "content",
+    "label": "Content",
+    "type": "richtext",
+    "default": "<p>Edit this text in the HubSpot editor. No code needed.</p>",
+    "help_text": "Full rich text. Supports paragraphs, bullet lists, numbered lists, bold, italic, and links."
+  }
+]

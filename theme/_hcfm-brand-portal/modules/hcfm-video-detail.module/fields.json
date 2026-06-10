@@ -1,0 +1,71 @@
+[
+  {
+    "name": "video_number",
+    "label": "Video number label",
+    "type": "text",
+    "default": "1.",
+    "help_text": "Shown before the title. e.g. '1.' or '2.' Leave blank to omit."
+  },
+  {
+    "name": "video_title",
+    "label": "Video title",
+    "type": "text",
+    "default": "Visual Identity Walkthrough",
+    "help_text": "The H2 title for this video."
+  },
+  {
+    "name": "video_meta",
+    "label": "Metadata line",
+    "type": "text",
+    "default": "≈ 16 min · Victoria Hassan + Emmanuel Epau · Overview of the 2026 brand system.",
+    "help_text": "Duration, presenters, and one-line description. Shown below the title in muted text."
+  },
+  {
+    "name": "youtube_id",
+    "label": "YouTube video ID",
+    "type": "text",
+    "default": "tdYuca88vKw",
+    "help_text": "The ID only, not the full URL. Find it after 'v=' in the YouTube address bar. e.g. 'tdYuca88vKw'"
+  },
+  {
+    "name": "what_you_learn",
+    "label": "What you will learn (bullet list)",
+    "type": "richtext",
+    "default": "<ul><li>The meaning behind the HCFM mark</li><li>The primary and secondary color palette</li></ul>",
+    "help_text": "Format as a bulleted list. Each bullet is one learning point from the video."
+  },
+  {
+    "name": "chapters",
+    "label": "Chapter timestamps",
+    "type": "group",
+    "occurrence": {
+      "min": 0,
+      "max": 30,
+      "sorting_label_field": "timestamp_display"
+    },
+    "default": [],
+    "children": [
+      {
+        "name": "timestamp_display",
+        "label": "Timestamp (display)",
+        "type": "text",
+        "default": "0:00",
+        "help_text": "How it appears on screen. e.g. '0:37' or '12:21'"
+      },
+      {
+        "name": "timestamp_seconds",
+        "label": "Timestamp in seconds (for the jump link)",
+        "type": "number",
+        "default": 0,
+        "help_text": "The same timestamp converted to total seconds. e.g. 37 for '0:37', or 741 for '12:21'"
+      },
+      {
+        "name": "chapter_title",
+        "label": "Chapter title",
+        "type": "text",
+        "default": "Introduction",
+        "help_text": "The chapter name shown next to the timestamp."
+      }
+    ]
+  }
+]

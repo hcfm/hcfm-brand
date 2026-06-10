@@ -1,0 +1,16 @@
+{
+  "label": "HCFM Photo Gallery",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "An album-style photo grid. Add, remove, or replace photos without touching code. Used in the Imagery section.",
+  "host_template_types": ["PAGE", "BLOG_POST"],
+  "icon": null,
+  "inline_help_text": "Add photos from the media library. Each photo becomes one card in the album grid.",
+  "is_available_for_new_content": true,
+  "module_id": null,
+  "smart_type": "NOT_SMART",
+  "tags": ["hcfm", "brand", "imagery"],
+  "categories": ["MEDIA"],
+  "type": "module"
+}

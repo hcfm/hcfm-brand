@@ -1,3 +1,6 @@
-{# HCFM Voice Rule, one rule entry. Renders as a <li> inside the .voice-list <ul>. #}
-{% if module.rule_title %}<strong>{{ module.rule_title|escape }}</strong>{% endif %}
-{% if module.rule_body %}{{ module.rule_body }}{% endif %}
+{# HCFM Voice Rule — one voice principle. Renders a full <li> for use inside
+   .voice-list in the Voice section. Both title and body are editable fields. #}
+<li>
+  {% if module.rule_title %}<strong>{{ module.rule_title }}</strong>{% endif %}
+  {% if module.rule_body %}{{ module.rule_body }}{% endif %}
+</li>

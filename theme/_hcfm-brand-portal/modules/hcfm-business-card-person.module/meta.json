@@ -1,0 +1,16 @@
+{
+  "label": "HCFM Business Card",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "One CSS-rendered business card. Use for front (person details) or back (HCFM brand). Add one module per card in the Stationery section.",
+  "host_template_types": ["PAGE", "BLOG_POST"],
+  "icon": null,
+  "inline_help_text": "Set name, title, phone, and email to update this person's card. No design skills needed.",
+  "is_available_for_new_content": true,
+  "module_id": null,
+  "smart_type": "NOT_SMART",
+  "tags": ["hcfm", "brand", "stationery"],
+  "categories": ["DESIGN"],
+  "type": "module"
+}

@@ -1,0 +1,44 @@
+{# HCFM Video Detail
+   Renders a full video section: embed, "what you'll learn", and clickable chapter list.
+   The chapter-jump buttons are wired to the YouTube player by hcfm-scripts.js.
+   To add a new video: duplicate this module, paste a new YouTube ID, update title + chapters. #}
+<article class="video-detail" data-yt-id="{{ module.youtube_id }}">
+  <div class="video-detail-head">
+    <h2>{% if module.video_number %}{{ module.video_number }} {% endif %}{{ module.video_title }}</h2>
+    {% if module.video_meta %}<p class="video-meta">{{ module.video_meta }}</p>{% endif %}
+  </div>
+  <div class="video-detail-body">
+    <div class="video-frame">
+      <iframe
+        loading="lazy"
+        src="https://www.youtube.com/embed/{{ module.youtube_id }}"
+        title="{{ module.video_title }}"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="video-side">
+      {% if module.what_you_learn %}
+      <div class="video-learn">
+        <h3>What you'll learn</h3>
+        {{ module.what_you_learn }}
+      </div>
+      {% endif %}
+      {% if module.chapters %}
+      <div class="video-chapters">
+        <h3>Chapters</h3>
+        <ol class="chapter-list">
+          {% for chapter in module.chapters %}
+          <li>
+            <button type="button" class="chapter-jump" data-t="{{ chapter.timestamp_seconds }}">
+              <span class="ch-time">{{ chapter.timestamp_display }}</span>
+              <span class="ch-title">{{ chapter.chapter_title }}</span>
+            </button>
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</article>

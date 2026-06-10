@@ -1,0 +1,12 @@
+{# HCFM Section Header
+   Renders the breadcrumb, H1, and intro paragraph at the top of every section.
+   Placing this module in a section makes all three fields editable in HubSpot. #}
+{% if module.breadcrumb %}
+<p class="breadcrumb">{{ module.breadcrumb }}</p>
+{% endif %}
+{% if module.page_title %}
+<h1>{{ module.page_title }}</h1>
+{% endif %}
+{% if module.page_intro %}
+<div class="page-intro">{{ module.page_intro }}</div>
+{% endif %}

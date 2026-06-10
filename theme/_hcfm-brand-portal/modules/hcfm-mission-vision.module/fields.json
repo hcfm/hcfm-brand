@@ -1,0 +1,44 @@
+[
+  {
+    "name": "section_heading",
+    "label": "Section heading",
+    "type": "text",
+    "default": "Mission and Vision",
+    "help_text": "The H2 above the two cards. Usually 'Mission and Vision'."
+  },
+  {
+    "name": "section_intro",
+    "label": "Intro sentence below heading",
+    "type": "text",
+    "default": "Every line of HCFM communication is rooted in the Mission and Vision. Reread them before drafting anything significant.",
+    "help_text": "One sentence placed between the heading and the cards."
+  },
+  {
+    "name": "mission_eyebrow",
+    "label": "Mission card eyebrow label",
+    "type": "text",
+    "default": "Mission Statement",
+    "help_text": "Small caps label above the mission text."
+  },
+  {
+    "name": "mission_text",
+    "label": "Mission statement",
+    "type": "richtext",
+    "default": "<p>Holy Cross Family Ministries is: A family of Catholic ministries that inspires, promotes, and fosters the prayer life and spiritual well-being of families throughout the world.</p>",
+    "help_text": "The full mission statement text. Edit only when there is an official change."
+  },
+  {
+    "name": "vision_eyebrow",
+    "label": "Vision card eyebrow label",
+    "type": "text",
+    "default": "Vision",
+    "help_text": "Small caps label above the vision text."
+  },
+  {
+    "name": "vision_text",
+    "label": "Vision statement",
+    "type": "richtext",
+    "default": "<p>Holy Cross Family Ministries strives to be a respected and reliable catalyst for inspiration, support, and dynamic content on family life through a focus on spirituality and prayer, especially the Rosary.</p>",
+    "help_text": "The full vision text. Edit only when there is an official change."
+  }
+]

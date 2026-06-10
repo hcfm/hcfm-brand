@@ -1,0 +1,45 @@
+[
+  {
+    "name": "card_type",
+    "label": "Card type",
+    "type": "choice",
+    "default": "front",
+    "choices": [["front", "Front — person's name, title, and contact details"], ["back", "Back — HCFM brand and Peyton quote (no editable content)"]],
+    "help_text": "Front cards have the person's name. The back is always the standard HCFM brand back."
+  },
+  {
+    "name": "card_name",
+    "label": "Name on card",
+    "type": "text",
+    "default": "Victoria Hassan",
+    "help_text": "First and last name exactly as it should appear. Not used for back cards."
+  },
+  {
+    "name": "card_title",
+    "label": "Job title",
+    "type": "text",
+    "default": "Sr. Marketing & Communications Specialist",
+    "help_text": "Full title as it appears on the card."
+  },
+  {
+    "name": "card_phone",
+    "label": "Phone number (with label)",
+    "type": "text",
+    "default": "T 508 238-4095",
+    "help_text": "Include the 'T ' prefix. e.g. T 508 238-4095"
+  },
+  {
+    "name": "card_email",
+    "label": "Email address",
+    "type": "text",
+    "default": "vhassan@hcfm.org",
+    "help_text": "Email shown on the card."
+  },
+  {
+    "name": "figure_caption",
+    "label": "Caption below card",
+    "type": "text",
+    "default": "Front · 3.5 × 2 in · Strathmore 130# DTC Cover.",
+    "help_text": "Small text below the card image. Describes the print spec."
+  }
+]

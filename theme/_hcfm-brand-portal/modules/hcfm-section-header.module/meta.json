@@ -1,0 +1,16 @@
+{
+  "label": "HCFM Section Header",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "help_text": "Breadcrumb path, page title, and intro paragraph. Used at the top of every section.",
+  "host_template_types": ["PAGE", "BLOG_POST"],
+  "icon": null,
+  "inline_help_text": "Set the breadcrumb trail, page H1, and opening paragraph for this section.",
+  "is_available_for_new_content": true,
+  "module_id": null,
+  "smart_type": "NOT_SMART",
+  "tags": ["hcfm", "brand", "layout"],
+  "categories": ["DESIGN"],
+  "type": "module"
+}

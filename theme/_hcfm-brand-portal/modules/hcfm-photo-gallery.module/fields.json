@@ -1,0 +1,43 @@
+[
+  {
+    "name": "section_heading",
+    "label": "Section heading",
+    "type": "text",
+    "default": "A few samples",
+    "help_text": "H2 shown above the gallery. Set blank to hide."
+  },
+  {
+    "name": "section_intro",
+    "label": "Intro text",
+    "type": "text",
+    "default": "Examples of the kind of style and layering HCFM creatives lean on. Click any image to view at full size.",
+    "help_text": "One or two sentences shown below the heading."
+  },
+  {
+    "name": "photos",
+    "label": "Photos",
+    "type": "group",
+    "occurrence": {
+      "min": 1,
+      "max": 20,
+      "sorting_label_field": "photo_alt"
+    },
+    "default": [],
+    "children": [
+      {
+        "name": "photo_image",
+        "label": "Photo",
+        "type": "image",
+        "default": { "src": "", "alt": "HCFM photography sample" },
+        "help_text": "Pick from media library or upload. Recommended: at least 800px wide."
+      },
+      {
+        "name": "photo_alt",
+        "label": "Alt text (required for accessibility)",
+        "type": "text",
+        "default": "HCFM photography sample",
+        "help_text": "Describe what is in the photo. Used by screen readers and search engines."
+      }
+    ]
+  }
+]

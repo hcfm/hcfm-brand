@@ -1,0 +1,11 @@
+{# HCFM Rich Text Block
+   General-purpose editable content block. Use for any prose section
+   that needs to be updated by non-developers. #}
+{% if module.heading %}
+  {% if module.heading_level == "h3" %}
+    <h3>{{ module.heading }}</h3>
+  {% else %}
+    <h2>{{ module.heading }}</h2>
+  {% endif %}
+{% endif %}
+{{ module.content }}
