@@ -1,4 +1,4 @@
-# HCFM Banner Studio (v2 — non-technical)
+# HCFM Banner Studio (v2 — non-technical, hcfm-org)
 
 The web tool used to update the campaign banner on every HCFM email signature — designed so non-technical people (Victoria, FTP team, marketing) can use it without ever knowing what GitHub is.
 
