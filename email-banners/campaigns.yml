@@ -1,0 +1,69 @@
+# HCFM email signature banners: what is live, and until when.
+#
+# This file is the single source of truth for two things:
+#   1. Where a banner click lands  (destination)
+#   2. When a banner goes stale    (end_date)
+#
+# Editing this file in the GitHub web UI is enough. On every push the
+# build-go-pages workflow regenerates the /go/<ministry>/ redirect pages, and the
+# daily banner-health workflow fails loudly once today is past an end_date.
+# That alarm exists because in August 2026 all six signatures advertised the
+# Global Rosary for nine days after the event had happened, and nothing said so.
+#
+# FIELDS
+#   label        Human name of the ministry. Appears in health-check output.
+#   campaign     Short slug for the creative currently in banner.png.
+#                Also becomes utm_campaign on every click.
+#   destination  Where a click on the banner goes. Must be https and must
+#                actually resolve. The health check fetches it daily.
+#   end_date     Last day this creative is correct (YYYY-MM-DD). After this
+#                date the health check fails until the banner and this file
+#                are both updated. Use a far date for evergreen creative.
+#   review_date  Soft reminder. Not enforced. Use it for "look at this again".
+#
+# CHANGING A CAMPAIGN, the whole procedure:
+#   1. Publish the new PNG, 600px wide, 100 to 200px tall.
+#   2. Edit this file: campaign, destination, end_date.
+#   3. Nothing else. No signature is re-installed, ever.
+
+parent:
+  label: Holy Cross Family Ministries
+  campaign: global-rosary-peace-2026
+  destination: https://hcfm.org/pray-for-peace/
+  end_date: 2026-10-22
+  review_date: 2026-10-15
+
+ftp:
+  label: Family Theater Productions
+  campaign: global-rosary-peace-2026
+  destination: https://hcfm.org/pray-for-peace/
+  end_date: 2026-10-22
+  review_date: 2026-10-15
+
+family-rosary:
+  label: Family Rosary
+  campaign: global-rosary-peace-2026
+  destination: https://hcfm.org/pray-for-peace/
+  end_date: 2026-10-22
+  review_date: 2026-10-15
+
+catholic-mom:
+  label: Catholic Mom
+  campaign: global-rosary-peace-2026
+  destination: https://hcfm.org/pray-for-peace/
+  end_date: 2026-10-22
+  review_date: 2026-10-15
+
+catholic-central:
+  label: Catholic Central
+  campaign: global-rosary-peace-2026
+  destination: https://hcfm.org/pray-for-peace/
+  end_date: 2026-10-22
+  review_date: 2026-10-15
+
+peyton-institute:
+  label: The Peyton Institute for Domestic Church Life
+  campaign: global-rosary-peace-2026
+  destination: https://hcfm.org/pray-for-peace/
+  end_date: 2026-10-22
+  review_date: 2026-10-15
