@@ -1,0 +1,232 @@
+name: Banner health
+
+# Why this exists.
+#
+# In July 2026 a Global Rosary banner was published to all six ministry
+# signatures. The event happened on 11 August. The banner advertised it for
+# nine more days, on every email every member of staff sent, and nothing
+# anywhere said so. Nobody was at fault: there was no place for the fact
+# "this creative expires on this date" to live, and nothing was watching.
+#
+# This workflow is that place and that watcher. It reads email-banners/campaigns.yml,
+# checks every banner against the spec and against its own expiry date, checks
+# that the live URLs actually serve, and opens a GitHub issue the moment any of
+# it stops being true. It runs every morning whether or not anyone remembers.
+
+on:
+  schedule:
+    - cron: '15 11 * * *'      # 07:15 America/New_York, standard time
+  push:
+    branches: [main]
+    paths:
+      - 'email-banners/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: banner-health
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check every banner
+        id: check
+        run: |
+          python3 - <<'PY' | tee report.txt
+          import datetime, json, os, re, struct, sys, urllib.error, urllib.request
+
+          SITE      = "https://hcfm.github.io/hcfm-brand"
+          WIDTH     = 600
+          MIN_H     = 100
+          MAX_H     = 200
+          MAX_BYTES = 250 * 1024
+          SOFT_BYTES= 100 * 1024
+          LIVE      = os.environ.get("GITHUB_EVENT_NAME") != "push"
+
+          def manifest(path="email-banners/campaigns.yml"):
+              """Two-level YAML only. No dependency, so this can never fail to install."""
+              out, key = {}, None
+              for raw in open(path, encoding="utf-8"):
+                  line = raw.rstrip("\n")
+                  if not line.strip() or line.lstrip().startswith("#"):
+                      continue
+                  if not line.startswith((" ", "\t")):
+                      key = line.split(":", 1)[0].strip()
+                      out[key] = {}
+                  elif key:
+                      k, _, v = line.strip().partition(":")
+                      out[key][k.strip()] = v.strip().strip('"').strip("'")
+              return out
+
+          def png_size(path):
+              """Width and height straight out of the IHDR chunk."""
+              with open(path, "rb") as fh:
+                  head = fh.read(24)
+              if head[:8] != b"\x89PNG\r\n\x1a\n":
+                  return None
+              return struct.unpack(">II", head[16:24])
+
+          def fetch(url, timeout=25):
+              req = urllib.request.Request(url, headers={"User-Agent": "hcfm-banner-health"})
+              try:
+                  with urllib.request.urlopen(req, timeout=timeout) as r:
+                      return r.status, r.read()
+              except urllib.error.HTTPError as e:
+                  return e.code, b""
+              except Exception as e:
+                  return 0, str(e).encode()
+
+          today    = datetime.date.today()
+          problems = []
+          notes    = []
+          data     = manifest()
+
+          print("HCFM banner health")
+          print("  date: %s   ministries: %d   live checks: %s"
+                % (today, len(data), "on" if LIVE else "off (push build)"))
+          print("")
+
+          for key, meta in sorted(data.items()):
+              label = meta.get("label", key)
+              path  = "email-banners/%s/banner.png" % key
+
+              # ---- the file itself
+              if not os.path.exists(path):
+                  problems.append("%s: %s is missing" % (key, path))
+                  continue
+              size = os.path.getsize(path)
+              dims = png_size(path)
+              if dims is None:
+                  problems.append("%s: not a PNG. Only PNG is allowed." % key)
+              else:
+                  w, h = dims
+                  if w != WIDTH:
+                      problems.append("%s: width is %dpx, must be exactly %dpx. "
+                                      "Outlook for Windows clips wider banners." % (key, w, WIDTH))
+                  if not (MIN_H <= h <= MAX_H):
+                      problems.append("%s: height is %dpx, must be %d-%dpx." % (key, h, MIN_H, MAX_H))
+              if size > MAX_BYTES:
+                  problems.append("%s: %.0f KB, over the %d KB hard limit."
+                                  % (key, size / 1024, MAX_BYTES // 1024))
+              elif size > SOFT_BYTES:
+                  notes.append("%s: %.0f KB, over the %d KB target. Consider re-exporting."
+                               % (key, size / 1024, SOFT_BYTES // 1024))
+
+              # ---- has the creative expired
+              end = meta.get("end_date", "")
+              if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", end or ""):
+                  problems.append("%s: end_date is missing or malformed in campaigns.yml." % key)
+              else:
+                  end_d = datetime.date.fromisoformat(end)
+                  if today > end_d:
+                      problems.append(
+                          "%s: STALE. This banner expired on %s, %d days ago, and is still "
+                          "going out on every signature. Publish the replacement and update "
+                          "campaigns.yml." % (key, end, (today - end_d).days))
+                  elif (end_d - today).days <= 7:
+                      notes.append("%s: expires in %d days (%s)." % (key, (end_d - today).days, end))
+
+              dest = meta.get("destination", "")
+              if not dest.startswith("https://"):
+                  problems.append("%s: destination must be https, got '%s'." % (key, dest))
+
+              # ---- does any of it actually work in public
+              if LIVE:
+                  bs, bb = fetch("%s/email-banners/%s/banner.png" % (SITE, key))
+                  if bs != 200:
+                      problems.append("%s: banner URL returned HTTP %s." % (key, bs))
+                  elif bb[:8] != b"\x89PNG\r\n\x1a\n":
+                      problems.append("%s: banner URL is not serving a PNG." % key)
+
+                  gs, gb = fetch("%s/go/%s/" % (SITE, key))
+                  if gs != 200:
+                      problems.append("%s: redirect page returned HTTP %s." % (key, gs))
+                  elif dest and dest.encode() not in gb:
+                      problems.append("%s: redirect page does not point at the destination in "
+                                      "campaigns.yml. Re-run the build-go-pages workflow." % key)
+
+                  ds, _ = fetch(dest)
+                  if ds == 0 or ds >= 400:
+                      problems.append("%s: click destination %s returned %s. A banner that renders "
+                                      "perfectly and lands on a dead page is still broken."
+                                      % (key, dest, ds or "no response"))
+
+              print("  %-18s %-46s %s" % (key, label, meta.get("campaign", "?")))
+
+          print("")
+          for n in notes:
+              print("NOTE  " + n)
+          if problems:
+              print("")
+              for p in problems:
+                  print("FAIL  " + p)
+              open("problems.txt", "w").write("\n".join("- " + p for p in problems))
+              sys.exit(1)
+          print("")
+          print("PASS  every banner is present, correctly sized, current, and reachable.")
+          PY
+
+      - name: Open or update an issue when something is wrong
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = [
+              'The daily banner health check failed. Until this is fixed, what it describes is',
+              'going out on every HCFM email signature.',
+              '',
+              fs.existsSync('problems.txt') ? fs.readFileSync('problems.txt', 'utf8') : '(see the run log)',
+              '',
+              '**How to fix a stale banner**',
+              '1. Publish the replacement PNG to `email-banners/<ministry>/banner.png`.',
+              '   600px wide, 100 to 200px tall, under 100 KB.',
+              '2. Update `campaigns.yml`: `campaign`, `destination`, `end_date`.',
+              '3. Nothing else. No signature is ever re-installed.',
+              '',
+              `Run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            ].join('\n');
+            const title = 'Banner health check is failing';
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'banner-health'
+            });
+            if (open.data.length) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: open.data[0].number, body
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body, labels: ['banner-health']
+              });
+            }
+
+      - name: Close the issue once everything passes again
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo,
+              state: 'open', labels: 'banner-health'
+            });
+            for (const i of open.data) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: i.number,
+                body: 'Banner health is passing again. Closing.'
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: i.number, state: 'closed'
+              });
+            }
