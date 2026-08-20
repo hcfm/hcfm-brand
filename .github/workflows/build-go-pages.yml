@@ -1,0 +1,123 @@
+name: Rebuild banner redirect pages
+
+# Marketing changes where a banner click lands by editing one line in
+# email-banners/campaigns.yml, in the GitHub web UI, with no local tooling.
+# This workflow turns that edit into the regenerated /go/<ministry>/ pages, so
+# nobody has to remember to run anything, and so the destination written in the
+# manifest and the destination a recipient actually reaches can never disagree.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'email-banners/campaigns.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-go-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Regenerate redirect pages from the manifest
+        run: |
+          python3 - <<'PY'
+          import html, os, urllib.parse
+
+          def manifest(path="email-banners/campaigns.yml"):
+              out, key = {}, None
+              for raw in open(path, encoding="utf-8"):
+                  line = raw.rstrip("\n")
+                  if not line.strip() or line.lstrip().startswith("#"):
+                      continue
+                  if not line.startswith((" ", "\t")):
+                      key = line.split(":", 1)[0].strip()
+                      out[key] = {}
+                  elif key:
+                      k, _, v = line.strip().partition(":")
+                      out[key][k.strip()] = v.strip().strip('"').strip("'")
+              return out
+
+          PAGE = """<!doctype html>
+          <html lang="en">
+          <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="robots" content="noindex, nofollow">
+          <title>{label}</title>
+          <link rel="canonical" href="{dest}">
+          <meta http-equiv="refresh" content="0; url={tagged_esc}">
+          <style>
+            :root {{ color-scheme: light; }}
+            body {{ margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+                   background:#0047BB; color:#fff; text-align:center; padding:24px;
+                   font-family:'Whitney','Helvetica Neue',Helvetica,Arial,sans-serif; }}
+            .card {{ max-width:520px; }}
+            .msg {{ font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:22px;
+                   line-height:1.4; margin:0 0 18px; }}
+            .rule {{ width:68px; height:2px; background:#FFB500; margin:0 auto 18px; }}
+            .go {{ display:inline-block; background:#FFB500; color:#00307f; font-weight:700;
+                  text-decoration:none; padding:12px 22px; border-radius:4px; letter-spacing:.04em; }}
+            .small {{ margin-top:16px; font-size:13px; color:#cfe0ff; }}
+            .small a {{ color:#fff; }}
+          </style>
+          </head>
+          <body>
+            <div class="card">
+              <p class="msg">A World at Prayer is a World at Peace<sup>&reg;</sup></p>
+              <div class="rule"></div>
+              <p>Taking you to {label}.</p>
+              <p><a class="go" href="{tagged_esc}">Continue to hcfm.org</a></p>
+              <p class="small">If you are not redirected automatically,
+                <a href="{tagged_esc}">click here</a>.</p>
+            </div>
+          <script>location.replace("{tagged}");</script>
+          </body>
+          </html>
+          """
+          PAGE = "\n".join(l[10:] if l.startswith(" " * 10) else l for l in PAGE.split("\n"))
+
+          # Three redirect mechanisms on purpose. Some corporate mail gateways rewrite
+          # and pre-fetch links, some strip scripts, some disable meta refresh. The
+          # visible button is the floor: a human can always still get there.
+          written = 0
+          for key, meta in sorted(manifest().items()):
+              dest   = meta["destination"]
+              tagged = dest + ("&" if "?" in dest else "?") + urllib.parse.urlencode({
+                  "utm_source":   "email-signature",
+                  "utm_medium":   "email",
+                  "utm_campaign": meta.get("campaign", "unspecified"),
+                  "utm_content":  key,
+              })
+              out = PAGE.format(
+                  label      = html.escape(meta.get("label", key)),
+                  dest       = dest,
+                  tagged     = tagged,
+                  tagged_esc = tagged.replace("&", "&amp;"),
+              )
+              d = os.path.join("go", key)
+              os.makedirs(d, exist_ok=True)
+              open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(out)
+              print("  go/%s/index.html -> %s" % (key, tagged))
+              written += 1
+          print("Wrote %d redirect pages." % written)
+          PY
+
+      - name: Commit if anything changed
+        run: |
+          if [ -z "$(git status --porcelain go/)" ]; then
+            echo "Redirect pages already match campaigns.yml. Nothing to commit."
+            exit 0
+          fi
+          git config user.name  "hcfm-banner-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add go/
+          git commit -m "Rebuild banner redirect pages from campaigns.yml"
+          git push
