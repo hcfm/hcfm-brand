@@ -6,11 +6,85 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options",   "value": "nosniff" },
-        { "key": "Referrer-Policy",          "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options",          "value": "DENY" },
-        { "key": "Strict-Transport-Security","value": "max-age=31536000; includeSubDomains" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/go/catholic-central",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=catholic-central",
+      "permanent": false
+    },
+    {
+      "source": "/go/catholic-central/",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=catholic-central",
+      "permanent": false
+    },
+    {
+      "source": "/go/catholic-mom",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=catholic-mom",
+      "permanent": false
+    },
+    {
+      "source": "/go/catholic-mom/",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=catholic-mom",
+      "permanent": false
+    },
+    {
+      "source": "/go/family-rosary",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=family-rosary",
+      "permanent": false
+    },
+    {
+      "source": "/go/family-rosary/",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=family-rosary",
+      "permanent": false
+    },
+    {
+      "source": "/go/ftp",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=ftp",
+      "permanent": false
+    },
+    {
+      "source": "/go/ftp/",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=ftp",
+      "permanent": false
+    },
+    {
+      "source": "/go/parent",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=parent",
+      "permanent": false
+    },
+    {
+      "source": "/go/parent/",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=parent",
+      "permanent": false
+    },
+    {
+      "source": "/go/peyton-institute",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=peyton-institute",
+      "permanent": false
+    },
+    {
+      "source": "/go/peyton-institute/",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=peyton-institute",
+      "permanent": false
     }
   ]
 }

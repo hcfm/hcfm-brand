@@ -10,30 +10,15 @@
 <link rel="canonical" href="https://hcfm.org/pray-for-peace/">
 <style>
   :root { color-scheme: light; }
-  html { background: #ffffff; }
-  body { visibility: hidden; animation: reveal 0s linear 1500ms forwards;
-         margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
-         background:#0047BB; color:#fff; text-align:center; padding:24px;
-         font-family:'Whitney','Helvetica Neue',Helvetica,Arial,sans-serif; }
-  @keyframes reveal { to { visibility: visible; } }
-  .card { max-width:520px; }
-  .msg { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:22px;
-         line-height:1.4; margin:0 0 18px; }
-  .rule { width:68px; height:2px; background:#FFB500; margin:0 auto 18px; }
-  .go { display:inline-block; background:#FFB500; color:#00307f; font-weight:700;
-        text-decoration:none; padding:12px 22px; border-radius:4px; letter-spacing:.04em; }
-  .small { margin-top:16px; font-size:13px; color:#cfe0ff; }
-  .small a { color:#fff; }
+  html, body { background:#fff; margin:0; height:100%; }
+  .fallback { visibility:hidden; animation:show 0s linear 3000ms forwards;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    font-size:15px; color:#1a1a1a; padding:28px; text-align:center; }
+  @keyframes show { to { visibility:visible; } }
+  .fallback a { color:#0047BB; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <p class="msg">A World at Prayer is a World at Peace<sup>&reg;</sup></p>
-    <div class="rule"></div>
-    <p>Taking you to Catholic Mom.</p>
-    <p><a class="go" href="https://hcfm.org/pray-for-peace/?utm_source=email-signature&amp;utm_medium=email&amp;utm_campaign=global-rosary-peace-2026&amp;utm_content=catholic-mom">Continue now</a></p>
-    <p class="small">If you are not taken there automatically,
-      <a href="https://hcfm.org/pray-for-peace/?utm_source=email-signature&amp;utm_medium=email&amp;utm_campaign=global-rosary-peace-2026&amp;utm_content=catholic-mom">click here</a>.</p>
-  </div>
+  <p class="fallback"><a href="https://hcfm.org/pray-for-peace/?utm_source=email-signature&amp;utm_medium=email&amp;utm_campaign=global-rosary-peace-2026&amp;utm_content=catholic-mom">Continue to Catholic Mom</a></p>
 </body>
 </html>

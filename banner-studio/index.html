@@ -543,7 +543,7 @@
             </tr>
             <tr><td class="sig-title">Senior Marketing &amp; Communication Specialist (Analytics)</td></tr>
             <tr><td class="sig-org">Holy Cross Family Ministries</td></tr>
-            <tr><td class="sig-contact"><a href="#">hcfm.org</a> <span style="color:#aaa;margin:0 6px;">|</span> 737-237-4274</td></tr>
+            <tr><td class="sig-contact"><a href="#">hcfm.org</a> <span style="color:#aaa;margin:0 6px;">|</span> 508.238.4095</td></tr>
             <tr><td class="sig-tag">The Family That Prays Together Stays Together&trade;</td></tr>
             <tr>
               <td colspan="2" class="sig-banner"><a id="mockup-banner-link" target="_blank" rel="noopener"><img id="mockup-banner-img" alt="Campaign banner preview"></a></td>
@@ -1057,9 +1057,10 @@
   // have to touch the upload form to do it.
   const LINK_BANNER_BASE = 'https://hcfm.github.io/hcfm-brand/email-banners';
   // The redirect layer, not the campaign destination. Clicking a preview here
-  // follows exactly the path a recipient follows, redirect included, so a broken
-  // redirect shows up in Studio rather than in someone's inbox.
-  const GO_BASE = 'https://hcfm.github.io/hcfm-brand/go';
+  // follows exactly the path a recipient follows, so a broken redirect shows up
+  // in Studio rather than in someone's inbox. This is the Vercel 302, the same
+  // one installed signatures use.
+  const GO_BASE = 'https://hcfm-banner-studio.vercel.app/go';
 
   function linkStatus(kind, html) {
     els.linkStatus.className = `status ${kind} active`;
