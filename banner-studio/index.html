@@ -242,6 +242,12 @@
   .signature-mockup .sig-tag { font-family: Georgia, serif; font-style: italic; font-size: 10.5pt; color: #444; padding-top: 6px; }
   .signature-mockup .sig-banner { padding-top: 14px; }
   .signature-mockup .sig-banner img { width: 600px; max-width: 100%; height: auto; display: block; border-radius: 3px; }
+  .signature-mockup .sig-banner a { display: block; text-decoration: none; border: 0; }
+  .signature-mockup .sig-banner a[href] { cursor: pointer; }
+  .signature-mockup .sig-banner a:not([href]) { cursor: default; }
+  .signature-mockup-wrap .mockup-note { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin: 0 0 10px; line-height: 1.5; }
+  .link-current .thumb a { display: block; }
+  .link-current .info .test-note { display: block; margin-top: 6px; font-size: 12.5px; color: var(--ink-mute); }
 
   /* Selector (6 ministry cards: 3 columns on desktop, 1 on mobile) */
   .selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 18px; }
@@ -276,6 +282,41 @@
   .field-reason .field-help { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 6px; line-height: 1.5; }
   .field-reason.error input { border-color: var(--err); }
   .field-reason.error .field-help { color: var(--err); }
+
+  /* Link editor: its own section, own ministry picker, own state. */
+  .link-fields { margin-top: 4px; }
+  .link-field { margin-top: 16px; }
+  .link-field label { font-family: var(--font-ui); font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
+  .link-field input[type="text"], .link-field input[type="date"] {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 8px;
+    font-family: var(--font-ui); font-size: 14px; min-height: 44px;
+  }
+  .link-field input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
+  .link-field .field-help { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 6px; line-height: 1.5; }
+  .link-field.error input { border-color: var(--err); }
+  .link-field.error .field-help { color: var(--err); }
+
+  /* The banner this link belongs to, shown so nobody edits the wrong one. */
+  .link-current { display: none; gap: 14px; align-items: center; margin-top: 18px;
+    padding: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
+  .link-current.active { display: flex; }
+  .link-current .thumb { flex: 0 0 160px; }
+  .link-current .thumb img { width: 160px; height: auto; display: block; border-radius: 4px; border: 1px solid var(--line); background: #fff; }
+  .link-current .info { min-width: 0; font-family: var(--font-body); font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+  .link-current .info b { font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-mute); display: block; margin-bottom: 2px; }
+  .link-current .info .dest { word-break: break-all; color: var(--hcfm-blue); }
+
+  /* Exactly what a recipient will land on, assembled live. */
+  .link-resolved { display: none; margin-top: 16px; padding: 12px 14px; border-radius: 8px;
+    background: #f4f7ff; border: 1px solid #dbe5ff;
+    font-family: var(--font-ui); font-size: 12.5px; color: var(--hcfm-blue-dark); word-break: break-all; line-height: 1.6; }
+  .link-resolved.active { display: block; }
+  .link-resolved b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; color: var(--ink-mute); }
+
+  .link-placeholder { font-family: var(--font-body); font-size: 13.5px; color: var(--ink-mute); margin: 16px 0 0; }
+  .activity-row .kind-pill { display: inline-block; font-family: var(--font-ui); font-size: 11px; font-weight: 600;
+    padding: 1px 7px; border-radius: 999px; background: #eef3ff; color: var(--hcfm-blue-dark); margin-right: 6px; }
 
   /* Buttons */
   .actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; flex-wrap: wrap; }
@@ -491,6 +532,7 @@
 
       <div class="signature-mockup-wrap" id="signature-mockup-wrap">
         <div class="mockup-title">Preview: how this looks at the bottom of an email</div>
+        <p class="mockup-note" id="mockup-note">Pick a ministry below and the banner here becomes clickable, following the same link a recipient follows.</p>
         <div class="signature-mockup">
           <table cellpadding="0" cellspacing="0" border="0">
             <tr>
@@ -504,7 +546,7 @@
             <tr><td class="sig-contact"><a href="#">hcfm.org</a> <span style="color:#aaa;margin:0 6px;">|</span> 737-237-4274</td></tr>
             <tr><td class="sig-tag">The Family That Prays Together Stays Together&trade;</td></tr>
             <tr>
-              <td colspan="2" class="sig-banner"><img id="mockup-banner-img" alt="Campaign banner preview"></td>
+              <td colspan="2" class="sig-banner"><a id="mockup-banner-link" target="_blank" rel="noopener"><img id="mockup-banner-img" alt="Campaign banner preview"></a></td>
             </tr>
           </table>
         </div>
@@ -568,6 +610,85 @@
     </div>
 
     <div class="card">
+      <h2>Where a banner sends people</h2>
+      <p class="hint">Separate from the image. Every banner is already a link on every installed signature; this is where that link goes. Changing it takes effect on signatures people already have, with nothing to re-paste.</p>
+
+      <div class="selector" id="link-selector" role="radiogroup" aria-label="Which ministry banner link to change">
+        <label data-key="parent">
+          <input type="radio" name="link-target" value="parent">
+          <span class="name">HCFM North Easton</span>
+          <span class="desc">Main-office staff in Easton, MA</span>
+        </label>
+        <label data-key="ftp">
+          <input type="radio" name="link-target" value="ftp">
+          <span class="name">Family Theater Productions</span>
+          <span class="desc">FTP team</span>
+        </label>
+        <label data-key="family-rosary">
+          <input type="radio" name="link-target" value="family-rosary">
+          <span class="name">Family Rosary</span>
+          <span class="desc">Family Rosary staff</span>
+        </label>
+        <label data-key="catholic-mom">
+          <input type="radio" name="link-target" value="catholic-mom">
+          <span class="name">Catholic Mom</span>
+          <span class="desc">Catholic Mom team</span>
+        </label>
+        <label data-key="catholic-central">
+          <input type="radio" name="link-target" value="catholic-central">
+          <span class="name">Catholic Central</span>
+          <span class="desc">Catholic Central team</span>
+        </label>
+        <label data-key="peyton-institute">
+          <input type="radio" name="link-target" value="peyton-institute">
+          <span class="name">The Peyton Institute</span>
+          <span class="desc">Peyton Institute staff</span>
+        </label>
+      </div>
+
+      <p class="link-placeholder" id="link-placeholder">Pick a ministry to see its banner and where it currently sends people.</p>
+
+      <div class="link-current" id="link-current">
+        <div class="thumb"><a id="link-thumb-link" target="_blank" rel="noopener"><img id="link-thumb" alt="The banner this link belongs to"></a></div>
+        <div class="info">
+          <b>Sends people to</b>
+          <span class="dest" id="link-current-dest">&hellip;</span>
+          <span class="test-note">Click the banner to follow that link yourself, exactly as a recipient would.</span>
+        </div>
+      </div>
+
+      <div class="link-fields" id="link-fields" hidden>
+        <div class="link-field" id="link-field-dest">
+          <label for="link-destination">Destination</label>
+          <input type="text" id="link-destination" placeholder="https://hcfm.org/pray-for-peace/">
+          <div class="field-help">The page a click should land on. Must start with https://. Paste the registration page itself, not a shortener.</div>
+        </div>
+
+        <div class="link-field" id="link-field-campaign">
+          <label for="link-campaign">Campaign name</label>
+          <input type="text" id="link-campaign" placeholder="global-rosary-peace-2026" maxlength="80">
+          <div class="field-help">Lowercase letters, numbers and hyphens. This is how the click shows up in Google Analytics, so name the creative, not the ministry. The ministry is tagged separately and automatically.</div>
+        </div>
+
+        <div class="link-field" id="link-field-end">
+          <label for="link-end-date">Correct until</label>
+          <input type="date" id="link-end-date">
+          <div class="field-help">The last day this banner is still true. After it, the daily health check fails until someone updates it. This is the guard that stopped a Global Rosary banner running nine days past the event.</div>
+        </div>
+
+        <div class="link-resolved" id="link-resolved">
+          <b>A recipient will land on</b>
+          <span id="link-resolved-url"></span>
+        </div>
+
+        <div class="actions">
+          <button class="btn-primary" id="link-save">Update link</button>
+        </div>
+        <div class="status" id="link-status"></div>
+      </div>
+    </div>
+
+    <div class="card">
       <h2>Recent activity</h2>
       <p class="hint">The most recent banner updates. Each row shows the actual image and who published it. Click <b>Revert</b> on an older row to roll back to that banner.</p>
       <ul class="activity-list" id="activity">
@@ -588,7 +709,7 @@
 <div class="modal-overlay" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
   <div class="modal">
     <h3 id="confirm-title">Publish this banner to everyone?</h3>
-    <p>This replaces the current banner on every HCFM email signature on the side you picked. Recipients will see it on the next email they open.</p>
+    <p id="confirm-body">This replaces the current banner on every HCFM email signature on the side you picked. Recipients will see it on the next email they open.</p>
     <div class="summary" id="confirm-summary"></div>
     <div class="actions">
       <button class="btn-ghost" id="confirm-cancel">Cancel</button>
@@ -612,6 +733,9 @@
     fileDims: null,
     target: null,
     activity: [],
+    linkTarget: null,
+    linkLoaded: null,
+    confirmAction: null,
   };
   const saved = (() => { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch { return null; } })();
   if (saved && saved.token && saved.name) { state.token = saved.token; state.name = saved.name; }
@@ -627,12 +751,22 @@
     piDims: $('#pi-dims'), piSize: $('#pi-size'),
     dimsVal: $('#dims-val'), sizeVal: $('#size-val'),
     mockupWrap: $('#signature-mockup-wrap'), mockupBannerImg: $('#mockup-banner-img'),
+    mockupBannerLink: $('#mockup-banner-link'), mockupNote: $('#mockup-note'),
+    linkThumbLink: $('#link-thumb-link'),
     selector: $('#selector'),
     fieldReason: $('#field-reason'), msg: $('#msg'),
     publish: $('#publish'), reset: $('#reset'),
     status: $('#status'),
     activity: $('#activity'),
+    linkSelector: $('#link-selector'), linkPlaceholder: $('#link-placeholder'),
+    linkCurrent: $('#link-current'), linkThumb: $('#link-thumb'), linkCurrentDest: $('#link-current-dest'),
+    linkFields: $('#link-fields'), linkDestination: $('#link-destination'),
+    linkCampaign: $('#link-campaign'), linkEndDate: $('#link-end-date'),
+    linkResolved: $('#link-resolved'), linkResolvedUrl: $('#link-resolved-url'),
+    linkSave: $('#link-save'), linkStatus: $('#link-status'),
+    linkFieldDest: $('#link-field-dest'), linkFieldCampaign: $('#link-field-campaign'), linkFieldEnd: $('#link-field-end'),
     confirmModal: $('#confirm-modal'),
+    confirmTitle: $('#confirm-title'), confirmBody: $('#confirm-body'),
     confirmSummary: $('#confirm-summary'),
     confirmCancel: $('#confirm-cancel'),
     confirmGo: $('#confirm-go'),
@@ -791,7 +925,21 @@
       const input = l.querySelector('input');
       if (input) input.checked = (l.dataset.key === key);
     });
+    refreshMockupLink();
     refreshPublishEnabled();
+  }
+
+  // A banner in a real signature is a link. The preview showed a plain image,
+  // which quietly misrepresented the thing being previewed.
+  function refreshMockupLink() {
+    const key = state.target;
+    if (key) {
+      els.mockupBannerLink.href = `${GO_BASE}/${key}/`;
+      els.mockupNote.textContent = `Clickable. Following it goes where the ${targetLabel(key)} banner currently sends people, redirect and all.`;
+    } else {
+      els.mockupBannerLink.removeAttribute('href');
+      els.mockupNote.textContent = 'Pick a ministry below and the banner here becomes clickable, following the same link a recipient follows.';
+    }
   }
 
   function resetForm() {
@@ -804,24 +952,49 @@
     els.msg.value = '';
     els.fieldReason.classList.remove('error');
     clearStatus();
+    refreshMockupLink();
     refreshPublishEnabled();
   }
 
   // ---------- Confirmation modal ----------
-  function openConfirmModal() {
-    const reason = els.msg.value.trim();
-    const target = state.target;
-    els.confirmSummary.innerHTML = `
-      <div><b>Updating:</b> ${escapeHtml(targetLabel(target))} signature</div>
-      <div><b>Reason:</b> ${escapeHtml(reason)}</div>
-      <div><b>Image:</b> ${escapeHtml(state.file?.name || 'untitled.png')} (${fmtBytes(state.fileBytes||0)})</div>
-      <div><b>You're publishing as:</b> ${escapeHtml(state.name)}</div>
-    `;
+  // One modal, two callers. The image publish and the link change are different
+  // enough that a shared fixed wording would be wrong for one of them, so title,
+  // body, summary and the confirm button all come from the caller.
+  function openConfirm({ title, body, summary, confirmLabel, onConfirm }) {
+    els.confirmTitle.textContent = title;
+    els.confirmBody.textContent = body;
+    els.confirmSummary.innerHTML = summary;
+    els.confirmGo.textContent = confirmLabel;
+    state.confirmAction = onConfirm;
     els.confirmModal.classList.add('active');
     setTimeout(() => els.confirmGo.focus(), 50);
   }
   function closeConfirmModal() {
     els.confirmModal.classList.remove('active');
+    state.confirmAction = null;
+  }
+  function runConfirmAction() {
+    const fn = state.confirmAction;
+    state.confirmAction = null;
+    els.confirmModal.classList.remove('active');
+    if (typeof fn === 'function') fn();
+  }
+
+  function openConfirmModal() {
+    const reason = els.msg.value.trim();
+    const target = state.target;
+    openConfirm({
+      title: 'Publish this banner to everyone?',
+      body: 'This replaces the current banner on every HCFM email signature on the side you picked. Recipients will see it on the next email they open.',
+      summary: `
+        <div><b>Updating:</b> ${escapeHtml(targetLabel(target))} signature</div>
+        <div><b>Reason:</b> ${escapeHtml(reason)}</div>
+        <div><b>Image:</b> ${escapeHtml(state.file?.name || 'untitled.png')} (${fmtBytes(state.fileBytes||0)})</div>
+        <div><b>You're publishing as:</b> ${escapeHtml(state.name)}</div>
+      `,
+      confirmLabel: 'Yes, publish',
+      onConfirm: doPublish,
+    });
   }
 
   // ---------- Publish flow ----------
@@ -878,6 +1051,168 @@
     openConfirmModal();
   }
 
+  // ---------- Link editor ----------
+  // Deliberately independent of the image-upload flow above: someone changing
+  // where a banner points usually has no new image to publish, and should not
+  // have to touch the upload form to do it.
+  const LINK_BANNER_BASE = 'https://hcfm.github.io/hcfm-brand/email-banners';
+  // The redirect layer, not the campaign destination. Clicking a preview here
+  // follows exactly the path a recipient follows, redirect included, so a broken
+  // redirect shows up in Studio rather than in someone's inbox.
+  const GO_BASE = 'https://hcfm.github.io/hcfm-brand/go';
+
+  function linkStatus(kind, html) {
+    els.linkStatus.className = `status ${kind} active`;
+    els.linkStatus.innerHTML = html;
+    if (kind === 'err' || kind === 'ok') announce(els.linkStatus.textContent || '');
+  }
+  function clearLinkStatus() { els.linkStatus.className = 'status'; els.linkStatus.innerHTML = ''; }
+
+  // Mirrors exactly what the redirect layer builds, so what is previewed here is
+  // what a recipient actually lands on. If the tagging rules in
+  // .github/workflows/build-go-pages.yml change, change this too.
+  function resolvedUrl(destination, campaign, key) {
+    if (!/^https:\/\/\S+$/.test(destination)) return null;
+    const sep = destination.includes('?') ? '&' : '?';
+    const q = new URLSearchParams({
+      utm_source: 'email-signature',
+      utm_medium: 'email',
+      utm_campaign: campaign || 'unspecified',
+      utm_content: key,
+    });
+    return destination + sep + q.toString();
+  }
+
+  function refreshResolvedPreview() {
+    const key = state.linkTarget;
+    if (!key) { els.linkResolved.classList.remove('active'); return; }
+    const url = resolvedUrl((els.linkDestination.value||'').trim(), (els.linkCampaign.value||'').trim(), key);
+    if (!url) { els.linkResolved.classList.remove('active'); return; }
+    els.linkResolvedUrl.textContent = url;
+    els.linkResolved.classList.add('active');
+  }
+
+  function setLinkTarget(key) {
+    if (state.linkTarget !== key) clearLinkStatus();
+    state.linkTarget = key;
+    [...els.linkSelector.querySelectorAll('label')].forEach(l => {
+      l.classList.toggle('checked', l.dataset.key === key);
+      const input = l.querySelector('input');
+      if (input) input.checked = (l.dataset.key === key);
+    });
+    loadLink(key);
+  }
+
+  // Deliberately does NOT clear the status bar: it is also called to refresh the
+  // form after a successful save, and clearing here wiped the confirmation
+  // message the moment it appeared. Switching ministry clears it instead.
+  async function loadLink(key) {
+    els.linkFields.hidden = true;
+    els.linkCurrent.classList.remove('active');
+    els.linkResolved.classList.remove('active');
+    els.linkPlaceholder.hidden = false;
+    els.linkPlaceholder.textContent = 'Loading the current link\u2026';
+    try {
+      const data = await api(`/api/campaign?target=${encodeURIComponent(key)}`);
+      if (state.linkTarget !== key) return;   // user switched ministry mid-flight
+      state.linkLoaded = data;
+      els.linkDestination.value = data.destination || '';
+      els.linkCampaign.value = data.campaign || '';
+      els.linkEndDate.value = data.end_date || '';
+      els.linkThumb.src = `${LINK_BANNER_BASE}/${key}/banner.png?v=${Date.now()}`;
+      els.linkThumbLink.href = `${GO_BASE}/${key}/`;
+      els.linkCurrentDest.textContent = data.destination || '(nothing set)';
+      els.linkPlaceholder.hidden = true;
+      els.linkCurrent.classList.add('active');
+      els.linkFields.hidden = false;
+      refreshResolvedPreview();
+    } catch (err) {
+      if (err.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
+      els.linkPlaceholder.hidden = false;
+      els.linkPlaceholder.textContent = `Couldn't load the current link for ${targetLabel(key)}. ${err.message || ''}`;
+    }
+  }
+
+  function validateLink() {
+    const destination = (els.linkDestination.value || '').trim();
+    const campaign = (els.linkCampaign.value || '').trim();
+    const endDate = (els.linkEndDate.value || '').trim();
+    [els.linkFieldDest, els.linkFieldCampaign, els.linkFieldEnd].forEach(f => f.classList.remove('error'));
+    if (!/^https:\/\/\S+$/.test(destination)) {
+      els.linkFieldDest.classList.add('error'); els.linkDestination.focus();
+      return { ok: false, msg: 'The destination has to be a full https:// address.' };
+    }
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(campaign)) {
+      els.linkFieldCampaign.classList.add('error'); els.linkCampaign.focus();
+      return { ok: false, msg: 'The campaign name can only use lowercase letters, numbers and hyphens.' };
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(endDate)) {
+      els.linkFieldEnd.classList.add('error'); els.linkEndDate.focus();
+      return { ok: false, msg: 'Pick the last day this banner is still correct.' };
+    }
+    const today = new Date().toISOString().slice(0, 10);
+    if (endDate < today) {
+      els.linkFieldEnd.classList.add('error'); els.linkEndDate.focus();
+      return { ok: false, msg: 'That date has already passed, so the health check would fail the moment this saved. Pick a date in the future.' };
+    }
+    return { ok: true, destination, campaign, endDate };
+  }
+
+  function startLinkSave() {
+    const key = state.linkTarget;
+    if (!key) return;
+    const v = validateLink();
+    if (!v.ok) { linkStatus('err', `<b>Not saved.</b> ${escapeHtml(v.msg)}`); return; }
+    clearLinkStatus();
+    const label = targetLabel(key);
+    const was = state.linkLoaded && state.linkLoaded.destination;
+    openConfirm({
+      title: `Change where the ${label} banner sends people?`,
+      body: `This applies to every ${label} signature already installed. Nobody re-pastes anything, and the change is live within a couple of minutes.`,
+      summary: `
+        ${was && was !== v.destination ? `<div><b>Was:</b> ${escapeHtml(was)}</div>` : ''}
+        <div><b>Now:</b> ${escapeHtml(v.destination)}</div>
+        <div><b>Campaign:</b> ${escapeHtml(v.campaign)}</div>
+        <div><b>Correct until:</b> ${escapeHtml(v.endDate)}</div>
+        <div><b>You're changing this as:</b> ${escapeHtml(state.name)}</div>
+      `,
+      confirmLabel: 'Yes, change the link',
+      onConfirm: () => doLinkSave(key, v),
+    });
+  }
+
+  async function doLinkSave(key, v) {
+    els.linkSave.disabled = true;
+    linkStatus('info', '<b>Saving\u2026</b> Updating the redirect for every installed signature.');
+    announce('Saving the banner link.');
+    try {
+      const data = await api('/api/campaign', {
+        method: 'POST',
+        body: JSON.stringify({ target: key, destination: v.destination, campaign: v.campaign, end_date: v.endDate }),
+      });
+      const label = targetLabel(key);
+      linkStatus('ok', `
+        <b>Done.</b> The ${escapeHtml(label)} banner now sends people to
+        <a href="${escapeHtml(data.destination)}" target="_blank" rel="noopener">${escapeHtml(data.destination)}</a>.
+        <small>
+          The redirect page rebuilds itself automatically and is usually live within two minutes. Nobody re-pastes anything.
+          If you open the banner in your own email before then, you may still land on the old page because your browser cached the redirect; recipients do not share that cache.
+        </small>
+      `);
+      announce(`Link updated for ${label}.`);
+      await loadLink(key);
+      await loadActivity();
+    } catch (err) {
+      let msg = err.message || 'Something went wrong.';
+      if (err.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
+      if (err.status === 403) msg = "The studio's GitHub credential expired. Ask Emmy to refresh it.";
+      else if (err.status === 409) msg = 'Someone else changed a banner link a moment ago. Reload the page and try again.';
+      linkStatus('err', `<b>Couldn't save.</b> ${escapeHtml(msg)}`);
+    } finally {
+      els.linkSave.disabled = false;
+    }
+  }
+
   // ---------- Activity feed ----------
   async function loadActivity() {
     try {
@@ -896,22 +1231,26 @@
     const seenLive = new Set();
     els.activity.innerHTML = items.map((it) => {
       const tgt = it.target || 'parent';
-      const isCurrent = it.target && !seenLive.has(it.target);
-      if (it.target) seenLive.add(it.target);
+      const isCurrent = it.kind !== 'link' && it.target && !seenLive.has(it.target);
+      if (it.kind !== 'link' && it.target) seenLive.add(it.target);
       const thumbUrl = `https://cdn.jsdelivr.net/gh/${BRAND_REPO}@${it.sha}/email-banners/${tgt}/banner.png`;
       const reasonText = it.what || '(no reason given)';
+      // A link change never gets a Revert button. The image at that commit is
+      // identical to the one before it, so reverting would be a no-op dressed up
+      // as an action.
+      const isLink = it.kind === 'link';
       return `
         <li class="activity-row ${isCurrent ? 'current' : ''}" data-sha="${escapeHtml(it.sha)}" data-target="${escapeHtml(tgt)}">
           <div class="thumb"><img src="${thumbUrl}" alt="Banner thumbnail" loading="lazy" onerror="this.style.display='none'"></div>
           <div class="body">
             <div class="what" title="${escapeHtml(reasonText)}">${escapeHtml(reasonText)}</div>
             <div class="meta">
-              <span class="target-pill">${escapeHtml(targetLabel(tgt))}</span>
+              ${isLink ? '<span class="kind-pill">link</span>' : ''}<span class="target-pill">${escapeHtml(targetLabel(tgt))}</span>
               ${escapeHtml(it.uploader || '')}${it.uploader && it.when ? ' &middot; ' : ''}${it.when ? escapeHtml(fmtRelative(it.when)) : ''}
             </div>
           </div>
           <div class="right-actions">
-            ${isCurrent ? '' : `<button class="btn-revert" data-revert-sha="${escapeHtml(it.sha)}" data-revert-target="${escapeHtml(tgt)}">Revert to this</button>`}
+            ${(isCurrent || isLink) ? '' : `<button class="btn-revert" data-revert-sha="${escapeHtml(it.sha)}" data-revert-target="${escapeHtml(tgt)}">Revert to this</button>`}
           </div>
         </li>
       `;
@@ -1032,9 +1371,15 @@
 
     els.publish.addEventListener('click', startPublish);
     els.reset.addEventListener('click', resetForm);
+    [...els.linkSelector.querySelectorAll('label')].forEach(l => {
+      l.addEventListener('click', (e) => { e.preventDefault(); setLinkTarget(l.dataset.key); });
+    });
+    els.linkSave.addEventListener('click', startLinkSave);
+    els.linkDestination.addEventListener('input', refreshResolvedPreview);
+    els.linkCampaign.addEventListener('input', refreshResolvedPreview);
 
     els.confirmCancel.addEventListener('click', closeConfirmModal);
-    els.confirmGo.addEventListener('click', doPublish);
+    els.confirmGo.addEventListener('click', runConfirmAction);
     els.confirmModal.addEventListener('click', (e) => {
       if (e.target === els.confirmModal) closeConfirmModal();
     });

@@ -1,10 +1,11 @@
 name: Rebuild banner redirect pages
 
 # Marketing changes where a banner click lands by editing one line in
-# email-banners/campaigns.yml, in the GitHub web UI, with no local tooling.
-# This workflow turns that edit into the regenerated /go/<ministry>/ pages, so
-# nobody has to remember to run anything, and so the destination written in the
-# manifest and the destination a recipient actually reaches can never disagree.
+# email-banners/campaigns.yml, in the GitHub web UI or through Banner Studio,
+# with no local tooling. This workflow turns that edit into the regenerated
+# /go/<ministry>/ pages, so nobody has to remember to run anything, and so the
+# destination written in the manifest and the destination a recipient actually
+# reaches can never disagree.
 
 on:
   push:
@@ -45,48 +46,73 @@ jobs:
                       out[key][k.strip()] = v.strip().strip('"').strip("'")
               return out
 
+          # Placeholders are __NAME__ rather than {name} so the CSS braces below
+          # need no escaping and this template can be read as plain CSS.
+          #
+          # WHY THE PAGE LOOKS LIKE THIS
+          # GitHub Pages serves static files and cannot issue an HTTP 302, so the
+          # hop has to happen inside a document. location.replace() does not blank
+          # the screen: the browser keeps painting THIS page until the destination
+          # responds, which on a cold connection is a second or more. Measured 26
+          # Aug 2026: the previous version of this page sat fully rendered, in HCFM
+          # blue, for the whole of that wait, and read to staff as being sent to a
+          # random page before the real one.
+          #
+          # So the body starts hidden and reveals itself only after 1500ms. A
+          # redirect that works is invisible: the recipient goes from the email to
+          # the destination with a blank frame in between, the way an ordinary link
+          # behaves. A redirect that is broken, because a gateway stripped the
+          # script and the meta refresh, still shows the branded card and a real
+          # button, just 1.5s later. Nobody is ever stranded on a blank page.
+          #
+          # This makes the hop invisible. It does not make it fast: the extra round
+          # trip is inherent to redirecting from static hosting. Removing that
+          # requires serving /go/ from somewhere that can return a real 302.
           PAGE = """<!doctype html>
           <html lang="en">
           <head>
           <meta charset="utf-8">
+          <script>location.replace("__TAGGED__");</script>
+          <meta http-equiv="refresh" content="0; url=__TAGGED_ESC__">
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <meta name="robots" content="noindex, nofollow">
-          <title>{label}</title>
-          <link rel="canonical" href="{dest}">
-          <meta http-equiv="refresh" content="0; url={tagged_esc}">
+          <title>__LABEL__</title>
+          <link rel="canonical" href="__DEST__">
           <style>
-            :root {{ color-scheme: light; }}
-            body {{ margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+            :root { color-scheme: light; }
+            html { background: #ffffff; }
+            body { visibility: hidden; animation: reveal 0s linear 1500ms forwards;
+                   margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
                    background:#0047BB; color:#fff; text-align:center; padding:24px;
-                   font-family:'Whitney','Helvetica Neue',Helvetica,Arial,sans-serif; }}
-            .card {{ max-width:520px; }}
-            .msg {{ font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:22px;
-                   line-height:1.4; margin:0 0 18px; }}
-            .rule {{ width:68px; height:2px; background:#FFB500; margin:0 auto 18px; }}
-            .go {{ display:inline-block; background:#FFB500; color:#00307f; font-weight:700;
-                  text-decoration:none; padding:12px 22px; border-radius:4px; letter-spacing:.04em; }}
-            .small {{ margin-top:16px; font-size:13px; color:#cfe0ff; }}
-            .small a {{ color:#fff; }}
+                   font-family:'Whitney','Helvetica Neue',Helvetica,Arial,sans-serif; }
+            @keyframes reveal { to { visibility: visible; } }
+            .card { max-width:520px; }
+            .msg { font-family:Georgia,'Times New Roman',serif; font-style:italic; font-size:22px;
+                   line-height:1.4; margin:0 0 18px; }
+            .rule { width:68px; height:2px; background:#FFB500; margin:0 auto 18px; }
+            .go { display:inline-block; background:#FFB500; color:#00307f; font-weight:700;
+                  text-decoration:none; padding:12px 22px; border-radius:4px; letter-spacing:.04em; }
+            .small { margin-top:16px; font-size:13px; color:#cfe0ff; }
+            .small a { color:#fff; }
           </style>
           </head>
           <body>
             <div class="card">
               <p class="msg">A World at Prayer is a World at Peace<sup>&reg;</sup></p>
               <div class="rule"></div>
-              <p>Taking you to {label}.</p>
-              <p><a class="go" href="{tagged_esc}">Continue to hcfm.org</a></p>
-              <p class="small">If you are not redirected automatically,
-                <a href="{tagged_esc}">click here</a>.</p>
+              <p>Taking you to __LABEL__.</p>
+              <p><a class="go" href="__TAGGED_ESC__">Continue now</a></p>
+              <p class="small">If you are not taken there automatically,
+                <a href="__TAGGED_ESC__">click here</a>.</p>
             </div>
-          <script>location.replace("{tagged}");</script>
           </body>
           </html>
           """
           PAGE = "\n".join(l[10:] if l.startswith(" " * 10) else l for l in PAGE.split("\n"))
 
-          # Three redirect mechanisms on purpose. Some corporate mail gateways rewrite
-          # and pre-fetch links, some strip scripts, some disable meta refresh. The
-          # visible button is the floor: a human can always still get there.
+          # Three mechanisms on purpose, in priority order: the script fires first
+          # and is what almost everyone gets, meta refresh covers script-stripping
+          # gateways, and the visible button is the floor a human can always use.
           written = 0
           for key, meta in sorted(manifest().items()):
               dest   = meta["destination"]
@@ -96,12 +122,11 @@ jobs:
                   "utm_campaign": meta.get("campaign", "unspecified"),
                   "utm_content":  key,
               })
-              out = PAGE.format(
-                  label      = html.escape(meta.get("label", key)),
-                  dest       = dest,
-                  tagged     = tagged,
-                  tagged_esc = tagged.replace("&", "&amp;"),
-              )
+              out = (PAGE
+                     .replace("__LABEL__",      html.escape(meta.get("label", key)))
+                     .replace("__DEST__",       dest)
+                     .replace("__TAGGED_ESC__", tagged.replace("&", "&amp;"))
+                     .replace("__TAGGED__",     tagged))
               d = os.path.join("go", key)
               os.makedirs(d, exist_ok=True)
               open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(out)

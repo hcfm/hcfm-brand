@@ -34,8 +34,17 @@ function inferTargetFromCommit(c) {
   return null;
 }
 
+// A destination change and an image swap both land in email-banners/, so the
+// commit message is the only thing separating them. A link row must never offer
+// Revert: reverting it would roll back a banner image that never changed.
+function inferKindFromCommit(c) {
+  const msg = (c.commit?.message || '').split('\n')[0];
+  return /^Banner Studio link:/i.test(msg) ? 'link' : 'image';
+}
+
 // Strip prefixes for a clean "what" line in the activity feed.
 const STRIP_PREFIXES = [
+  /^Banner Studio link:\s*/i,
   /^Banner Studio:\s*/i,
   /^HCFM North Easton\s*[—-]\s*/i,
   /^HCFM Parent\s*[—-]\s*/i,
@@ -90,6 +99,7 @@ export default async function handler(req, res) {
         uploader,
         when: c.commit?.author?.date || c.commit?.committer?.date,
         target: inferTargetFromCommit(c),
+        kind: inferKindFromCommit(c),
       };
     });
     return res.status(200).json({ items: sanitized });
