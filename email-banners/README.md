@@ -4,12 +4,12 @@ Live banner images that ride at the bottom of every HCFM email signature.
 
 | Path | URL recipients see | Who controls it |
 |---|---|---|
-| `parent/banner.png` | https://emmanuelepau.github.io/hcfm-brand/email-banners/parent/banner.png | HCFM Marketing & Communications |
-| `ftp/banner.png` | https://emmanuelepau.github.io/hcfm-brand/email-banners/ftp/banner.png | Family Theater Productions |
+| `parent/banner.png` | https://hcfm.github.io/hcfm-brand/email-banners/parent/banner.png | HCFM Marketing & Communications |
+| `ftp/banner.png` | https://hcfm.github.io/hcfm-brand/email-banners/ftp/banner.png | Family Theater Productions |
 
 ## How to update a banner
 
-Use **Banner Studio**: https://emmanuelepau.github.io/hcfm-brand/banner-upload/
+Use **Banner Studio**: https://hcfm.github.io/hcfm-brand/banner-upload/
 
 Drop a 600×200 PNG, pick the target, click Publish. Within ~10 minutes every staff signature in the org shows the new banner — no action from staff.
 
@@ -24,7 +24,7 @@ For setup, troubleshooting, and architecture details, see `banner-upload/README.
 ## Audit trail
 
 Every banner swap is a Git commit. View history at:
-- This folder: https://github.com/EmmanuelEpau/hcfm-brand/commits/main/email-banners
+- This folder: https://github.com/hcfm/hcfm-brand/commits/main/email-banners
 
 Reverting a bad swap = revert the commit on GitHub, or re-upload the prior file via Banner Studio.
 

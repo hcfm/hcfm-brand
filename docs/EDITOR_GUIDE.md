@@ -379,7 +379,7 @@ For things outside the chatbot's scope, use the **Help** section's forms to emai
 | File Manager | app.hubspot.com/files/275132 |
 | Page editor | app.hubspot.com/pages/275132/editor/212534416190/content |
 | Live brand portal | hcfm.org/brand |
-| Git history (audit trail) | github.com/EmmanuelEpau/hcfm-brand/commits/main |
+| Git history (audit trail) | github.com/hcfm/hcfm-brand/commits/main |
 
 ---
 

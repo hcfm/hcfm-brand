@@ -30,7 +30,7 @@ A single source of truth for **how the HCFM Brand Portal operates**. Read this f
 ┌─────────────────────────────────────────────────────────────────┐
 │  LAYER 1: SOURCE CODE                                           │
 │  Where: Emmanuel's Mac + GitHub repo                            │
-│  github.com/EmmanuelEpau/hcfm-brand                             │
+│  github.com/hcfm/hcfm-brand                             │
 │                                                                 │
 │  Contains: HTML templates, CSS styles, JS scripts, the          │
 │  Word letterhead .docx files, helper scripts, documentation.    │
@@ -206,7 +206,7 @@ the **commit + push** step replaces the **CLI upload** step, push to main, HubSp
 ## The audit trail
 
 Every change to the brand portal is captured in **git history**:
-- View at: `https://github.com/EmmanuelEpau/hcfm-brand/commits/main`
+- View at: `https://github.com/hcfm/hcfm-brand/commits/main`
 - Each commit shows: timestamp, author, what changed, why
 - Reverting a change: `git revert <commit-id>` + re-push
 

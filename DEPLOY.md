@@ -6,9 +6,9 @@ Plain-English notes for whoever ships the production version.
 
 **GitHub Pages**, free tier, served from this repo's `main` branch.
 
-- **Live URL:** https://emmanuelepau.github.io/hcfm-brand/
-- **Source:** https://github.com/EmmanuelEpau/hcfm-brand
-- **Heavy assets (ZIPs):** Hosted via [GitHub Releases](https://github.com/EmmanuelEpau/hcfm-brand/releases/tag/v1.0-assets), not in the repo
+- **Live URL:** https://hcfm.github.io/hcfm-brand/
+- **Source:** https://github.com/hcfm/hcfm-brand
+- **Heavy assets (ZIPs):** Hosted via [GitHub Releases](https://github.com/hcfm/hcfm-brand/releases/tag/v1.0-assets), not in the repo
 - **Deploy trigger:** Every `git push` to `main` rebuilds the site within ~60 seconds
 
 That's the entire stack. There is no server, database, build step, or CI pipeline. The HTML, CSS, and JS are static files. Click anywhere in this repo, edit, push, and the live site updates.
@@ -123,9 +123,9 @@ The current setup works for ministry centers, vendors, and partners worldwide. N
 
 ## Custom domain (optional, anytime)
 
-To serve at `brand.hcfm.org` instead of `emmanuelepau.github.io/hcfm-brand`:
+To serve at `brand.hcfm.org` instead of `hcfm.github.io/hcfm-brand`:
 
-1. In your DNS provider, add a CNAME record: `brand` → `emmanuelepau.github.io`
+1. In your DNS provider, add a CNAME record: `brand` → `hcfm.github.io`
 2. In the repo: `Settings → Pages → Custom domain` → enter `brand.hcfm.org`
 3. Wait 10–30 minutes for SSL to provision
 
@@ -149,4 +149,4 @@ GitHub Pages handles HTTPS automatically.
 ## Contacts
 
 - **Brand owners:** Victoria Hassan · `vhassan@hcfm.org` · Emmanuel Epau · `eepau@hcfm.org`
-- **Repo owner:** [@EmmanuelEpau](https://github.com/EmmanuelEpau)
+- **Repo owner:** [@hcfm](https://github.com/hcfm)

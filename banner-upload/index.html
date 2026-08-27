@@ -238,7 +238,7 @@
     <ol>
       <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> in a new tab.</li>
       <li>Token name: <code>HCFM Banner Studio</code>. Expiration: <code>90 days</code> (or your team policy).</li>
-      <li>Repository access: <b>Only select repositories</b> &rarr; <code>EmmanuelEpau/hcfm-brand</code>.</li>
+      <li>Repository access: <b>Only select repositories</b> &rarr; <code>hcfm/hcfm-brand</code>.</li>
       <li>Repository permissions &rarr; <b>Contents</b>: <code>Read and write</code>. Leave everything else as default.</li>
       <li>Click <b>Generate token</b>. Copy the token (starts with <code>github_pat_</code>) and paste it below.</li>
     </ol>
@@ -332,7 +332,7 @@
     <div>HCFM Banner Studio &middot; v1.0</div>
     <div class="links">
       <a href="https://hcfm.org/brand" target="_blank" rel="noopener">Brand book</a>
-      <a href="https://github.com/EmmanuelEpau/hcfm-brand/commits/main/email-banners" target="_blank" rel="noopener">Full history</a>
+      <a href="https://github.com/hcfm/hcfm-brand/commits/main/email-banners" target="_blank" rel="noopener">Full history</a>
     </div>
   </footer>
 
@@ -342,7 +342,7 @@
 (() => {
   'use strict';
 
-  const REPO_OWNER = 'EmmanuelEpau';
+  const REPO_OWNER = 'hcfm';
   const REPO_NAME  = 'hcfm-brand';
   const BRANCH     = 'main';
   const PATHS = {
@@ -350,8 +350,8 @@
     ftp:    'email-banners/ftp/banner.png',
   };
   const LIVE_URLS = {
-    parent: 'https://emmanuelepau.github.io/hcfm-brand/email-banners/parent/banner.png',
-    ftp:    'https://emmanuelepau.github.io/hcfm-brand/email-banners/ftp/banner.png',
+    parent: 'https://hcfm.github.io/hcfm-brand/email-banners/parent/banner.png',
+    ftp:    'https://hcfm.github.io/hcfm-brand/email-banners/ftp/banner.png',
   };
   const TOKEN_KEY = 'hcfm-banner-studio:token-v1';
   const USER_KEY  = 'hcfm-banner-studio:user-v1';
@@ -675,7 +675,7 @@
     } catch (err) {
       let msg = err.message || 'Token validation failed.';
       if (err.status === 401) msg = 'GitHub rejected this token. Check you copied it correctly.';
-      else if (err.status === 404) msg = 'This token doesn\'t have access to EmmanuelEpau/hcfm-brand. Re-create it and select that repository.';
+      else if (err.status === 404) msg = 'This token doesn\'t have access to hcfm/hcfm-brand. Re-create it and select that repository.';
       els.gateError.textContent = msg;
       els.gateError.classList.add('active');
     } finally {

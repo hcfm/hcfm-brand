@@ -50,7 +50,7 @@ The rest of this guide is for Approach B.
 
 ### Step 1: Verify the repo structure
 
-You should already have this. The repo at `github.com/EmmanuelEpau/hcfm-brand` should have:
+You should already have this. The repo at `github.com/hcfm/hcfm-brand` should have:
 
 ```
 hcfm-brand/
@@ -82,7 +82,7 @@ This will be used only by GitHub Actions, separate from Emmanuel's personal CLI 
 
 ### Step 3: Add the key as a GitHub Actions secret
 
-1. Go to the repo: https://github.com/EmmanuelEpau/hcfm-brand
+1. Go to the repo: https://github.com/hcfm/hcfm-brand
 2. Click **Settings** (top of the repo nav).
 3. Left sidebar → **Secrets and variables** → **Actions**.
 4. Click **New repository secret**.

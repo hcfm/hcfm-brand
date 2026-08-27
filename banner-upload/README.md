@@ -2,7 +2,7 @@
 
 The web tool used to update the campaign banner that rides at the bottom of every HCFM email signature.
 
-**Live URL:** https://emmanuelepau.github.io/hcfm-brand/banner-upload/
+**Live URL:** https://hcfm.github.io/hcfm-brand/banner-upload/
 
 ---
 
@@ -29,12 +29,12 @@ A PAT is a long string GitHub gives you that proves you have permission to commi
 
 ## First-time setup (3 minutes, once per browser per person)
 
-1. Go to **https://emmanuelepau.github.io/hcfm-brand/banner-upload/**
+1. Go to **https://hcfm.github.io/hcfm-brand/banner-upload/**
 2. On the setup screen, click the link to open GitHub's token page
 3. Fill in:
    - Name: `HCFM Banner Studio`
    - Expiration: 90 days
-   - Repository access: **Only select repositories** → `EmmanuelEpau/hcfm-brand`
+   - Repository access: **Only select repositories** → `hcfm/hcfm-brand`
    - Repository permissions → **Contents**: Read and write
 4. Click **Generate token**, copy the `github_pat_…` string
 5. Paste it back into the studio and hit **Save token**
@@ -45,7 +45,7 @@ You won't have to do this again until the token expires (90 days). The token is 
 
 ## Day-to-day use
 
-1. Open https://emmanuelepau.github.io/hcfm-brand/banner-upload/
+1. Open https://hcfm.github.io/hcfm-brand/banner-upload/
 2. Drop your 600×200 PNG into the upload area
 3. Pick **HCFM Parent** or **Family Theater Productions**
 4. Type a short note about what the banner's for (it shows up in the audit log)
@@ -92,7 +92,7 @@ Your own browser cached the old image. Close and reopen the compose window, or u
                                           ↓                                 ↓
                             [GitHub Pages rebuild]            [purge-jsdelivr workflow runs]
                                           ↓                                 ↓
-                          [emmanuelepau.github.io/...]            [cdn.jsdelivr.net/... cache cleared]
+                          [hcfm.github.io/...]            [cdn.jsdelivr.net/... cache cleared]
                                           ↓
                               Every email signature
                               referencing this URL

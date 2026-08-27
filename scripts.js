@@ -330,7 +330,7 @@
 
   // Release base for heavy ZIPs hosted on GitHub Releases — declared early so
   // the auto-unlock path below can use it (avoids temporal dead zone).
-  const RELEASE_BASE = 'https://github.com/EmmanuelEpau/hcfm-brand/releases/download/v1.0-assets';
+  const RELEASE_BASE = 'https://github.com/hcfm/hcfm-brand/releases/download/v1.0-assets';
 
   function unlockDownloads() {
     if (dlGate) dlGate.hidden = true;
