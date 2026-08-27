@@ -88,5 +88,5 @@ export default async function handler(req, res) {
   if (!entries.length && !team) {
     return res.status(500).json({ error: 'Studio is not fully configured. Ask Emmy to set the access codes.' });
   }
-  return res.status(401).json({ error: 'That code does not match. Codes are personal; ask Emmy for yours.' });
+  return res.status(401).json({ error: "That password does not match. Ask Emmy for the current one." });
 }

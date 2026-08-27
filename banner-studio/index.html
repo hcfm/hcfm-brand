@@ -35,27 +35,27 @@
   @font-face { font-family:'Calluna'; src:url('https://hcfm.github.io/hcfm-brand/assets/fonts/Calluna-Bold.otf') format('opentype'); font-weight:700; font-style:normal; font-display:swap; }
 
   :root{
-    --paper:#F5F3ED;
+    --paper:#F5F7FB;
     --card:#FFFFFF;
-    --ink:#111418;
-    --ink-2:#5C6167;
-    --ink-3:#9AA0A6;
-    --hairline:#EDEAE2;
+    --ink:#0B1524;
+    --ink-2:#5A6572;
+    --ink-3:#8A94A2;
+    --hairline:#E3E8EF;
     --blue:#0047BB;
-    --blue-deep:#00307F;
+    --blue-deep:#022B76;
     --blue-tonal:#E8EFFC;
     --gold:#FFB500;
     --gold-ink:#7A5A00;
-    --gold-tonal:#FCF1D4;
+    --gold-tonal:#FFF6DE;
     --gold-muted:#89764B;
-    --green-ink:#1E6B3E;
-    --green-tonal:#E3F2E8;
-    --red:#B3261E;
-    --red-tonal:#FBEAE8;
+    --green-ink:#1E7A5B;
+    --green-tonal:#E6F3EE;
+    --red:#B23A22;
+    --red-tonal:#FAECE8;
 
-    --sans:"Whitney","Helvetica Neue",Helvetica,Arial,sans-serif;
-    --serif:"Calluna",Georgia,"Times New Roman",serif;
-    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --serif:ui-serif,"New York","Iowan Old Style",Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
 
     --sh-rest:0 1px 2px rgba(17,20,24,.04), 0 6px 20px rgba(17,20,24,.05);
     --sh-hover:0 2px 4px rgba(17,20,24,.05), 0 14px 34px rgba(17,20,24,.09);
@@ -174,8 +174,7 @@
   .gatecard input:focus{outline:none;border-color:var(--blue)}
   .gatecard .hint{font-size:12.5px;color:var(--ink-3);margin:8px 0 22px}
   .gatecard .b{width:100%;padding:12px}
-  .gate-name{display:none;text-align:left;margin:0 0 4px}
-  .gate-name.on{display:block}
+  .gate-name{text-align:left;margin:0 0 18px}
   .gate-name input{text-align:left;letter-spacing:0;font-weight:400}
   .gate-error{display:none;font-size:13px;color:var(--red);margin:14px 0 0;line-height:1.5}
   .gate-error.on{display:block}
@@ -469,13 +468,13 @@
         <img class="brandmark" src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="Holy Cross Family Ministries">
         <h1>HCFM Signature Banners</h1>
         <p class="lede">One place to change the banner at the bottom of every HCFM email signature.</p>
-        <label for="code">Access code</label>
-        <input id="code" type="password" autocomplete="current-password" spellcheck="false" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-        <p class="hint">Yours alone. If you need one, ask Emmy (eepau@hcfm.org).</p>
-        <div class="field gate-name" id="gate-name">
+        <div class="field gate-name on" id="gate-name">
           <label for="gname">Your name</label>
-          <input id="gname" type="text" autocomplete="name" maxlength="60" placeholder="So publishes carry your name">
+          <input id="gname" type="text" autocomplete="name" maxlength="60" placeholder="So changes carry your name">
         </div>
+        <label for="code">Team password</label>
+        <input id="code" type="password" autocomplete="current-password" spellcheck="false" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+        <p class="hint">Shared by the whole team. Ask Emmy (eepau@hcfm.org) if you don't have it.</p>
         <button class="b b-solid" id="signin-btn">Sign in</button>
         <div class="gate-error" id="gate-error" role="alert"></div>
       </div>
@@ -810,17 +809,14 @@
     els.gateError.classList.remove('on'); els.gateError.textContent = '';
     const code = els.code.value || '';
     const name = (els.gname.value || '').trim();
-    if (!code) { gateFail('Enter your access code. If you need one, ask Emmy.'); return; }
+    if (name.length < 2) { gateFail('Add your name first.'); els.gname.focus(); return; }
+    if (!code) { gateFail('Enter the team password. Ask Emmy if you don\'t have it.'); els.code.focus(); return; }
     els.signinBtn.disabled = true; els.signinBtn.textContent = 'Signing in…';
     try {
-      const data = await api('/api/auth', { method: 'POST', body: JSON.stringify({ code, name: name || undefined }) });
+      const data = await api('/api/auth', { method: 'POST', body: JSON.stringify({ code, name }) });
       if (data && data.needName) {
-        const alreadyAsked = els.gateName.classList.contains('on');
-        els.gateName.classList.add('on');
+        gateFail('Add your name first.');
         els.gname.focus();
-        gateFail(alreadyAsked
-          ? 'Add your name, so publishes carry it.'
-          : 'That is the shared team code, which does not carry a name. Add yours above, or ask Emmy for a personal code.');
         return;
       }
       state.token = data.token; state.name = data.name;
@@ -1450,7 +1446,7 @@
 
   bind();
   if (state.token && state.name) enterApp();
-  else { show('signin'); els.code.focus(); }
+  else { show('signin'); els.gname.focus(); }
 })();
 </script>
 </body>
