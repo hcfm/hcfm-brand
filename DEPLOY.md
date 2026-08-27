@@ -32,8 +32,8 @@ These three items are wired for the showcase but should be rebuilt before public
 ### 1. Password gate (`scripts.js`, top of the IIFE)
 
 ```js
-const MINISTRY_PASSWORDS = ['hcfm2026', 'eastoncreatives', 'familyrosary'];
-const ADMIN_PASSWORDS    = ['emmyvictoria', 'brandowners', 'eastonadmin'];
+const MINISTRY_PASSWORDS = [ /* values live in scripts.js only */ ];
+const ADMIN_PASSWORDS    = [ /* values live in scripts.js only */ ];
 ```
 
 These are **client-side checks** — anyone reading the JS source can see them. Fine for the showcase, NOT for ministry-center distribution.
@@ -138,7 +138,7 @@ GitHub Pages handles HTTPS automatically.
 - Sixteen routed pages (Symbol, Logos, Colors, Typography, Voice, Imagery, Design Elements, Stationery, Platform Dimensions, Ministry Centers, Downloads, Videos, Pre-flight Checklist, FAQ, Help, Home)
 - Real Whitney + Calluna + Playlist Script fonts loaded via `@font-face`
 - Click-to-copy on every color swatch
-- Two-tier password gate on Downloads (`hcfm2026` ministry tier, `emmyvictoria` source-files tier)
+- Two-tier password gate on Downloads (ministry tier and source-files tier; the values sit in `scripts.js` and are deliberately not repeated in this document)
 - Image lightbox for photography
 - 75-entry hand-built brand chat helper
 - 17-question searchable FAQ

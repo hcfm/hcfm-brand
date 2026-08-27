@@ -13,7 +13,7 @@ A single source of truth for **how the HCFM Brand Portal operates**. Read this f
 | If you're… | Read |
 |---|---|
 | A marketing-team member who wants to edit content | [EDITOR_GUIDE.md](EDITOR_GUIDE.md) |
-| On the IT team and need to understand the technical architecture | [IT_HANDOFF.md](IT_HANDOFF.md) |
+| On the IT team and need to understand the technical architecture | Ask Emmy for the IT handoff document; it is kept outside this public repository |
 | A developer continuing the build | This doc, then [GITHUB_AUTO_SYNC.md](GITHUB_AUTO_SYNC.md) |
 
 ---
