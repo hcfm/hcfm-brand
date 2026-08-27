@@ -4,1075 +4,760 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>HCFM Banner Studio</title>
+<title>HCFM Signature Banners</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='49' fill='%23ffffff' stroke='%23ececec' stroke-width='2'/%3E%3Ctext x='50' y='66' text-anchor='middle' font-family='Helvetica' font-weight='bold' font-size='36' fill='%2389764B'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <style>
-  /* HCFM brand fonts (loaded from the brand repo) */
+  /* ============================================================
+     HCFM Banner Studio, v2.
+     Design language from the approved 26 August mockup:
+     - Separation by ground contrast, space, and one soft shadow
+       tier. Almost no borders.
+     - One button vocabulary: solid is the single commit on a
+       screen, tonal is secondary, plain is the rest.
+     - Type scale 34 / 17 / 14 / 12.5 / 11 with real gaps.
+     - Blue is the action colour and only the action colour.
+       Gold is a dot or a rule, never text. Muted gold carries
+       the brand whisper.
+     - One warm light world. Every colour painted explicitly.
+     The signature preview keeps the real brand faces, Whitney
+     and Calluna, because it previews a real signature.
+     ============================================================ */
   @font-face {
     font-family: 'Whitney';
     src: url('https://hcfm.github.io/hcfm-brand/assets/fonts/Whitney-Bold.otf') format('opentype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
+    font-weight: 700; font-style: normal; font-display: swap;
   }
   @font-face {
     font-family: 'Calluna';
     src: url('https://hcfm.github.io/hcfm-brand/assets/fonts/Calluna-Regular.otf') format('opentype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+    font-weight: 400; font-style: normal; font-display: swap;
   }
 
-  :root {
-    --hcfm-blue: #0047BB;
-    --hcfm-blue-dark: #003590;
-    --hcfm-gold: #FFB500;
-    --hcfm-muted-gold: #89764B;
-    --ink: #111418;
-    --ink-soft: #444;
-    --ink-mute: #6b7280;
-    --line: #e5e7eb;
-    --line-soft: #f1f3f5;
-    --bg: #f7f8fa;
-    --card: #ffffff;
-    --ok: #1f7a3a;
-    --warn: #b06b00;
-    --err: #b3261e;
-    --ok-bg: #e9f5ee;
-    --warn-bg: #fdf3e0;
-    --err-bg: #fae9e7;
-    --radius: 10px;
-    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-    --shadow-md: 0 8px 32px rgba(15, 23, 42, 0.12);
+  :root{
+    --paper:#F5F3ED;
+    --card:#FFFFFF;
+    --ink:#111418;
+    --ink-2:#5C6167;
+    --ink-3:#9AA0A6;
+    --hairline:#EDEAE2;
+    --blue:#0047BB;
+    --blue-deep:#00307F;
+    --blue-tonal:#E8EFFC;
+    --gold:#FFB500;
+    --gold-ink:#7A5A00;
+    --gold-tonal:#FCF1D4;
+    --gold-muted:#89764B;
+    --green-ink:#1E6B3E;
+    --green-tonal:#E3F2E8;
+    --red:#B3261E;
+    --red-tonal:#FBEAE8;
 
-    /* Brand font stacks */
-    --font-display: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    --font-body:    'Calluna', Georgia, 'Palatino Linotype', Palatino, 'Times New Roman', serif;
-    --font-ui:      'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    font-family: var(--font-body);
-    color: var(--ink);
-    background: var(--bg);
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.005em;
-  }
-  .container { max-width: 760px; margin: 0 auto; padding: 36px 24px 80px; }
+    --sans:"Libre Franklin","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
 
-  /* Screen-reader-only utility for accessibility announcements */
-  .sr-only {
-    position: absolute;
-    width: 1px; height: 1px;
-    padding: 0; margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
+    --sh-rest:0 1px 2px rgba(17,20,24,.04), 0 6px 20px rgba(17,20,24,.05);
+    --sh-hover:0 2px 4px rgba(17,20,24,.05), 0 14px 34px rgba(17,20,24,.09);
+    --sh-float:0 12px 40px rgba(17,20,24,.16);
   }
 
-  header.brand {
-    display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:14px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
   }
-  header.brand .mark {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #ffffff;
-    border: 1px solid #ececec;
-    flex-shrink: 0;
-    overflow: hidden;
-    position: relative;
-  }
-  header.brand .mark .symbol {
-    position: absolute;
-    inset: 0;
-    background-color: var(--hcfm-muted-gold);
-    -webkit-mask: url('https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
-            mask: url('https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-black.png') no-repeat center / 100% 100%;
-  }
-  header.brand .titles { flex: 1; min-width: 0; }
-  header.brand h1 {
-    margin: 0; font-family: var(--font-display); font-size: 22px; font-weight: 700;
-    color: var(--ink); letter-spacing: -0.01em;
-  }
-  header.brand .sub { margin: 4px 0 0; font-family: var(--font-body); font-size: 13.5px; color: var(--ink-mute); }
-  header.brand .who {
-    font-size: 12px; color: var(--ink-mute); text-align: right;
-    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
-  }
-  header.brand .who .name { color: var(--ink); font-weight: 600; font-size: 13px; }
-  header.brand .who .sign-out-btn {
-    font-size: 12px; padding: 6px 10px; min-height: 28px;
-    background: transparent; border: 1px solid var(--line); border-radius: 6px;
-    color: var(--ink-soft); cursor: pointer;
-    transition: background 120ms, border-color 120ms;
-  }
-  header.brand .who .sign-out-btn:hover { background: var(--line-soft); border-color: var(--ink-mute); }
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+  button:disabled{opacity:.55;cursor:not-allowed}
+  a{color:var(--blue)}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:3px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    padding: 24px;
-    margin-bottom: 18px;
-  }
-  .card h2 { margin: 0 0 6px; font-family: var(--font-display); font-size: 16.5px; font-weight: 700; letter-spacing: -0.005em; }
-  .card .hint { color: var(--ink-mute); font-family: var(--font-body); font-size: 13.5px; margin: 0 0 16px; line-height: 1.55; }
-  .card .req { color: var(--err); font-weight: 700; font-family: var(--font-ui); }
+  /* Content lives in a 1280px container: wide enough for three cards
+     across on a laptop, capped so a 27-inch monitor or a mirrored TV
+     centers it instead of stretching it. Research range: key content
+     inside ~1140-1280, up to ~1440 on large desktops, never fluid. */
+  .wrap{max-width:1280px;margin:0 auto;padding:0 36px}
+  @media(max-width:720px){.wrap{padding:0 18px}}
+  @media(min-width:1680px){body{font-size:15px}}
 
-  /* SIGN-IN */
-  .gate { display: none; }
-  .gate.active { display: block; }
-  .gate .field { margin-bottom: 14px; }
-  .gate label { font-family: var(--font-ui); font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
-  .gate input {
-    width: 100%; padding: 12px 14px;
-    border: 1px solid var(--line); border-radius: 8px;
-    font-family: var(--font-ui); font-size: 15px; background: #fff;
-    min-height: 44px;
-  }
-  .gate input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
-  .gate .submit-row { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
-  .gate .gate-error { color: var(--err); font-size: 13px; margin: 12px 0 0; display: none; }
-  .gate .gate-error.active { display: block; }
-  .gate .help { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line-soft); font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); line-height: 1.55; }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-  /* APP */
-  .app { display: none; }
-  .app.active { display: block; }
+  /* ---------- buttons: one vocabulary ---------- */
+  .b{
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    font-weight:600;font-size:14px;border-radius:9px;padding:10px 18px;
+    transition:background .15s ease, transform .1s ease;white-space:nowrap;
+  }
+  .b:active:not(:disabled){transform:scale(.985)}
+  .b-solid{background:var(--blue);color:#fff}
+  .b-solid:hover:not(:disabled){background:var(--blue-deep)}
+  .b-tonal{background:var(--blue-tonal);color:var(--blue)}
+  .b-tonal:hover:not(:disabled){background:#DCE7FA}
+  .b-plain{color:var(--ink-2);padding:10px 8px}
+  .b-plain:hover:not(:disabled){color:var(--blue)}
 
-  /* Drop zone */
-  .dropzone {
-    position: relative;
-    display: block;
-    border: 2px dashed var(--line);
-    border-radius: var(--radius);
-    background: var(--line-soft);
-    padding: 44px 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 120ms ease, background 120ms ease;
+  /* ---------- header ---------- */
+  .top{background:var(--card);box-shadow:0 1px 0 rgba(17,20,24,.06)}
+  .top .wrap{height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .brand{display:flex;align-items:center;gap:12px;min-width:0}
+  .brandmark{width:34px;height:34px;object-fit:contain;flex:0 0 auto;display:block}
+  .brand .n{font-weight:600;font-size:15px;letter-spacing:-.1px;white-space:nowrap}
+  .brand .n small{display:block;font-size:11px;font-weight:500;color:var(--ink-3);letter-spacing:.02em;line-height:1.3}
+  .top nav{display:flex;gap:14px;align-items:center}
+  /* The view switcher is one segmented control, not loose links. */
+  .seg{display:inline-flex;background:var(--paper);border-radius:11px;padding:3px;gap:2px}
+  .seg button{
+    font-size:13.5px;font-weight:600;color:var(--ink-2);padding:7px 16px;border-radius:8px;
+    white-space:nowrap;transition:background .12s ease,color .12s ease;
   }
-  .dropzone:hover, .dropzone:focus-within { border-color: var(--hcfm-blue); background: #fbfcff; }
-  .dropzone.dragover { border-color: var(--hcfm-blue); background: #eef3ff; }
-  .dropzone .icon {
-    width: 36px; height: 36px;
-    color: var(--hcfm-blue);
-    margin: 0 auto 10px;
-    display: block;
+  .seg button:hover{color:var(--ink)}
+  .seg button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(17,20,24,.10)}
+  .tlink{font-size:13.5px;font-weight:500;color:var(--ink-2);padding:8px 2px;border-radius:8px;white-space:nowrap}
+  .tlink:hover{color:var(--blue)}
+  .avatar{
+    width:34px;height:34px;border-radius:50%;background:var(--blue-tonal);color:var(--blue);
+    display:grid;place-items:center;font-size:12px;font-weight:700;letter-spacing:.02em;
+    flex:0 0 auto;border:0;
   }
-  .dropzone .label { font-family: var(--font-ui); font-weight: 600; margin-bottom: 6px; font-size: 15px; color: var(--ink); }
-  .dropzone .meta { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); }
-  .dropzone input[type="file"] {
-    position: absolute;
-    width: 1px; height: 1px;
-    padding: 0; margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
+  @media(max-width:560px){
+    .brand .n{display:none}
+    .top nav{gap:10px}
+    .seg button{padding:7px 12px}
   }
 
-  /* Preview block (validation pill) */
-  .preview {
-    display: none;
-    margin-top: 18px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: #fff;
-    padding: 14px;
-  }
-  .preview.active { display: block; }
-  .preview-frame {
-    background: repeating-conic-gradient(#f3f4f6 0 25%, #fff 0 50%) 0 0 / 16px 16px;
-    border-radius: 6px;
-    padding: 10px;
-    display: flex; justify-content: center;
-  }
-  .preview img { display: block; max-width: 100%; height: auto; border-radius: 4px; }
-  .preview-info {
-    margin-top: 10px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    font-size: 13px;
-  }
-  .preview-info .pi { display: flex; align-items: center; gap: 6px; color: var(--ink-soft); }
-  .preview-info .pi .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex-shrink: 0; }
-  .preview-info .pi.bad .dot { background: var(--err); }
-  .preview-info .pi.warn .dot { background: var(--warn); }
-  .preview-info .pi b { color: var(--ink); margin-right: 4px; }
+  /* ---------- views ---------- */
+  .view{display:none}
+  .view.on{display:block;animation:viewin .28s ease}
+  @keyframes viewin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-  /* Signature mockup — live preview of the banner in context */
-  .signature-mockup-wrap {
-    display: none;
-    margin-top: 18px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    background: #fff;
-    padding: 14px;
+  /* ---------- the navy world: full-bleed hero bands ----------
+     The arrival moment. Deep navy ground borrowed from the banner
+     creative itself, serif display type, an uppercase eyebrow, a
+     gold rule. Content cards overlap the band's lower edge. */
+  .hero{
+    background:
+      radial-gradient(circle at 86% 18%, rgba(255,255,255,.05) 0 170px, transparent 171px),
+      radial-gradient(circle at 79% 115%, rgba(255,255,255,.04) 0 130px, transparent 131px),
+      linear-gradient(160deg,#10264D 0%,#0B1B36 58%,#091528 100%);
+    color:#fff;
   }
-  .signature-mockup-wrap.active { display: block; }
-  .signature-mockup-wrap .mockup-title {
-    font-size: 12px; font-weight: 600; color: var(--ink-mute);
-    margin-bottom: 12px;
-    text-transform: uppercase; letter-spacing: 0.04em;
-  }
-  .signature-mockup {
-    background: #fff;
-    border-radius: 6px;
-    padding: 18px 16px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    line-height: 1.4;
-    color: #111;
-    overflow-x: auto;
-  }
-  .signature-mockup table { border-collapse: collapse; line-height: 1.35; }
-  .signature-mockup .sig-mark { width: 110px; height: 110px; vertical-align: top; padding-right: 18px; }
-  .signature-mockup .sig-mark img { width: 110px; height: auto; display: block; border: 0; }
-  .signature-mockup .sig-name { font-weight: 700; font-size: 13pt; color: #0047BB; }
-  .signature-mockup .sig-title { font-family: Georgia, serif; font-size: 11pt; color: #444; padding-top: 2px; }
-  .signature-mockup .sig-org { font-weight: 700; font-size: 11pt; color: #0047BB; padding-top: 4px; }
-  .signature-mockup .sig-contact { font-family: Georgia, serif; font-size: 11pt; color: #444; padding-top: 2px; }
-  .signature-mockup .sig-contact a { color: #0047BB; text-decoration: none; }
-  .signature-mockup .sig-tag { font-family: Georgia, serif; font-style: italic; font-size: 10.5pt; color: #444; padding-top: 6px; }
-  .signature-mockup .sig-banner { padding-top: 14px; }
-  .signature-mockup .sig-banner img { width: 600px; max-width: 100%; height: auto; display: block; border-radius: 3px; }
-  .signature-mockup .sig-banner a { display: block; text-decoration: none; border: 0; }
-  .signature-mockup .sig-banner a[href] { cursor: pointer; }
-  .signature-mockup .sig-banner a:not([href]) { cursor: default; }
-  .signature-mockup-wrap .mockup-note { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin: 0 0 10px; line-height: 1.5; }
-  .link-current .thumb a { display: block; }
-  .link-current .info .test-note { display: block; margin-top: 6px; font-size: 12.5px; color: var(--ink-mute); }
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#D9BE7F;margin:0 0 16px}
+  .hero h1.page,.hero .mvname{font-family:var(--serif);font-weight:600;color:#fff}
+  .hero .rule{background:var(--gold);width:44px;height:3px}
+  .hero .model{color:#B9C6E4}
 
-  /* Selector (6 ministry cards: 3 columns on desktop, 1 on mobile) */
-  .selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 18px; }
-  .selector label {
-    border: 1px solid var(--line); border-radius: 8px; padding: 14px;
-    cursor: pointer; transition: border-color 120ms, background 120ms;
-    min-height: 44px;
+  /* ---------- sign in ---------- */
+  .gate{
+    min-height:calc(100vh - 66px);display:grid;place-items:center;padding:48px 18px;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(255,255,255,.05) 0 210px, transparent 211px),
+      radial-gradient(circle at 12% 95%, rgba(255,255,255,.04) 0 150px, transparent 151px),
+      linear-gradient(160deg,#10264D 0%,#0B1B36 58%,#091528 100%);
   }
-  .selector label.checked { border-color: var(--hcfm-blue); background: #eef3ff; }
-  .selector label .name { font-family: var(--font-display); font-weight: 700; font-size: 14.5px; display: block; }
-  .selector label .desc { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 3px; display: block; line-height: 1.45; }
-  .selector input[type="radio"] {
-    position: absolute;
-    width: 1px; height: 1px;
-    padding: 0; margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
+  .gatecard{
+    background:var(--card);border-radius:20px;box-shadow:var(--sh-rest);
+    width:min(400px,100%);padding:44px 40px 36px;text-align:center;
   }
+  @media(max-width:420px){.gatecard{padding:36px 24px 30px}}
+  .gatecard .brandmark{width:54px;height:54px;margin:0 auto 18px}
+  .gatecard h1{font-size:22px;font-weight:700;letter-spacing:-.3px;margin:0 0 10px}
+  .gatecard .lede{font-family:var(--serif);font-size:15.5px;line-height:1.6;color:var(--ink-2);margin:0 0 28px}
+  .gatecard label{display:block;text-align:left;font-size:12.5px;font-weight:600;margin:0 0 6px}
+  .gatecard input{
+    width:100%;padding:12px 14px;border:1.5px solid var(--hairline);border-radius:10px;
+    font:inherit;font-size:15px;background:var(--card);color:var(--ink);text-align:center;
+    letter-spacing:.06em;font-weight:600;
+  }
+  .gatecard input:focus{outline:none;border-color:var(--blue)}
+  .gatecard .hint{font-size:12.5px;color:var(--ink-3);margin:8px 0 22px}
+  .gatecard .b{width:100%;padding:12px}
+  .gate-name{display:none;text-align:left;margin:0 0 4px}
+  .gate-name.on{display:block}
+  .gate-name input{text-align:left;letter-spacing:0;font-weight:400}
+  .gate-error{display:none;font-size:13px;color:var(--red);margin:14px 0 0;line-height:1.5}
+  .gate-error.on{display:block}
+  .gatefoot{margin-top:22px;font-size:12.5px;color:#8FA3CB;text-align:center}
 
-  /* Reason field */
-  .field-reason { margin-top: 16px; }
-  .field-reason label { font-family: var(--font-ui); font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
-  .field-reason input[type="text"] {
-    width: 100%; padding: 10px 12px;
-    border: 1px solid var(--line); border-radius: 8px;
-    font-family: var(--font-ui); font-size: 14px;
-    min-height: 44px;
+  /* ---------- title blocks inside heroes ---------- */
+  .head{padding:58px 0 84px}
+  .hero-sm .head{padding:40px 0 74px}
+  .headgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,400px);gap:32px 56px;align-items:end}
+  @media(max-width:940px){.headgrid{grid-template-columns:1fr;align-items:start;gap:24px}}
+  h1.page{font-size:46px;line-height:1.12;letter-spacing:-.2px;margin:0;text-wrap:balance}
+  @media(max-width:560px){
+    h1.page{font-size:28px;line-height:1.18}
+    .head{padding:36px 0 62px}
+    .eyebrow{letter-spacing:.12em}
   }
-  .field-reason input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
-  .field-reason .field-help { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 6px; line-height: 1.5; }
-  .field-reason.error input { border-color: var(--err); }
-  .field-reason.error .field-help { color: var(--err); }
+  .rule{width:32px;height:2px;background:var(--gold-muted);margin:18px 0}
+  .model{font-family:var(--serif);font-size:17px;line-height:1.65;max-width:56ch;margin:0}
 
-  /* Link editor: its own section, own ministry picker, own state. */
-  .link-fields { margin-top: 4px; }
-  .link-field { margin-top: 16px; }
-  .link-field label { font-family: var(--font-ui); font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px; }
-  .link-field input[type="text"], .link-field input[type="date"] {
-    width: 100%; padding: 10px 12px;
-    border: 1px solid var(--line); border-radius: 8px;
-    font-family: var(--font-ui); font-size: 14px; min-height: 44px;
+  .status{
+    display:block;font-size:14px;line-height:1.6;margin:0;color:var(--ink);
+    background:var(--card);border-radius:14px;box-shadow:var(--sh-float);padding:16px 19px;
   }
-  .link-field input:focus { outline: 2px solid var(--hcfm-blue); outline-offset: -1px; border-color: var(--hcfm-blue); }
-  .link-field .field-help { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 6px; line-height: 1.5; }
-  .link-field.error input { border-color: var(--err); }
-  .link-field.error .field-help { color: var(--err); }
+  .status .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:1px}
+  .status.ok .dot{background:var(--green-ink)}
+  .status.warn .dot{background:var(--gold)}
+  .status.bad .dot{background:var(--red)}
+  .status.dim .dot{background:var(--ink-3)}
+  .status b{font-weight:600}
+  .status .go{font-weight:600;color:var(--blue);text-decoration:none;background:none;font-size:14px}
+  .status .go:hover{text-decoration:underline}
 
-  /* The banner this link belongs to, shown so nobody edits the wrong one. */
-  .link-current { display: none; gap: 14px; align-items: center; margin-top: 18px;
-    padding: 14px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
-  .link-current.active { display: flex; }
-  .link-current .thumb { flex: 0 0 160px; }
-  .link-current .thumb img { width: 160px; height: auto; display: block; border-radius: 4px; border: 1px solid var(--line); background: #fff; }
-  .link-current .info { min-width: 0; font-family: var(--font-body); font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
-  .link-current .info b { font-family: var(--font-ui); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-mute); display: block; margin-bottom: 2px; }
-  .link-current .info .dest { word-break: break-all; color: var(--hcfm-blue); }
+  /* ---------- manifest grid: three across, risen into the hero ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 0 56px;margin-top:-46px}
+  @media(max-width:1080px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
 
-  /* Exactly what a recipient will land on, assembled live. */
-  .link-resolved { display: none; margin-top: 16px; padding: 12px 14px; border-radius: 8px;
-    background: #f4f7ff; border: 1px solid #dbe5ff;
-    font-family: var(--font-ui); font-size: 12.5px; color: var(--hcfm-blue-dark); word-break: break-all; line-height: 1.6; }
-  .link-resolved.active { display: block; }
-  .link-resolved b { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; color: var(--ink-mute); }
+  .card{
+    background:var(--card);border-radius:16px;box-shadow:var(--sh-rest);
+    overflow:hidden;display:flex;flex-direction:column;cursor:pointer;
+    transition:box-shadow .18s ease, transform .18s ease;
+    text-align:left;
+  }
+  .card:hover{box-shadow:var(--sh-hover);transform:translateY(-1px)}
+  .card:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  .card.flash{animation:flash 2.2s ease-out 1}
+  @keyframes flash{0%,65%{box-shadow:0 0 0 2.5px var(--gold), var(--sh-rest)}100%{box-shadow:var(--sh-rest)}}
 
-  .link-placeholder { font-family: var(--font-body); font-size: 13.5px; color: var(--ink-mute); margin: 16px 0 0; }
-  .activity-row .kind-pill { display: inline-block; font-family: var(--font-ui); font-size: 11px; font-weight: 600;
-    padding: 1px 7px; border-radius: 999px; background: #eef3ff; color: var(--hcfm-blue-dark); margin-right: 6px; }
+  .card .art{position:relative;background:#0B1B36;min-height:40px;overflow:hidden}
+  .card .art img{display:block;width:100%;height:auto;transition:transform .4s ease}
+  .card:hover .art img{transform:scale(1.03)}
+  .card .art .strip{position:absolute;left:0;right:0;bottom:0;height:3px}
+  .card .art .strip.warn{background:var(--gold)}
+  .card .art .strip.bad{background:var(--red)}
 
-  /* Buttons */
-  .actions { display: flex; gap: 10px; align-items: center; margin-top: 22px; flex-wrap: wrap; }
-  button {
-    font-family: var(--font-ui); font-size: 14px; font-weight: 600;
-    padding: 12px 20px; border-radius: 8px; cursor: pointer;
-    border: 1px solid transparent;
-    min-height: 44px;
-    transition: background 120ms, border-color 120ms, transform 60ms;
-  }
-  button:active:not(:disabled) { transform: translateY(1px); }
-  button:disabled { opacity: 0.55; cursor: not-allowed; }
-  .btn-primary { background: var(--hcfm-blue); color: #fff; }
-  .btn-primary:hover:not(:disabled) { background: var(--hcfm-blue-dark); }
-  .btn-ghost { background: transparent; color: var(--ink-soft); border-color: var(--line); }
-  .btn-ghost:hover:not(:disabled) { background: var(--line-soft); }
-  .btn-danger { background: var(--err); color: #fff; }
-  .btn-danger:hover:not(:disabled) { background: #8e1d17; }
+  .card .bd{padding:17px 20px 19px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .mname{font-size:17px;font-weight:600;letter-spacing:-.2px;margin:0;line-height:1.25}
 
-  /* Status box */
-  .status { margin-top: 18px; padding: 14px 16px; border-radius: 8px; font-size: 14px; display: none; }
-  .status.active { display: block; }
-  .status.info { background: #eef3ff; color: var(--hcfm-blue-dark); border: 1px solid #d6e0ff; }
-  .status.ok   { background: var(--ok-bg);   color: var(--ok);   border: 1px solid #cce7d6; }
-  .status.warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f1d9a8; }
-  .status.err  { background: var(--err-bg);  color: var(--err);  border: 1px solid #efcdc9; }
-  .status a { color: inherit; font-weight: 600; }
-  .status small { display: block; margin-top: 8px; opacity: 0.85; font-size: 12px; line-height: 1.5; }
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;margin-top:1px;
+    padding:4px 11px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;
+    background:var(--green-tonal);color:var(--green-ink);
+  }
+  .chip i{width:6px;height:6px;border-radius:50%;background:currentColor;display:block}
+  .chip.soon{background:var(--gold-tonal);color:var(--gold-ink)}
+  .chip.gone{background:var(--red-tonal);color:var(--red)}
+  .chip.busy{background:var(--blue-tonal);color:var(--blue)}
+  .chip.busy i{animation:pulse 1.1s ease-in-out infinite}
+  .chip.dim{background:var(--paper);color:var(--ink-3)}
+  @keyframes pulse{50%{opacity:.3}}
 
-  /* Activity feed redesigned */
-  .activity-list { margin: 0; padding: 0; list-style: none; }
-  .activity-row {
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    gap: 14px;
-    align-items: center;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .activity-row:last-child { border-bottom: 0; }
-  .activity-row .thumb {
-    width: 80px; height: 27px;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    background: var(--line-soft) repeating-conic-gradient(#f3f4f6 0 25%, #fff 0 50%) 0 0 / 8px 8px;
-    overflow: hidden;
-  }
-  .activity-row .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .activity-row .body { min-width: 0; }
-  .activity-row .body .what { font-family: var(--font-body); font-size: 13.5px; color: var(--ink); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .activity-row .body .meta { font-family: var(--font-body); font-size: 12.5px; color: var(--ink-mute); margin-top: 3px; }
-  .activity-row .body .meta .target-pill {
-    display: inline-block; padding: 1px 7px; border-radius: 3px;
-    background: var(--line-soft); color: var(--ink-soft);
-    font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.01em;
-    margin-right: 6px;
-  }
-  .activity-row .right-actions { display: flex; gap: 6px; align-items: center; }
-  .activity-row .btn-revert {
-    font-size: 12px; padding: 6px 10px; min-height: 28px; font-weight: 600;
-    background: transparent; border: 1px solid var(--line); border-radius: 6px;
-    color: var(--ink-soft); cursor: pointer;
-    transition: background 120ms, border-color 120ms;
-  }
-  .activity-row .btn-revert:hover:not(:disabled) { background: var(--line-soft); border-color: var(--ink-mute); color: var(--ink); }
-  .activity-row .btn-revert:disabled { opacity: 0.4; cursor: not-allowed; }
-  .activity-row.current .btn-revert { display: none; }
-  .activity-row.current::before {
-    content: 'LIVE';
-    font-size: 10px; font-weight: 700; color: var(--ok);
-    background: var(--ok-bg); border: 1px solid #cce7d6;
-    padding: 1px 6px; border-radius: 3px;
-    grid-row: 1; grid-column: 3;
-    align-self: center;
-  }
-  .activity-list .empty { color: var(--ink-mute); font-size: 13px; padding: 10px 0; }
+  .meta{display:grid;grid-template-columns:70px 1fr;gap:6px 12px;align-items:baseline}
+  .lab{font-size:12px;color:var(--ink-3)}
+  .val{font-size:13px;color:var(--ink);min-width:0}
+  .val.url{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .val .soon{color:var(--gold-ink);font-weight:600}
+  .val .gone{color:var(--red);font-weight:600}
+  .stale{font-family:var(--serif);font-size:14px;color:var(--red);margin:-2px 0 0}
+  .unavail{font-family:var(--serif);font-size:13.5px;color:var(--ink-2);margin:0}
 
-  /* Confirmation modal */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(15, 23, 42, 0.45);
-    display: none;
-    align-items: center; justify-content: center;
-    padding: 24px;
-    z-index: 100;
-  }
-  .modal-overlay.active { display: flex; }
-  .modal {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
-    max-width: 480px;
-    width: 100%;
-    padding: 24px;
-  }
-  .modal h3 { margin: 0 0 8px; font-family: var(--font-display); font-size: 17.5px; font-weight: 700; letter-spacing: -0.005em; }
-  .modal p { margin: 0 0 6px; font-family: var(--font-body); font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
-  .modal .summary {
-    margin: 14px 0 0;
-    background: var(--line-soft);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-family: var(--font-ui); font-size: 13px;
-    color: var(--ink);
-  }
-  .modal .summary div { padding: 3px 0; }
-  .modal .summary b { color: var(--ink); margin-right: 6px; }
-  .modal .actions { margin-top: 18px; justify-content: flex-end; }
+  .acts{display:flex;align-items:center;justify-content:flex-end;margin-top:auto;padding-top:8px}
+  .acts .b{padding:9px 16px;font-size:13.5px}
+  .cardgo{font-size:13px;font-weight:600;color:var(--ink-3);transition:color .15s ease}
+  .card:hover .cardgo{color:var(--blue)}
 
-  footer.bottom {
-    margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 12px; color: var(--ink-mute);
+  /* ---------- ministry view ---------- */
+  .crumb{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13.5px;font-weight:500;color:#B9C6E4;padding:6px 8px 6px 0;border-radius:8px;
   }
+  .crumb:hover{color:#fff}
+  .mhero{padding:34px 0 70px}
+  .mhero .mhead{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-top:18px}
+  .mvname{font-size:42px;line-height:1.1;letter-spacing:-.2px;margin:0}
+  @media(max-width:560px){.mvname{font-size:29px}.mhero{padding:26px 0 60px}}
 
-  @media (max-width: 880px) {
-    .selector { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 600px) {
-    .container { padding: 24px 16px 64px; }
-    .selector { grid-template-columns: 1fr; }
-    .preview-info { grid-template-columns: 1fr; }
-    .activity-row { grid-template-columns: 60px 1fr; row-gap: 8px; }
-    .activity-row .right-actions { grid-column: 2; justify-content: flex-end; }
-    .activity-row.current::before { grid-column: 2; justify-self: end; }
-    header.brand .who { font-size: 11px; }
-  }
+  .cols{display:grid;grid-template-columns:minmax(0,450px) minmax(0,1fr);gap:30px;padding:0 0 150px;margin-top:-40px;align-items:start}
+  @media(max-width:900px){.cols{grid-template-columns:1fr;gap:22px}}
+  .leftcol{position:sticky;top:22px;display:flex;flex-direction:column;gap:22px}
+  @media(max-width:900px){.leftcol{position:static}}
 
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
+  .panel{background:var(--card);border-radius:16px;box-shadow:var(--sh-rest)}
+  .panel .pd{padding:22px}
+  .ptitle{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+
+  /* the preview: a real signature, in the real signature faces */
+  .sig{background:#fff;border-radius:10px;box-shadow:inset 0 0 0 1px var(--hairline);padding:20px 20px 16px;overflow-x:auto}
+  .sig table{border-collapse:collapse;line-height:1.35}
+  .sig .sig-mark{width:64px;vertical-align:top;padding-right:14px}
+  .sig .sig-mark img{width:64px;height:auto;display:block;border:0}
+  .sig .sig-name{font-family:'Whitney','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:14px;color:#0047BB}
+  .sig .sig-org{font-family:'Whitney','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:12px;color:#0047BB;padding-top:3px}
+  .sig .sig-contact{font-family:'Calluna',Georgia,serif;font-size:12px;color:#444;padding-top:2px}
+  .sig .sig-contact a{color:#0047BB;text-decoration:none}
+  .sig .sig-tag{font-family:'Calluna',Georgia,serif;font-style:italic;font-size:11.5px;color:#444;padding-top:6px}
+  .sig .sig-banner{padding-top:12px}
+  .sig .sig-banner a{display:block;text-decoration:none;border:0}
+  .sig .sig-banner img{width:100%;max-width:340px;height:auto;display:block;border-radius:3px}
+  .cap{font-family:var(--serif);font-size:13.5px;color:var(--ink-2);margin:13px 0 0;text-align:center}
+
+  .count{display:flex;align-items:baseline;gap:12px;margin:2px 0 16px}
+  .count .n{font-family:var(--serif);font-size:46px;font-weight:600;line-height:1;color:var(--ink);letter-spacing:-.5px}
+  .count .l{font-family:var(--serif);font-size:14px;color:var(--ink-2);line-height:1.4;max-width:20ch}
+  .count.bad .n,.count.bad .l{color:var(--red)}
+  .facts{display:grid;grid-template-columns:86px 1fr;gap:8px 14px;align-items:baseline;font-size:13px}
+  .facts .lab{font-size:12px}
+  .facts .val{word-break:break-all;white-space:normal}
+
+  /* editor card */
+  .sec{padding:26px 28px}
+  @media(max-width:520px){.sec{padding:22px 18px}}
+  .sec + .sec{border-top:1px solid var(--hairline)}
+  .sech{font-size:17px;font-weight:600;letter-spacing:-.2px;margin:0 0 4px}
+  .sechelp{font-family:var(--serif);font-size:14.5px;line-height:1.6;color:var(--ink-2);margin:0 0 18px;max-width:56ch}
+  .field{margin-bottom:16px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:6px}
+  .field input{
+    width:100%;padding:11px 13px;border:1.5px solid var(--hairline);border-radius:10px;
+    font-family:var(--sans);font-size:14px;background:var(--card);color:var(--ink);
+    transition:border-color .12s ease;
+  }
+  .field input.mono{font-family:var(--mono);font-size:13px}
+  .field input:focus{outline:none;border-color:var(--blue)}
+  .field.error input{border-color:var(--red)}
+  .field.error .hint{color:var(--red)}
+  .hint{font-size:12.5px;color:var(--ink-3);margin:6px 0 0;line-height:1.5}
+  .was{font-size:12.5px;color:var(--green-ink);font-weight:500;margin:10px 0 0}
+  .resolved{
+    display:none;margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--paper);
+    font-family:var(--mono);font-size:12px;color:var(--ink-2);word-break:break-all;line-height:1.6;
+  }
+  .resolved.on{display:block}
+  .resolved b{display:block;font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+
+  .drop{
+    position:relative;border:1.5px dashed #D8D2C4;border-radius:12px;background:var(--paper);
+    padding:26px 20px;text-align:center;transition:border-color .15s ease, background .15s ease;
+  }
+  .drop:hover,.drop.dragover{border-color:var(--blue)}
+  .drop.dragover{background:var(--blue-tonal)}
+  .drop .big{font-weight:600;font-size:14px}
+  .drop .small{font-size:12.5px;color:var(--ink-2);margin-top:4px}
+  .drop .b{margin-top:14px}
+  .drop input[type=file]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+  .droperr{display:none;font-family:var(--serif);font-size:14px;color:var(--red);line-height:1.55;margin:12px 0 0}
+  .droperr.on{display:block}
+
+  /* history */
+  .hentry{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:start;padding:15px 0}
+  .hentry + .hentry{border-top:1px solid var(--hairline)}
+  .hthumb{border-radius:4px;overflow:hidden;background:#F1EEE6;min-height:24px;display:grid;place-items:center;color:var(--ink-3)}
+  .hthumb img{display:block;width:100%;height:auto}
+  .hthumb svg{display:block}
+  .hsent{font-family:var(--serif);font-size:14.5px;line-height:1.55;margin:0;overflow-wrap:anywhere}
+  .hsent .when{color:var(--ink-3)}
+  .hlive{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:700;color:var(--green-ink);background:var(--green-tonal);border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:1px}
+  .hkind{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--blue-deep);background:var(--blue-tonal);border-radius:4px;padding:1px 6px;margin-right:6px;vertical-align:1px}
+  .hrestore{font-size:12.5px;font-weight:600;color:var(--blue);padding:4px 0 0}
+  .hrestore:hover{text-decoration:underline}
+  .hempty{font-family:var(--serif);font-size:14px;color:var(--ink-2);margin:0;padding:6px 0}
+
+  /* activity view */
+  .alist{background:var(--card);border-radius:16px;box-shadow:var(--sh-rest);padding:10px 18px;margin:-46px auto 56px;max-width:920px}
+  @media(max-width:520px){.alist{padding:8px 10px}}
+  .arow{
+    display:grid;grid-template-columns:88px 1fr auto;gap:16px;align-items:center;
+    padding:13px 12px;border-radius:12px;cursor:pointer;text-align:left;width:100%;
+    transition:background .12s ease;
+  }
+  .arow:hover{background:var(--paper)}
+  .arow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+  .arow + .arow{position:relative}
+  .arow + .arow::before{content:"";position:absolute;left:12px;right:12px;top:0;height:1px;background:var(--hairline)}
+  .arow .ameta{font-size:12px;font-weight:600;color:var(--ink-3);margin:0 0 3px}
+  .arow .asent{font-family:var(--serif);font-size:14.5px;line-height:1.5;margin:0;color:var(--ink);overflow-wrap:anywhere}
+  .arow .chev{font-size:18px;color:var(--ink-3);transition:color .12s ease,transform .12s ease}
+  .arow:hover .chev{color:var(--blue);transform:translateX(2px)}
+  @media(max-width:520px){.arow{grid-template-columns:64px 1fr auto;gap:10px}}
+
+  /* publish bar */
+  .pubbar{
+    position:fixed;left:0;right:0;bottom:0;background:var(--card);
+    box-shadow:0 -8px 30px rgba(17,20,24,.10);
+    transform:translateY(110%);transition:transform .22s cubic-bezier(.2,.7,.3,1);z-index:40;
+    visibility:hidden;
+  }
+  .pubbar.up{transform:translateY(0);visibility:visible}
+  .pubbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:15px;padding-bottom:15px}
+  .pubsum{font-family:var(--serif);font-size:15px;margin:0;min-width:0}
+  .pubacts{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+  @media(max-width:680px){
+    .pubbar .wrap{flex-direction:column;align-items:stretch;gap:12px}
+    .pubacts{justify-content:flex-end}
+    .pubacts .b-solid{flex:1}
   }
 
-  /* Windows high-contrast / forced-colors fallback */
-  @media (forced-colors: active) {
-    .card, .modal, .preview, .signature-mockup-wrap { border: 1px solid CanvasText; }
-    .activity-row .thumb { border: 1px solid CanvasText; }
-    button { border: 1px solid CanvasText; }
-    .selector label.checked { border: 2px solid Highlight; }
-    .activity-row.current::before { border: 1px solid CanvasText; }
+  /* confirm sheet */
+  .veil{
+    position:fixed;inset:0;background:rgba(17,20,24,.34);z-index:50;
+    display:none;align-items:center;justify-content:center;padding:20px;
   }
+  @supports (backdrop-filter:blur(4px)){.veil{backdrop-filter:blur(3px)}}
+  .veil.on{display:flex}
+  .sheet{
+    background:var(--card);border-radius:18px;box-shadow:var(--sh-float);
+    max-width:500px;width:100%;padding:28px;max-height:88vh;overflow:auto;
+    animation:rise .22s cubic-bezier(.2,.7,.3,1);
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .sheet h3{font-size:20px;font-weight:700;letter-spacing:-.2px;margin:0 0 18px}
+  .ba{display:grid;gap:12px;margin-bottom:16px}
+  .ba .row{display:grid;grid-template-columns:58px 1fr;gap:12px;align-items:center}
+  .ba .k{font-size:12px;color:var(--ink-3)}
+  .ba .thumb{border-radius:5px;overflow:hidden;background:#F1EEE6}
+  .ba .thumb img{display:block;width:100%;height:auto}
+  .linkdiff{font-family:var(--mono);font-size:12.5px;line-height:1.8;word-break:break-all}
+  .linkdiff .old{color:var(--ink-3);text-decoration:line-through}
+  .linkdiff .new{color:var(--ink)}
+  .linkdiff .hi{background:var(--gold-tonal);padding:1px 4px;border-radius:3px}
+  .weight{
+    font-family:var(--serif);font-size:15.5px;line-height:1.6;margin:16px 0 20px;
+    padding:15px 17px;background:var(--paper);border-radius:12px;
+  }
+  .sheet .field{margin:0 0 20px}
+  .sheeterr{display:none;font-family:var(--serif);font-size:14px;color:var(--red);line-height:1.55;margin:0 0 16px}
+  .sheeterr.on{display:block}
+  .sheetacts{display:flex;justify-content:flex-end;gap:10px;align-items:center}
+
+  /* toast */
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,150%);
+    background:var(--ink);color:#fff;padding:13px 20px;border-radius:12px;
+    font-family:var(--serif);font-size:15px;box-shadow:var(--sh-float);z-index:60;
+    transition:transform .26s cubic-bezier(.2,.7,.3,1);max-width:min(90vw,560px);
+    visibility:hidden;line-height:1.5;
+  }
+  .toast.up{transform:translate(-50%,0);visibility:visible}
+
+  footer{padding:8px 0 44px;text-align:center}
+  footer p{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--gold-muted);margin:0}
 </style>
 </head>
 <body>
-<div class="container">
 
-  <header class="brand">
-    <div class="mark" role="img" aria-label="HCFM">
-      <div class="symbol"></div>
+<div class="sr-only" aria-live="polite" aria-atomic="true" id="live-region"></div>
+
+<div class="top">
+  <div class="wrap">
+    <div class="brand">
+      <img class="brandmark" src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="Holy Cross Family Ministries">
+      <span class="n">Signature Banners<small>Holy Cross Family Ministries</small></span>
     </div>
-    <div class="titles">
-      <h1>Banner Studio</h1>
-      <p class="sub">Update the banner on every HCFM email signature.</p>
-    </div>
-    <div class="who" id="who"></div>
-  </header>
-
-  <!-- Live region for screen-reader status announcements -->
-  <div class="sr-only" aria-live="polite" aria-atomic="true" id="live-region"></div>
-
-  <!-- SIGN-IN GATE -->
-  <section class="card gate" id="gate">
-    <h2>Sign in</h2>
-    <p class="hint">Enter your name (so we know who uploaded what) and the team password Emmy gave you.</p>
-
-    <div class="field">
-      <label for="name-field">Your name</label>
-      <input type="text" id="name-field" placeholder="e.g. Victoria Hassan" autocomplete="name" maxlength="60">
-    </div>
-    <div class="field">
-      <label for="password-field">Team password</label>
-      <input type="password" id="password-field" placeholder="••••••••" autocomplete="current-password">
-    </div>
-    <div class="submit-row">
-      <button class="btn-primary" id="sign-in">Sign in</button>
-    </div>
-    <div class="gate-error" id="gate-error" role="alert"></div>
-
-    <div class="help">
-      Don't have the team password? Ask Emmy (eepau@hcfm.org). He'll send it to you over Slack or text.
-    </div>
-  </section>
-
-  <!-- MAIN APP -->
-  <section class="app" id="app">
-
-    <div class="card">
-      <h2>1. Choose the banner image</h2>
-      <p class="hint">PNG file, exactly <b>600 pixels wide</b>, height between <b>100 and 200 px</b> (150 recommended). File under 100&nbsp;KB.</p>
-
-      <label class="dropzone" id="dropzone" for="file-input">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 15v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-3"/>
-          <path d="M12 3v13"/>
-          <path d="M7 8l5-5 5 5"/>
-        </svg>
-        <div class="label">Drop a PNG here, or click to choose a file</div>
-        <div class="meta">600 px wide × 100–200 tall (150 recommended), under 100 KB</div>
-        <input type="file" id="file-input" accept="image/png">
-      </label>
-
-      <div class="preview" id="preview">
-        <div class="preview-frame"><img id="preview-img" alt="The banner image you just chose"></div>
-        <div class="preview-info">
-          <div class="pi" id="pi-dims"><span class="dot"></span><b>Dimensions:</b><span id="dims-val">…</span></div>
-          <div class="pi" id="pi-size"><span class="dot"></span><b>File size:</b><span id="size-val">…</span></div>
-        </div>
+    <nav id="topnav" style="visibility:hidden">
+      <div class="seg" role="tablist" aria-label="View">
+        <button id="nav-banners" class="on">Banners</button>
+        <button id="nav-activity">Activity</button>
       </div>
-
-      <div class="signature-mockup-wrap" id="signature-mockup-wrap">
-        <div class="mockup-title">Preview: how this looks at the bottom of an email</div>
-        <p class="mockup-note" id="mockup-note">Pick a ministry below and the banner here becomes clickable, following the same link a recipient follows.</p>
-        <div class="signature-mockup">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tr>
-              <td rowspan="5" class="sig-mark">
-                <img src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="HCFM">
-              </td>
-              <td class="sig-name">Emmanuel Epau</td>
-            </tr>
-            <tr><td class="sig-title">Senior Marketing &amp; Communication Specialist (Analytics)</td></tr>
-            <tr><td class="sig-org">Holy Cross Family Ministries</td></tr>
-            <tr><td class="sig-contact"><a href="#">hcfm.org</a> <span style="color:#aaa;margin:0 6px;">|</span> 508.238.4095</td></tr>
-            <tr><td class="sig-tag">The Family That Prays Together Stays Together&trade;</td></tr>
-            <tr>
-              <td colspan="2" class="sig-banner"><a id="mockup-banner-link" target="_blank" rel="noopener"><img id="mockup-banner-img" alt="Campaign banner preview"></a></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>2. Which signature does this update?</h2>
-      <p class="hint">Each sub-ministry's signature has its own banner. Pick the right one.</p>
-
-      <div class="selector" id="selector" role="radiogroup" aria-label="Which ministry signature to update">
-        <label data-key="parent">
-          <input type="radio" name="target" value="parent">
-          <span class="name">HCFM North Easton</span>
-          <span class="desc">Main-office staff in Easton, MA</span>
-        </label>
-        <label data-key="ftp">
-          <input type="radio" name="target" value="ftp">
-          <span class="name">Family Theater Productions</span>
-          <span class="desc">FTP team</span>
-        </label>
-        <label data-key="family-rosary">
-          <input type="radio" name="target" value="family-rosary">
-          <span class="name">Family Rosary</span>
-          <span class="desc">Family Rosary staff</span>
-        </label>
-        <label data-key="catholic-mom">
-          <input type="radio" name="target" value="catholic-mom">
-          <span class="name">Catholic Mom</span>
-          <span class="desc">Catholic Mom team</span>
-        </label>
-        <label data-key="catholic-central">
-          <input type="radio" name="target" value="catholic-central">
-          <span class="name">Catholic Central</span>
-          <span class="desc">Catholic Central team</span>
-        </label>
-        <label data-key="peyton-institute">
-          <input type="radio" name="target" value="peyton-institute">
-          <span class="name">The Peyton Institute</span>
-          <span class="desc">Peyton Institute staff</span>
-        </label>
-      </div>
-
-      <div class="field-reason" id="field-reason">
-        <label for="msg">What is this banner for? <span class="req" aria-hidden="true">*</span></label>
-        <input type="text" id="msg" placeholder="e.g. Grand Reopening, June 6 launch" maxlength="140" required>
-        <div class="field-help">Required. This shows up in the audit log so we can trace who published what and why.</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>3. Publish</h2>
-      <p class="hint">When you click Publish, this banner replaces the current one. Recipients see it on the next email they open from any HCFM staff member.</p>
-
-      <div class="actions">
-        <button class="btn-primary" id="publish" disabled>Publish banner</button>
-        <button class="btn-ghost" id="reset">Start over</button>
-      </div>
-
-      <div class="status" id="status"></div>
-    </div>
-
-    <div class="card">
-      <h2>Where a banner sends people</h2>
-      <p class="hint">Separate from the image. Every banner is already a link on every installed signature; this is where that link goes. Changing it takes effect on signatures people already have, with nothing to re-paste.</p>
-
-      <div class="selector" id="link-selector" role="radiogroup" aria-label="Which ministry banner link to change">
-        <label data-key="parent">
-          <input type="radio" name="link-target" value="parent">
-          <span class="name">HCFM North Easton</span>
-          <span class="desc">Main-office staff in Easton, MA</span>
-        </label>
-        <label data-key="ftp">
-          <input type="radio" name="link-target" value="ftp">
-          <span class="name">Family Theater Productions</span>
-          <span class="desc">FTP team</span>
-        </label>
-        <label data-key="family-rosary">
-          <input type="radio" name="link-target" value="family-rosary">
-          <span class="name">Family Rosary</span>
-          <span class="desc">Family Rosary staff</span>
-        </label>
-        <label data-key="catholic-mom">
-          <input type="radio" name="link-target" value="catholic-mom">
-          <span class="name">Catholic Mom</span>
-          <span class="desc">Catholic Mom team</span>
-        </label>
-        <label data-key="catholic-central">
-          <input type="radio" name="link-target" value="catholic-central">
-          <span class="name">Catholic Central</span>
-          <span class="desc">Catholic Central team</span>
-        </label>
-        <label data-key="peyton-institute">
-          <input type="radio" name="link-target" value="peyton-institute">
-          <span class="name">The Peyton Institute</span>
-          <span class="desc">Peyton Institute staff</span>
-        </label>
-      </div>
-
-      <p class="link-placeholder" id="link-placeholder">Pick a ministry to see its banner and where it currently sends people.</p>
-
-      <div class="link-current" id="link-current">
-        <div class="thumb"><a id="link-thumb-link" target="_blank" rel="noopener"><img id="link-thumb" alt="The banner this link belongs to"></a></div>
-        <div class="info">
-          <b>Sends people to</b>
-          <span class="dest" id="link-current-dest">&hellip;</span>
-          <span class="test-note">Click the banner to follow that link yourself, exactly as a recipient would.</span>
-        </div>
-      </div>
-
-      <div class="link-fields" id="link-fields" hidden>
-        <div class="link-field" id="link-field-dest">
-          <label for="link-destination">Destination</label>
-          <input type="text" id="link-destination" placeholder="https://hcfm.org/pray-for-peace/">
-          <div class="field-help">The page a click should land on. Must start with https://. Paste the registration page itself, not a shortener.</div>
-        </div>
-
-        <div class="link-field" id="link-field-campaign">
-          <label for="link-campaign">Campaign name</label>
-          <input type="text" id="link-campaign" placeholder="global-rosary-peace-2026" maxlength="80">
-          <div class="field-help">Lowercase letters, numbers and hyphens. This is how the click shows up in Google Analytics, so name the creative, not the ministry. The ministry is tagged separately and automatically.</div>
-        </div>
-
-        <div class="link-field" id="link-field-end">
-          <label for="link-end-date">Correct until</label>
-          <input type="date" id="link-end-date">
-          <div class="field-help">The last day this banner is still true. After it, the daily health check fails until someone updates it. This is the guard that stopped a Global Rosary banner running nine days past the event.</div>
-        </div>
-
-        <div class="link-resolved" id="link-resolved">
-          <b>A recipient will land on</b>
-          <span id="link-resolved-url"></span>
-        </div>
-
-        <div class="actions">
-          <button class="btn-primary" id="link-save">Update link</button>
-        </div>
-        <div class="status" id="link-status"></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Recent activity</h2>
-      <p class="hint">The most recent banner updates. Each row shows the actual image and who published it. Click <b>Revert</b> on an older row to roll back to that banner.</p>
-      <ul class="activity-list" id="activity">
-        <li class="empty">Loading recent activity&hellip;</li>
-      </ul>
-    </div>
-
-  </section>
-
-  <footer class="bottom">
-    <div>HCFM Banner Studio</div>
-    <div><a href="https://hcfm.org/brand" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Brand book</a></div>
-  </footer>
-
+      <button class="tlink" id="nav-signout">Sign out</button>
+      <span class="avatar" id="avatar" title=""></span>
+    </nav>
+  </div>
 </div>
 
-<!-- Confirmation modal -->
-<div class="modal-overlay" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
-  <div class="modal">
-    <h3 id="confirm-title">Publish this banner to everyone?</h3>
-    <p id="confirm-body">This replaces the current banner on every HCFM email signature on the side you picked. Recipients will see it on the next email they open.</p>
-    <div class="summary" id="confirm-summary"></div>
-    <div class="actions">
-      <button class="btn-ghost" id="confirm-cancel">Cancel</button>
-      <button class="btn-primary" id="confirm-go">Yes, publish</button>
+<!-- ============ SIGN IN ============ -->
+<section class="view on" id="view-signin">
+  <div class="gate">
+    <div>
+      <div class="gatecard">
+        <img class="brandmark" src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="Holy Cross Family Ministries">
+        <h1>HCFM Signature Banners</h1>
+        <p class="lede">One place to change the banner at the bottom of every HCFM email signature.</p>
+        <label for="code">Access code</label>
+        <input id="code" type="password" autocomplete="current-password" spellcheck="false" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+        <p class="hint">Yours alone. If you need one, ask Emmy (eepau@hcfm.org).</p>
+        <div class="field gate-name" id="gate-name">
+          <label for="gname">Your name</label>
+          <input id="gname" type="text" autocomplete="name" maxlength="60" placeholder="So publishes carry your name">
+        </div>
+        <button class="b b-solid" id="signin-btn">Sign in</button>
+        <div class="gate-error" id="gate-error" role="alert"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANIFEST ============ -->
+<section class="view" id="view-manifest">
+  <div class="hero"><div class="wrap head">
+    <div class="headgrid">
+      <div>
+        <p class="eyebrow">Holy Cross Family Ministries</p>
+        <h1 class="page">On every signature right now</h1>
+        <div class="rule"></div>
+        <p class="model">These banners sit at the bottom of every HCFM email signature. Change one, and every installed signature follows within minutes. No one re-pastes anything.</p>
+      </div>
+      <div class="status dim" id="statusline"><span class="dot"></span><span>Reading the live campaigns&hellip;</span></div>
+    </div>
+  </div></div>
+  <div class="wrap"><div class="grid" id="grid"></div></div>
+</section>
+
+<!-- ============ MINISTRY ============ -->
+<section class="view" id="view-ministry">
+  <div class="hero mhero"><div class="wrap">
+    <button class="crumb" id="crumb">&larr; All ministries</button>
+    <p class="eyebrow" style="margin-top:22px">Ministry</p>
+    <div class="mhead"><h1 class="mvname" id="mvName"></h1><span id="mvChip"></span></div>
+  </div></div>
+
+  <div class="wrap">
+    <div class="cols">
+      <div class="leftcol">
+        <div class="panel"><div class="pd">
+          <p class="ptitle">Preview</p>
+          <div class="sig">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td rowspan="4" class="sig-mark">
+                  <img src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="HCFM">
+                </td>
+                <td class="sig-name" id="sig-name"></td>
+              </tr>
+              <tr><td class="sig-org" id="sig-org"></td></tr>
+              <tr><td class="sig-contact"><a href="https://www.hcfm.org" target="_blank" rel="noopener">hcfm.org</a> <span style="color:#aaa;margin:0 6px;">|</span> 508.238.4095</td></tr>
+              <tr><td class="sig-tag">The Family That Prays Together Stays Together&trade;</td></tr>
+            </table>
+            <div class="sig-banner"><a id="sig-banner-link" target="_blank" rel="noopener"><img id="sig-banner-img" alt="Campaign banner preview"></a></div>
+          </div>
+          <p class="cap" id="previewcap">This is what a recipient sees today. The banner is a live link.</p>
+        </div></div>
+
+        <div class="panel"><div class="pd">
+          <p class="ptitle">Live now</p>
+          <div class="count" id="count" style="display:none"><span class="n" id="countN"></span><span class="l" id="countL"></span></div>
+          <div class="facts">
+            <span class="lab">Campaign</span><span class="val" id="factCamp"></span>
+            <span class="lab">Links to</span><span class="val url" id="factDest"></span>
+            <span class="lab">Runs until</span><span class="val" id="factExp"></span>
+          </div>
+        </div></div>
+      </div>
+
+      <div>
+        <div class="panel">
+          <div class="sec">
+            <h2 class="sech">Banner image</h2>
+            <p class="sechelp">A PNG, 600 pixels wide and 100 to 200 tall, under 250 KB. Publishing replaces the image on every <span id="mvN1"></span> signature already installed.</p>
+            <div class="drop" id="drop">
+              <div class="big">Drop a PNG here</div>
+              <div class="small">600 wide &times; 100&ndash;200 tall, under 250 KB</div>
+              <button class="b b-tonal" id="choose-btn" type="button">Choose a file</button>
+              <input type="file" id="file-input" accept="image/png" aria-label="Choose a banner PNG">
+            </div>
+            <p class="droperr" id="droperr" role="alert"></p>
+            <p class="was" id="imgWas"></p>
+          </div>
+
+          <div class="sec">
+            <h2 class="sech">Where the banner links</h2>
+            <p class="sechelp">The banner is already a link in every installed signature. This is where a click lands. Changing it needs no re-paste from anyone.</p>
+
+            <div class="field" id="f-dest">
+              <label for="dest">Links to</label>
+              <input id="dest" class="mono" type="text" spellcheck="false">
+              <p class="hint">The page itself, starting with https://. Not a shortener.</p>
+            </div>
+
+            <div class="field" id="f-camp">
+              <label for="camp">Campaign name</label>
+              <input id="camp" type="text" maxlength="80" spellcheck="false" placeholder="advent-novena-2026">
+              <p class="hint">How clicks appear in Google Analytics. Lowercase letters, numbers and hyphens. Name the creative, not the ministry; the ministry is tagged automatically.</p>
+            </div>
+
+            <div class="field" id="f-exp">
+              <label for="exp">Runs until</label>
+              <input id="exp" type="date">
+              <p class="hint">The last day this banner is still true. After it, the morning health check flags it until someone updates it.</p>
+            </div>
+
+            <div class="resolved" id="resolved">
+              <b>A recipient will land on</b>
+              <span id="resolved-url"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:22px"><div class="sec">
+          <h2 class="sech">History</h2>
+          <div id="hist"><p class="hempty">Loading recent changes&hellip;</p></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTIVITY ============ -->
+<section class="view" id="view-activity">
+  <div class="hero hero-sm"><div class="wrap head">
+    <p class="eyebrow">Audit log</p>
+    <h1 class="page">Recent activity</h1>
+    <div class="rule"></div>
+    <p class="model">Every banner and link change across the six ministries, newest first. To restore an earlier banner, open its ministry from the row.</p>
+  </div></div>
+  <div class="wrap"><div class="alist" id="alist"><p class="hempty" style="padding:18px 0">Loading&hellip;</p></div></div>
+</section>
+
+<div class="pubbar" id="pubbar">
+  <div class="wrap">
+    <p class="pubsum" id="pubsum"></p>
+    <div class="pubacts">
+      <button class="b b-plain" id="discard-btn">Discard</button>
+      <button class="b b-solid" id="pub-btn">Publish&hellip;</button>
     </div>
   </div>
 </div>
 
+<div class="veil" id="veil">
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle">
+    <h3 id="shTitle"></h3>
+    <div class="ba" id="ba"></div>
+    <p class="weight" id="weight"></p>
+    <div class="field" id="sheet-reason-field">
+      <label for="sheet-reason">What is this change for?</label>
+      <input id="sheet-reason" type="text" maxlength="140" placeholder="e.g. Advent novena launch">
+      <p class="hint">Goes into the audit log, so anyone can trace who published what and why.</p>
+    </div>
+    <p class="sheeterr" id="sheeterr" role="alert"></p>
+    <div class="sheetacts">
+      <button class="b b-plain" id="sheet-cancel">Cancel</button>
+      <button class="b b-solid" id="sheet-go"></button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer><p>A World at Prayer is a World at Peace</p></footer>
+
 <script>
 (() => {
   'use strict';
+
+  /* ---------- constants (unchanged from v1; the api contract depends on them) ---------- */
   const SESSION_KEY = 'hcfm-banner-studio:session-v2';
-  const BRAND_REPO = 'hcfm/hcfm-brand';
-
-  const state = {
-    token: null,
-    name:  null,
-    file: null,
-    fileDataUrl: null,
-    fileBytes: null,
-    fileDims: null,
-    target: null,
-    activity: [],
-    linkTarget: null,
-    linkLoaded: null,
-    confirmAction: null,
-  };
-  const saved = (() => { try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch { return null; } })();
-  if (saved && saved.token && saved.name) { state.token = saved.token; state.name = saved.name; }
-
-  const $ = (sel) => document.querySelector(sel);
-  const els = {
-    gate: $('#gate'), app: $('#app'),
-    nameField: $('#name-field'), pwField: $('#password-field'),
-    signIn: $('#sign-in'), gateError: $('#gate-error'),
-    who: $('#who'),
-    dropzone: $('#dropzone'), fileInput: $('#file-input'),
-    preview: $('#preview'), previewImg: $('#preview-img'),
-    piDims: $('#pi-dims'), piSize: $('#pi-size'),
-    dimsVal: $('#dims-val'), sizeVal: $('#size-val'),
-    mockupWrap: $('#signature-mockup-wrap'), mockupBannerImg: $('#mockup-banner-img'),
-    mockupBannerLink: $('#mockup-banner-link'), mockupNote: $('#mockup-note'),
-    linkThumbLink: $('#link-thumb-link'),
-    selector: $('#selector'),
-    fieldReason: $('#field-reason'), msg: $('#msg'),
-    publish: $('#publish'), reset: $('#reset'),
-    status: $('#status'),
-    activity: $('#activity'),
-    linkSelector: $('#link-selector'), linkPlaceholder: $('#link-placeholder'),
-    linkCurrent: $('#link-current'), linkThumb: $('#link-thumb'), linkCurrentDest: $('#link-current-dest'),
-    linkFields: $('#link-fields'), linkDestination: $('#link-destination'),
-    linkCampaign: $('#link-campaign'), linkEndDate: $('#link-end-date'),
-    linkResolved: $('#link-resolved'), linkResolvedUrl: $('#link-resolved-url'),
-    linkSave: $('#link-save'), linkStatus: $('#link-status'),
-    linkFieldDest: $('#link-field-dest'), linkFieldCampaign: $('#link-field-campaign'), linkFieldEnd: $('#link-field-end'),
-    confirmModal: $('#confirm-modal'),
-    confirmTitle: $('#confirm-title'), confirmBody: $('#confirm-body'),
-    confirmSummary: $('#confirm-summary'),
-    confirmCancel: $('#confirm-cancel'),
-    confirmGo: $('#confirm-go'),
-    live: $('#live-region'),
-  };
-
-  // ---------- API ----------
-  async function api(path, opts = {}) {
-    const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
-    if (state.token) headers['Authorization'] = `Bearer ${state.token}`;
-    const res = await fetch(path, { ...opts, headers });
-    const text = await res.text();
-    let data = null;
-    try { data = text ? JSON.parse(text) : null; } catch {}
-    if (!res.ok) {
-      const e = new Error((data && data.error) || `Request failed (${res.status}).`);
-      e.status = res.status;
-      throw e;
-    }
-    return data;
-  }
-
-  // ---------- Helpers ----------
-  function readFileAsDataUrl(file) {
-    return new Promise((resolve, reject) => {
-      const r = new FileReader();
-      r.onload = () => resolve(r.result);
-      r.onerror = () => reject(r.error);
-      r.readAsDataURL(file);
-    });
-  }
-  function imageDimensions(dataUrl) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
-      img.onerror = () => reject(new Error('Could not decode image.'));
-      img.src = dataUrl;
-    });
-  }
-  function fmtBytes(n) {
-    if (n < 1024) return `${n} B`;
-    if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
-    return `${(n / 1024 / 1024).toFixed(2)} MB`;
-  }
-  function fmtRelative(iso) {
-    const then = new Date(iso).getTime();
-    const sec = Math.max(0, Math.round((Date.now() - then) / 1000));
-    if (sec < 60)   return `${sec}s ago`;
-    if (sec < 3600) return `${Math.round(sec/60)}m ago`;
-    if (sec < 86400) return `${Math.round(sec/3600)}h ago`;
-    return `${Math.round(sec/86400)}d ago`;
-  }
-  function escapeHtml(s) {
-    return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  }
-  const TARGET_LABELS = {
-    'parent':           'HCFM North Easton',
-    'ftp':              'Family Theater Productions',
-    'family-rosary':    'Family Rosary',
-    'catholic-mom':     'Catholic Mom',
-    'catholic-central': 'Catholic Central',
-    'peyton-institute': 'The Peyton Institute',
-  };
-  function targetLabel(t) { return TARGET_LABELS[t] || 'Unknown'; }
-  function announce(msg) {
-    // Triggers screen reader announcement via aria-live region
-    els.live.textContent = '';
-    setTimeout(() => { els.live.textContent = msg; }, 50);
-  }
-
-  // ---------- UI: validation + preview ----------
-  function showStatus(kind, html) {
-    els.status.className = `status ${kind} active`;
-    els.status.innerHTML = html;
-    if (kind === 'err' || kind === 'ok' || kind === 'warn') {
-      announce(els.status.textContent || '');
-    }
-  }
-  function clearStatus() { els.status.className = 'status'; els.status.innerHTML = ''; }
-
-  function refreshPublishEnabled() {
-    const dimsOk = state.fileDims
-      && state.fileDims.w === 600
-      && state.fileDims.h >= 100
-      && state.fileDims.h <= 200;
-    const sizeOk = state.fileBytes != null && state.fileBytes <= 250 * 1024;
-    const reasonOk = (els.msg.value || '').trim().length >= 2;
-    const ok = dimsOk && sizeOk && !!state.target && reasonOk;
-    els.publish.disabled = !ok;
-  }
-
-  async function onFileSelected(file) {
-    if (!file) return;
-    clearStatus();
-    if (!file.type.startsWith('image/') || !/\.png$/i.test(file.name)) {
-      showStatus('err', 'Please choose a <b>.png</b> file. Other formats (JPG, GIF, WebP) aren\'t supported by email clients reliably.');
-      return;
-    }
-    const dataUrl = await readFileAsDataUrl(file);
-    let dims;
-    try { dims = await imageDimensions(dataUrl); }
-    catch { showStatus('err', 'Could not read this image. It may be corrupted. Try opening it in Preview to verify it\'s a real PNG, then try again.'); return; }
-
-    state.file = file;
-    state.fileDataUrl = dataUrl;
-    state.fileBytes = file.size;
-    state.fileDims  = dims;
-
-    els.previewImg.src = dataUrl;
-    els.preview.classList.add('active');
-
-    const okWidth = dims.w === 600;
-    const okHeight = dims.h >= 100 && dims.h <= 200;
-    const okDims = okWidth && okHeight;
-    let dimsMsg;
-    if (okDims) {
-      dimsMsg = `${dims.w} × ${dims.h} ✓`;
-    } else if (!okWidth && !okHeight) {
-      dimsMsg = `${dims.w} × ${dims.h} (need 600 wide, 100–200 tall)`;
-    } else if (!okWidth) {
-      dimsMsg = `${dims.w} × ${dims.h} (must be exactly 600 px wide)`;
-    } else if (dims.h < 100) {
-      dimsMsg = `${dims.w} × ${dims.h} (height too short, minimum 100 px)`;
-    } else {
-      dimsMsg = `${dims.w} × ${dims.h} (height too tall, maximum 200 px)`;
-    }
-    els.dimsVal.textContent = dimsMsg;
-    els.piDims.classList.toggle('bad', !okDims);
-
-    const okSize = file.size <= 100 * 1024;
-    const tooLarge = file.size > 250 * 1024;
-    els.sizeVal.textContent = okSize
-      ? `${fmtBytes(file.size)} ✓`
-      : tooLarge
-        ? `${fmtBytes(file.size)} (too large, max 250 KB)`
-        : `${fmtBytes(file.size)} (large, consider compressing)`;
-    els.piSize.classList.toggle('bad', tooLarge);
-    els.piSize.classList.toggle('warn', !okSize && !tooLarge);
-
-    // Live signature mockup preview
-    if (okDims && !tooLarge) {
-      els.mockupBannerImg.src = dataUrl;
-      els.mockupWrap.classList.add('active');
-      announce(`Banner preview loaded. ${dims.w} by ${dims.h} pixels, ${fmtBytes(file.size)}.`);
-    } else {
-      els.mockupWrap.classList.remove('active');
-    }
-
-    refreshPublishEnabled();
-  }
-
-  function setTarget(key) {
-    state.target = key;
-    [...els.selector.querySelectorAll('label')].forEach(l => {
-      l.classList.toggle('checked', l.dataset.key === key);
-      const input = l.querySelector('input');
-      if (input) input.checked = (l.dataset.key === key);
-    });
-    refreshMockupLink();
-    refreshPublishEnabled();
-  }
-
-  // A banner in a real signature is a link. The preview showed a plain image,
-  // which quietly misrepresented the thing being previewed.
-  function refreshMockupLink() {
-    const key = state.target;
-    if (key) {
-      els.mockupBannerLink.href = `${GO_BASE}/${key}/`;
-      els.mockupNote.textContent = `Clickable. Following it goes where the ${targetLabel(key)} banner currently sends people, redirect and all.`;
-    } else {
-      els.mockupBannerLink.removeAttribute('href');
-      els.mockupNote.textContent = 'Pick a ministry below and the banner here becomes clickable, following the same link a recipient follows.';
-    }
-  }
-
-  function resetForm() {
-    state.file = null; state.fileDataUrl = null; state.fileBytes = null; state.fileDims = null; state.target = null;
-    els.fileInput.value = '';
-    els.preview.classList.remove('active');
-    els.mockupWrap.classList.remove('active');
-    [...els.selector.querySelectorAll('label')].forEach(l => l.classList.remove('checked'));
-    [...els.selector.querySelectorAll('input')].forEach(i => i.checked = false);
-    els.msg.value = '';
-    els.fieldReason.classList.remove('error');
-    clearStatus();
-    refreshMockupLink();
-    refreshPublishEnabled();
-  }
-
-  // ---------- Confirmation modal ----------
-  // One modal, two callers. The image publish and the link change are different
-  // enough that a shared fixed wording would be wrong for one of them, so title,
-  // body, summary and the confirm button all come from the caller.
-  function openConfirm({ title, body, summary, confirmLabel, onConfirm }) {
-    els.confirmTitle.textContent = title;
-    els.confirmBody.textContent = body;
-    els.confirmSummary.innerHTML = summary;
-    els.confirmGo.textContent = confirmLabel;
-    state.confirmAction = onConfirm;
-    els.confirmModal.classList.add('active');
-    setTimeout(() => els.confirmGo.focus(), 50);
-  }
-  function closeConfirmModal() {
-    els.confirmModal.classList.remove('active');
-    state.confirmAction = null;
-  }
-  function runConfirmAction() {
-    const fn = state.confirmAction;
-    state.confirmAction = null;
-    els.confirmModal.classList.remove('active');
-    if (typeof fn === 'function') fn();
-  }
-
-  function openConfirmModal() {
-    const reason = els.msg.value.trim();
-    const target = state.target;
-    openConfirm({
-      title: 'Publish this banner to everyone?',
-      body: 'This replaces the current banner on every HCFM email signature on the side you picked. Recipients will see it on the next email they open.',
-      summary: `
-        <div><b>Updating:</b> ${escapeHtml(targetLabel(target))} signature</div>
-        <div><b>Reason:</b> ${escapeHtml(reason)}</div>
-        <div><b>Image:</b> ${escapeHtml(state.file?.name || 'untitled.png')} (${fmtBytes(state.fileBytes||0)})</div>
-        <div><b>You're publishing as:</b> ${escapeHtml(state.name)}</div>
-      `,
-      confirmLabel: 'Yes, publish',
-      onConfirm: doPublish,
-    });
-  }
-
-  // ---------- Publish flow ----------
-  async function doPublish() {
-    closeConfirmModal();
-    els.publish.disabled = true;
-    const target = state.target;
-    const b64 = state.fileDataUrl.replace(/^data:image\/png;base64,/, '');
-    const reason = els.msg.value.trim();
-
-    showStatus('info', `<b>Publishing &hellip;</b> Saving your banner and notifying every HCFM signature.`);
-    announce('Publishing banner.');
-
-    try {
-      const data = await api('/api/upload', {
-        method: 'POST',
-        body: JSON.stringify({ image: b64, target, reason }),
-      });
-      const cacheBustUrl = `${data.liveUrl}?v=${Date.now()}`;
-      showStatus('ok', `
-        <b>Done.</b> The ${escapeHtml(targetLabel(target))} signature banner is saved. Recipients will see it on the next email they open from any HCFM staff member (typically within 1 to 10 minutes).
-        <small>
-          <b>See the new banner:</b> <a href="${cacheBustUrl}" target="_blank" rel="noopener">open the live image in a new tab</a> (fresh-loaded, bypassing cache).<br>
-          <b>One gotcha if checking your own Outlook:</b> your browser may still show the previous banner in your own compose view because it cached the image. Recipients don't share that cache. To force-refresh your own compose: hard-refresh your Outlook tab (Cmd+Shift+R or Ctrl+Shift+R) and open a fresh compose, or email yourself at a non-Outlook address (Gmail, iCloud) to see the recipient view.
-        </small>
-      `);
-      announce(`Banner published successfully for ${targetLabel(target)}.`);
-      // Refresh activity feed so the new row appears
-      await loadActivity();
-    } catch (err) {
-      let msg = err.message || 'Something went wrong.';
-      if (err.status === 401) {
-        showSignedOut('Your sign-in expired. Please sign in again.');
-        return;
-      }
-      if (err.status === 403) msg = 'The studio\'s GitHub credential expired. Ask Emmy to refresh it (it rotates every 30 days).';
-      else if (err.status === 409) msg = 'Someone else updated the banner a moment ago. Reload the page and try your upload again.';
-      else if (err.status === 502 || err.status === 503) msg = 'GitHub or the studio backend is temporarily unavailable. Try again in a minute.';
-      showStatus('err', `<b>Couldn't publish.</b> ${escapeHtml(msg)}`);
-    } finally {
-      els.publish.disabled = false;
-    }
-  }
-
-  async function startPublish() {
-    if (els.publish.disabled) return;
-    // Re-validate reason field (could be empty if user bypassed by Enter key)
-    if ((els.msg.value || '').trim().length < 2) {
-      els.fieldReason.classList.add('error');
-      els.msg.focus();
-      announce('Please tell us what this banner is for before publishing.');
-      return;
-    }
-    openConfirmModal();
-  }
-
-  // ---------- Link editor ----------
-  // Deliberately independent of the image-upload flow above: someone changing
-  // where a banner points usually has no new image to publish, and should not
-  // have to touch the upload form to do it.
-  const LINK_BANNER_BASE = 'https://hcfm.github.io/hcfm-brand/email-banners';
+  const BRAND_REPO  = 'hcfm/hcfm-brand';
+  const BANNER_BASE = 'https://hcfm.github.io/hcfm-brand/email-banners';
   // The redirect layer, not the campaign destination. Clicking a preview here
-  // follows exactly the path a recipient follows, so a broken redirect shows up
-  // in Studio rather than in someone's inbox. This is the Vercel 302, the same
-  // one installed signatures use.
+  // follows exactly the path a recipient follows, Vercel 302 included, so a
+  // broken redirect shows up in Studio rather than in someone's inbox.
   const GO_BASE = 'https://hcfm-banner-studio.vercel.app/go';
 
-  function linkStatus(kind, html) {
-    els.linkStatus.className = `status ${kind} active`;
-    els.linkStatus.innerHTML = html;
-    if (kind === 'err' || kind === 'ok') announce(els.linkStatus.textContent || '');
-  }
-  function clearLinkStatus() { els.linkStatus.className = 'status'; els.linkStatus.innerHTML = ''; }
+  const MINISTRIES = [
+    { key: 'parent',           label: 'HCFM North Easton',          desc: 'Main-office staff in Easton, MA' },
+    { key: 'ftp',              label: 'Family Theater Productions', desc: 'FTP team' },
+    { key: 'family-rosary',    label: 'Family Rosary',              desc: 'Family Rosary staff' },
+    { key: 'catholic-mom',     label: 'Catholic Mom',               desc: 'Catholic Mom team' },
+    { key: 'catholic-central', label: 'Catholic Central',           desc: 'Catholic Central team' },
+    { key: 'peyton-institute', label: 'The Peyton Institute',       desc: 'Peyton Institute staff' },
+  ];
+  const byKey = {}; MINISTRIES.forEach(m => byKey[m.key] = m);
+  function targetLabel(k){ return byKey[k] ? byKey[k].label : 'Unknown'; }
 
-  // Mirrors exactly what the redirect layer builds, so what is previewed here is
-  // what a recipient actually lands on. If the tagging rules in
-  // .github/workflows/build-go-pages.yml change, change this too.
-  function resolvedUrl(destination, campaign, key) {
+  /* ---------- state ---------- */
+  const state = {
+    token: null, name: null,
+    view: 'signin',
+    cur: null,                 // ministry key open in the ministry view
+    live: {},                  // key -> {campaign,destination,end_date} | {error}
+    activity: [],
+    staged: null,              // {img:{dataUrl,bytes,dims,fileName}|null}
+    base: null,                // link fields as loaded, for diffing
+    sheet: null,               // {kind:'publish'|'restore'|'signout', ...}
+    busyKeys: {},              // key -> true while "Updating signatures" chip shows
+  };
+  try {
+    const saved = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+    if (saved && saved.token && saved.name) { state.token = saved.token; state.name = saved.name; }
+  } catch {}
+
+  const $ = s => document.querySelector(s);
+  const els = {
+    topnav: $('#topnav'), avatar: $('#avatar'),
+    navBanners: $('#nav-banners'), navActivity: $('#nav-activity'), navSignout: $('#nav-signout'),
+    vSignin: $('#view-signin'), vManifest: $('#view-manifest'), vMinistry: $('#view-ministry'), vActivity: $('#view-activity'),
+    code: $('#code'), gname: $('#gname'), gateName: $('#gate-name'), signinBtn: $('#signin-btn'), gateError: $('#gate-error'),
+    statusline: $('#statusline'), grid: $('#grid'),
+    crumb: $('#crumb'), mvName: $('#mvName'), mvN1: $('#mvN1'), mvChip: $('#mvChip'),
+    count: $('#count'), countN: $('#countN'), countL: $('#countL'),
+    sigName: $('#sig-name'), sigOrg: $('#sig-org'), sigBannerImg: $('#sig-banner-img'), sigBannerLink: $('#sig-banner-link'),
+    previewcap: $('#previewcap'),
+    factCamp: $('#factCamp'), factDest: $('#factDest'), factExp: $('#factExp'),
+    drop: $('#drop'), chooseBtn: $('#choose-btn'), fileInput: $('#file-input'), droperr: $('#droperr'), imgWas: $('#imgWas'),
+    dest: $('#dest'), camp: $('#camp'), exp: $('#exp'),
+    fDest: $('#f-dest'), fCamp: $('#f-camp'), fExp: $('#f-exp'),
+    resolved: $('#resolved'), resolvedUrl: $('#resolved-url'),
+    hist: $('#hist'), alist: $('#alist'),
+    pubbar: $('#pubbar'), pubsum: $('#pubsum'), pubBtn: $('#pub-btn'), discardBtn: $('#discard-btn'),
+    veil: $('#veil'), shTitle: $('#shTitle'), ba: $('#ba'), weight: $('#weight'),
+    sheetReasonField: $('#sheet-reason-field'), sheetReason: $('#sheet-reason'),
+    sheeterr: $('#sheeterr'), sheetCancel: $('#sheet-cancel'), sheetGo: $('#sheet-go'),
+    toast: $('#toast'), live: $('#live-region'),
+  };
+
+  /* ---------- helpers ---------- */
+  function escapeHtml(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function announce(msg){ els.live.textContent = ''; setTimeout(() => { els.live.textContent = msg; }, 50); }
+  let toastTimer = 0;
+  function toast(msg, ms){
+    els.toast.textContent = msg;
+    els.toast.classList.add('up');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => els.toast.classList.remove('up'), ms || 5200);
+    announce(msg);
+  }
+  function fmtBytes(n){
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n/1024).toFixed(1) + ' KB';
+    return (n/1048576).toFixed(2) + ' MB';
+  }
+  function fmtRelative(iso){
+    const sec = Math.max(0, Math.round((Date.now() - new Date(iso).getTime())/1000));
+    if (sec < 60) return sec + 's ago';
+    if (sec < 3600) return Math.round(sec/60) + 'm ago';
+    if (sec < 86400) return Math.round(sec/3600) + 'h ago';
+    return Math.round(sec/86400) + 'd ago';
+  }
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function parseDay(s){ const p = String(s).split('-'); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function todayStart(){ const t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }
+  function daysLeft(s){ return Math.round((parseDay(s) - todayStart())/86400000); }
+  function pretty(s){ const d = parseDay(s); return MONTHS[d.getMonth()].slice(0,3) + ' ' + d.getDate(); }
+  /* One voice for "when it expired", used everywhere. */
+  function expiredPhrase(s){
+    const n = daysLeft(s), d = parseDay(s);
+    return n > -7 ? 'on ' + DAYS[d.getDay()] : 'on ' + pretty(s);
+  }
+  function expiryHTML(s){
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s || '')) return '<span style="color:var(--ink-3)">not set</span>';
+    const n = daysLeft(s);
+    if (n < 0)   return '<span class="gone">Expired ' + escapeHtml(expiredPhrase(s)) + '</span>';
+    if (n <= 14) return escapeHtml(pretty(s)) + ' <span class="soon">&middot; ' + n + ' days left</span>';
+    return escapeHtml(pretty(s)) + ' <span style="color:var(--ink-3)">&middot; in ' + n + ' days</span>';
+  }
+  function chipFor(s){
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s || '')) return '<span class="chip dim"><i></i>Unknown</span>';
+    const n = daysLeft(s);
+    if (n < 0)   return '<span class="chip gone"><i></i>Expired</span>';
+    if (n <= 14) return '<span class="chip soon"><i></i>' + n + ' days left</span>';
+    return '<span class="chip"><i></i>Live</span>';
+  }
+  function initials(name){
+    return String(name || '').trim().split(/\s+/).map(w => w[0] || '').join('').slice(0,2).toUpperCase() || '?';
+  }
+  // Mirrors exactly what the redirect layer builds, so what is previewed is
+  // what a recipient lands on. If build-go-pages.yml changes its tagging,
+  // change this too.
+  function resolvedUrl(destination, campaign, key){
     if (!/^https:\/\/\S+$/.test(destination)) return null;
     const sep = destination.includes('?') ? '&' : '?';
     const q = new URLSearchParams({
@@ -1083,314 +768,691 @@
     });
     return destination + sep + q.toString();
   }
+  function bannerUrl(key){ return BANNER_BASE + '/' + key + '/banner.png?v=' + Date.now(); }
 
-  function refreshResolvedPreview() {
-    const key = state.linkTarget;
-    if (!key) { els.linkResolved.classList.remove('active'); return; }
-    const url = resolvedUrl((els.linkDestination.value||'').trim(), (els.linkCampaign.value||'').trim(), key);
-    if (!url) { els.linkResolved.classList.remove('active'); return; }
-    els.linkResolvedUrl.textContent = url;
-    els.linkResolved.classList.add('active');
-  }
-
-  function setLinkTarget(key) {
-    if (state.linkTarget !== key) clearLinkStatus();
-    state.linkTarget = key;
-    [...els.linkSelector.querySelectorAll('label')].forEach(l => {
-      l.classList.toggle('checked', l.dataset.key === key);
-      const input = l.querySelector('input');
-      if (input) input.checked = (l.dataset.key === key);
-    });
-    loadLink(key);
-  }
-
-  // Deliberately does NOT clear the status bar: it is also called to refresh the
-  // form after a successful save, and clearing here wiped the confirmation
-  // message the moment it appeared. Switching ministry clears it instead.
-  async function loadLink(key) {
-    els.linkFields.hidden = true;
-    els.linkCurrent.classList.remove('active');
-    els.linkResolved.classList.remove('active');
-    els.linkPlaceholder.hidden = false;
-    els.linkPlaceholder.textContent = 'Loading the current link\u2026';
+  /* ---------- api ---------- */
+  async function api(path, opts = {}){
+    const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
+    if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
+    let res;
     try {
-      const data = await api(`/api/campaign?target=${encodeURIComponent(key)}`);
-      if (state.linkTarget !== key) return;   // user switched ministry mid-flight
-      state.linkLoaded = data;
-      els.linkDestination.value = data.destination || '';
-      els.linkCampaign.value = data.campaign || '';
-      els.linkEndDate.value = data.end_date || '';
-      els.linkThumb.src = `${LINK_BANNER_BASE}/${key}/banner.png?v=${Date.now()}`;
-      els.linkThumbLink.href = `${GO_BASE}/${key}/`;
-      els.linkCurrentDest.textContent = data.destination || '(nothing set)';
-      els.linkPlaceholder.hidden = true;
-      els.linkCurrent.classList.add('active');
-      els.linkFields.hidden = false;
-      refreshResolvedPreview();
+      res = await fetch(path, { ...opts, headers });
+    } catch {
+      throw new Error(location.protocol === 'file:'
+        ? 'This page is open as a file on disk, where the Studio server does not exist. Use the deployed Studio at hcfm-banner-studio.vercel.app.'
+        : 'Could not reach the Studio server. Check your connection and try again.');
+    }
+    const text = await res.text();
+    let data = null;
+    try { data = text ? JSON.parse(text) : null; } catch {}
+    if (!res.ok) {
+      const e = new Error((data && data.error) || ('Request failed (' + res.status + ').'));
+      e.status = res.status;
+      throw e;
+    }
+    return data;
+  }
+
+  /* ---------- view switching ---------- */
+  function show(view){
+    state.view = view;
+    els.vSignin.classList.toggle('on', view === 'signin');
+    els.vManifest.classList.toggle('on', view === 'manifest');
+    els.vMinistry.classList.toggle('on', view === 'ministry');
+    els.vActivity.classList.toggle('on', view === 'activity');
+    els.topnav.style.visibility = view === 'signin' ? 'hidden' : 'visible';
+    els.navBanners.classList.toggle('on', view === 'manifest' || view === 'ministry');
+    els.navActivity.classList.toggle('on', view === 'activity');
+    if (view !== 'ministry') els.pubbar.classList.remove('up');
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- sign in ---------- */
+  async function signIn(){
+    els.gateError.classList.remove('on'); els.gateError.textContent = '';
+    const code = els.code.value || '';
+    const name = (els.gname.value || '').trim();
+    if (!code) { gateFail('Enter your access code. If you need one, ask Emmy.'); return; }
+    els.signinBtn.disabled = true; els.signinBtn.textContent = 'Signing in…';
+    try {
+      const data = await api('/api/auth', { method: 'POST', body: JSON.stringify({ code, name: name || undefined }) });
+      if (data && data.needName) {
+        const alreadyAsked = els.gateName.classList.contains('on');
+        els.gateName.classList.add('on');
+        els.gname.focus();
+        gateFail(alreadyAsked
+          ? 'Add your name, so publishes carry it.'
+          : 'That is the shared team code, which does not carry a name. Add yours above, or ask Emmy for a personal code.');
+        return;
+      }
+      state.token = data.token; state.name = data.name;
+      try { localStorage.setItem(SESSION_KEY, JSON.stringify({ token: state.token, name: state.name })); } catch {}
+      enterApp();
     } catch (err) {
-      if (err.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
-      els.linkPlaceholder.hidden = false;
-      els.linkPlaceholder.textContent = `Couldn't load the current link for ${targetLabel(key)}. ${err.message || ''}`;
+      gateFail(err.message || 'Sign-in failed.');
+    } finally {
+      els.signinBtn.disabled = false; els.signinBtn.textContent = 'Sign in';
+    }
+  }
+  function gateFail(msg){ els.gateError.textContent = msg; els.gateError.classList.add('on'); }
+  function signedOut(reason){
+    state.token = null; state.name = null;
+    try { localStorage.removeItem(SESSION_KEY); } catch {}
+    els.code.value = '';
+    show('signin');
+    if (reason) gateFail(reason);
+    els.code.focus();
+  }
+
+  function enterApp(){
+    els.avatar.textContent = initials(state.name);
+    els.avatar.title = state.name;
+    show('manifest');
+    drawGrid();
+    loadLive();
+    loadActivity();
+  }
+
+  /* ---------- manifest ---------- */
+  function drawGrid(){
+    els.grid.innerHTML = MINISTRIES.map(m => {
+      const d = state.live[m.key];
+      let chip, strip = '', metaHtml, staleHtml = '';
+      if (state.busyKeys[m.key]) {
+        chip = '<span class="chip busy"><i></i>Updating signatures&hellip;</span>';
+      } else if (!d) {
+        chip = '<span class="chip dim"><i></i>Loading</span>';
+      } else if (d.error) {
+        chip = '<span class="chip dim"><i></i>Unknown</span>';
+      } else {
+        chip = chipFor(d.end_date);
+      }
+      if (d && !d.error && /^\d{4}-\d{2}-\d{2}$/.test(d.end_date || '')) {
+        const n = daysLeft(d.end_date);
+        if (n < 0) { strip = '<div class="strip bad"></div>'; staleHtml = '<p class="stale">This expired ' + escapeHtml(expiredPhrase(d.end_date)) + ' and is still being sent.</p>'; }
+        else if (n <= 14) strip = '<div class="strip warn"></div>';
+      }
+      if (!d) {
+        metaHtml = '<p class="unavail">Reading the live campaign&hellip;</p>';
+      } else if (d.error) {
+        metaHtml = '<p class="unavail">Campaign details unavailable: ' + escapeHtml(d.error) + ' The banner image above is still the live one.</p>';
+      } else {
+        metaHtml = '<div class="meta">'
+          + '<span class="lab">Campaign</span><span class="val">' + escapeHtml(d.campaign || 'not set') + '</span>'
+          + '<span class="lab">Links to</span><span class="val url">' + escapeHtml(d.destination || 'not set') + '</span>'
+          + '<span class="lab">Runs until</span><span class="val">' + expiryHTML(d.end_date) + '</span>'
+          + '</div>';
+      }
+      const bad = d && !d.error && /^\d{4}-\d{2}-\d{2}$/.test(d.end_date || '') && daysLeft(d.end_date) < 0;
+      return '<article class="card" id="card-' + m.key + '" tabindex="0" role="button" aria-label="' + escapeHtml(m.label) + ', open" data-open="' + m.key + '">'
+        + '<div class="art"><img src="' + bannerUrl(m.key) + '" alt="' + escapeHtml(m.label) + ' live banner" loading="lazy" onerror="this.style.display=\'none\'">' + strip + '</div>'
+        + '<div class="bd">'
+        +   '<div class="card-top"><h2 class="mname">' + escapeHtml(m.label) + '</h2>' + chip + '</div>'
+        +   staleHtml
+        +   metaHtml
+        +   '<div class="acts">' + (bad ? '<span class="b b-tonal">Update now</span>' : '<span class="cardgo">Manage &rsaquo;</span>') + '</div>'
+        + '</div>'
+        + '</article>';
+    }).join('');
+  }
+
+  function refreshStatus(){
+    const loaded = MINISTRIES.filter(m => state.live[m.key] && !state.live[m.key].error);
+    const failed  = MINISTRIES.filter(m => state.live[m.key] && state.live[m.key].error);
+    const pending = MINISTRIES.filter(m => !state.live[m.key]);
+    const s = els.statusline;
+    if (pending.length) {
+      s.className = 'status dim';
+      s.innerHTML = '<span class="dot"></span><span>Reading the live campaigns&hellip;</span>';
+      return;
+    }
+    const gone = loaded.filter(m => daysLeft(state.live[m.key].end_date) < 0);
+    const soon = loaded.filter(m => { const n = daysLeft(state.live[m.key].end_date); return n >= 0 && n <= 14; })
+                       .sort((a,b) => daysLeft(state.live[a.key].end_date) - daysLeft(state.live[b.key].end_date));
+    if (gone.length) {
+      s.className = 'status bad';
+      s.innerHTML = '<span class="dot"></span><span><b>' + escapeHtml(gone[0].label) + '&rsquo;s banner has expired</b> and is still going out. </span>'
+        + '<button class="go" data-open="' + gone[0].key + '">Update it now &rsaquo;</button>';
+    } else if (failed.length) {
+      s.className = 'status warn';
+      s.innerHTML = '<span class="dot"></span><span><b>' + failed.length + ' of 6 campaign reads failed.</b> The banners themselves are unaffected. Reload to retry.</span>';
+    } else if (soon.length) {
+      s.className = 'status warn';
+      s.innerHTML = '<span class="dot"></span><span><b>All six banners are current.</b> Next to lapse: ' + escapeHtml(soon[0].label) + ', in ' + daysLeft(state.live[soon[0].key].end_date) + ' days.</span>';
+    } else {
+      s.className = 'status ok';
+      s.innerHTML = '<span class="dot"></span><span><b>All six banners are healthy.</b> Nothing lapses in the next two weeks.</span>';
     }
   }
 
-  function validateLink() {
-    const destination = (els.linkDestination.value || '').trim();
-    const campaign = (els.linkCampaign.value || '').trim();
-    const endDate = (els.linkEndDate.value || '').trim();
-    [els.linkFieldDest, els.linkFieldCampaign, els.linkFieldEnd].forEach(f => f.classList.remove('error'));
+  async function loadLive(){
+    await Promise.all(MINISTRIES.map(async m => {
+      try {
+        const d = await api('/api/campaign?target=' + encodeURIComponent(m.key));
+        state.live[m.key] = { campaign: d.campaign, destination: d.destination, end_date: d.end_date };
+      } catch (err) {
+        if (err.status === 401) { signedOut('Your sign-in expired. Please sign in again.'); throw err; }
+        state.live[m.key] = { error: err.message || 'could not read campaigns.yml.' };
+      }
+      if (state.view === 'manifest') { drawGrid(); refreshStatus(); }
+    })).catch(() => {});
+  }
+
+  /* ---------- ministry view ---------- */
+  function openMinistry(key){
+    const m = byKey[key]; if (!m) return;
+    state.cur = key;
+    state.staged = { img: null };
+    els.mvName.textContent = m.label;
+    els.mvN1.textContent = m.label;
+    els.sigName.textContent = state.name || '';
+    els.sigOrg.textContent = m.label;
+    els.sigBannerImg.src = bannerUrl(key);
+    els.sigBannerLink.href = GO_BASE + '/' + key + '/';
+    els.previewcap.textContent = 'This is what a recipient sees today. The banner is a live link.';
+    els.imgWas.textContent = '';
+    dropError('');
+    const d = state.live[key];
+    state.base = (d && !d.error)
+      ? { dest: d.destination || '', camp: d.campaign || '', exp: d.end_date || '' }
+      : null;
+    fillLinkFields();
+    fillFacts();
+    drawHist();
+    show('ministry');
+    sync();
+    // Re-read this ministry so the fields are fresh, not remembered.
+    api('/api/campaign?target=' + encodeURIComponent(key)).then(fresh => {
+      if (state.cur !== key) return;
+      state.live[key] = { campaign: fresh.campaign, destination: fresh.destination, end_date: fresh.end_date };
+      const dirty = changes().length > 0;
+      state.base = { dest: fresh.destination || '', camp: fresh.campaign || '', exp: fresh.end_date || '' };
+      if (!dirty) fillLinkFields();
+      fillFacts();
+      sync();
+    }).catch(err => {
+      if (err.status === 401) signedOut('Your sign-in expired. Please sign in again.');
+    });
+    loadActivity();
+  }
+
+  function fillLinkFields(){
+    if (state.base) {
+      els.dest.value = state.base.dest;
+      els.camp.value = state.base.camp;
+      els.exp.value = state.base.exp;
+      els.dest.disabled = els.camp.disabled = els.exp.disabled = false;
+    } else {
+      els.dest.value = ''; els.camp.value = ''; els.exp.value = '';
+      els.dest.disabled = els.camp.disabled = els.exp.disabled = true;
+    }
+    [els.fDest, els.fCamp, els.fExp].forEach(f => f.classList.remove('error'));
+    refreshResolved();
+  }
+  function fillFacts(){
+    const d = state.live[state.cur];
+    if (d && !d.error) {
+      els.factCamp.textContent = d.campaign || 'not set';
+      els.factDest.textContent = d.destination || 'not set';
+      els.factExp.innerHTML = expiryHTML(d.end_date);
+      els.mvChip.innerHTML = chipFor(d.end_date);
+      if (/^\d{4}-\d{2}-\d{2}$/.test(d.end_date || '')) {
+        const n = daysLeft(d.end_date);
+        els.count.style.display = '';
+        els.count.classList.toggle('bad', n < 0);
+        els.countN.textContent = String(Math.abs(n));
+        els.countL.textContent = n >= 0
+          ? 'days left on this banner, through ' + pretty(d.end_date)
+          : (Math.abs(n) === 1 ? 'day' : 'days') + ' past its end date, and still being sent';
+      } else {
+        els.count.style.display = 'none';
+      }
+    } else {
+      els.factCamp.textContent = 'data unavailable';
+      els.factDest.textContent = d && d.error ? d.error : 'data unavailable';
+      els.factExp.textContent = 'data unavailable';
+      els.mvChip.innerHTML = '';
+      els.count.style.display = 'none';
+    }
+  }
+  function refreshResolved(){
+    if (!state.cur) return;
+    const url = resolvedUrl((els.dest.value || '').trim(), (els.camp.value || '').trim(), state.cur);
+    if (url) { els.resolvedUrl.textContent = url; els.resolved.classList.add('on'); }
+    else els.resolved.classList.remove('on');
+  }
+
+  /* ---------- staging ---------- */
+  function dropError(msg){
+    els.droperr.textContent = msg || '';
+    els.droperr.classList.toggle('on', !!msg);
+  }
+  function readFileAsDataUrl(file){
+    return new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result);
+      r.onerror = () => reject(r.error);
+      r.readAsDataURL(file);
+    });
+  }
+  function imageDimensions(dataUrl){
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve({ w: img.naturalWidth, h: img.naturalHeight });
+      img.onerror = () => reject(new Error('Could not decode image.'));
+      img.src = dataUrl;
+    });
+  }
+  async function onFileSelected(file){
+    if (!file) return;
+    dropError('');
+    if (!/\.png$/i.test(file.name) || (file.type && file.type !== 'image/png')) {
+      dropError('That file is ' + (file.type || 'not a PNG') + '. Banners must be PNG, because email clients handle other formats unreliably.');
+      return;
+    }
+    let dataUrl, dims;
+    try {
+      dataUrl = await readFileAsDataUrl(file);
+      dims = await imageDimensions(dataUrl);
+    } catch {
+      dropError('This file could not be read as an image. Open it in Preview to check it is a real PNG, then try again.');
+      return;
+    }
+    if (dims.w !== 600 || dims.h < 100 || dims.h > 200) {
+      dropError('This image is ' + dims.w + ' by ' + dims.h + '. Banners must be 600 wide and 100 to 200 tall; 600 by 150 is the usual shape.');
+      return;
+    }
+    if (file.size > 250 * 1024) {
+      dropError('This file is ' + fmtBytes(file.size) + '. Banners must be under 250 KB, or Outlook loads them slowly. Export it again with more compression.');
+      return;
+    }
+    state.staged.img = { dataUrl, bytes: file.size, dims, fileName: file.name };
+    els.sigBannerImg.src = dataUrl;
+    els.previewcap.textContent = 'Previewing your staged banner. Nothing is live until you publish.';
+    els.imgWas.textContent = 'Ready: ' + file.name + ' (' + dims.w + ' by ' + dims.h + ', ' + fmtBytes(file.size) + ')'
+      + (file.size > 100 * 1024 ? '. On the large side; under 100 KB is ideal.' : '');
+    announce('Banner staged. ' + dims.w + ' by ' + dims.h + ' pixels, ' + fmtBytes(file.size) + '.');
+    sync();
+  }
+  function clearStagedImage(){
+    state.staged.img = null;
+    els.fileInput.value = '';
+    els.imgWas.textContent = '';
+    els.sigBannerImg.src = bannerUrl(state.cur);
+    els.previewcap.textContent = 'This is what a recipient sees today. The banner is a live link.';
+  }
+
+  function changes(){
+    const c = [];
+    if (!state.staged) return c;
+    if (state.staged.img) c.push('a new banner');
+    if (state.base) {
+      if ((els.dest.value || '').trim() !== state.base.dest) c.push('a new link');
+      if ((els.camp.value || '').trim() !== state.base.camp) c.push('a new campaign name');
+      if (els.exp.value !== state.base.exp) c.push('a new run date');
+    }
+    return c;
+  }
+  function phrase(list){
+    if (list.length === 1) return list[0];
+    if (list.length === 2) return list[0] + ' and ' + list[1];
+    return list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1];
+  }
+  function linkDirty(){
+    return state.base && (
+      (els.dest.value || '').trim() !== state.base.dest ||
+      (els.camp.value || '').trim() !== state.base.camp ||
+      els.exp.value !== state.base.exp
+    );
+  }
+  function sync(){
+    refreshResolved();
+    const c = changes();
+    if (c.length && state.view === 'ministry') {
+      els.pubsum.textContent = 'Staged for ' + targetLabel(state.cur) + ': ' + phrase(c) + '.';
+      els.pubbar.classList.add('up');
+    } else {
+      els.pubbar.classList.remove('up');
+    }
+  }
+  function discard(){
+    clearStagedImage();
+    if (state.base) fillLinkFields();
+    dropError('');
+    sync();
+  }
+
+  /* ---------- validation before the sheet ---------- */
+  function validateLink(){
+    const destination = (els.dest.value || '').trim();
+    const campaign = (els.camp.value || '').trim();
+    const endDate = (els.exp.value || '').trim();
+    [els.fDest, els.fCamp, els.fExp].forEach(f => f.classList.remove('error'));
     if (!/^https:\/\/\S+$/.test(destination)) {
-      els.linkFieldDest.classList.add('error'); els.linkDestination.focus();
-      return { ok: false, msg: 'The destination has to be a full https:// address.' };
+      els.fDest.classList.add('error'); els.dest.focus();
+      return { ok: false, msg: 'The link has to be a full https:// address.' };
     }
     if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(campaign)) {
-      els.linkFieldCampaign.classList.add('error'); els.linkCampaign.focus();
+      els.fCamp.classList.add('error'); els.camp.focus();
       return { ok: false, msg: 'The campaign name can only use lowercase letters, numbers and hyphens.' };
     }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(endDate)) {
-      els.linkFieldEnd.classList.add('error'); els.linkEndDate.focus();
+      els.fExp.classList.add('error'); els.exp.focus();
       return { ok: false, msg: 'Pick the last day this banner is still correct.' };
     }
     const today = new Date().toISOString().slice(0, 10);
     if (endDate < today) {
-      els.linkFieldEnd.classList.add('error'); els.linkEndDate.focus();
-      return { ok: false, msg: 'That date has already passed, so the health check would fail the moment this saved. Pick a date in the future.' };
+      els.fExp.classList.add('error'); els.exp.focus();
+      return { ok: false, msg: 'That date has already passed, so the health check would fail the moment this published. Pick a date in the future.' };
     }
     return { ok: true, destination, campaign, endDate };
   }
 
-  function startLinkSave() {
-    const key = state.linkTarget;
-    if (!key) return;
-    const v = validateLink();
-    if (!v.ok) { linkStatus('err', `<b>Not saved.</b> ${escapeHtml(v.msg)}`); return; }
-    clearLinkStatus();
+  /* ---------- the sheet: one door to guard ---------- */
+  function sheetError(msg){
+    els.sheeterr.textContent = msg || '';
+    els.sheeterr.classList.toggle('on', !!msg);
+  }
+  function openSheet(cfg){
+    state.sheet = cfg;
+    els.shTitle.textContent = cfg.title;
+    els.ba.innerHTML = cfg.rows || '';
+    els.weight.textContent = cfg.weight || '';
+    els.weight.style.display = cfg.weight ? '' : 'none';
+    els.sheetReasonField.style.display = cfg.askReason ? '' : 'none';
+    els.sheetReason.value = '';
+    sheetError('');
+    els.sheetGo.textContent = cfg.confirmLabel;
+    els.sheetGo.disabled = false;
+    els.sheetCancel.disabled = false;
+    els.veil.classList.add('on');
+    setTimeout(() => (cfg.askReason ? els.sheetReason : els.sheetGo).focus(), 40);
+  }
+  function closeSheet(){
+    els.veil.classList.remove('on');
+    state.sheet = null;
+  }
+
+  function startPublish(){
+    const key = state.cur;
+    const img = state.staged.img;
+    const link = linkDirty();
+    if (!img && !link) return;
+    let v = null;
+    if (link) {
+      v = validateLink();
+      if (!v.ok) { toast('Not staged for publish yet. ' + v.msg); return; }
+    }
     const label = targetLabel(key);
-    const was = state.linkLoaded && state.linkLoaded.destination;
-    openConfirm({
-      title: `Change where the ${label} banner sends people?`,
-      body: `This applies to every ${label} signature already installed. Nobody re-pastes anything, and the change is live within a couple of minutes.`,
-      summary: `
-        ${was && was !== v.destination ? `<div><b>Was:</b> ${escapeHtml(was)}</div>` : ''}
-        <div><b>Now:</b> ${escapeHtml(v.destination)}</div>
-        <div><b>Campaign:</b> ${escapeHtml(v.campaign)}</div>
-        <div><b>Correct until:</b> ${escapeHtml(v.endDate)}</div>
-        <div><b>You're changing this as:</b> ${escapeHtml(state.name)}</div>
-      `,
-      confirmLabel: 'Yes, change the link',
-      onConfirm: () => doLinkSave(key, v),
+    let rows = '';
+    if (img) {
+      rows += '<div class="row"><span class="k">Now</span><div class="thumb"><img src="' + bannerUrl(key) + '" alt="Current banner" onerror="this.style.display=\'none\'"></div></div>';
+      rows += '<div class="row"><span class="k">New</span><div class="thumb"><img src="' + img.dataUrl + '" alt="Staged banner"></div></div>';
+    }
+    if (v && state.base && v.destination !== state.base.dest) {
+      rows += '<div class="row" style="grid-template-columns:1fr"><div class="linkdiff">'
+        + '<div class="old">' + escapeHtml(state.base.dest || '(nothing set)') + '</div>'
+        + '<div class="new"><span class="hi">' + escapeHtml(v.destination) + '</span></div></div></div>';
+    }
+    const bits = [];
+    if (v && state.base && v.campaign !== state.base.camp) bits.push('Campaign becomes <b>' + escapeHtml(v.campaign) + '</b>');
+    if (v && state.base && v.endDate !== state.base.exp) bits.push('Runs until <b>' + escapeHtml(pretty(v.endDate)) + '</b>');
+    if (bits.length) rows += '<div class="row" style="grid-template-columns:1fr"><div style="font-size:13.5px;line-height:1.7">' + bits.join('<br>') + '</div></div>';
+    openSheet({
+      kind: 'publish',
+      title: 'Publish to ' + label + '?',
+      rows,
+      weight: 'This lands on every ' + label + ' signature already installed, within a few minutes, with nothing to re-paste. You can restore the previous banner at any time.',
+      askReason: true,
+      confirmLabel: 'Publish to ' + label,
+      run: () => doPublish(key, img, v),
     });
   }
 
-  async function doLinkSave(key, v) {
-    els.linkSave.disabled = true;
-    linkStatus('info', '<b>Saving\u2026</b> Updating the redirect for every installed signature.');
-    announce('Saving the banner link.');
-    try {
-      const data = await api('/api/campaign', {
-        method: 'POST',
-        body: JSON.stringify({ target: key, destination: v.destination, campaign: v.campaign, end_date: v.endDate }),
-      });
-      const label = targetLabel(key);
-      linkStatus('ok', `
-        <b>Done.</b> The ${escapeHtml(label)} banner now sends people to
-        <a href="${escapeHtml(data.destination)}" target="_blank" rel="noopener">${escapeHtml(data.destination)}</a>.
-        <small>
-          The redirect page rebuilds itself automatically and is usually live within two minutes. Nobody re-pastes anything.
-          If you open the banner in your own email before then, you may still land on the old page because your browser cached the redirect; recipients do not share that cache.
-        </small>
-      `);
-      announce(`Link updated for ${label}.`);
-      await loadLink(key);
-      await loadActivity();
-    } catch (err) {
-      let msg = err.message || 'Something went wrong.';
-      if (err.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
-      if (err.status === 403) msg = "The studio's GitHub credential expired. Ask Emmy to refresh it.";
-      else if (err.status === 409) msg = 'Someone else changed a banner link a moment ago. Reload the page and try again.';
-      linkStatus('err', `<b>Couldn't save.</b> ${escapeHtml(msg)}`);
-    } finally {
-      els.linkSave.disabled = false;
+  async function doPublish(key, img, v){
+    const reason = (els.sheetReason.value || '').trim();
+    if (reason.length < 2) {
+      sheetError('Say what this change is for. One short phrase is enough; it goes in the audit log.');
+      els.sheetReason.focus();
+      return;
     }
-  }
-
-  // ---------- Activity feed ----------
-  async function loadActivity() {
+    els.sheetGo.disabled = true;
+    els.sheetCancel.disabled = true;
+    els.sheetGo.textContent = 'Publishing…';
+    const label = targetLabel(key);
+    let imgDone = !img, linkDone = !v;
     try {
-      const { items } = await api('/api/activity');
-      state.activity = items || [];
-      renderActivity();
-    } catch (e) {
-      if (e.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
-      els.activity.innerHTML = `<li class="empty">Couldn't load recent activity. ${escapeHtml(e.message || '')}</li>`;
-    }
-  }
-  function renderActivity() {
-    const items = state.activity;
-    if (!items.length) { els.activity.innerHTML = '<li class="empty">No banner updates recorded yet.</li>'; return; }
-    // The first item per target is the "current live" one.
-    const seenLive = new Set();
-    els.activity.innerHTML = items.map((it) => {
-      const tgt = it.target || 'parent';
-      const isCurrent = it.kind !== 'link' && it.target && !seenLive.has(it.target);
-      if (it.kind !== 'link' && it.target) seenLive.add(it.target);
-      const thumbUrl = `https://cdn.jsdelivr.net/gh/${BRAND_REPO}@${it.sha}/email-banners/${tgt}/banner.png`;
-      const reasonText = it.what || '(no reason given)';
-      // A link change never gets a Revert button. The image at that commit is
-      // identical to the one before it, so reverting would be a no-op dressed up
-      // as an action.
-      const isLink = it.kind === 'link';
-      return `
-        <li class="activity-row ${isCurrent ? 'current' : ''}" data-sha="${escapeHtml(it.sha)}" data-target="${escapeHtml(tgt)}">
-          <div class="thumb"><img src="${thumbUrl}" alt="Banner thumbnail" loading="lazy" onerror="this.style.display='none'"></div>
-          <div class="body">
-            <div class="what" title="${escapeHtml(reasonText)}">${escapeHtml(reasonText)}</div>
-            <div class="meta">
-              ${isLink ? '<span class="kind-pill">link</span>' : ''}<span class="target-pill">${escapeHtml(targetLabel(tgt))}</span>
-              ${escapeHtml(it.uploader || '')}${it.uploader && it.when ? ' &middot; ' : ''}${it.when ? escapeHtml(fmtRelative(it.when)) : ''}
-            </div>
-          </div>
-          <div class="right-actions">
-            ${(isCurrent || isLink) ? '' : `<button class="btn-revert" data-revert-sha="${escapeHtml(it.sha)}" data-revert-target="${escapeHtml(tgt)}">Revert to this</button>`}
-          </div>
-        </li>
-      `;
-    }).join('');
-    [...els.activity.querySelectorAll('.btn-revert')].forEach(btn => {
-      btn.addEventListener('click', onRevertClick);
-    });
-  }
-
-  async function onRevertClick(e) {
-    const btn = e.currentTarget;
-    const sha = btn.getAttribute('data-revert-sha');
-    const tgt = btn.getAttribute('data-revert-target');
-    if (!sha || !tgt) return;
-    const tLabel = targetLabel(tgt);
-    if (!confirm(`Revert ${tLabel} signature to this banner version? Every HCFM signature on this side will switch back to it within minutes.`)) return;
-    btn.disabled = true;
-    btn.textContent = 'Reverting…';
-    clearStatus();
-    announce('Reverting banner.');
-    try {
-      const data = await api('/api/revert', {
-        method: 'POST',
-        body: JSON.stringify({ sha, target: tgt }),
-      });
-      if (data.noop) {
-        showStatus('warn', '<b>Already current.</b> That version is already the live banner.');
-      } else {
-        showStatus('ok', `<b>Reverted.</b> The ${escapeHtml(tLabel)} signature is back to the version from <code>${escapeHtml(data.revertedFrom||sha.slice(0,7))}</code>. New committed version: <code>${escapeHtml(data.sha||'')}</code>.`);
-        announce(`Reverted ${tLabel} banner.`);
+      if (img) {
+        const b64 = img.dataUrl.replace(/^data:image\/png;base64,/, '');
+        await api('/api/upload', { method: 'POST', body: JSON.stringify({ image: b64, target: key, reason }) });
+        imgDone = true;
+        clearStagedImage();
       }
-      await loadActivity();
+      if (v) {
+        await api('/api/campaign', { method: 'POST', body: JSON.stringify({ target: key, destination: v.destination, campaign: v.campaign, end_date: v.endDate, reason }) });
+        linkDone = true;
+        state.live[key] = { campaign: v.campaign, destination: v.destination, end_date: v.endDate };
+        state.base = { dest: v.destination, camp: v.campaign, exp: v.endDate };
+        fillLinkFields(); fillFacts();
+      }
+      closeSheet();
+      afterPublish(key, label);
     } catch (err) {
-      let msg = err.message || 'Something went wrong.';
-      if (err.status === 401) { showSignedOut('Your sign-in expired. Please sign in again.'); return; }
-      showStatus('err', `<b>Couldn't revert.</b> ${escapeHtml(msg)}`);
-      btn.disabled = false;
-      btn.textContent = 'Revert to this';
+      if (err.status === 401) { closeSheet(); signedOut('Your sign-in expired. Please sign in again.'); return; }
+      let msg = friendlyError(err);
+      if (img && imgDone && !linkDone) {
+        // Partial: the image is live, the link change is not. Say exactly that.
+        state.staged.img = null;
+        els.sigBannerImg.src = bannerUrl(key);
+        sheetError('The new banner image is published, but the link change did not save: ' + msg + ' The link fields are still staged; try Publish again for just the link.');
+        els.ba.innerHTML = '';
+        loadActivity();
+      } else {
+        sheetError('Nothing was published. ' + msg);
+      }
+      els.sheetGo.disabled = false;
+      els.sheetCancel.disabled = false;
+      els.sheetGo.textContent = 'Publish to ' + label;
+      sync();
     }
   }
 
-  // ---------- Sign-in flow ----------
-  async function signIn() {
-    els.gateError.classList.remove('active');
-    els.gateError.textContent = '';
-    const name = (els.nameField.value || '').trim();
-    const password = els.pwField.value || '';
-    if (name.length < 2) { els.gateError.textContent = 'Please enter your name.'; els.gateError.classList.add('active'); return; }
-    if (!password) { els.gateError.textContent = 'Please enter the team password.'; els.gateError.classList.add('active'); return; }
-    els.signIn.disabled = true;
-    els.signIn.textContent = 'Signing in…';
-    try {
-      const data = await api('/api/auth', { method: 'POST', body: JSON.stringify({ name, password }) });
-      state.token = data.token; state.name = data.name;
-      localStorage.setItem(SESSION_KEY, JSON.stringify({ token: state.token, name: state.name }));
-      showApp();
-    } catch (err) {
-      let msg = err.message || 'Sign-in failed.';
-      els.gateError.textContent = msg;
-      els.gateError.classList.add('active');
-    } finally {
-      els.signIn.disabled = false; els.signIn.textContent = 'Sign in';
-    }
+  function friendlyError(err){
+    if (err.status === 403) return 'The Studio’s GitHub credential was refused. Ask Emmy to refresh it.';
+    if (err.status === 409) return 'Someone else published a change a moment ago. Reload and try again.';
+    if (err.status === 502 || err.status === 503) return 'GitHub or the Studio backend is temporarily unavailable. Try again in a minute.';
+    return err.message || 'Something went wrong.';
   }
 
-  function showApp() {
-    els.gate.classList.remove('active');
-    els.app.classList.add('active');
-    els.who.innerHTML = `
-      <span class="name">Signed in as ${escapeHtml(state.name)}</span>
-      <button type="button" class="sign-out-btn" id="sign-out">Sign out</button>
-    `;
-    document.getElementById('sign-out').addEventListener('click', signOut);
+  function afterPublish(key, label){
+    state.busyKeys[key] = true;
+    show('manifest');
+    drawGrid(); refreshStatus();
+    const card = document.getElementById('card-' + key);
+    if (card) card.classList.add('flash');
+    setTimeout(() => {
+      delete state.busyKeys[key];
+      if (state.view === 'manifest') { drawGrid(); refreshStatus(); }
+    }, 2600);
+    toast(label + ' is live. Every installed signature updates within a few minutes. Your own Outlook may show the old image until its cache refreshes; recipients see the new one.', 7000);
+    loadLive();
     loadActivity();
   }
-  function showSignedOut(reason) {
-    state.token = null; state.name = null;
-    localStorage.removeItem(SESSION_KEY);
-    els.app.classList.remove('active');
-    els.gate.classList.add('active');
-    els.pwField.value = '';
-    els.who.innerHTML = '';
-    if (reason) { els.gateError.textContent = reason; els.gateError.classList.add('active'); }
-  }
-  function signOut() {
-    if (!confirm('Sign out of this device?')) return;
-    showSignedOut(null);
+
+  /* ---------- history + activity ---------- */
+  async function loadActivity(){
+    try {
+      const data = await api('/api/activity');
+      state.activity = (data && data.items) || [];
+    } catch (err) {
+      if (err.status === 401) { signedOut('Your sign-in expired. Please sign in again.'); return; }
+      state.activity = null; // null = failed, [] = genuinely empty
+    }
+    if (state.view === 'ministry') drawHist();
+    if (state.view === 'activity') drawActivity();
   }
 
-  // ---------- Init ----------
-  function bind() {
-    els.signIn.addEventListener('click', signIn);
-    [els.nameField, els.pwField].forEach(i => i.addEventListener('keydown', (e) => { if (e.key === 'Enter') signIn(); }));
+  const LINK_GLYPH = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';
 
-    els.fileInput.addEventListener('change', (e) => onFileSelected(e.target.files[0]));
-    els.dropzone.addEventListener('dragover', (e) => { e.preventDefault(); els.dropzone.classList.add('dragover'); });
-    els.dropzone.addEventListener('dragleave', () => els.dropzone.classList.remove('dragover'));
-    els.dropzone.addEventListener('drop', (e) => {
+  function historySentence(it){
+    const who = escapeHtml(it.uploader || 'Someone');
+    const what = escapeHtml(it.what || '');
+    const kind = it.kind === 'link' ? '<span class="hkind">link</span>' : '';
+    return kind + '<b>' + who + '</b> ' + (it.kind === 'link' ? 'changed the link: ' : 'published: ') + what;
+  }
+
+  function drawHist(){
+    const key = state.cur;
+    if (state.activity === null) {
+      els.hist.innerHTML = '<p class="hempty">Recent changes could not be loaded. Reload to retry; publishing still works.</p>';
+      return;
+    }
+    const items = state.activity.filter(it => it.target === key);
+    if (!items.length) {
+      els.hist.innerHTML = '<p class="hempty">No recorded changes for this ministry in the recent activity window.</p>';
+      return;
+    }
+    let liveSeen = false;
+    els.hist.innerHTML = items.map(it => {
+      const isImage = it.kind !== 'link';
+      const isLive = isImage && !liveSeen;
+      if (isImage) liveSeen = true;
+      const thumb = 'https://cdn.jsdelivr.net/gh/' + BRAND_REPO + '@' + it.sha + '/email-banners/' + key + '/banner.png';
+      return '<div class="hentry">'
+        + '<div class="hthumb">' + (isImage ? '<img src="' + thumb + '" alt="Banner at this version" loading="lazy" onerror="this.style.display=\'none\'">' : LINK_GLYPH) + '</div>'
+        + '<div><p class="hsent">' + historySentence(it)
+        +   ' <span class="when">' + escapeHtml(it.when ? fmtRelative(it.when) : '') + '</span>'
+        +   (isLive ? '<span class="hlive">LIVE</span>' : '') + '</p>'
+        + (isImage && !isLive ? '<button class="hrestore" data-restore-sha="' + escapeHtml(it.sha) + '">Restore this version</button>' : '')
+        + '</div></div>';
+    }).join('');
+  }
+
+  function drawActivity(){
+    if (state.activity === null) {
+      els.alist.innerHTML = '<p class="hempty" style="padding:18px 0">Recent activity could not be loaded. Reload to retry.</p>';
+      return;
+    }
+    if (!state.activity.length) {
+      els.alist.innerHTML = '<p class="hempty" style="padding:18px 0">No banner updates recorded yet.</p>';
+      return;
+    }
+    els.alist.innerHTML = state.activity.map(it => {
+      const tgt = it.target || 'parent';
+      const isImage = it.kind !== 'link';
+      const thumb = 'https://cdn.jsdelivr.net/gh/' + BRAND_REPO + '@' + it.sha + '/email-banners/' + tgt + '/banner.png';
+      const who = escapeHtml(it.uploader || 'Someone');
+      const what = escapeHtml(it.what || '');
+      return '<button class="arow" data-open="' + escapeHtml(tgt) + '" aria-label="Open ' + escapeHtml(targetLabel(tgt)) + '">'
+        + '<span class="hthumb">' + (isImage ? '<img src="' + thumb + '" alt="" loading="lazy" onerror="this.style.display=\'none\'">' : LINK_GLYPH) + '</span>'
+        + '<span><span class="ameta">' + escapeHtml(targetLabel(tgt)) + (it.when ? ' &middot; ' + escapeHtml(fmtRelative(it.when)) : '') + '</span>'
+        +   '<span class="asent" style="display:block"><b>' + who + '</b> ' + (isImage ? 'published: ' : 'changed the link: ') + what + '</span></span>'
+        + '<span class="chev" aria-hidden="true">&rsaquo;</span>'
+        + '</button>';
+    }).join('');
+  }
+
+  function startRestore(sha){
+    const key = state.cur;
+    const label = targetLabel(key);
+    const thumb = 'https://cdn.jsdelivr.net/gh/' + BRAND_REPO + '@' + sha + '/email-banners/' + key + '/banner.png';
+    openSheet({
+      kind: 'restore',
+      title: 'Restore this banner for ' + label + '?',
+      rows: '<div class="row"><span class="k">Now</span><div class="thumb"><img src="' + bannerUrl(key) + '" alt="Current banner" onerror="this.style.display=\'none\'"></div></div>'
+          + '<div class="row"><span class="k">Back to</span><div class="thumb"><img src="' + thumb + '" alt="Banner to restore" onerror="this.style.display=\'none\'"></div></div>',
+      weight: 'Every ' + label + ' signature already installed switches back to this banner within a few minutes. Only the image is restored; the link, campaign name and run date stay as they are.',
+      askReason: false,
+      confirmLabel: 'Restore for ' + label,
+      run: () => doRestore(key, sha),
+    });
+  }
+  async function doRestore(key, sha){
+    els.sheetGo.disabled = true;
+    els.sheetCancel.disabled = true;
+    els.sheetGo.textContent = 'Restoring…';
+    const label = targetLabel(key);
+    try {
+      const data = await api('/api/revert', { method: 'POST', body: JSON.stringify({ sha, target: key }) });
+      closeSheet();
+      if (data.noop) {
+        toast('That version is already the live ' + label + ' banner. Nothing changed.');
+      } else {
+        els.sigBannerImg.src = bannerUrl(key);
+        afterPublish(key, label);
+      }
+      loadActivity();
+    } catch (err) {
+      if (err.status === 401) { closeSheet(); signedOut('Your sign-in expired. Please sign in again.'); return; }
+      sheetError('Nothing was restored. ' + friendlyError(err));
+      els.sheetGo.disabled = false;
+      els.sheetCancel.disabled = false;
+      els.sheetGo.textContent = 'Restore for ' + label;
+    }
+  }
+
+  /* ---------- sign out ---------- */
+  function startSignOut(){
+    openSheet({
+      kind: 'signout',
+      title: 'Sign out?',
+      rows: '',
+      weight: 'You will need your access code to get back in.',
+      askReason: false,
+      confirmLabel: 'Sign out',
+      run: () => { closeSheet(); signedOut(null); },
+    });
+  }
+
+  /* ---------- wiring ---------- */
+  function bind(){
+    els.signinBtn.addEventListener('click', signIn);
+    [els.code, els.gname].forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') signIn(); }));
+
+    els.navBanners.addEventListener('click', () => { show('manifest'); drawGrid(); refreshStatus(); });
+    els.navActivity.addEventListener('click', () => { show('activity'); drawActivity(); loadActivity(); });
+    els.navSignout.addEventListener('click', startSignOut);
+    els.crumb.addEventListener('click', () => { show('manifest'); drawGrid(); refreshStatus(); });
+
+    // Whole cards open; delegated so redraws keep working.
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-open]');
+      if (t) { openMinistry(t.getAttribute('data-open')); return; }
+      const r = e.target.closest('[data-restore-sha]');
+      if (r) { startRestore(r.getAttribute('data-restore-sha')); }
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const t = e.target.closest && e.target.closest('article[data-open]');
+        if (t) openMinistry(t.getAttribute('data-open'));
+      }
+      if (e.key === 'Escape' && els.veil.classList.contains('on') && !els.sheetGo.disabled) closeSheet();
+    });
+
+    els.chooseBtn.addEventListener('click', () => els.fileInput.click());
+    els.fileInput.addEventListener('change', e => onFileSelected(e.target.files[0]));
+    els.drop.addEventListener('dragover', e => { e.preventDefault(); els.drop.classList.add('dragover'); });
+    els.drop.addEventListener('dragleave', () => els.drop.classList.remove('dragover'));
+    els.drop.addEventListener('drop', e => {
       e.preventDefault();
-      els.dropzone.classList.remove('dragover');
+      els.drop.classList.remove('dragover');
       const f = e.dataTransfer.files && e.dataTransfer.files[0];
       if (f) onFileSelected(f);
     });
 
-    [...els.selector.querySelectorAll('label')].forEach(l => {
-      l.addEventListener('click', (e) => { e.preventDefault(); setTarget(l.dataset.key); });
-      // Keyboard support: enter/space on a radio label
-      l.tabIndex = 0;
-      l.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setTarget(l.dataset.key); }
-      });
-    });
+    [els.dest, els.camp, els.exp].forEach(i => i.addEventListener('input', sync));
 
-    els.msg.addEventListener('input', () => {
-      if (els.msg.value.trim().length >= 2) els.fieldReason.classList.remove('error');
-      refreshPublishEnabled();
-    });
-
-    els.publish.addEventListener('click', startPublish);
-    els.reset.addEventListener('click', resetForm);
-    [...els.linkSelector.querySelectorAll('label')].forEach(l => {
-      l.addEventListener('click', (e) => { e.preventDefault(); setLinkTarget(l.dataset.key); });
-    });
-    els.linkSave.addEventListener('click', startLinkSave);
-    els.linkDestination.addEventListener('input', refreshResolvedPreview);
-    els.linkCampaign.addEventListener('input', refreshResolvedPreview);
-
-    els.confirmCancel.addEventListener('click', closeConfirmModal);
-    els.confirmGo.addEventListener('click', runConfirmAction);
-    els.confirmModal.addEventListener('click', (e) => {
-      if (e.target === els.confirmModal) closeConfirmModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && els.confirmModal.classList.contains('active')) closeConfirmModal();
-    });
+    els.discardBtn.addEventListener('click', discard);
+    els.pubBtn.addEventListener('click', startPublish);
+    els.sheetCancel.addEventListener('click', () => { if (!els.sheetCancel.disabled) closeSheet(); });
+    els.sheetGo.addEventListener('click', () => { if (state.sheet && !els.sheetGo.disabled) state.sheet.run(); });
+    els.sheetReason.addEventListener('keydown', e => { if (e.key === 'Enter' && state.sheet && !els.sheetGo.disabled) state.sheet.run(); });
+    els.veil.addEventListener('click', e => { if (e.target === els.veil && !els.sheetGo.disabled) closeSheet(); });
   }
 
   bind();
-  if (state.token && state.name) showApp(); else els.gate.classList.add('active');
+  if (state.token && state.name) enterApp();
+  else { show('signin'); els.code.focus(); }
 })();
 </script>
 </body>
