@@ -324,9 +324,11 @@
   const STORAGE_KEY = 'hcfm-dl-unlocked';
   const ADMIN_KEY = 'hcfm-dl-admin';
 
-  // Two passwords: ministry-tier vs admin-tier
-  const MINISTRY_PASSWORDS = ['hcfm2026', 'eastoncreatives', 'familyrosary'];
-  const ADMIN_PASSWORDS = ['emmyvictoria', 'brandowners', 'eastonadmin'];
+  // The password gate was removed on 27 August 2026. It ran in the browser, so
+  // the accepted words were readable in this file by anyone, and the files it
+  // guarded sit on public GitHub Releases. It protected nothing and implied a
+  // protection that did not exist. Downloads are simply open now. Editable
+  // source files are no longer linked from the page; send them directly.
 
   // Release base for heavy ZIPs hosted on GitHub Releases — declared early so
   // the auto-unlock path below can use it (avoids temporal dead zone).
@@ -338,7 +340,6 @@
     sessionStorage.setItem(STORAGE_KEY, '1');
     renderParentGallery();
     renderDlMinistryGrid();
-    renderSourceMinistryList();
   }
 
   function unlockAdmin() {
@@ -347,23 +348,7 @@
     document.body.classList.add('admin-active');
   }
 
-  if (dlForm) {
-    dlForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const value = (dlPassword.value || '').trim().toLowerCase();
-      if (ADMIN_PASSWORDS.includes(value)) {
-        unlockDownloads();
-        unlockAdmin();
-        showToast('Brand-owner access granted. Source Files tab unlocked.');
-      } else if (MINISTRY_PASSWORDS.includes(value)) {
-        unlockDownloads();
-        showToast('Access granted');
-      } else {
-        showToast('Wrong password. Email victoria@ or eepau@ to request access.');
-        dlPassword.value = '';
-      }
-    });
-  }
+  // Downloads are open. No gate, no submit handler.
 
   // Tabs inside Downloads
   document.querySelectorAll('.dl-tab').forEach(tab => {
@@ -531,14 +516,11 @@
     `).join('');
   }
 
-  /* ---------- Auto-unlock on page load if sessionStorage has the keys ----------
-     This MUST run AFTER renderParentGallery / renderDlMinistryGrid / renderSourceMinistryList
-     are defined, because unlockDownloads() calls all three. Placed here to guarantee
-     hoisting/temporal-dead-zone safety for any const dependencies. */
-  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
-    unlockDownloads();
-    if (sessionStorage.getItem(ADMIN_KEY) === '1') unlockAdmin();
-  }
+  /* ---------- Downloads render on page load ----------
+     Must run AFTER renderParentGallery and renderDlMinistryGrid are defined,
+     because unlockDownloads() calls both. There is no gate any more, so this
+     runs unconditionally. */
+  unlockDownloads();
 
   /* ---------- Image lightbox ---------- */
   const lightbox = document.getElementById('lightbox');
