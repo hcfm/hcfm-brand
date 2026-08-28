@@ -4,9 +4,8 @@
 // forward, because the four publish endpoints call requireSession(req) with no
 // response to set a cookie on and are deliberately not being touched.
 //
-// A token from the old localStorage sign-in still arrives in an Authorization
-// header. It is accepted once and swapped for a cookie, so people signed in
-// today are carried across without noticing.
+// The old localStorage sign-in is gone. A cookie issued under it still verifies
+// until it expires and comes back here with legacy true and no email on it.
 import { requireSession, issueSession, setSessionCookie } from '../lib/session.js';
 
 export default async function handler(req, res) {

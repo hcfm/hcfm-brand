@@ -11,9 +11,9 @@
 // argument and have no response to set a cookie on. Those four files are not
 // touched by this change.
 //
-// Old sessions carried only {n, e} and arrived in an Authorization header from
-// localStorage. Both are still accepted for one release so the deploy signs
-// nobody out. /api/me quietly swaps such a token for a cookie.
+// The Authorization header route is gone. Cookies issued under the old sign-in
+// carried only {n, e} and still verify until they expire, which is why the
+// legacy flag below stays.
 import crypto from 'node:crypto';
 
 const SESSION_DAYS = 90;
@@ -82,16 +82,10 @@ export function parseCookies(req) {
   return out;
 }
 
-// Cookie first, then the old Authorization header for one release.
+// The cookie is the only session. Nothing reads an Authorization header.
 export function requireSession(req) {
-  const secret = process.env.SESSION_SECRET;
   const cookies = parseCookies(req);
-  const fromCookie = verifySession(secret, cookies[SESSION_COOKIE]);
-  if (fromCookie) return fromCookie;
-  const auth = (req.headers && req.headers.authorization) || '';
-  const m = /^Bearer\s+(.+)$/.exec(auth);
-  if (!m) return null;
-  return verifySession(secret, m[1]);
+  return verifySession(process.env.SESSION_SECRET, cookies[SESSION_COOKIE]);
 }
 
 function serializeCookie(name, value, { maxAge, httpOnly = true }) {

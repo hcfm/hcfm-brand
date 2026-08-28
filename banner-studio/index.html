@@ -468,7 +468,7 @@
         <img class="brandmark" src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="Holy Cross Family Ministries">
         <h1>HCFM Signature Banners</h1>
         <p class="lede">One place to change the banner at the bottom of every HCFM email signature.</p>
-        <button class="b b-solid" id="signin-btn">Sign in with your HCFM email</button>
+        <button class="b b-solid" id="signin-btn">Sign in with your work email</button>
         <p class="hint">Cloudflare emails you a code, the same way the weekly reports do. Once you are in, this browser stays signed in for three months.</p>
         <div class="gate-error" id="gate-error" role="alert"></div>
       </div>
@@ -655,7 +655,7 @@
 
   /* ---------- state ---------- */
   const state = {
-    token: null, name: null, email: null, display: null,
+    name: null, email: null, display: null,
     view: 'signin',
     cur: null,                 // ministry key open in the ministry view
     live: {},                  // key -> {campaign,destination,end_date} | {error}
@@ -666,13 +666,10 @@
     busyKeys: {},              // key -> true while "Updating signatures" chip shows
   };
   // The session lives in an httpOnly cookie the page cannot read, so who you
-  // are comes from /api/me at load. A token from the old sign-in may still be
-  // sitting in localStorage; it is sent for one release so this deploy signs
-  // nobody out, and /api/me swaps it for a cookie.
-  try {
-    const saved = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
-    if (saved && saved.token) state.token = saved.token;
-  } catch {}
+  // are comes from /api/me at load. The old sign-in kept a token here instead.
+  // Nothing reads it any more, so sweep it out of the browsers that still hold
+  // one rather than leaving a dead credential lying around.
+  try { localStorage.removeItem(SESSION_KEY); } catch {}
 
   const $ = s => document.querySelector(s);
   const els = {
@@ -780,7 +777,6 @@
   /* ---------- api ---------- */
   async function api(path, opts = {}){
     const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
-    if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
     let res;
     try {
       res = await fetch(path, { credentials: 'same-origin', ...opts, headers });
@@ -826,7 +822,7 @@
   const SIGNIN_TROUBLE = {
     expired: 'That sign-in took too long. Press the button and go again.',
     restart: 'Sign-in has to start from this page. Press the button and go again.',
-    domain: 'Sign in with your HCFM address. Anything else is turned away here.',
+    domain: 'Sign in with your hcfm.org or familytheater.org address. Anything else is turned away here.',
     unconfigured: 'Sign-in is not set up yet. Ask Emmy (eepau@hcfm.org).',
   };
   async function bootSession(){
@@ -851,10 +847,10 @@
   }
   function gateFail(msg){ els.gateError.textContent = msg; els.gateError.classList.add('on'); }
   function signedOut(reason){
-    state.token = null; state.name = null; state.email = null; state.display = null;
+    state.name = null; state.email = null; state.display = null;
     try { localStorage.removeItem(SESSION_KEY); } catch {}
     els.signinBtn.disabled = false;
-    els.signinBtn.textContent = 'Sign in with your HCFM email';
+    els.signinBtn.textContent = 'Sign in with your work email';
     show('signin');
     if (reason) gateFail(reason);
   }
