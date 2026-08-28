@@ -468,14 +468,8 @@
         <img class="brandmark" src="https://hcfm.github.io/hcfm-brand/assets/logos/hcfm-symbol-gold.png" alt="Holy Cross Family Ministries">
         <h1>HCFM Signature Banners</h1>
         <p class="lede">One place to change the banner at the bottom of every HCFM email signature.</p>
-        <div class="field gate-name on" id="gate-name">
-          <label for="gname">Your name</label>
-          <input id="gname" type="text" autocomplete="name" maxlength="60" placeholder="So changes carry your name">
-        </div>
-        <label for="code">Team password</label>
-        <input id="code" type="password" autocomplete="current-password" spellcheck="false" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-        <p class="hint">Shared by the whole team. Ask Emmy (eepau@hcfm.org) if you don't have it.</p>
-        <button class="b b-solid" id="signin-btn">Sign in</button>
+        <button class="b b-solid" id="signin-btn">Sign in with your HCFM email</button>
+        <p class="hint">Cloudflare emails you a code, the same way the weekly reports do. Once you are in, this browser stays signed in for three months.</p>
         <div class="gate-error" id="gate-error" role="alert"></div>
       </div>
     </div>
@@ -661,7 +655,7 @@
 
   /* ---------- state ---------- */
   const state = {
-    token: null, name: null,
+    token: null, name: null, email: null, display: null,
     view: 'signin',
     cur: null,                 // ministry key open in the ministry view
     live: {},                  // key -> {campaign,destination,end_date} | {error}
@@ -671,9 +665,13 @@
     sheet: null,               // {kind:'publish'|'restore'|'signout', ...}
     busyKeys: {},              // key -> true while "Updating signatures" chip shows
   };
+  // The session lives in an httpOnly cookie the page cannot read, so who you
+  // are comes from /api/me at load. A token from the old sign-in may still be
+  // sitting in localStorage; it is sent for one release so this deploy signs
+  // nobody out, and /api/me swaps it for a cookie.
   try {
     const saved = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
-    if (saved && saved.token && saved.name) { state.token = saved.token; state.name = saved.name; }
+    if (saved && saved.token) state.token = saved.token;
   } catch {}
 
   const $ = s => document.querySelector(s);
@@ -681,7 +679,7 @@
     topnav: $('#topnav'), avatar: $('#avatar'),
     navBanners: $('#nav-banners'), navActivity: $('#nav-activity'), navSignout: $('#nav-signout'),
     vSignin: $('#view-signin'), vManifest: $('#view-manifest'), vMinistry: $('#view-ministry'), vActivity: $('#view-activity'),
-    code: $('#code'), gname: $('#gname'), gateName: $('#gate-name'), signinBtn: $('#signin-btn'), gateError: $('#gate-error'),
+    signinBtn: $('#signin-btn'), gateError: $('#gate-error'),
     statusline: $('#statusline'), grid: $('#grid'),
     crumb: $('#crumb'), mvName: $('#mvName'), mvN1: $('#mvN1'), mvChip: $('#mvChip'),
     count: $('#count'), countN: $('#countN'), countL: $('#countL'),
@@ -749,7 +747,19 @@
     return '<span class="chip"><i></i>Live</span>';
   }
   function initials(name){
-    return String(name || '').trim().split(/\s+/).map(w => w[0] || '').join('').slice(0,2).toUpperCase() || '?';
+    const words = String(name || '').trim().split(/\s+/).filter(Boolean);
+    if (!words.length) return '?';
+    if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+    return (words[0][0] + words[1][0]).toUpperCase();
+  }
+  // Nobody types a name any more, so the preview and the avatar read one off
+  // the address: victoria.hassan@hcfm.org becomes Victoria Hassan. Publishes
+  // are attributed with the full address, not with this.
+  function displayName(email, fallback){
+    const local = String(email || '').split('@')[0];
+    if (!local) return fallback || '';
+    return local.split(/[._-]+/).filter(Boolean)
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   }
   // Mirrors exactly what the redirect layer builds, so what is previewed is
   // what a recipient lands on. If build-go-pages.yml changes its tagging,
@@ -773,7 +783,7 @@
     if (state.token) headers['Authorization'] = 'Bearer ' + state.token;
     let res;
     try {
-      res = await fetch(path, { ...opts, headers });
+      res = await fetch(path, { credentials: 'same-origin', ...opts, headers });
     } catch {
       throw new Error(location.protocol === 'file:'
         ? 'This page is open as a file on disk, where the Studio server does not exist. Use the deployed Studio at hcfm-banner-studio.vercel.app.'
@@ -805,42 +815,53 @@
   }
 
   /* ---------- sign in ---------- */
-  async function signIn(){
+  // The button leaves the Studio. Cloudflare Access checks who you are and
+  // sends you back to /api/auth-callback, which sets the session cookie.
+  function signIn(){
     els.gateError.classList.remove('on'); els.gateError.textContent = '';
-    const code = els.code.value || '';
-    const name = (els.gname.value || '').trim();
-    if (name.length < 2) { gateFail('Add your name first.'); els.gname.focus(); return; }
-    if (!code) { gateFail('Enter the team password. Ask Emmy if you don\'t have it.'); els.code.focus(); return; }
-    els.signinBtn.disabled = true; els.signinBtn.textContent = 'Signing in…';
+    els.signinBtn.disabled = true;
+    els.signinBtn.textContent = 'Taking you to sign-in…';
+    location.href = '/api/signin-start';
+  }
+  const SIGNIN_TROUBLE = {
+    expired: 'That sign-in took too long. Press the button and go again.',
+    restart: 'Sign-in has to start from this page. Press the button and go again.',
+    domain: 'Sign in with your HCFM address. Anything else is turned away here.',
+    unconfigured: 'Sign-in is not set up yet. Ask Emmy (eepau@hcfm.org).',
+  };
+  async function bootSession(){
+    const trouble = new URLSearchParams(location.search).get('signin');
+    if (trouble) { try { history.replaceState(null, '', location.pathname); } catch {} }
     try {
-      const data = await api('/api/auth', { method: 'POST', body: JSON.stringify({ code, name }) });
-      if (data && data.needName) {
-        gateFail('Add your name first.');
-        els.gname.focus();
+      const me = await api('/api/me');
+      state.email = me.email || null;
+      state.name = me.name || me.email || '';
+      state.display = displayName(state.email, state.name);
+      enterApp();
+      return;
+    } catch (err) {
+      if (err.status !== 401) {
+        show('signin');
+        gateFail(err.message || 'Could not reach the Studio server.');
         return;
       }
-      state.token = data.token; state.name = data.name;
-      try { localStorage.setItem(SESSION_KEY, JSON.stringify({ token: state.token, name: state.name })); } catch {}
-      enterApp();
-    } catch (err) {
-      gateFail(err.message || 'Sign-in failed.');
-    } finally {
-      els.signinBtn.disabled = false; els.signinBtn.textContent = 'Sign in';
     }
+    show('signin');
+    if (trouble) gateFail(SIGNIN_TROUBLE[trouble] || 'Sign-in did not finish. Press the button and go again.');
   }
   function gateFail(msg){ els.gateError.textContent = msg; els.gateError.classList.add('on'); }
   function signedOut(reason){
-    state.token = null; state.name = null;
+    state.token = null; state.name = null; state.email = null; state.display = null;
     try { localStorage.removeItem(SESSION_KEY); } catch {}
-    els.code.value = '';
+    els.signinBtn.disabled = false;
+    els.signinBtn.textContent = 'Sign in with your HCFM email';
     show('signin');
     if (reason) gateFail(reason);
-    els.code.focus();
   }
 
   function enterApp(){
-    els.avatar.textContent = initials(state.name);
-    els.avatar.title = state.name;
+    els.avatar.textContent = initials(state.display || state.name);
+    els.avatar.title = state.email || state.name || '';
     show('manifest');
     drawGrid();
     loadLive();
@@ -939,7 +960,7 @@
     state.staged = { img: null };
     els.mvName.textContent = m.label;
     els.mvN1.textContent = m.label;
-    els.sigName.textContent = state.name || '';
+    els.sigName.textContent = state.display || state.name || '';
     els.sigOrg.textContent = m.label;
     els.sigBannerImg.src = bannerUrl(key);
     els.sigBannerLink.href = GO_BASE + '/' + key + '/';
@@ -1391,17 +1412,28 @@
       kind: 'signout',
       title: 'Sign out?',
       rows: '',
-      weight: 'You will need your access code to get back in.',
+      weight: 'Next time you will be emailed a code again.',
       askReason: false,
       confirmLabel: 'Sign out',
-      run: () => { closeSheet(); signedOut(null); },
+      run: () => { closeSheet(); doSignOut(); },
     });
+  }
+  // Clearing the Studio cookie is not enough on its own: the Cloudflare Access
+  // session would still be alive, so pressing the button would sign you back in
+  // with no code. So this ends both.
+  async function doSignOut(){
+    let logout = null;
+    try {
+      const r = await api('/api/signout', { method: 'POST' });
+      logout = r && r.accessLogout;
+    } catch {}
+    signedOut(null);
+    if (logout) location.href = logout;
   }
 
   /* ---------- wiring ---------- */
   function bind(){
     els.signinBtn.addEventListener('click', signIn);
-    [els.code, els.gname].forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') signIn(); }));
 
     els.navBanners.addEventListener('click', () => { show('manifest'); drawGrid(); refreshStatus(); });
     els.navActivity.addEventListener('click', () => { show('activity'); drawActivity(); loadActivity(); });
@@ -1445,8 +1477,7 @@
   }
 
   bind();
-  if (state.token && state.name) enterApp();
-  else { show('signin'); els.gname.focus(); }
+  bootSession();
 })();
 </script>
 </body>
