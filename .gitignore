@@ -26,14 +26,34 @@ assets/2025-2026 HCFM Visual Identity Guidelines/
 downloads/logos/
 downloads/source-files/
 downloads/locked/
-.env >>
 .env
+.env.*
+!.env.example
 hubspot.config.yml
 # Intermediate HubDB fetch results (have tokens / transient data)
 hubdb_*_check*.json
 hubdb_*_fetched.json
+hubdb_*_scratch*.json
 /The Father Peyton Center/
 /Daily Homily Blog and Video.png
 node_modules
 package-lock.json
 package.json
+
+# Timestamped safety copies taken before a risky edit. Git already holds every
+# state they preserve, so they are local scratch and never belong in the repo.
+*.bak
+*.bak-*
+*.bak2*
+_to_delete/
+
+# Generated WordPress handoff output. Rebuild it with generate_static.py.
+wordpress-handoff/
+wordpress-handoff */
+HCFM-Brand-Portal-WordPress-Handoff.zip
+
+# Raw meeting transcripts. Working material, not repository content.
+NoteGPT_TRANSCRIPT_*.txt
+
+# Photography working file, not loaded by the live page.
+assets/photography/hero-band.jpg
