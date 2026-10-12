@@ -1,3 +1,4 @@
+import {CAMPAIGN_FILE,writeCampaign,decodeManifest,encodeManifest} from '../lib/banner-campaign.js';
 // This route runs beside the existing publisher in the organisation's Vercel project.
 // Insights verifies the person, office and saved change before Vercel uses its credential.
 const APP='https://app.hcfm-weekly.pages.dev';
@@ -16,14 +17,21 @@ export default async function handler(req,res){
   if(!permission.ok||!permission.headers.get('content-type')?.includes('application/json'))return res.status(403).json({error:'not_authorized'});
   const permit=await permission.json(),file=`email-banners/${body.target}/banner.png`;
   const current=`/contents/${file}?ref=main`,history=`/commits?path=${encodeURIComponent(file)}&sha=main&per_page=20`;
-  const validRead=permit.path===current||permit.path===history||(/^\/[a-z]/.test(permit.path||'')&&/^[a-f0-9]{40}$/.test(body.operation?.revision||'')&&permit.path===`/contents/${file}?ref=${body.operation.revision}`);
-  if(!((permit.method==='GET'&&validRead)||(permit.method==='PUT'&&permit.path===`/contents/${file}`)))return res.status(403).json({error:'invalid_permission'});
+  const validRead=permit.path===`/contents/${CAMPAIGN_FILE}?ref=main`||permit.path===current||permit.path===history||(/^\/[a-z]/.test(permit.path||'')&&/^[a-f0-9]{40}$/.test(body.operation?.revision||'')&&permit.path===`/contents/${file}?ref=${body.operation.revision}`);
+  if(!((permit.method==='GET'&&validRead)||(permit.method==='PUT'&&(permit.path===`/contents/${file}`||permit.action==='campaign'&&permit.path===`/contents/${CAMPAIGN_FILE}`))))return res.status(403).json({error:'invalid_permission'});
   if(!process.env.GITHUB_TOKEN)return res.status(503).json({error:'publisher_not_connected'});
   async function github(path,options={}){
    const response=await fetch(REPO+path,{...options,redirect:'error',signal:AbortSignal.timeout(15000),headers:{Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'HCFM-Insights',Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,'Content-Type':'application/json'}});
    if(!response.ok)throw Object.assign(Error('Publisher request failed'),{status:response.status});return response.json();
   }
   if(permit.method==='GET')return res.status(200).json(await github(permit.path));
+  if(permit.action==='campaign'){
+   if(permit.target!==body.target)return res.status(403).json({error:'invalid_permission'});
+   const manifest=await github(`/contents/${CAMPAIGN_FILE}?ref=main`);
+   if(manifest.sha!==permit.expectedSha)return res.status(409).json({error:'campaign_changed_reload'});
+   const content=encodeManifest(writeCampaign(decodeManifest(manifest.content),permit.target,permit.fields));
+   return res.status(200).json(await github(permit.path,{method:'PUT',body:JSON.stringify({message:permit.message,content,sha:manifest.sha,branch:'main'})}));
+  }
   let content=permit.content;
   if(permit.action==='restore'){
    // Restore only bytes from a revision belonging to this ministry's own banner.
