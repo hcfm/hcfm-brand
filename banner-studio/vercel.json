@@ -27,6 +27,31 @@
   ],
   "redirects": [
     {
+      "source": "/",
+      "destination": "https://app.hcfm-weekly.pages.dev/#/eastern/brand-banners",
+      "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "destination": "https://app.hcfm-weekly.pages.dev/#/eastern/brand-banners",
+      "permanent": false
+    },
+    {
+      "source": "/install",
+      "destination": "https://app.hcfm-weekly.pages.dev/#/eastern/brand-banners",
+      "permanent": false
+    },
+    {
+      "source": "/install/",
+      "destination": "https://app.hcfm-weekly.pages.dev/#/eastern/brand-banners",
+      "permanent": false
+    },
+    {
+      "source": "/install/index.html",
+      "destination": "https://app.hcfm-weekly.pages.dev/#/eastern/brand-banners",
+      "permanent": false
+    },
+    {
       "source": "/go/catholic-central",
       "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=catholic-central",
       "permanent": false

@@ -72,7 +72,8 @@ jobs:
           # ---------- 1. The real redirect, served by Vercel ----------
           VERCEL = "banner-studio/vercel.json"
           cfg = json.load(open(VERCEL, encoding="utf-8"))
-          redirects = []
+          # Keep staff-tool entry rules while rebuilding recipient campaign links.
+          redirects = [rule for rule in cfg.get("redirects", []) if not rule["source"].startswith("/go/")]
           for key, meta in sorted(data.items()):
               url = tagged(meta, key)
               # Both spellings, so a trailing slash never costs an extra hop.
