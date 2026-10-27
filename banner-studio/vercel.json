@@ -63,12 +63,12 @@
     },
     {
       "source": "/go/catholic-mom",
-      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=catholic-mom",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=sacred-heart-consecration-2026&utm_content=catholic-mom",
       "permanent": false
     },
     {
       "source": "/go/catholic-mom/",
-      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=catholic-mom",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=sacred-heart-consecration-2026&utm_content=catholic-mom",
       "permanent": false
     },
     {
