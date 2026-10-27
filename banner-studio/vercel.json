@@ -103,12 +103,12 @@
     },
     {
       "source": "/go/peyton-institute",
-      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=peyton-institute",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=sacred-heart-consecration-2026&utm_content=peyton-institute",
       "permanent": false
     },
     {
       "source": "/go/peyton-institute/",
-      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=global-rosary-peace-2026&utm_content=peyton-institute",
+      "destination": "https://hcfm.org/pray-for-peace/?utm_source=email-signature&utm_medium=email&utm_campaign=sacred-heart-consecration-2026&utm_content=peyton-institute",
       "permanent": false
     }
   ]
