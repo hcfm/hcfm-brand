@@ -1,65 +1,81 @@
-# GitHub Actions — Auto-Deploy to HubSpot
-# Runs every push to main when theme files change.
-# See docs/GITHUB_AUTO_SYNC.md for full setup instructions.
-#
-# Required GitHub secret:
-#   HUBSPOT_PERSONAL_ACCESS_KEY — a HubSpot Personal Access Key with CMS write
-#   permissions, stored at Settings > Secrets and variables > Actions.
-
+# Manual upload after code review and an approved HubSpot preview.
+# See docs/GITHUB_AUTO_SYNC.md for the review and upload steps.
 name: Deploy to HubSpot
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'theme/**'
+  workflow_dispatch:
+    inputs:
+      reviewed_commit:
+        description: 'Full main commit SHA reviewed and approved for HubSpot upload'
+        required: true
+        type: string
 
-  # Allow manual triggering from the Actions tab as well
-  workflow_dispatch: {}
+permissions:
+  contents: read
 
-# Only run one deploy at a time. If a new push comes in while a deploy is
-# running, cancel the older deploy.
 concurrency:
   group: hubspot-deploy
   cancel-in-progress: false
 
 jobs:
   deploy:
-    name: Upload theme to HubSpot
+    name: Check and upload reviewed theme
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Require the reviewed main revision
+        env:
+          REVIEWED_COMMIT: ${{ inputs.reviewed_commit }}
+        run: |
+          if [[ "$GITHUB_REF" != "refs/heads/main" || "$REVIEWED_COMMIT" != "$GITHUB_SHA" ]]; then
+            echo "::error::Run this workflow on main with its full reviewed commit SHA."
+            exit 1
+          fi
 
-      - name: Setup Node 20
-        uses: actions/setup-node@v4
+      - name: Checkout reviewed revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          node-version: '20'
+          persist-credentials: false
 
-      - name: Install HubSpot CLI
-        run: npm install -g @hubspot/cli
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      - name: Check theme structure and JavaScript syntax
+        run: python3 scripts/check_hubspot_theme.py
+
+      - name: Install pinned HubSpot CLI
+        run: npm install -g @hubspot/cli@8.18.0
 
       - name: Initialize HubSpot config from secret
+        env:
+          HUBSPOT_PERSONAL_ACCESS_KEY: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
         run: |
-          cat > hubspot.config.yml << 'EOF'
-          defaultAccount: brand-portal
-          accounts:
-            - name: brand-portal
-              accountId: 275132
-              authType: personalaccesskey
-              personalAccessKey: ${{ secrets.HUBSPOT_PERSONAL_ACCESS_KEY }}
-          EOF
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          key = os.environ.get("HUBSPOT_PERSONAL_ACCESS_KEY", "")
+          if not key:
+              raise SystemExit("HubSpot CMS credential is missing.")
+          config = {
+              "defaultAccount": "brand-portal",
+              "accounts": [{
+                  "name": "brand-portal",
+                  "accountId": 275132,
+                  "authType": "personalaccesskey",
+                  "personalAccessKey": key,
+              }],
+          }
+          path = Path("hubspot.config.yml")
+          path.touch(mode=0o600)
+          path.chmod(0o600)
+          path.write_text(json.dumps(config), encoding="utf-8")
+          PY
 
       - name: Upload theme files
         run: hs cms upload theme/_hcfm-brand-portal _hcfm-brand-portal --account=brand-portal
 
-      - name: Cleanup (always)
+      - name: Cleanup
         if: always()
         run: rm -f hubspot.config.yml
-
-      - name: Notify on failure (optional)
-        if: failure()
-        run: echo "::warning::Deploy failed. Check the logs above and the HUBSPOT_PERSONAL_ACCESS_KEY secret."
