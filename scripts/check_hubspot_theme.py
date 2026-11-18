@@ -20,6 +20,12 @@ def check_fields(fields, source):
             check_fields(field.get("children"), source)
 
 
+for relative in ("theme.json", "fields.json", "templates/hcfm-brand-portal.html"):
+    if not (THEME / relative).is_file():
+        raise ValueError(f"Theme is missing required file: {relative}")
+if not (THEME / "modules").is_dir():
+    raise ValueError("Theme modules directory is missing")
+
 json_paths = sorted(THEME.rglob("*.json"))
 for path in json_paths:
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -29,6 +35,8 @@ for path in json_paths:
         raise ValueError(f"{path.relative_to(THEME)}: configuration must be an object")
 
 modules = sorted((THEME / "modules").glob("*.module"))
+if not modules:
+    raise ValueError("Theme must contain at least one module")
 for module in modules:
     for filename in ("fields.json", "meta.json", "module.html"):
         if not (module / filename).is_file():

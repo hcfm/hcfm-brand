@@ -24,6 +24,16 @@ reviewer's approval or configure branch protection. The team must establish its
 review and preview process and confirm the destination before running an upload.
 A push to main does not trigger this workflow.
 
+## Credential setup
+
+An account administrator can create a dedicated CMS Personal Access Key in
+HubSpot's **Profile & Preferences → Integrations → Personal Access Keys**. Give
+it the CMS permissions required for the approved destination. Store the key in
+this repository's **Settings → Secrets and variables → Actions** with the name
+`HUBSPOT_PERSONAL_ACCESS_KEY`. The operator needs repository access to run the
+workflow and account access to verify its result. Keep the account and destination
+under review if the team's staging arrangement changes.
+
 The upload needs the existing `HUBSPOT_PERSONAL_ACCESS_KEY` GitHub Actions secret.
 The workflow reads that secret through an environment variable, writes a temporary
 configuration with restricted permissions, and removes it after the run. Keep
