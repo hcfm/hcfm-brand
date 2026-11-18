@@ -1,0 +1,26 @@
+name: Check HubSpot theme
+
+on:
+  pull_request:
+    paths:
+      - 'theme/**'
+      - 'scripts/check_hubspot_theme.py'
+      - '.github/workflows/check-hubspot-theme.yml'
+      - '.github/workflows/deploy-to-hubspot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Check theme structure and JavaScript syntax
+        run: python3 scripts/check_hubspot_theme.py
